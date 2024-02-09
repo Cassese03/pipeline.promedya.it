@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'HankenBook';
+        src: url('/my_css/font//HankenBook.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HankenLight';
+        src: url('my_css/font//HankenLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
