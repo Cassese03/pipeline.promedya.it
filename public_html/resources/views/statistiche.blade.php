@@ -76,6 +76,22 @@
 
                 </div>
             </div>
+            <div class="col-xl-3 col-sm-12">
+                <!-- Bar chart -->
+                <div class="card card-fuchsia">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Sede Best Performer Annuale
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="donutAnnualePERFORMERZONAChart"
+                                style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
+                    </div>
+                    <!-- /.card-body-->
+
+                </div>
+            </div>
             {{--<div class="col-xl-3 col-sm-12">
                 <div class="card card-danger">
                     <div class="card-header">
@@ -94,7 +110,7 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-6 col-sm-12">
+            <div class="col-xl-3 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia">
                     <div class="card-header">
@@ -785,5 +801,67 @@ options: donutOptions
         type: 'bar',
         data: donutAnnualeProdottoPERFORMERData,
         options: donutAnnualeProdottoPERFORMEROptions
+    });
+
+
+    var donuteAnnualePERFORMERZONAChartCanvas = $('#donutAnnualePERFORMERZONAChart').get(0).getContext('2d')
+    var donutAnnualePERFORMERZONAData = {
+        labels: [
+            <?php $sales = ''; foreach ($statistiche_sales_vinte_zona as $s) {
+                if ($s->Sales != null && $s->Sales != '')
+                    $sales .= '\'' . $s->Sales . '\',';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ],
+        datasets: [
+            {
+                data: [
+                    <?php $sales = ''; foreach ($statistiche_sales_vinte_zona as $s) {
+                        if ($s->Sales != null && $s->Sales != '')
+                            $sales .= $s->Val . ',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+                backgroundColor: [
+
+                    <?php $sales = ''; foreach ($statistiche_sales_vinte_zona as $s) {
+                        if ($s->Sales != null && $s->Sales != '')
+                            $sales .= '\'#' . substr(md5(mt_rand()), 0, 6) . '\',';
+
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+
+                borderColor: [
+                    <?php $sales = ''; foreach ($statistiche_sales_vinte_zona as $s) {
+                        if ($s->Sales != null && $s->Sales != '')
+                            $sales .= '\'#999999\',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+                ],
+            }
+        ]
+    }
+
+    var donutAnnualePERFORMERZONAOptions = {
+        datasetLabel: false,
+        maintainAspectRatio: false,
+        responsive: true,
+    }
+
+    new Chart(donuteAnnualePERFORMERZONAChartCanvas, {
+        type: 'doughnut',
+        data: donutAnnualePERFORMERZONAData,
+        options: donutAnnualePERFORMERZONAOptions
     });
 </script>

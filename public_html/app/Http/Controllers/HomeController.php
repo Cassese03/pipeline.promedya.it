@@ -566,6 +566,7 @@ class HomeController extends Controller
             $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
             $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
             $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '1')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
+            $statistiche_sales_vinte_zona = DB::SELECT('select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 1 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo');
             $statistiche_categoria = DB::table('pipeline')
                 ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
                 ->whereNotNull('Categoria')
@@ -675,7 +676,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte','statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }
