@@ -589,6 +589,7 @@ class HomeController extends Controller
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%M\')'), 'ASC')
                 ->get();
             if ($data == 0) {
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 1 or Vinta = 0) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
@@ -609,6 +610,7 @@ class HomeController extends Controller
                 $mese_usato = DB::SELECT('SELECT MONTH(NOW()) as mese')[0]->mese;
                 $anno_usato = DB::SELECT('SELECT YEAR(NOW()) as anno')[0]->anno;
             } else {
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 1 or Vinta = 0) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\')) or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
@@ -673,7 +675,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

@@ -1,4 +1,5 @@
 <?php $utente = session('utente'); ?>
+<?php $differenza_mese = $statistiche_budget_mensile[1]->valore - $statistiche_budget_mensile[0]->valore; ?>
 
 @include('common.header')
 <div class="content-wrapper">
@@ -49,7 +50,7 @@
                                 <input type="text" class="form-control"
                                        style="width: 25%;text-align: right;<?php if($differenza[0]->valore <= 0) echo 'color:red;';?>"
                                        readonly
-                                       value="<?php if($differenza[0]->valore <= 0) echo '-';?><?php echo number_format(100-(1 - (($statistiche_budget[0]->valore-$statistiche_budget[1]->valore)/$statistiche_budget[0]->valore))*100,2,',','').'%';?>">
+                                       value="<?php if($differenza[0]->valore <= 0) echo '-';else echo '+';?><?php echo number_format(abs(100-(1 - (($statistiche_budget[0]->valore-$statistiche_budget[1]->valore)/$statistiche_budget[0]->valore))*100),2,',','').'%';?>">
                             </div>
                         </div>
                         {{-- <canvas id="donutBUDGETChart"
@@ -122,19 +123,54 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-4 col-sm-12">
+                        <div class="col-xl-3 col-sm-12">
+                            <!-- Bar chart -->
+                            <div
+                                style="height:240px!important; max-height: 233px!important; max-width: 100%!important;">
+                                <?php foreach ($statistiche_budget_mensile as $s){ ?>
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 30%"><?php echo $s->type; ?>
+                                    </label>
+                                    <input type="text"
+                                           style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($s->valore,2,',',' ');?>">
+                                    <input type="text" class="form-control"
+                                           style="width: 25%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                           readonly
+                                           value="<?php if($s->type == 'Budget') echo '100%'; else echo number_format((1 - (floatval($statistiche_budget_mensile[0]->valore-$statistiche_budget_mensile[1]->valore)/$statistiche_budget_mensile[0]->valore))*100,2,',','').'%';?>">
+                                </div>
+                                <?php } ?>
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 30%">Obiettivo</label>
+                                    <input type="text"
+                                           style="width: 40%;margin-right:5%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';?>"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($differenza_mese,2,',',' ');?>">
+                                    <input type="text" class="form-control"
+                                           style="width: 25%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';?>"
+                                           readonly
+                                           value="<?php if($differenza_mese<= 0) echo '-';else echo '+';?><?php echo number_format(abs(100-(1 - (($statistiche_budget_mensile[0]->valore-$statistiche_budget_mensile[1]->valore)/$statistiche_budget_mensile[0]->valore))*100),2,',','').'%';?>">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-sm-12">
                             <div class="card-body">
                                 <canvas id="donutMESEChart"
                                         style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-sm-12">
+                        <div class="col-xl-3 col-sm-12">
                             <div class="card-body">
                                 <canvas id="donutMESESalesChart"
                                         style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-sm-12">
+
+                        <div class="col-xl-3 col-sm-12">
                             <div class="card-body">
                                 <canvas id="donutMESEProdottoChart"
                                         style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
