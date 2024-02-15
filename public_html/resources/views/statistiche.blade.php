@@ -60,9 +60,9 @@
 
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-12">
+            <div class="col-xl-5 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
                 <!-- Bar chart -->
-                <div class="card card-fuchsia">
+                <div class="card card-fuchsia" style="width: 50%;">
                     <div class="card-header">
                         <h3 class="card-title">
                             Sales Best Performer Annuale
@@ -75,10 +75,7 @@
                     <!-- /.card-body-->
 
                 </div>
-            </div>
-            <div class="col-xl-3 col-sm-12">
-                <!-- Bar chart -->
-                <div class="card card-fuchsia">
+                <div class="card card-fuchsia" style="width: 50%;">
                     <div class="card-header">
                         <h3 class="card-title">
                             Sede Best Performer Annuale
@@ -110,7 +107,7 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-3 col-sm-12">
+            <div class="col-xl-4 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia">
                     <div class="card-header">
