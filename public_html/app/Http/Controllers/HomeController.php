@@ -292,8 +292,9 @@ class HomeController extends Controller
             $rows = DB::select('select * from pipeline_concessionario order by Id desc');
             $dipendenti = DB::select('select * from dipendente');
             $operatori = DB::select('select * from operatori');
+            $prodotto = DB::select('select * from prodotto');
             $segnalato = Segnalato::all();
-            return View::make('concessionario', compact('utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+            return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
         } else {
             return Redirect::to('login');
         }
@@ -676,7 +677,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte','statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }
