@@ -202,7 +202,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                PROMEDYA Sales Force
+                PROMEDYA | Sales Force
                 <small>&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
             <br>
