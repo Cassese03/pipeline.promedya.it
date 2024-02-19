@@ -39,7 +39,7 @@
                                     <tr>
                                         <?php foreach ($column as $c){ ?>
                                         <th class="no-sort"
-                                            style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
+                                            style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px;<?php if($c->COLUMN_NAME == 'Data') echo 'width:7%!important;'?><?php if($c->COLUMN_NAME == 'Prodotto') echo 'width:10%!important;'?>">
                                                 <?php if ($c->COLUMN_NAME != 'Val_Licenza_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Costo_Canone_AS_WKI') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                                 <?php if ($c->COLUMN_NAME == 'Val_Licenza_AC') echo 'Valore Licenza'; ?>
                                                 <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone'; ?>
@@ -101,6 +101,7 @@
 
                                         <td class="no-sort"
                                             style="contain:content;
+                                            <?php if($c->COLUMN_NAME == 'Data') echo 'width:7%!important;'?><?php if($c->COLUMN_NAME == 'Prodotto') echo 'width:10%!important;'?>
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') echo 'text-align:right;' ;
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
@@ -444,7 +445,7 @@
                                     <b
                                         style="color:red">*</b></label>
                                     <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Tipo_Cliente' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
-                                <input
+                                <input  onchange="calcola_ricavi_id('<?php echo $r->Id;?>')"
                                         <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->Id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -619,6 +620,21 @@
 
         $('#Ricavi_Licenza').val(ricavi_licenza);
         $('#Ricavi_Canone').val(ricavi_canone);
+    }
+
+    function calcola_ricavi_id(id) {
+        ricavi_canone = 0;
+        ricavi_licenza = 0;
+        Valore_Licenza = $('#Val_Licenza_AC'+id).val();
+        Costo_Licenza = $('#Costo_Licenza_WKI'+id).val();
+        Valore_Canone = $('#Val_Can_AC'+id).val();
+        Costo_Canone = $('#Costo_Canone_AS_WKI'+id).val();
+        if (Valore_Licenza != '' && Costo_Licenza != '')
+            ricavi_licenza = parseFloat(Valore_Licenza) - parseFloat(Costo_Licenza);
+        if (Valore_Canone != '' && Costo_Canone != '')
+            ricavi_canone = parseFloat(Valore_Canone) - parseFloat(Costo_Canone);
+        $('#Ricavi_Licenza'+id).val(ricavi_licenza);
+        $('#Ricavi_Canone'+id).val(ricavi_canone);
     }
 
     function filtra() {
