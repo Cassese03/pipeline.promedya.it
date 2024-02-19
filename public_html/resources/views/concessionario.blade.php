@@ -205,7 +205,7 @@
                                         <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'Costo Canone WKI'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
-                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
+                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input
                                     onchange="calcola_ricavi()"
                                         <?php if ($c->COLUMN_NAME == 'Val_Licenza_AC') echo 'required'; ?>
@@ -273,8 +273,20 @@
                                     </option>
                                 </select>
                                 <?php } ?>
+                                    <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
+                                <select style="width:100%" class="form-control aggiungi_dipendente" disabled="disabled"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                        <?php foreach ($dipendenti as $s){ ?>
+                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
+                                <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
-                                <select style="width:100%" class="form-control"
+                                <select style="width:100%" class="form-control aggiungi_segnalato"
+                                        onchange="check_segnalato('aggiungi_segnalato')"
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
@@ -341,7 +353,7 @@
                                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'Costo Canone WKI'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
-                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Tipo_Cliente' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Segnalato' && $c->DATA_TYPE != 'date' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
+                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Segnalato' && $c->DATA_TYPE != 'date' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input
                                         <?php if ($c->DATA_TYPE == 'varchar') echo 'value="Nessun Filtro..." onKeyUp="converti(\'' . $c->COLUMN_NAME . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
 
@@ -361,6 +373,31 @@
                                 </div>
 
                                 <?php } ?>
+
+                                    <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="">Nessun Filtro...
+                                    </option>
+                                        <?php foreach ($segnalato as $s){ ?>
+                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
+                                <?php } ?>
+
+                                    <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="">Nessun Filtro...
+                                    </option>
+                                        <?php foreach ($dipendenti as $s){ ?>
+                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
+                                <?php } ?>
+
                                     <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
                                 <select style="width:100%" class="form-control"
                                         id="<?php echo $c->COLUMN_NAME;?>"
@@ -444,13 +481,13 @@
                                            <?php if ($c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'Costo Canone WKI'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b
                                         style="color:red">*</b></label>
-                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Tipo_Cliente' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
-                                <input  onchange="calcola_ricavi_id('<?php echo $r->Id;?>')"
-                                        <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->Id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
-                                    <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
-                                    <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
-                                    <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
-                                value="<?php echo $r->{$c->COLUMN_NAME};?>">
+                                    <?php if ($c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
+                                <input onchange="calcola_ricavi_id('<?php echo $r->Id;?>')"
+                                       <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->Id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                           <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                           <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                           <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                       value="<?php echo $r->{$c->COLUMN_NAME};?>">
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
@@ -514,35 +551,37 @@
                                 </select>
                                 <?php } ?>
 
+
                                     <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
-                                <select style="width:100%" class="form-control"
-                                        id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                <select style="width:100%" class="form-control modifica_segnalato<?php echo $r->Id; ?>"
+                                        onchange="check_segnalato('modifica_segnalato<?php echo $r->Id; ?>')"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                        <?php foreach ($segnalato as $s){ ?>
+                                        <?php foreach ($segnalato as $s) { ?>
                                     <option
-                                        value="{{$s->descrizione}}" <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >{{$s->descrizione}}</option>
+                                        value="<?php echo $s->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >
+                                            <?php echo $s->descrizione; ?>
+                                    </option>
                                     <?php } ?>
-                                    {{--<option <?php if ($r->{$c->COLUMN_NAME} == 'COMMERCIALISTA') echo 'selected'; ?> value="COMMERCIALISTA">
-                                        COMMERCIALISTA
+                                </select>
+                                <?php } ?>
+                                    <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
+                                <select style="width:100% " class="form-control modifica_dipendente<?php echo $r->Id;?>"
+                                        <?php if ($r->Segnalato != 'DIPENDENTE') echo ' disabled="disabled"'; ?>
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
                                     </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 'Ragione_Sociale') echo 'selected'; ?> value="Ragione_Sociale">
-                                        Ragione_Sociale
+                                        <?php foreach ($dipendenti as $s) { ?>
+                                    <option
+                                        value="<?php echo $s->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >
+                                            <?php echo $s->descrizione; ?>
                                     </option>
-                                    --}}{{--<option <?php if ($r->{$c->COLUMN_NAME} == 'PASSA_PAROLA') echo 'selected'; ?> value="PASSA_PAROLA">
-                                        PASSA PAROLA
-                                    </option>
-                                    --}}{{--
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 'OCCASIONALE') echo 'selected'; ?> value="OCCASIONALE">
-                                        OCCASIONALE
-                                    </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 'WEB') echo 'selected'; ?> value="WEB">
-                                        WEB
-                                    </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 'CONTO_TERZI') echo 'selected'; ?> value="CONTO_TERZI">
-                                        CONTO TERZI
-                                    </option>--}}
+                                    <?php } ?>
                                 </select>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
@@ -602,6 +641,16 @@
 
     });
 
+    function check_segnalato(classname) {
+        segnalato = $('.' + classname).val();
+
+        if (segnalato === 'DIPENDENTE')
+            $('.' + classname.replace('segnalato', 'dipendente')).removeAttr('disabled');
+        if (segnalato !== 'DIPENDENTE') {
+            $('.' + classname.replace('segnalato', 'dipendente')).attr('disabled', 'disabled');
+        }
+    }
+
     function aggiungi() {
         $('#modal_aggiungi').modal('show');
     }
@@ -625,16 +674,16 @@
     function calcola_ricavi_id(id) {
         ricavi_canone = 0;
         ricavi_licenza = 0;
-        Valore_Licenza = $('#Val_Licenza_AC'+id).val();
-        Costo_Licenza = $('#Costo_Licenza_WKI'+id).val();
-        Valore_Canone = $('#Val_Can_AC'+id).val();
-        Costo_Canone = $('#Costo_Canone_AS_WKI'+id).val();
+        Valore_Licenza = $('#Val_Licenza_AC' + id).val();
+        Costo_Licenza = $('#Costo_Licenza_WKI' + id).val();
+        Valore_Canone = $('#Val_Can_AC' + id).val();
+        Costo_Canone = $('#Costo_Canone_AS_WKI' + id).val();
         if (Valore_Licenza != '' && Costo_Licenza != '')
             ricavi_licenza = parseFloat(Valore_Licenza) - parseFloat(Costo_Licenza);
         if (Valore_Canone != '' && Costo_Canone != '')
             ricavi_canone = parseFloat(Valore_Canone) - parseFloat(Costo_Canone);
-        $('#Ricavi_Licenza'+id).val(ricavi_licenza);
-        $('#Ricavi_Canone'+id).val(ricavi_canone);
+        $('#Ricavi_Licenza' + id).val(ricavi_licenza);
+        $('#Ricavi_Canone' + id).val(ricavi_canone);
     }
 
     function filtra() {

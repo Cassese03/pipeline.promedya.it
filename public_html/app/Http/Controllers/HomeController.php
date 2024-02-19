@@ -294,7 +294,8 @@ class HomeController extends Controller
             $operatori = DB::select('select * from operatori');
             $prodotto = DB::select('select * from prodotto');
             $segnalato = Segnalato::all();
-            return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+            $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
+            return View::make('concessionario', compact('prodotto', 'utente','dipendenti', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
         } else {
             return Redirect::to('login');
         }
