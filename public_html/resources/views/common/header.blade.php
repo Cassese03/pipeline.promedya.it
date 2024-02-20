@@ -20,6 +20,8 @@
     <link rel="stylesheet"
           href="<?php echo URL::asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="<?php echo URL::asset('backend/dist/css/adminlte.min.css') ?>">
     <link rel="stylesheet"
@@ -42,6 +44,7 @@
     <script src="<?php echo URL::asset('fullcalendar-5.6.0/lib/main.js') ?>"></script>
     <script src="<?php echo URL::asset('fullcalendar-5.6.0/lib/locales-all.js') ?>"></script>
     <script src="<?php echo URL::asset('backend/plugins/jquery/jquery.min.js') ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <style>
         .scroll {
@@ -189,8 +192,6 @@
 
             <nav class="mt-3">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="<?php echo URL::asset('pipeline') ?>" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -221,6 +222,12 @@
                             <p>Tabelle</p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo URL::asset('cf') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>Clienti</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('dipendenti') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-user-check"></i>
