@@ -176,7 +176,7 @@ class HomeController extends Controller
                     if ($search == 2) $search = 3; else $search = 1;
                     unset($dati['gruppo_prodotto']);
                 }
-                if ($dati['Sales_GRUPPO'] == 'undefined') unset($dati['Sales_GRUPPO']); else {
+                if ($dati['Sales_GRUPPO'] == 'undefined' || $dati['Sales_GRUPPO'] == 'Nessun Filtro...') unset($dati['Sales_GRUPPO']); else {
                     $sales = $dati['Sales_GRUPPO'];
                     if ($search == 1) $search = 3; else $search = 2;
                     unset($dati['Sales_GRUPPO']);
@@ -213,15 +213,15 @@ class HomeController extends Controller
                 if ($search == 1)
                     $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->orderBy('Id', 'desc')->get();
                 if ($search == 2)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Sales', db::raw('( select sales from operatori where gruppo = \'' . $sales . '\') '))->orderBy('Id', 'desc')->get();
+                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->/*whereIn('Sales', db::raw('(SELECT sales FROM operatori where gruppo = \'' . $sales . '\') '))->*/ orderBy('Id', 'desc')->get();
                 if ($search == 3)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->whereIn('Sales', db::raw('( select sales from operatori where gruppo = \'' . $sales . '\') '))->orderBy('Id', 'desc')->get();
+                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))/*->whereIn('Sales', db::raw('( select sales from operatori where gruppo = \'' . $sales . '\') '))*/ ->orderBy('Id', 'desc')->get();
                 $operatori = DB::select('select * from operatori');
                 $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
                 $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
                 $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
                 $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione) as prodotti FROM prodotto p GROUP BY p.gruppo ');
-                $zone = DB::SELECT('SELECT gruppo from operatori group by gruppo');
+                $zone = DB::SELECT('SELECT gruppo as descrizione from operatori group by gruppo');
                 $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
                 $segnalato = Segnalato::all();
                 return View::make('rows', compact('utente', 'segnalato', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
@@ -232,7 +232,7 @@ class HomeController extends Controller
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
             $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
             $segnalato = Segnalato::all();
-            $zone = DB::SELECT('SELECT gruppo from operatori group by gruppo');
+            $zone = DB::SELECT('SELECT gruppo as descrizione from operatori group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
             return View::make('rows', compact('utente', 'rows', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
@@ -306,7 +306,7 @@ class HomeController extends Controller
             $prodotto = DB::select('select * from prodotto');
             $segnalato = Segnalato::all();
             $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
-            return View::make('concessionario', compact('prodotto', 'utente','dipendenti', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+            return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
         } else {
             return Redirect::to('login');
         }

@@ -367,7 +367,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <?php foreach ($column as $c){ ?>
-                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
+                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
+
+                            <?php if ($c->COLUMN_NAME != 'Sales'){ ?>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
@@ -522,6 +525,7 @@
                                 <?php } ?>
                             </div>
                         </div>
+                        <?php } ?>
                             <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                         <div class="col-md-6">
                             <div class="form-group">
