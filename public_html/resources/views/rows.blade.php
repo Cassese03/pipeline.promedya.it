@@ -367,7 +367,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <?php foreach ($column as $c){ ?>
-                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
+                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
@@ -395,19 +395,7 @@
                                 </div>
 
                                 <?php } ?>
-                                    <?php if ($c->COLUMN_NAME == 'Sales') { ?>
-                                <select style="width:100%" class="form-control"
-                                        id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option
-                                        value="Nessun Filtro...">Nessun Filtro...
-                                    </option>
-                                        <?php foreach ($operatori as $o){ ?>
-                                    <option
-                                        value="{{$o->username}}">{{$o->username}}</option>
-                                    <?php } ?>
-                                </select>
-                                <?php } ?>
+
                                     <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
                                 <input type="text" name="Ragione_Sociale" id="Ragione_Sociale"
                                        class="form-control" list="clienti">
@@ -534,6 +522,35 @@
                                 <?php } ?>
                             </div>
                         </div>
+                            <?php if ($c->COLUMN_NAME == 'Sales') { ?>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Sales<b style="color:red">*</b></label>
+                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="Nessun Filtro...">Nessun Filtro...
+                                    </option>
+                                        <?php foreach ($operatori as $o){ ?>
+                                    <option value="{{$o->username}}">{{$o->username}}</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Zona <b style="color:red">*</b></label>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME;?>_GRUPPO"
+                                        name="<?php echo $c->COLUMN_NAME ;?>_GRUPPO">
+                                    <option value="Nessun Filtro...">Nessun Filtro...
+                                    </option>
+                                        <?php foreach ($zone as $z){ ?>
+                                    <option value="{{$z->descrizione}}">{{$z->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <?php } ?>
                             <?php if ($c->COLUMN_NAME == 'Prodotto'){ ?>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -553,6 +570,8 @@
                         <?php } ?>
                         <?php } ?>
                         <?php } ?>
+
+
                     </div>
                     <div class=" clearfix">
                     </div>
