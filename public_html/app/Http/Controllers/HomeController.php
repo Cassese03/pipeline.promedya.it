@@ -221,7 +221,7 @@ class HomeController extends Controller
                 $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
                 $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
                 $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione) as prodotti FROM prodotto p GROUP BY p.gruppo ');
-                $zone = DB::SELECT('SELECT gruppo as descrizione from operatori group by gruppo');
+                $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
                 $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
                 $segnalato = Segnalato::all();
                 return View::make('rows', compact('utente', 'segnalato', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
@@ -232,7 +232,7 @@ class HomeController extends Controller
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
             $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
             $segnalato = Segnalato::all();
-            $zone = DB::SELECT('SELECT gruppo as descrizione from operatori group by gruppo');
+            $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
             return View::make('rows', compact('utente', 'rows', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
