@@ -213,9 +213,9 @@ class HomeController extends Controller
                 if ($search == 1)
                     $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->orderBy('Id', 'desc')->get();
                 if ($search == 2)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->/*whereIn('Sales', db::raw('(SELECT sales FROM operatori where gruppo = \'' . $sales . '\') '))->*/ orderBy('Id', 'desc')->get();
+                    $rows = DB::TABLE('pipeline')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
                 if ($search == 3)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))/*->whereIn('Sales', db::raw('( select sales from operatori where gruppo = \'' . $sales . '\') '))*/ ->orderBy('Id', 'desc')->get();
+                    $rows = DB::TABLE('pipeline')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
                 $operatori = DB::select('select * from operatori');
                 $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
                 $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
