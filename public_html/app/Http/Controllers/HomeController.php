@@ -585,7 +585,7 @@ class HomeController extends Controller
                 ->whereNotNull('Categoria')
                 ->groupBy('Categoria', DB::raw('DATE_FORMAT(Data_contatto, \'%Y - %M\')'))
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%M\')'), 'ASC')
+                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
 
             $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
@@ -600,7 +600,7 @@ class HomeController extends Controller
                 ->select(DB::raw("DATE_FORMAT(Data_contatto,'%Y - %M') AS Data"), DB::raw('CAST(SUM(Val_Ven_AC) as Decimal(20,2)) AS Val'))
                 ->groupBy(DB::raw('DATE_FORMAT(Data_contatto,\'%Y - %M\') '))
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%M\')'), 'ASC')
+                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
             if ($data == 0) {
                 $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');

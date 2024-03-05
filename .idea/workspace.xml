@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix ZONA VUOTA SU FILTRO">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix grafica filtro e aggiungi pipeline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/operatori.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/operatori.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -397,6 +403,9 @@
       <workItem from="1707487522158" duration="796000" />
       <workItem from="1707490228099" duration="20000" />
       <workItem from="1708594201370" duration="76000" />
+      <workItem from="1708688226212" duration="392000" />
+      <workItem from="1709291539841" duration="281000" />
+      <workItem from="1709638245743" duration="247000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -430,7 +439,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708594272478</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix grafica filtro e aggiungi pipeline">
+      <option name="closed" value="true" />
+      <created>1708688619748</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708688619748</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,6 +461,7 @@
     <MESSAGE value="Fix zona" />
     <MESSAGE value="Fix QUERY ZONA SU FILTRO" />
     <MESSAGE value="Fix ZONA VUOTA SU FILTRO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix ZONA VUOTA SU FILTRO" />
+    <MESSAGE value="Fix grafica filtro e aggiungi pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix grafica filtro e aggiungi pipeline" />
   </component>
 </project>

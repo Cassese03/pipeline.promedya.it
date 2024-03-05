@@ -1,12 +1,6 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    @if ($utente->username != 'Giovanni Tutino')
-        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
-                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
-        </div>
-    @else
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -38,6 +32,10 @@
                     <tr>
                         <td>{{ $p->id}}</td>
                         <td>{{ $p->descrizione }}</td>
+                        @if ($utente->username != 'Giovanni Tutino')
+                            <td>
+                            </td>
+                        @else
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -65,12 +63,12 @@
                                 </div>
                             </td>
                         </form>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </section>
-    @endif
 </div>
 <!-- /.container-fluid-->
 
