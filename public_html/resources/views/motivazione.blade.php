@@ -1,16 +1,20 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-        <section class="content" style="margin:5%;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            PROMEDYA | Sales Force
+            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        </h1>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="margin:5%;">
+        @if ($utente->username != 'Giovanni Tutino')
+            <div>
+            </div>
+        @else
 
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
                     id="aggiungi_motivazione"
@@ -19,23 +23,24 @@
                 Nuova
                 Motivazione
             </button>
-            <table id="example3" class="table table-bordered datatable">
-                <thead>
+        @endif
+        <table id="example3" class="table table-bordered datatable">
+            <thead>
+            <tr>
+                <th class="no-sort">Id</th>
+                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($table as $p)
                 <tr>
-                    <th class="no-sort">Id</th>
-                    <th class="no-sort">Descrizione</th>
-                    <th class="no-sort">Azioni</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($table as $p)
-                    <tr>
-                        <td>{{ $p->id}}</td>
-                        <td>{{ $p->descrizione }}</td>
-                        @if ($utente->username != 'Giovanni Tutino')
-                            <td>
-                            </td>
-                        @else
+                    <td>{{ $p->id}}</td>
+                    <td>{{ $p->descrizione }}</td>
+                    @if ($utente->username != 'Giovanni Tutino')
+                        <td>
+                        </td>
+                    @else
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -63,12 +68,12 @@
                                 </div>
                             </td>
                         </form>
-                        @endif
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </section>
+                    @endif
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </section>
 </div>
 <!-- /.container-fluid-->
 

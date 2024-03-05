@@ -12,12 +12,17 @@
         <!-- Main content -->
         <section class="content" style="margin:5%;">
 
-            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_segnalato"
+            @if ($utente->username != 'Giovanni Tutino')
+                <div>
+                </div>
+            @else
+                <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_segnalato"
                     onclick="aggiungi()" name="aggiungi_segnalato">
                 Aggiungi
                 Nuovo
                 segnalato
             </button>
+            @endif
             <table id="example3" class="table table-bordered datatable">
                 <thead>
                 <tr>
