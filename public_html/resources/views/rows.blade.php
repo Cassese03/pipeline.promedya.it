@@ -192,7 +192,7 @@
                     <div class="row">
                         <?php foreach ($column as $c){
                         if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre'){ ?>
-                        <div class="col-md-<?php if($c->COLUMN_NAME == 'Ragione_Sociale') echo 12; else echo 6; ?> ">
+                        <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>
                                         <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
@@ -371,7 +371,7 @@
 
                             <?php if ($c->COLUMN_NAME != 'Sales'){ ?>
 
-                        <div class="col-md-<?php if($c->COLUMN_NAME == 'Ragione_Sociale') echo 12; else echo 6; ?> ">
+                        <div class="col-md-6 ">
                             <div class="form-group">
                                 <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
