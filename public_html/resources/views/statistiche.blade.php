@@ -60,7 +60,7 @@
 
                 </div>
             </div>
-            <div class="col-xl-5 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
+            <div class="col-xl-4 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia" style="width: 50%;">
                     <div class="card-header">
@@ -107,7 +107,7 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-4 col-sm-12">
+            <div class="col-xl-5 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia">
                     <div class="card-header">
@@ -728,7 +728,7 @@ options: donutOptions
         labels: [
             <?php $sales = ''; foreach ($statistiche_corrente_prodotto_annuale as $s) {
                 if ($s->gruppo != null && $s->gruppo != '')
-                    $sales .= '\'' . $s->gruppo . '\',';
+                    $sales .= '\'' . $s->gruppo . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($s->Percentuale), 2, ',', ' ') . '%)\',';
             }
             $sales = substr($sales, 0, strlen($sales) - 1);
             echo $sales;
@@ -806,7 +806,7 @@ options: donutOptions
         labels: [
             <?php $sales = ''; foreach ($statistiche_sales_vinte_zona as $s) {
                 if ($s->Sales != null && $s->Sales != '')
-                    $sales .= '\'' . $s->Sales . '\',';
+                    $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($s->Percentuale), 2, ',', ' ') . '%)\',';
             }
             $sales = substr($sales, 0, strlen($sales) - 1);
             echo $sales;
