@@ -117,7 +117,7 @@
                     </div>
                     <div class="card-body">
                         <canvas id="donutAnnualeProdottoPERFORMERChart"
-                                style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
+                                style="height:  260px!important; max-height: 260px!important; max-width: 100%!important;"></canvas>
                     </div>
                     <!-- /.card-body-->
 

@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix grafica MESI ORDINAMENTO PER DATA E NON VARCHAR, TUTTI POSSONO VEDERE LE TABELLE MA SOLO GIOVANNI LE PUO' modificare">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserimento Percentuali su statistiche dove richiesto">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
