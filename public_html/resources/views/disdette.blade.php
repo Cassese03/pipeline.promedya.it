@@ -68,7 +68,7 @@
                                             <?php foreach ($column as $c){ ?>
 
                                             <?php
-                                            if ($c->COLUMN_NAME == 'Valore_Iniziale') {
+                                            if ($c->COLUMN_NAME == 'Valore_Contratto') {
                                                 if (isset(${$c->COLUMN_NAME}))
                                                     ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
                                                 else
@@ -131,11 +131,6 @@
                                                                 d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                                         </svg>
                                                     </button>
-                                                    <button type="button" onclick="duplica(<?php echo $r->id;?>)"
-                                                            class="form-control btn-warning">
-                                                        <i class="fa fa-clone" aria-hidden="true"
-                                                           style="color: white"></i>
-                                                    </button>
                                                     <button type="submit" name="elimina" value="<?php echo $r->id;?>"
                                                             class="form-control btn-danger">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -155,10 +150,10 @@
                                     </tbody>
                                     <tfoot>
                                     <tr style="background-color: lightblue">
-                                            <?php /*foreach ($column as $c){ ?>
-                                    <th class="no-sort"
-                                        style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>width:20px;border-color: grey; border-width:1px"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
-                                    <?php } */ ?>
+                                            <?php foreach ($column as $c){ ?>
+                                        <th class="no-sort"
+                                            style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>width:20px;border-color: grey; border-width:1px"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
+                                        <?php } ?>
                                         <th class="no-sort"
                                             style="width:20px;border-color: grey; border-width:1px"></th>
                                     </tr>
@@ -196,17 +191,17 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>
-                                        <?php if ($c->COLUMN_NAME != 'Valore_Iniziale' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
-                                        <?php if ($c->COLUMN_NAME == 'Valore_Iniziale') echo 'Valore Vendita A/C'; ?>
+                                        <?php if ($c->COLUMN_NAME != 'Valore_Contratto' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                        <?php if ($c->COLUMN_NAME == 'Valore_Contratto') echo 'Valore Vendita A/C'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'Valore Canone A/C'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
-                                    <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' /*&& $c->COLUMN_NAME != 'Motivazione'*/ && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
+                                    <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' /*&& $c->COLUMN_NAME != 'Motivazione'*/ && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input
-                                        <?php if ($c->COLUMN_NAME == 'Valore_Iniziale') echo 'required'; ?>
+                                        <?php if ($c->COLUMN_NAME == 'Valore_Contratto') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Vendita_Budget') echo 'required'; ?>
-                                    <?php if ($c->COLUMN_NAME == 'Valore_Iniziale' || $c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'min="0"'; else if ($c->DATA_TYPE == 'float' || $c->DATA_TYPE == 'int') echo 'min="0"'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Valore_Contratto' || $c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'min="0"'; else if ($c->DATA_TYPE == 'float' || $c->DATA_TYPE == 'int') echo 'min="0"'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') echo 'required'; ?>
                                     <?php if ($c->DATA_TYPE == 'varchar' && $c->COLUMN_NAME != 'Note') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -284,17 +279,17 @@
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                {{--     <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
-                                 <select style="width:100%" class="form-control aggiungi_motivazione" disabled="disabled"
-                                         id="<?php echo $c->COLUMN_NAME;?>"
-                                         name="<?php echo $c->COLUMN_NAME ;?>">
-                                     <option value="">Inserisci Valore...
-                                     </option>
-                                         <?php foreach ($motivazione as $m){ ?>
-                                     <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
-                                     <?php } ?>
-                                 </select>
-                                 <?php } ?>--}}
+                                    <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                        <?php foreach ($motivazione as $m){ ?>
+                                    <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
+                                <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
                                 <select style="width:100%" class="form-control"
                                         id="<?php echo $c->COLUMN_NAME;?>"
@@ -370,7 +365,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <?php foreach ($column as $c){ ?>
-                            <?php if ($c->COLUMN_NAME != 'id' && $c->COLUMN_NAME != 'Valore_Iniziale' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
+                            <?php if ($c->COLUMN_NAME != 'id' && $c->COLUMN_NAME != 'Valore_Contratto' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
 
                             <?php if ($c->COLUMN_NAME != 'Sales'){ ?>
 
@@ -379,7 +374,7 @@
                                 <label><?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                     <b
                                         style="color:red">*</b></label>
-                                    <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Segnalato'/* && $c->COLUMN_NAME != 'Motivazione'*/ && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->DATA_TYPE != 'date' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
+                                    <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->DATA_TYPE != 'date' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input
                                         <?php if ($c->DATA_TYPE == 'varchar') echo 'value="Nessun Filtro..." onKeyUp="converti(\'' . $c->COLUMN_NAME . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -434,17 +429,17 @@
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                {{--<?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
-                            <select style="width:100%" class="form-control"
-                                    id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
-                                <option value="">Nessun Filtro...
-                                </option>
-                                    <?php foreach ($motivazione as $m){ ?>
-                                <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
+                                    <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                    <option value="">Nessun Filtro...
+                                    </option>
+                                        <?php foreach ($motivazione as $m){ ?>
+                                    <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
+                                    <?php } ?>
+                                </select>
                                 <?php } ?>
-                            </select>
-                            <?php } ?>--}}
 
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
                                 <select style="width:100%" class="form-control"
@@ -618,32 +613,6 @@
         </div>
     </div>
 </form>
-<form method="post" enctype="multipart/form-data" action="/disdette">
-    @csrf
-    <div class="modal fade" id="modal_duplica_<?php echo $r->id;?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Duplica richiesta</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row" id="ajax_duplica_<?php echo $r->id;?>"></div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="modal-footer">
-                    <input type="hidden" name="Id_Padre" value="<?php echo $r->id;?>">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
-                    <input type="submit" class="btn btn-primary pull-right" name="duplica" value="Duplica"
-                           style="margin-right:5px;">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 <?php } ?>
 
 <script type="text/javascript">
@@ -660,17 +629,6 @@
         });
     }
 
-    function duplica_ajax(id) {
-        $.ajax({
-            url: '<?php echo URL::asset('ajax/duplica_ajax_DISDETTA') ?>/' + id,
-            type: "POST",
-            contentType: "application/json",
-            data: {}
-        }).done(function (result) {
-            $('#ajax_duplica_' + id).html(result);
-        });
-    }
-
     function aggiungi() {
         $('#modal_aggiungi').modal('show');
     }
@@ -684,10 +642,6 @@
         $('#modal_modifica_' + id).modal('show');
     }
 
-    function duplica(id) {
-        duplica_ajax(id);
-        $('#modal_duplica_' + id).modal('show');
-    }
 
     function converti(id) {
         document.getElementById(id).value = document.getElementById(id).value.toUpperCase();
