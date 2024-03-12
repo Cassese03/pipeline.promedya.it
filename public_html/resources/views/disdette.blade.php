@@ -191,10 +191,14 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>
-                                        <?php if ($c->COLUMN_NAME != 'Valore_Contratto' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
-                                        <?php if ($c->COLUMN_NAME == 'Valore_Contratto') echo 'Valore Vendita A/C'; ?>
-                                        <?php if ($c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'Valore Canone A/C'; ?>
-                                        <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                                        <?php /*if ($c->COLUMN_NAME != 'Valore_Contratto' && $c->COLUMN_NAME != 'Valore_Ricontrattato' && $c->COLUMN_NAME != 'Inc_Canone_AS')*/
+                                        echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                        <?php // if ($c->COLUMN_NAME == 'Valore_Contratto') echo 'Valore Vendita A/C';
+                                        ?>
+                                        <?php // if ($c->COLUMN_NAME == 'Valore_Ricontrattato') echo 'Valore Canone A/C';
+                                        ?>
+                                        <?php // if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S';
+                                        ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
                                     <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' /*&& $c->COLUMN_NAME != 'Motivazione'*/ && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input

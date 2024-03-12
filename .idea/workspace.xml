@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Grafica">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Richieste da Giovanni">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -407,7 +404,7 @@
       <workItem from="1709639271376" duration="45000" />
       <workItem from="1709891841357" duration="193000" />
       <workItem from="1710255685634" duration="3581000" />
-      <workItem from="1710262451969" duration="407000" />
+      <workItem from="1710262451969" duration="1817000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -481,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710259613031</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fix Richieste da Giovanni">
+      <option name="closed" value="true" />
+      <created>1710263023765</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710263023765</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,6 +505,7 @@
     <MESSAGE value="Fix grafico su statistica" />
     <MESSAGE value="Gestione Disdette" />
     <MESSAGE value="Fix Grafica" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Grafica" />
+    <MESSAGE value="Fix Richieste da Giovanni" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Richieste da Giovanni" />
   </component>
 </project>

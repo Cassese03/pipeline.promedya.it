@@ -541,7 +541,7 @@ class AjaxController extends Controller
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
         $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
         $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
-
+        $operatori = DB::select('select * from operatori');
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'id') {
                 ?>
@@ -551,7 +551,7 @@ class AjaxController extends Controller
                             <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <b
                                 style="color:red">*</b></label>
-                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione') { ?>
+                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Note') { ?>
                             <input
                                 <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                 <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -589,6 +589,28 @@ class AjaxController extends Controller
                                     <?php } ?>
                                 </select>
                             <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Note') { ?>
+
+                                <textarea rows="8" cols="100"
+                                          onKeyUp="converti(<?php echo '\'' . $c->COLUMN_NAME . '\''; ?>)"
+                                          class="form-control" type="text" id="<?php echo $c->COLUMN_NAME; ?>"
+                                          name="<?php echo $c->COLUMN_NAME; ?>"><?php echo $r->{
+                                    $c->COLUMN_NAME
+                                    }; ?></textarea>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Sales') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <?php foreach ($operatori as $o) { ?>
+                                        <option
+                                            value="<?php echo $o->username; ?>" <?php if ($o->username == $r->{$c->COLUMN_NAME}) echo 'selected'; ?> >
+                                            <?php echo $o->username; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+
 
                         <?php } ?>
                     </div>
