@@ -199,7 +199,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo URL::asset('disdette') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-phone"></i>
                             <p>Disdetta</p>
                         </a>
                     </li>

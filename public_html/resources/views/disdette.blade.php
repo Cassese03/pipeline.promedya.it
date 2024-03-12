@@ -1,164 +1,178 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
+
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            PROMEDYA | Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-        </h1>
-        <br>
-        <button class="form-control btn-primary" style="border-radius:25px" id="aggiungi_disdetta"
-                onclick="aggiungi()" name="aggiungi_disdetta">
-            Aggiungi
-            Nuovo
-            Contatto
-        </button>
-        <br>
-        <button class="form-control btn-danger" style="border-radius:25px" id="filtra_disdetta" onclick="filtra()"
-                name="filtra_disdetta">
-            Filtri / Ricerca
-        </button>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <div class="content-wrapper" style="margin:1% 1% 0 1%!important;">
-            <div class="row">
-                <div style="display: flex;width: 100%;justify-content: center">
-                    <div style="min-width: 360px;">
-                        <ul class="charts-css legend legend-rectangle">
-                            <li>In Corso</li>
-                            <li>Persa</li>
-                            <li>Vinta</li>
-                        </ul>
+    @if ($utente->username != 'Giovanni Tutino')
+        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
+            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
+                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
+        </div>
+    @else
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                PROMEDYA | Sales Force
+                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+            </h1>
+            <br>
+            <button class="form-control btn-primary" style="border-radius:25px" id="aggiungi_disdetta"
+                    onclick="aggiungi()" name="aggiungi_disdetta">
+                Aggiungi
+                Nuovo
+                Contatto
+            </button>
+            <br>
+            <button class="form-control btn-danger" style="border-radius:25px" id="filtra_disdetta" onclick="filtra()"
+                    name="filtra_disdetta">
+                Filtri / Ricerca
+            </button>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="content-wrapper" style="margin:1% 1% 0 1%!important;">
+                <div class="row">
+                    <div style="display: flex;width: 100%;justify-content: center">
+                        <div style="min-width: 360px;">
+                            <ul class="charts-css legend legend-rectangle">
+                                <li>In Corso</li>
+                                <li>Persa</li>
+                                <li>Vinta</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <div class="box">
-                        <div class="box-body">
-                            <table id="example11" class="table table-bordered datatable"
-                                   style="border-color: grey; border-width:1px;">
-                                <thead>
-                                <tr>
-                                    <?php foreach ($column as $c){ ?>
-                                    <th class="no-sort"
-                                        style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
-                                            <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
-                                    </th>
-                                    <?php } ?>
-                                    <th class="no-sort"
-                                        style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
-                                        Azioni
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach ($rows as $r){
-                                    ?>
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <table id="example11" class="table table-bordered datatable"
+                                       style="border-color: grey; border-width:1px;">
+                                    <thead>
+                                    <tr>
+                                            <?php foreach ($column as $c){ ?>
+                                        <th class="no-sort"
+                                            style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
+                                                <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                        </th>
+                                        <?php } ?>
+                                        <th class="no-sort"
+                                            style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
+                                            Azioni
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($rows as $r){
+                                        ?>
 
-                                <tr style="background: <?php if($r->Esito == 1) echo 'lightgreen'; if($r->Esito == 0) echo '#ff6666'; if($r->Esito == 2) echo 'lightyellow';?>;">
-                                        <?php foreach ($column as $c){ ?>
+                                    <tr style="background: <?php if($r->Esito == 1) echo 'lightgreen'; if($r->Esito == 0) echo '#ff6666'; if($r->Esito == 2) echo 'lightyellow';?>;">
+                                            <?php foreach ($column as $c){ ?>
 
-                                        <?php
-                                        if ($c->COLUMN_NAME == 'Valore_Iniziale') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        }
-                                        if ($c->COLUMN_NAME == 'Valore_Ricontrattato') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        } ?>
+                                            <?php
+                                            if ($c->COLUMN_NAME == 'Valore_Iniziale') {
+                                                if (isset(${$c->COLUMN_NAME}))
+                                                    ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                                else
+                                                    ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                            }
+                                            if ($c->COLUMN_NAME == 'Valore_Ricontrattato') {
+                                                if (isset(${$c->COLUMN_NAME}))
+                                                    ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                                else
+                                                    ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                            } ?>
 
-                                    <td class="no-sort"
-                                        style="contain:content;
+                                        <td class="no-sort"
+                                            style="contain:content;
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
-                                            if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') echo 'text-align:right;' ;
+                                            if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') {if($c->COLUMN_NAME != 'Esito') echo 'text-align:right;';}
+                                            if($c->COLUMN_NAME == 'Esito') echo 'text-align:center;';
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
                                             if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;?>
                                                 border-color: grey; border-width:1px">
-                                            <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
-                                            if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, ',', '.'); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
-                                        } ?>
-                                            <?php if ($c->COLUMN_NAME == 'Esito') {
-                                            if ($r->{$c->COLUMN_NAME} == 1) echo 'VINTA';
-                                            if ($r->{$c->COLUMN_NAME} == 0) echo 'PERSA';
-                                            if ($r->{$c->COLUMN_NAME} == 2) echo 'IN CORSO';
-                                        } ?>
-                                            <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
-                                        <button class="form-control btn-default"
-                                                onclick="nota('<?php echo $r->id; ?>');">NOTA
-                                        </button> <?php } ?>
-                                                      <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
-                                        <div class="progress-bar-label" style="text-align: center"><label
-                                                style="font-weight: bold"><?php echo $r->{$c->COLUMN_NAME} . '%'; ?></label>
-                                        </div>
-                                        <div class="progress"
-                                             style="height: 7px;color: rgba(46, 204, 113,0.6);background-color: lightgray">
-                                            <div class="progress-bar" role="progressbar"
-                                                 style="width: <?php echo $r->{$c->COLUMN_NAME};?>%;"
-                                                 aria-valuenow="50"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <?php } ?>
-
-                                    </td>
-                                    <?php } ?>
-                                    <form enctype="multipart/form-data" method="post"
-                                          onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                                        @csrf
-                                        <td class="no-sort"
-                                            style="background:white;border-color: grey; border-width:1px">
-                                            <div style="display:flex;gap: 2px;">
-                                                <button type="button" onclick="modifica(<?php echo $r->id;?>)"
-                                                        class="form-control btn-primary">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                         fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                                    </svg>
-                                                </button>
-                                                <button type="button" onclick="duplica(<?php echo $r->id;?>)"
-                                                        class="form-control btn-warning">
-                                                    <i class="fa fa-clone" aria-hidden="true" style="color: white"></i>
-                                                </button>
-                                                <button type="submit" name="elimina" value="<?php echo $r->id;?>"
-                                                        class="form-control btn-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                        <path
-                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                                    </svg>
-                                                </button>
+                                                <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
+                                                if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, ',', '.'); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
+                                            } ?>
+                                                <?php if ($c->COLUMN_NAME == 'Esito') {
+                                                if ($r->{$c->COLUMN_NAME} == 1) echo 'VINTA';
+                                                if ($r->{$c->COLUMN_NAME} == 0) echo 'PERSA';
+                                                if ($r->{$c->COLUMN_NAME} == 2) echo 'IN CORSO';
+                                            } ?>
+                                                <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
+                                            <button class="form-control btn-default"
+                                                    onclick="nota('<?php echo $r->id; ?>');">NOTA
+                                            </button> <?php } ?>
+                                                          <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
+                                            <div class="progress-bar-label" style="text-align: center"><label
+                                                    style="font-weight: bold"><?php echo $r->{$c->COLUMN_NAME} . '%'; ?></label>
                                             </div>
+                                            <div class="progress"
+                                                 style="height: 7px;color: rgba(46, 204, 113,0.6);background-color: lightgray">
+                                                <div class="progress-bar" role="progressbar"
+                                                     style="width: <?php echo $r->{$c->COLUMN_NAME};?>%;"
+                                                     aria-valuenow="50"
+                                                     aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <?php } ?>
+
                                         </td>
-                                    </form>
-                                </tr>
-                                <?php } ?>
-                                </tbody>
-                                <tfoot>
-                                <tr style="background-color: lightblue">
-                                    <?php /*foreach ($column as $c){ ?>
+                                        <?php } ?>
+                                        <form enctype="multipart/form-data" method="post"
+                                              onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                                            @csrf
+                                            <td class="no-sort"
+                                                style="background:white;border-color: grey; border-width:1px">
+                                                <div style="display:flex;gap: 2px;">
+                                                    <button type="button" onclick="modifica(<?php echo $r->id;?>)"
+                                                            class="form-control btn-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                             fill="currentColor" class="bi bi-pencil"
+                                                             viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                        </svg>
+                                                    </button>
+                                                    <button type="button" onclick="duplica(<?php echo $r->id;?>)"
+                                                            class="form-control btn-warning">
+                                                        <i class="fa fa-clone" aria-hidden="true"
+                                                           style="color: white"></i>
+                                                    </button>
+                                                    <button type="submit" name="elimina" value="<?php echo $r->id;?>"
+                                                            class="form-control btn-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                             fill="currentColor" class="bi bi-trash"
+                                                             viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                            <path
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr style="background-color: lightblue">
+                                            <?php /*foreach ($column as $c){ ?>
                                     <th class="no-sort"
                                         style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>width:20px;border-color: grey; border-width:1px"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
                                     <?php } */ ?>
-                                    <th class="no-sort" style="width:20px;border-color: grey; border-width:1px"></th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                        <th class="no-sort"
+                                            style="width:20px;border-color: grey; border-width:1px"></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- /.content -->
+        </section>
+        <!-- /.content -->
+
+    @endif
 </div>
 @include('common.footer')
 
@@ -679,3 +693,4 @@
         document.getElementById(id).value = document.getElementById(id).value.toUpperCase();
     }
 </script>
+
