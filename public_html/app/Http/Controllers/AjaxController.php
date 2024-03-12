@@ -532,4 +532,96 @@ class AjaxController extends Controller
             <?php } ?>
         <?php } ?>
     <?php }
+
+
+    public function duplica_ajax_DISDETTA($id)
+    {
+        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
+        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+        foreach ($column as $c) {
+            if ($c->COLUMN_NAME != 'id') { ?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                            <b
+                                style="color:red">*</b></label>
+                        <?php if ($c->COLUMN_NAME != 'Esito') { ?>
+
+                            <input
+                                <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
+                        <?php } else { ?>
+                            <?php if ($c->COLUMN_NAME == 'Esito') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="undefined">Nessun Esito...
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">IN CORSO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">VINTA
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">PERSA
+                                    </option>
+                                </select>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php }
+    }
+
+    public
+    function modifica_ajax_DISDETTA($id)
+    {
+        $dati = file_get_contents("php://input");
+        $json = json_decode($dati);
+
+        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
+        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+
+        foreach ($column as $c) {
+            if ($c->COLUMN_NAME != 'id') {
+                ?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <b
+                                style="color:red">*</b></label>
+                        <?php if ($c->COLUMN_NAME != 'Esito') { ?>
+                            <input
+                                <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
+                        <?php } else { ?>
+                            <?php if ($c->COLUMN_NAME == 'Esito') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="undefined">Nessun Esito...
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">IN CORSO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">VINTA
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">PERSA
+                                    </option>
+                                </select>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php }
 }

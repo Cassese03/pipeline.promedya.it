@@ -198,6 +198,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo URL::asset('disdette') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Disdetta</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo URL::asset('concessionario') ?>" class="nav-link">
                             <i class="nav-icon fas fa-pen-nib"></i>
                             <p>Concessionario</p>

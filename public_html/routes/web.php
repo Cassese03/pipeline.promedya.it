@@ -21,6 +21,7 @@ Route::any('/statistiche/{data}', [HomeController::class, 'statistiche']);
 Route::any('/statistiche', [HomeController::class, 'statistiche']);
 Route::any('login', [HomeController::class, 'login']);
 Route::any('pipeline', [HomeController::class, 'pipeline']);
+Route::any('disdette', [HomeController::class, 'disdette']);
 Route::any('concessionario', [HomeController::class, 'concessionario']);
 Route::any('budget', [HomeController::class, 'budget']);
 Route::any('prodotti', [HomeController::class, 'prodotti']);
@@ -37,4 +38,7 @@ Route::any('logout', [HomeController::class, 'logout']);
 Route::any('ajax/modifica_ajax/{Id}', [AjaxController::class, 'modifica_ajax']);
 Route::any('ajax/riga_ajax/{Id}', [AjaxController::class, 'riga_ajax']);
 Route::any('ajax/duplica_ajax/{Id}', [AjaxController::class, 'duplica_ajax']);
+
+Route::any('ajax/modifica_ajax_DISDETTA/{Id}', [AjaxController::class, 'modifica_ajax_DISDETTA']);
+Route::any('ajax/duplica_ajax_DISDETTA/{Id}', [AjaxController::class, 'duplica_ajax_DISDETTA']);
 

@@ -24,6 +24,126 @@ class HomeController extends Controller
         return Redirect::to('statistiche');
     }
 
+    public function disdette(Request $request)
+    {
+        $dati = $request->all();
+
+        if (isset($dati['aggiungi'])) {
+            if (isset($dati['_token'])) unset($dati['_token']);
+            if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+            $id = DB::table('disdette')->insertGetId($dati);
+            return Redirect::to('disdette');
+        }
+        if (isset($dati['duplica'])) {
+            if (isset($dati['_token'])) unset($dati['_token']);
+            if (isset($dati['duplica'])) unset($dati['duplica']);
+            if (isset($dati['Id'])) unset($dati['Id']);
+            if (isset($dati['Id_Padre'])) unset($dati['Id_Padre']);
+            $id = DB::table('disdette')->insertGetId($dati);
+            return Redirect::to('disdette');
+        }
+        if (isset($dati['elimina'])) {
+            DB::table('disdette')->delete($dati['elimina']);
+            return Redirect::to('disdette');
+        }
+        if (isset($dati['modifica'])) {
+            if (isset($dati['_token'])) unset($dati['_token']);
+            if (isset($dati['modifica'])) unset($dati['modifica']);
+            if (isset($dati['Id'])) {
+                $id = $dati['Id'];
+                unset($dati['Id']);
+            }
+            DB::table('disdette')->where(['Id' => $id])->update($dati);
+            return Redirect::to('disdette');
+
+        }
+        if (session()->has('utente')) {
+            $utente = session('utente');
+            $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+            if (isset($dati['filtra'])) {
+                $dati = array_filter($dati, static function ($var) {
+                    return $var !== null;
+                });
+                foreach ($column as $c) {
+                    if ($c->COLUMN_NAME != 'Id' && $c->DATA_TYPE != 'date') {
+                        if (isset($dati[$c->COLUMN_NAME]) && ($dati[$c->COLUMN_NAME] == 'Nessun Filtro...' || $dati[$c->COLUMN_NAME] == '' || $dati[$c->COLUMN_NAME] == 'undefined' || $dati[$c->COLUMN_NAME] == null)) {
+                            unset($dati[$c->COLUMN_NAME]);
+                        }
+                    }
+                }
+                $where = [];
+                $prodotti = '';
+                $search = 0;
+                if ($dati['gruppo_prodotto'] == 'undefined') unset($dati['gruppo_prodotto']); else {
+                    $prodotti = $dati['gruppo_prodotto'];
+                    if ($search == 2) $search = 3; else $search = 1;
+                    unset($dati['gruppo_prodotto']);
+                }
+                if ($dati['Sales_GRUPPO'] == 'undefined' || $dati['Sales_GRUPPO'] == 'Nessun Filtro...') unset($dati['Sales_GRUPPO']); else {
+                    $sales = $dati['Sales_GRUPPO'];
+                    if ($search == 1) $search = 3; else $search = 2;
+                    unset($dati['Sales_GRUPPO']);
+                }
+                if (isset($dati['Data_contatto_i'])) {
+                    $new_filter = ['column' => 'Data_Contatto', 'operator' => '>=', 'value' => $dati['Data_contatto_i']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_contatto_i']);
+                }
+                if (isset($dati['Data_contatto_f'])) {
+                    $new_filter = ['column' => 'Data_Contatto', 'operator' => '<=', 'value' => $dati['Data_contatto_f']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_contatto_f']);
+                }
+                if (isset($dati['Data_Probabile_Chiusura_i'])) {
+                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '>=', 'value' => $dati['Data_Probabile_Chiusura_i']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_Probabile_Chiusura_i']);
+                }
+                if (isset($dati['Data_Probabile_Chiusura_f'])) {
+                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '<=', 'value' => $dati['Data_Probabile_Chiusura_f']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_Probabile_Chiusura_f']);
+                }
+                if (isset($dati['Ragione_Sociale'])) {
+                    $new_filter = ['column' => 'Ragione_Sociale', 'operator' => 'like', 'value' => '%' . $dati['Ragione_Sociale'] . '%'];
+                    array_push($where, $new_filter);
+                    unset($dati['Ragione_Sociale']);
+                }
+                unset($dati['_token']);
+                unset($dati['filtra']);
+                if ($search == 0)
+                    $rows = DB::TABLE('disdette')->select(DB::raw('*'))->where($dati)->where($where)->orderBy('Id', 'desc')->get();
+                if ($search == 1)
+                    $rows = DB::TABLE('disdette')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->orderBy('Id', 'desc')->get();
+                if ($search == 2)
+                    $rows = DB::TABLE('disdette')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
+                if ($search == 3)
+                    $rows = DB::TABLE('disdette')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
+                $operatori = DB::select('select * from operatori');
+                $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+                $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
+                $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+                $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione) as prodotti FROM prodotto p GROUP BY p.gruppo ');
+                $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
+                $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
+                $segnalato = Segnalato::all();
+                return View::make('disdette', compact('utente', 'segnalato', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
+            }
+            $rows = DB::select('select * from disdette order by Id desc');
+            $operatori = DB::select('select * from operatori');
+            $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
+            $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+            $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+            $segnalato = Segnalato::all();
+            $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
+            $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
+            $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
+            return View::make('disdette', compact('utente', 'rows', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
+
     public function pipeline(Request $request)
     {
         $dati = $request->all();
