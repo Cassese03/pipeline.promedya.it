@@ -619,6 +619,31 @@
 </form>
 <?php } ?>
 
+<?php foreach ($rows as $r){ ?>
+    <?php if ($r->Note != ''){ ?>
+<div class="modal fade" id="modal_nota_<?php echo $r->id ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titolo_modal_mgmov">Nota Record <?php echo $r->id ?></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <?php echo $r->Note; ?>
+                <div class=" clearfix">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<?php } ?>
 <script type="text/javascript">
 
     function modifica_ajax(id) {
@@ -646,6 +671,9 @@
         $('#modal_modifica_' + id).modal('show');
     }
 
+    function nota(id) {
+        $('#modal_nota_' + id).modal('show');
+    }
 
     function converti(id) {
         document.getElementById(id).value = document.getElementById(id).value.toUpperCase();

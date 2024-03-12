@@ -542,6 +542,8 @@ class AjaxController extends Controller
         $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
         $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
         $operatori = DB::select('select * from operatori');
+        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'id') {
                 ?>
@@ -551,7 +553,7 @@ class AjaxController extends Controller
                             <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <b
                                 style="color:red">*</b></label>
-                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Note') { ?>
+                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Prodotto') { ?>
                             <input
                                 <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                 <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -611,6 +613,21 @@ class AjaxController extends Controller
                                 </select>
                             <?php } ?>
 
+                            <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
+                                <select style="width:100% " class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                    <?php foreach ($prodotto as $s) { ?>
+                                        <option
+                                            value="<?php echo $s->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >
+                                            <?php echo $s->descrizione; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
 
                         <?php } ?>
                     </div>

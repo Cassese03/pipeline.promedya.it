@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Richieste da Giovanni">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserimento nuove colonne">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -404,7 +405,7 @@
       <workItem from="1709639271376" duration="45000" />
       <workItem from="1709891841357" duration="193000" />
       <workItem from="1710255685634" duration="3581000" />
-      <workItem from="1710262451969" duration="1817000" />
+      <workItem from="1710262451969" duration="2426000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -486,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710263023765</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Inserimento nuove colonne">
+      <option name="closed" value="true" />
+      <created>1710264480698</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710264480698</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,6 +515,7 @@
     <MESSAGE value="Gestione Disdette" />
     <MESSAGE value="Fix Grafica" />
     <MESSAGE value="Fix Richieste da Giovanni" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Richieste da Giovanni" />
+    <MESSAGE value="Inserimento nuove colonne" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserimento nuove colonne" />
   </component>
 </project>
