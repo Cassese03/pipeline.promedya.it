@@ -170,7 +170,7 @@ class HomeController extends Controller
                 $mail->setFrom('commerciale@promedya.it');
                 $mail->addBCC('umberto.limone@promedya.it');
                 $mail->addBCC('alessandro.aniello@promedya.it');
-                //$mail->addBCC('dino.fioretti@promedya.it');
+                $mail->addBCC('dino.fioretti@promedya.it');
                 $mail->addBCC('francesco.napolitano@promedya.it');
                 $mail->addBCC('daniela.dellacorte@promedya.it');
                 $mail->addBCC('giovanni.tutino@promedya.it');
@@ -256,7 +256,7 @@ class HomeController extends Controller
                     $mail->setFrom('commerciale@promedya.it');
                     $mail->addBCC('umberto.limone@promedya.it');
                     $mail->addBCC('alessandro.aniello@promedya.it');
-                    //$mail->addBCC('dino.fioretti@promedya.it');
+                    $mail->addBCC('dino.fioretti@promedya.it');
                     $mail->addBCC('francesco.napolitano@promedya.it');
                     $mail->addBCC('daniela.dellacorte@promedya.it');
                     $mail->addBCC('giovanni.tutino@promedya.it');
