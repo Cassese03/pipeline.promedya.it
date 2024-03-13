@@ -34,9 +34,9 @@
                     <div style="display: flex;width: 100%;justify-content: center">
                         <div style="min-width: 360px;">
                             <ul class="charts-css legend legend-rectangle">
-                                <li>In Corso</li>
-                                <li>Persa</li>
-                                <li>Vinta</li>
+                                <li>CONTATTATO</li>
+                                <li>DISDETTA</li>
+                                <li>RIENTRO</li>
                             </ul>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                                                 if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, ',', '.'); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
                                             } ?>
                                                 <?php if ($c->COLUMN_NAME == 'Esito') {
-                                                if ($r->{$c->COLUMN_NAME} == 1) echo 'VINTA';
-                                                if ($r->{$c->COLUMN_NAME} == 0) echo 'PERSA';
-                                                if ($r->{$c->COLUMN_NAME} == 2) echo 'IN CORSO';
+                                                if ($r->{$c->COLUMN_NAME} == 1) echo 'RIENTRO';
+                                                if ($r->{$c->COLUMN_NAME} == 0) echo 'DISDETTA';
+                                                if ($r->{$c->COLUMN_NAME} == 2) echo 'CONTATTATO';
                                             } ?>
                                                 <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
                                             <button class="form-control btn-default"
@@ -232,11 +232,11 @@
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Esito...
                                     </option>
-                                    <option value="2">IN CORSO
+                                    <option value="2">CONTATTATO
                                     </option>
-                                    <option value="1">VINTA
+                                    <option value="1">RIENTRO
                                     </option>
-                                    <option value="0">PERSA
+                                    <option value="0">DISDETTA
                                     </option>
                                 </select>
                                 <?php } ?>
@@ -413,11 +413,11 @@
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Filtro...
                                     </option>
-                                    <option value="2">IN CORSO
+                                    <option value="2">CONTATTATO
                                     </option>
-                                    <option value="1">VINTA
+                                    <option value="1">RIENTRO
                                     </option>
-                                    <option value="0">PERSA
+                                    <option value="0">DISDETTA
                                     </option>
                                 </select>
                                 <?php } ?>

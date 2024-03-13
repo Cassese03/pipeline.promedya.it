@@ -567,11 +567,11 @@ class AjaxController extends Controller
                                         name="<?php echo $c->COLUMN_NAME; ?>">
                                     <option value="undefined">Nessun Esito...
                                     </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">IN CORSO
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">CONTATTATO
                                     </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">VINTA
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">RIENTRO
                                     </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">PERSA
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">DISDETTA
                                     </option>
                                 </select>
                             <?php } ?>
