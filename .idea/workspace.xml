@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Dino Fioretti di nuovo email">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Tolte date 01-01-1970">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +33,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Cassese03&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="2b3a6ae3-b699-496c-a93a-83bb39007429" />
+        <option name="url" value="https://github.com/Cassese03/pipeline.promedya.it.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -411,7 +425,9 @@
       <workItem from="1710340396615" duration="604000" />
       <workItem from="1710342095882" duration="46000" />
       <workItem from="1710429871469" duration="622000" />
-      <workItem from="1710519996475" duration="185000" />
+      <workItem from="1710519996475" duration="212000" />
+      <workItem from="1710520684402" duration="235000" />
+      <workItem from="1710521367758" duration="478000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -533,7 +549,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710342133608</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Tolte date 01-01-1970">
+      <option name="closed" value="true" />
+      <created>1710520205604</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710520205604</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,6 +582,7 @@
     <MESSAGE value="CAMBIO ESITI" />
     <MESSAGE value="Tutti possono vedere e modificare la pagina disdette" />
     <MESSAGE value="Dino Fioretti di nuovo email" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dino Fioretti di nuovo email" />
+    <MESSAGE value="Tolte date 01-01-1970" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tolte date 01-01-1970" />
   </component>
 </project>

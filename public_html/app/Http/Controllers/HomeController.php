@@ -129,7 +129,7 @@ class HomeController extends Controller
                 $segnalato = Segnalato::all();
                 return View::make('disdette', compact('utente', 'segnalato', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
             }
-            $rows = DB::select('select * from disdette order by Id desc');
+            $rows = DB::select('select * from disdette order by DATE_FORMAT(Data_Disdetta, \'%Y\') desc,DATE_FORMAT(Data_Disdetta, \'%m\') desc,DATE_FORMAT(Data_Disdetta, \'%d\') desc');
             $operatori = DB::select('select * from operatori');
             $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
