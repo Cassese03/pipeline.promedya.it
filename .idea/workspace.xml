@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserimento nuove colonne NOTA">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Dino Fioretti di nuovo email">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" afterDir="false" />
     </list>
@@ -406,7 +406,12 @@
       <workItem from="1710255685634" duration="3581000" />
       <workItem from="1710262451969" duration="2472000" />
       <workItem from="1710265130546" duration="288000" />
-      <workItem from="1710318615626" duration="116000" />
+      <workItem from="1710318615626" duration="1174000" />
+      <workItem from="1710340359022" duration="30000" />
+      <workItem from="1710340396615" duration="604000" />
+      <workItem from="1710342095882" duration="46000" />
+      <workItem from="1710429871469" duration="622000" />
+      <workItem from="1710519996475" duration="185000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -504,7 +509,31 @@
       <option name="project" value="LOCAL" />
       <updated>1710264942007</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="CAMBIO ESITI">
+      <option name="closed" value="true" />
+      <created>1710318792329</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1710318792329</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Tutti possono vedere e modificare la pagina disdette">
+      <option name="closed" value="true" />
+      <created>1710340386640</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1710340386640</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Dino Fioretti di nuovo email">
+      <option name="closed" value="true" />
+      <created>1710342133607</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1710342133608</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,6 +555,9 @@
     <MESSAGE value="Fix Richieste da Giovanni" />
     <MESSAGE value="Inserimento nuove colonne" />
     <MESSAGE value="Inserimento nuove colonne NOTA" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inserimento nuove colonne NOTA" />
+    <MESSAGE value="CAMBIO ESITI" />
+    <MESSAGE value="Tutti possono vedere e modificare la pagina disdette" />
+    <MESSAGE value="Dino Fioretti di nuovo email" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dino Fioretti di nuovo email" />
   </component>
 </project>
