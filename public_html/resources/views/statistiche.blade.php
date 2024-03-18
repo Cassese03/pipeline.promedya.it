@@ -81,7 +81,7 @@
                 <div class="card card-fuchsia">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Best SOTTOGRUPPO Annuale
+                            Best Asset Annuale
                         </h3>
                     </div>
                     <div class="card-body">
