@@ -81,7 +81,7 @@
                 <div class="card card-fuchsia">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Best Asset Annuale
+                            Asset Best Performer Annuale
                         </h3>
                     </div>
                     <div class="card-body">
