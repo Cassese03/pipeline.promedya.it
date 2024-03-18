@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Grafica" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Grafica 1.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -430,6 +430,7 @@
       <workItem from="1710771959786" duration="282000" />
       <workItem from="1710775658725" duration="598000" />
       <workItem from="1710778733913" duration="49000" />
+      <workItem from="1710778832243" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -607,7 +608,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710778780165</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fix Grafica 1.1">
+      <option name="closed" value="true" />
+      <created>1710778864428</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1710778864428</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,6 +647,7 @@
     <MESSAGE value="Inserimento sottogruppo" />
     <MESSAGE value="Inserimento statistiche grafico sottogruppo" />
     <MESSAGE value="Fix Grafica" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Grafica" />
+    <MESSAGE value="Fix Grafica 1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Grafica 1.1" />
   </component>
 </project>
