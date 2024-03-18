@@ -714,6 +714,14 @@ class HomeController extends Controller
                                                       WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
+            $statistiche_corrente_sottogruppo_annuale =
+
+                DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
+                                                      FROM   pipeline
+                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      GROUP  BY gruppo
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
             /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
             $categoria = DB::SELECT('SELECT Categoria FROM pipeline where Categoria is not null GROUP BY Categoria');
 
@@ -810,7 +818,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_sottogruppo_annuale','statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

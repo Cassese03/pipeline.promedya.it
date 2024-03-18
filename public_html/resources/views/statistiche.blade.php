@@ -17,7 +17,7 @@
             <div class="col-xl-3 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
-                    <div class="card-header" style="color:white;background-color:lightseagreen">
+                    <div class="card-header"  style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
                             Statistiche Budget
                         </h3>
@@ -26,8 +26,8 @@
                         --}}
                     </div>
                     <div class="card-body">
-                        <div style="height:240px!important; max-height: 233px!important; max-width: 100%!important;">
-                            <?php foreach ($statistiche_budget as $s){ ?>
+                        <div style="height:240px!important; max-height: 240px!important; max-width: 100%!important;">
+                        <?php foreach ($statistiche_budget as $s){ ?>
                             <div style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
                                 <label style="width: 30%"><?php echo $s->type; ?>
                                 </label>
@@ -60,7 +60,7 @@
 
                 </div>
             </div>
-            <div class="col-xl-9 col-sm-12">
+            <div class="col-xl-6 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia">
                     <div class="card-header">
@@ -70,6 +70,22 @@
                     </div>
                     <div class="card-body">
                         <canvas id="donutAnnualeProdottoPERFORMERChart"
+                                style="height:  260px!important; max-height: 260px!important; max-width: 100%!important;"></canvas>
+                    </div>
+                    <!-- /.card-body-->
+
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-12">
+
+                <div class="card card-fuchsia">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Best SOTTOGRUPPO Annuale
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="donutAnnualeSottogruppoPERFORMERChart"
                                 style="height:  260px!important; max-height: 260px!important; max-width: 100%!important;"></canvas>
                     </div>
                     <!-- /.card-body-->
@@ -253,6 +269,7 @@
     }
 
 
+
     // BEST PERFORMER SALES MESE
     // STATISTICHE MESE CORRENTE
 
@@ -311,6 +328,82 @@
         type: 'doughnut',
         data: donutMESESalesData,
         options: donutMESESalesOptions
+    });
+    var donutAnnualeSottogruppoPERFORMERChart = $('#donutAnnualeSottogruppoPERFORMERChart').get(0).getContext('2d')
+    var donutAnnualeSottogruppoPERFORMERData = {
+        labels: [
+            <?php $sales = ''; foreach ($statistiche_corrente_sottogruppo_annuale as $s) {
+                if ($s->gruppo != null && $s->gruppo != '')
+                    $sales .= '\'' . $s->gruppo . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($s->Percentuale), 2, ',', ' ') . '%)\',';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ],
+        datasets: [
+            {
+                data: [
+                    <?php $sales = ''; foreach ($statistiche_corrente_sottogruppo_annuale as $s) {
+                        if ($s->gruppo != null && $s->gruppo != '')
+                            $sales .= $s->Val . ',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+                backgroundColor: [
+
+                    <?php $sales = ''; foreach ($statistiche_corrente_sottogruppo_annuale as $s) {
+                        if ($s->gruppo != null && $s->gruppo != '')
+                            $sales .= '\'#' . substr(md5(mt_rand()), 0, 6) . '\',';
+
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+
+                borderColor: [
+                    <?php $sales = ''; foreach ($statistiche_corrente_sottogruppo_annuale as $s) {
+                        if ($s->gruppo != null && $s->gruppo != '')
+                            $sales .= '\'#999999\',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+                ],
+            }
+        ]
+    }
+
+    var donutAnnualeSottogruppoPERFORMEROptions = {
+        responsive: true,
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                beginAtZero: true
+            },
+            y: {
+                beginAtZero: true
+            },
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+
+    new Chart(donutAnnualeSottogruppoPERFORMERChart, {
+        type: 'bar',
+        data: donutAnnualeSottogruppoPERFORMERData,
+        options: donutAnnualeSottogruppoPERFORMEROptions
     });
 
 
@@ -794,6 +887,13 @@ options: donutOptions
             }]
         }
     }
+
+    new Chart(donutAnnualeProdottoPERFORMERChart, {
+        type: 'bar',
+        data: donutAnnualeProdottoPERFORMERData,
+        options: donutAnnualeProdottoPERFORMEROptions
+    });
+
 
     new Chart(donutAnnualeProdottoPERFORMERChart, {
         type: 'bar',
