@@ -60,7 +60,24 @@
 
                 </div>
             </div>
-            <div class="col-xl-4 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
+            <div class="col-xl-9 col-sm-12">
+                <!-- Bar chart -->
+                <div class="card card-fuchsia">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Prodotto Best Performer Annuale
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="donutAnnualeProdottoPERFORMERChart"
+                                style="height:  260px!important; max-height: 260px!important; max-width: 100%!important;"></canvas>
+                    </div>
+                    <!-- /.card-body-->
+
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia" style="width: 50%;">
                     <div class="card-header">
@@ -107,22 +124,6 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-5 col-sm-12">
-                <!-- Bar chart -->
-                <div class="card card-fuchsia">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Prodotto Best Performer Annuale
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="donutAnnualeProdottoPERFORMERChart"
-                                style="height:  260px!important; max-height: 260px!important; max-width: 100%!important;"></canvas>
-                    </div>
-                    <!-- /.card-body-->
-
-                </div>
-            </div>
             <div class="col-xl-12 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
@@ -136,7 +137,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-3 col-sm-12">
+                        <div class="col-xl-2 col-sm-12">
                             <!-- Bar chart -->
                             <div
                                 style="height:240px!important; max-height: 233px!important; max-width: 100%!important;">
@@ -170,7 +171,7 @@
                             </div>
 
                         </div>
-                        <div class="col-xl-3 col-sm-12">
+                        <div class="col-xl-2 col-sm-12">
                             <div class="card-body">
                                 <canvas id="donutMESEChart"
                                         style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
@@ -183,7 +184,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-sm-12">
+                        <div class="col-xl-5 col-sm-12">
                             <div class="card-body">
                                 <canvas id="donutMESEProdottoChart"
                                         style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
