@@ -2,78 +2,80 @@
 @include('common.header')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-        <section class="content" style="margin:5%;">
-            @if ($utente->username != 'Giovanni Tutino')
-                <div>
-                </div>
-            @else
-                <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_prodotto"
+    <section class="content-header">
+        <h1>
+            PROMEDYA | Sales Force
+            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        </h1>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="margin:5%;">
+        @if ($utente->username != 'Giovanni Tutino')
+            <div>
+            </div>
+        @else
+            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_prodotto"
                     onclick="aggiungi()" name="aggiungi_prodotto">
                 Aggiungi
                 Nuovo
                 Prodotto
             </button>
-            @endif
-            <table id="example3" class="table table-bordered datatable">
-                <thead>
+        @endif
+        <table id="example3" class="table table-bordered datatable">
+            <thead>
+            <tr>
+                <th class="no-sort">Id</th>
+                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Gruppo</th>
+                <th class="no-sort">Sottogruppo</th>
+                <th class="no-sort">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($prodotti as $p)
                 <tr>
-                    <th class="no-sort">Id</th>
-                    <th class="no-sort">Descrizione</th>
-                    <th class="no-sort">Gruppo</th>
-                    <th class="no-sort">Azioni</th>
+                    <td>{{ $p->id}}</td>
+                    <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->gruppo }}</td>
+                    <td>{{ $p->sottogruppo }}</td>
+                    <form enctype="multipart/form-data" method="post"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                        @csrf
+                        <td class="no-sort"
+                            style="background:white;border-width:1px">
+                            @if ($utente->username != 'Giovanni Tutino')
+                                <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
+                                </div>
+                            @else
+                                <div style="display:flex;gap: 2px;">
+                                    <button type="button" onclick="modifica(<?php echo $p->id;?>)"
+                                            class="form-control btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                        </svg>
+                                    </button>
+                                    <button type="submit" name="elimina" value="<?php echo $p->id;?>"
+                                            class="form-control btn-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endif
+                        </td>
+                    </form>
                 </tr>
-                </thead>
-                <tbody>
-                @foreach($prodotti as $p)
-                    <tr>
-                        <td>{{ $p->id}}</td>
-                        <td>{{ $p->descrizione }}</td>
-                        <td>{{ $p->gruppo }}</td>
-                        <form enctype="multipart/form-data" method="post"
-                              onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                            @csrf
-                            <td class="no-sort"
-                                style="background:white;border-width:1px">
-                                @if ($utente->username != 'Giovanni Tutino')
-                                    <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-                                    </div>
-                                @else
-                                    <div style="display:flex;gap: 2px;">
-                                        <button type="button" onclick="modifica(<?php echo $p->id;?>)"
-                                                class="form-control btn-primary">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                 fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                            </svg>
-                                        </button>
-                                        <button type="submit" name="elimina" value="<?php echo $p->id;?>"
-                                                class="form-control btn-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                 fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                <path
-                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                @endif
-                            </td>
-                        </form>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </section>
+            @endforeach
+            </tbody>
+        </table>
+    </section>
 </div>
 <!-- /.container-fluid-->
 
@@ -101,6 +103,10 @@
                         Gruppo
                     </label>
                     <input class="form-control" name="gruppo" id="gruppo" value="{{ $p->gruppo }}">
+                    <label for="sottogruppo">
+                        SottoGruppo
+                    </label>
+                    <input class="form-control" name="sottogruppo" id="sottogruppo" value="{{ $p->sottogruppo }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -141,6 +147,10 @@
                             Gruppo
                         </label>
                         <input class="form-control" name="gruppo" id="gruppo">
+                        <label for="sottogruppo">
+                            SottoGruppo
+                        </label>
+                        <input class="form-control" name="sottogruppo" id="sottogruppo">
 
                     </div>
                     <div class=" clearfix">
