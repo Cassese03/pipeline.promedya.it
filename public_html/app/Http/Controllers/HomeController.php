@@ -713,7 +713,7 @@ class HomeController extends Controller
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
-                                                      ORDER  BY (SELECT gruppo from prodotto where descrizione = pipeline.Prodotto)');
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
             /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
             $categoria = DB::SELECT('SELECT Categoria FROM pipeline where Categoria is not null GROUP BY Categoria');
 
