@@ -3,7 +3,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
+        <h1 style="color:#007bff">
             PROMEDYA | Sales Force
             <small>&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
@@ -21,22 +21,24 @@
             </a>
             <a class="nav-link"
                style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
-                <p>Copyright : Softmaint SRL</p>
-            </a>
-            <a class="nav-link"
-               style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
-                <p>Prodotto : SALES FORCE</p>
-            </a>
-            <a class="nav-link"
-               style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
                 <p>Versione : GT.321.24</p>
             </a>
             <a class="nav-link"
                style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
-                <p>Manuale : Sales Force GT 3231 24</p>
+                <p>Piattaforma : WEB</p>
             </a>
-            <a class="btn btn-primary" onclick="window.open('<?php echo URL::ASSET('ManualeSalesForceGT32124.pdf')?>')"
-               style="width: 100%;justify-content: center">Download</a>
+            <a class="nav-link"
+               style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
+                <p onclick="top.location.href = 'https://softmaint.it'">Copyright : Softmaint SRL</p>
+            </a>
+            <a class="nav-link"
+               style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
+                <p>Numero Licenza : 00124</p>
+            </a>
+            <a class="nav-link"
+               style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
+                <p>PIVA : 03144930645</p>
+            </a>
         </div>
         <div class="col-xl-4 col-2"></div>
     </div>

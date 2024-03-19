@@ -3,7 +3,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
+        <h1 style="color:#007bff">
             PROMEDYA | Sales Force
             <small>&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>

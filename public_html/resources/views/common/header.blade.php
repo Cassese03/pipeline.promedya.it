@@ -265,13 +265,12 @@
                             </li>
                         </ul>
                     </li>
-                    {{--
-                                        <li class="nav-item">
-                                            <a href="<?php echo URL::asset('info') ?>" class="nav-link">
-                                                <i class="nav-icon fas fa-info"></i>
-                                                <p>Info</p>
-                                            </a>
-                                        </li>--}}
+                    <li class="nav-item">
+                        <a href="<?php echo URL::asset('info') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-info"></i>
+                            <p>Info</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="<?php echo URL::asset('logout') ?>" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
