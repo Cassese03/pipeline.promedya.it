@@ -22,32 +22,32 @@
                          src="<?php echo URL::asset('logo_softmaint.jpg') ?>" alt="LOGO">
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>SALES FORCE</p>
+                   style="font-size: 1.10rem;color:red;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">SALES FORCE</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>Versione : GT.321.24</p>
+                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">Versione : GT.321.24</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>Piattaforma : WEB</p>
+                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">Piattaforma : WEB</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p onclick="top.location.href = 'https://softmaint.it'">Copyright : Softmaint SRL IT 07374571219</p>
+                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
+                    <p onclick="top.location.href = 'https://softmaint.it'">Copyright : Softmaint SRL - IT 07374571219</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>INFORMAZIONI LICENZA</p>
+                   style="font-size: 1.10rem;color:red;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">INFORMAZIONI LICENZA</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>Utente : Promedya SRL IT 03144930645</p>
+                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">Utente : Promedya SRL - IT 03144930645</p>
                 </a>
                 <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p>Numero Licenza : 00124</p>
+                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
+                    <p style="margin:0;">Numero Licenza : 00124</p>
                 </a>
             </span>
         </div>

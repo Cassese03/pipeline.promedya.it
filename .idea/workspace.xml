@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Cambio Colore e inserimento info">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix info page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/work.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/work.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +440,8 @@
       <workItem from="1710778832243" duration="82000" />
       <workItem from="1710781774012" duration="216000" />
       <workItem from="1710868916694" duration="490000" />
-      <workItem from="1710943476461" duration="3554000" />
+      <workItem from="1710943476461" duration="3689000" />
+      <workItem from="1710952696958" duration="1174000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -638,7 +643,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710869395971</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Fix info page">
+      <option name="closed" value="true" />
+      <created>1710948428833</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1710948428833</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,6 +685,7 @@
     <MESSAGE value="Fix Grafica 1.1" />
     <MESSAGE value="Fix Grafica 1.2" />
     <MESSAGE value="Cambio Colore e inserimento info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambio Colore e inserimento info" />
+    <MESSAGE value="Fix info page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix info page" />
   </component>
 </project>
