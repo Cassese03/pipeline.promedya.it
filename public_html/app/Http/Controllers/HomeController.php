@@ -344,18 +344,20 @@ class HomeController extends Controller
                 $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
                 $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
                 $segnalato = Segnalato::all();
-                return View::make('rows', compact('utente', 'segnalato', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
+                $categoria = DB::select('select * from categoria ORDER BY id');
+                return View::make('rows', compact('utente', 'segnalato','categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
             }
             $rows = DB::select('select * from pipeline order by Id desc');
             $operatori = DB::select('select * from operatori');
             $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
             $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+            $categoria = DB::select('select * from categoria ORDER BY id');
             $segnalato = Segnalato::all();
             $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
-            return View::make('rows', compact('utente', 'rows', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
+            return View::make('rows', compact('utente', 'rows', 'zone','categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
         } else {
             return Redirect::to('login');
         }
@@ -489,6 +491,41 @@ class HomeController extends Controller
             $utente = session('utente');
 
             return View::make('work', compact('utente'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
+
+    public function categoria(Request $request)
+    {
+        $dati = $request->all();
+        if (session()->has('utente')) {
+            if (isset($dati['modifica'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['modifica'])) unset($dati['modifica']);
+                if (isset($dati['id'])) {
+                    $id = $dati['id'];
+                    unset($dati['id']);
+                    DB::table('categoria')->where(['id' => $id])->update($dati);
+                }
+                return Redirect::to('categoria');
+            }
+            if (isset($dati['elimina'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['elimina'])) {
+                    DB::table('categoria')->where(['id' => $dati['elimina']])->delete();
+                }
+                return Redirect::to('categoria');
+            }
+            if (isset($dati['aggiungi'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                DB::table('categoria')->insert($dati);
+                return Redirect::to('categoria');
+            }
+            $utente = session('utente');
+            $categoria = DB::SELECT('SELECT * FROM categoria');
+            return View::make('categoria', compact('utente', 'categoria'));
         } else {
             return Redirect::to('login');
         }
@@ -818,7 +855,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_sottogruppo_annuale','statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

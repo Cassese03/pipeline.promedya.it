@@ -245,14 +245,9 @@
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                    <option value="COMMERCIALISTA">COMMERCIALISTA
-                                    </option>
-                                    <option value="AZIENDA">AZIENDA
-                                    </option>
-                                    <option value="CONSULENTE DEL LAVORO">CONSULENTE DEL LAVORO
-                                    </option>
-                                    <option value="ALTRO">ALTRO
-                                    </option>
+                                    @foreach($categoria as $c1)
+                                        <option value="{{ $c1->descrizione }}">{{ $c1->descrizione }}</option>
+                                    @endforeach
                                 </select>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
@@ -490,14 +485,9 @@
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
-                                    <option value="COMMERCIALISTA">COMMERCIALISTA
-                                    </option>
-                                    <option value="AZIENDA">AZIENDA
-                                    </option>
-                                    <option value="CONSULENTE DEL LAVORO">CONSULENTE DEL LAVORO
-                                    </option>
-                                    <option value="ALTRO">ALTRO
-                                    </option>
+                                    @foreach($categoria as $c1)
+                                        <option value="{{ $c1->descrizione }}">{{ $c1->descrizione }}</option>
+                                    @endforeach
                                 </select>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>

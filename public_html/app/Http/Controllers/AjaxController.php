@@ -129,6 +129,7 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') { ?>
@@ -207,21 +208,12 @@ class AjaxController extends Controller
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
                                 </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'COMMERCIALISTA') echo 'selected'; ?>
-                                    value="COMMERCIALISTA">
-                                    COMMERCIALISTA
+                        <?php foreach ($categoria as $c1){ ?>
+                                <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
+                                    value="<?php echo $c1->descrizione ?>">
+                                    <?php echo $c1->descrizione ?>
                                 </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'AZIENDA') echo 'selected'; ?>
-                                    value="AZIENDA">
-                                    AZIENDA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'CONSULENTE DEL LAVORO') echo 'selected'; ?>
-                                    value="CONSULENTE DEL LAVORO">
-                                    CONSULENTE DEL LAVORO
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'ALTRO') echo 'selected'; ?> value="ALTRO">
-                                    ALTRO
-                                </option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -333,6 +325,7 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') {
@@ -414,21 +407,12 @@ class AjaxController extends Controller
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
                                 </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'COMMERCIALISTA') echo 'selected'; ?>
-                                    value="COMMERCIALISTA">
-                                    COMMERCIALISTA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'AZIENDA') echo 'selected'; ?>
-                                    value="AZIENDA">
-                                    AZIENDA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'CONSULENTE DEL LAVORO') echo 'selected'; ?>
-                                    value="CONSULENTE DEL LAVORO">
-                                    CONSULENTE DEL LAVORO
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'ALTRO') echo 'selected'; ?> value="ALTRO">
-                                    ALTRO
-                                </option>
+                                <?php foreach ($categoria as $c1) { ?>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
+                                        value="<?php echo $c1->descrizione ?>">
+                                        <?php echo $c1->descrizione ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -567,7 +551,8 @@ class AjaxController extends Controller
                                         name="<?php echo $c->COLUMN_NAME; ?>">
                                     <option value="undefined">Nessun Esito...
                                     </option>
-                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">CONTATTATO
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">
+                                        CONTATTATO
                                     </option>
                                     <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">RIENTRO
                                     </option>

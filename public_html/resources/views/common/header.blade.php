@@ -246,6 +246,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="<?php echo URL::asset('categoria') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-ad"></i>
+                                    <p>Categoria</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?php echo URL::asset('segnalato') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-check"></i>
                                     <p>Segnalato</p>
