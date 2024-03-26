@@ -30,6 +30,7 @@
             <tr>
                 <th class="no-sort">Id</th>
                 <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Valore Annuale Lordo</th>
                 <th class="no-sort">Azioni</th>
             </tr>
             </thead>
@@ -38,6 +39,7 @@
                 <tr>
                     <td>{{ $p->id}}</td>
                     <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->Valore_Annuale_Lordo }}</td>
                     @if ($utente->username != 'Giovanni Tutino')
                         <td style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
                         </td>
@@ -98,6 +100,10 @@
                         Descrizione
                     </label>
                     <input class="form-control" name="descrizione" id="descrizione" value="{{ $p->descrizione }}">
+                    <label for="Valore_Annuale_Lordo">
+                        Valore Annuale Lordo
+                    </label>
+                    <input class="form-control" name="Valore_Annuale_Lordo" id="Valore_Annuale_Lordo" value="{{ $p->Valore_Annuale_Lordo }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -133,6 +139,10 @@
                             Descrizione
                         </label>
                         <input class="form-control" name="descrizione" id="descrizione">
+                        <label for="Valore_Annuale_Lordo">
+                            Valore Annuale Lordo
+                        </label>
+                        <input class="form-control" name="Valore_Annuale_Lordo" id="Valore_Annuale_Lordo">
                     </div>
                     <div class=" clearfix">
                     </div>

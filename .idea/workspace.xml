@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserita tabella categoria" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Tutti possono modificare la gestione invio mail">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -436,6 +439,8 @@
       <workItem from="1710943476461" duration="3689000" />
       <workItem from="1710952696958" duration="1226000" />
       <workItem from="1711018059677" duration="821000" />
+      <workItem from="1711034465720" duration="59000" />
+      <workItem from="1711466667283" duration="298000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -661,7 +666,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711018873211</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Tutti possono modificare la gestione invio mail">
+      <option name="closed" value="true" />
+      <created>1711034517768</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711034517768</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +684,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix zona" />
     <MESSAGE value="Fix QUERY ZONA SU FILTRO" />
     <MESSAGE value="Fix ZONA VUOTA SU FILTRO" />
     <MESSAGE value="Fix grafica filtro e aggiungi pipeline" />
@@ -696,7 +708,8 @@
     <MESSAGE value="Cambio Colore e inserimento info" />
     <MESSAGE value="Fix info page" />
     <MESSAGE value="Inserita tabella categoria" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inserita tabella categoria" />
+    <MESSAGE value="Tutti possono modificare la gestione invio mail" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tutti possono modificare la gestione invio mail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
