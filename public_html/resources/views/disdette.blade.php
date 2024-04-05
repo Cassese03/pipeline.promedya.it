@@ -223,7 +223,7 @@
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Esito') { ?>
-                                <select style="width:100%" class="form-control"
+                                <select style="width:100%" class="form-control" required
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Esito...
@@ -404,7 +404,7 @@
                                 </datalist>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Esito') { ?>
-                                <select style="width:100%" class="form-control"
+                                <select style="width:100%" class="form-control" required
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Filtro...
