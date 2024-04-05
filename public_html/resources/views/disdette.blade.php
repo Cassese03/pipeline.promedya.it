@@ -12,8 +12,8 @@
         <button class="form-control btn-primary" style="border-radius:25px" id="aggiungi_disdetta"
                 onclick="aggiungi()" name="aggiungi_disdetta">
             Aggiungi
-            Nuovo
-            Contatto
+            Nuova
+            Disdetta
         </button>
         <br>
         <button class="form-control btn-danger" style="border-radius:25px" id="filtra_disdetta" onclick="filtra()"
@@ -404,7 +404,7 @@
                                 </datalist>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Esito') { ?>
-                                <select style="width:100%" class="form-control" required
+                                <select style="width:100%" class="form-control"
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
