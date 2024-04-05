@@ -226,7 +226,7 @@
                                 <select style="width:100%" class="form-control" required
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="undefined">Nessun Esito...
+                                    <option value="">Nessun Esito...
                                     </option>
                                     <option value="2">CONTATTATO
                                     </option>
@@ -407,7 +407,7 @@
                                 <select style="width:100%" class="form-control" required
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="undefined">Nessun Filtro...
+                                    <option value="">Nessun Filtro...
                                     </option>
                                     <option value="2">CONTATTATO
                                     </option>
