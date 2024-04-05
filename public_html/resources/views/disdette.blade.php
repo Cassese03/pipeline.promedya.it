@@ -168,7 +168,7 @@
 @include('common.footer')
 
 <form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova Lead?')" enctype="multipart/form-data"
+      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova Disdetta?')" enctype="multipart/form-data"
       action="/disdette">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
