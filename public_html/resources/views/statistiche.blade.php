@@ -32,11 +32,11 @@
                                 <label style="width: 30%"><?php echo $s->type; ?>
                                 </label>
                                 <input type="text"
-                                       style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                       style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;'; ?>"
                                        readonly class="form-control"
                                        value="<?php echo number_format($s->valore,2,',',' ');?>">
                                 <input type="text" class="form-control"
-                                       style="width: 25%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                       style="width: 25%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;'; ?>"
                                        readonly
                                        value="<?php if($s->type == 'Budget') echo '100%'; else echo number_format((1 - (floatval($statistiche_budget[0]->valore-$statistiche_budget[1]->valore)/$statistiche_budget[0]->valore))*100,2,',','').'%';?>">
                             </div>
@@ -163,11 +163,11 @@
                                     <label style="width: 25%;font-size:14px"><?php echo $s->type; ?>
                                     </label>
                                     <input type="text"
-                                           style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                           style="width: 40%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;'; ?>"
                                            readonly class="form-control"
                                            value="<?php echo number_format($s->valore,2,',',' ');?>">
                                     <input type="text" class="form-control"
-                                           style="width: 30%;text-align: right;<?php if($s->type != 'Budget') echo 'color:green;'; ?>"
+                                           style="width: 34%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;'; ?>"
                                            readonly
                                            value="<?php if($s->type == 'Budget') echo '100%'; else echo number_format((1 - (floatval($statistiche_budget_mensile[0]->valore-$statistiche_budget_mensile[1]->valore)/$statistiche_budget_mensile[0]->valore))*100,2,',','').'%';?>">
                                 </div>
@@ -176,11 +176,11 @@
                                     style="margin:5%;display: flex;align-items:center;justify-content: space-between">
                                     <label style="width: 25%;font-size:14px" >Obiettivo</label>
                                     <input type="text"
-                                           style="width: 40%;margin-right:5%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';?>"
+                                           style="width: 40%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';else echo 'color:green;'?>"
                                            readonly class="form-control"
                                            value="<?php echo number_format($differenza_mese,2,',',' ');?>">
                                     <input type="text" class="form-control"
-                                           style="width: 30%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';?>"
+                                           style="width: 34%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;'; else echo 'color:green;'?>"
                                            readonly
                                            value="<?php if($differenza_mese<= 0) echo '-';else echo '+';?><?php echo number_format(abs(100-(1 - (($statistiche_budget_mensile[0]->valore-$statistiche_budget_mensile[1]->valore)/$statistiche_budget_mensile[0]->valore))*100),2,',','').'%';?>">
                                 </div>

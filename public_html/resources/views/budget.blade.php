@@ -24,7 +24,7 @@
             </div>
             <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
                 <label for="input">VENDITA ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder" readonly type="text"
+                <input style="text-align:right;font-weight: bolder;color:blue;" readonly type="text"
                        value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
             </div>
             <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
@@ -105,7 +105,7 @@
                                     name="<?php if ($i == 0) echo 'vendita'; ?><?php if ($i == 1) echo 'budget'; ?><?php if ($i == 2) echo 'differenza'; ?><?php echo '_'.$y;?>"
                                     <?php if ($i == 0) echo 'readonly'; ?> <?php if ($i == 1 && $utente->username != 'Giovanni Tutino') echo 'readonly'; ?><?php if ($i == 2) echo 'readonly'; ?> type="text"
                                     step="0.01"
-                                    style="text-align: right;width:92%!important;margin-left:5%;<?php if ($i == 1) echo 'color:green;'; ?>"
+                                    style="text-align: right;width:92%!important;margin-left:5%;<?php if ($i == 1) echo 'color:blue;'; ?>"
                                     onclick="calcola_differenza();"
                                     onkeydown="check_numero(<?php echo $i?>);"
                                     onchange="calcola_differenza();"
@@ -136,7 +136,7 @@
                                 <div style="display:flex;align-items: center;justify-content: center;width: 100%">
                                     <label style="margin-left:-20%">Bgt</label>
                                     <input readonly value="<?php echo number_format(${'budget_t'.$y},2,',',' ');?>"
-                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;color:green"
+                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;color:blue"
                                            class="form-control" type="text">
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                 <div style="display:flex;align-items: center;justify-content: center;width: 100%">
                                     <label style="margin-left:-20%">Obt</label>
                                     <input readonly value="<?php echo number_format(${'differenze_t'.$y},2,',',' ');?>"
-                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important; <?php if(${'differenze_t'.$y}<=0) echo 'color: red;';?>"
+                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important; <?php if(${'differenze_t'.$y}<=0) echo 'color: red;';else echo 'color:green;'?>"
                                            class="form-control" type="text">
                                 </div>
                             </div>
