@@ -17,15 +17,15 @@
                  style="display: flex;justify-content: center;align-items: center"></div>
             <div class="col-lg-3 col-md-12 col-sm-12"></div>
             <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
+                <label for="input">VENDITA ANNUALE</label>
+                <input style="text-align:right;font-weight: bolder;color:blue;" readonly type="text"
+                       value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
+            </div>
+            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
                 <label for="input">BUDGET ANNUALE</label>
                 <input style="text-align:right;font-weight: bolder" type="text"
                        value="<?php echo number_format($budget_annuale,2,',',' ');?>" readonly
                        class="form-control">
-            </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">VENDITA ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder;color:blue;" readonly type="text"
-                       value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
             </div>
             <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
                 <label for="input">OBIETTIVO ANNUALE</label>
@@ -103,12 +103,12 @@
                                 <input
                                     id="<?php if ($i == 0) echo 'vendita'; ?><?php if ($i == 1) echo 'budget'; ?><?php if ($i == 2) echo 'differenza'; ?><?php echo '_'.$y;?>"
                                     name="<?php if ($i == 0) echo 'vendita'; ?><?php if ($i == 1) echo 'budget'; ?><?php if ($i == 2) echo 'differenza'; ?><?php echo '_'.$y;?>"
-                                    <?php if ($i == 0) echo 'readonly'; ?> <?php if ($i == 1 && $utente->username != 'Giovanni Tutino') echo 'readonly'; ?><?php if ($i == 2) echo 'readonly'; ?> type="text"
+                                    <?php if ($i == 0) echo 'readonly'; ?><?php if ($i == 1 && $utente->username != 'Giovanni Tutino') echo 'readonly'; ?><?php if ($i == 2) echo 'readonly'; ?> type="text"
                                     step="0.01"
-                                    style="text-align: right;width:92%!important;margin-left:5%;<?php if ($i == 1) echo 'color:blue;'; ?>"
-                                    onclick="calcola_differenza();"
-                                    onkeydown="check_numero(<?php echo $i?>);"
-                                    onchange="calcola_differenza();"
+                                    style="text-align: right;width:92%!important;margin-left:5%;<?php if ($i == 0) echo 'color:blue;'; ?>"
+                                    <?php if ($i == 1) echo 'onclick="calcola_differenza();"'; ?>
+                                    <?php if ($i == 1) echo 'onkeydown="check_numero(<?php echo $i?>);"'; ?>
+                                    <?php if ($i == 1) echo 'onchange="calcola_differenza();"'; ?>
                                     <?php if ($i == 1) echo 'onblur="check_numero(' . $y . ');submit_form(this.form)";'; ?>
                                     value="<?php if($i == 0) foreach ($vendite_mensili as $v) { if($v->Mese == $y) echo number_format($v->Vendite,2,'.','');}if($i == 1) foreach ($budget as $b) { if($b->data_mese == $y) echo number_format($b->budget,2,'.','');}?>"
                                     min="0.01" class="form-control">
@@ -128,7 +128,7 @@
                                 <div style="display:flex;align-items: center;justify-content: center;width: 100%">
                                     <label style="margin-left:-20%">Ven</label>
                                     <input readonly value="<?php echo number_format(${'vendite_t'.$y},2,',',' ');?>"
-                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;"
+                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;color:blue"
                                            class="form-control" type="text">
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <div style="display:flex;align-items: center;justify-content: center;width: 100%">
                                     <label style="margin-left:-20%">Bgt</label>
                                     <input readonly value="<?php echo number_format(${'budget_t'.$y},2,',',' ');?>"
-                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;color:blue"
+                                           style="text-align: right; margin-left: 5%;margin-bottom:5%; width: 92% !important;"
                                            class="form-control" type="text">
                                 </div>
                             </div>
@@ -184,7 +184,7 @@
         $('#vendita_' + '<?php echo $i ?>').val('0.00');
     <?php } ?>
 
-    $('#vendita_1').click();
+    $('#budget_1').click();
 
     function revert_number(i) {
         $('#budget_' + i).val($('#budget_' + i).val().replaceAll(' ', '').replaceAll(',', '.'));
@@ -242,23 +242,23 @@
             document.getElementById('vendita_' + i).value = vendita.replace(/[^0-9]/g, '');
         }
 
-       /* value = document.getElementById('budget').value;
-        // Rimuovi eventuali caratteri non numerici
-        value = value.replace(/[^\d.]/g, '');
+        /* value = document.getElementById('budget').value;
+         // Rimuovi eventuali caratteri non numerici
+         value = value.replace(/[^\d.]/g, '');
 
-        // Converti in numero a virgola mobile
-        var number = parseFloat(value);
+         // Converti in numero a virgola mobile
+         var number = parseFloat(value);
 
-        // Verifica se è un numero valido
-        if (!isNaN(number)) {
-            // Formatta il numero con 2 decimali e virgole per le migliaia
-            var formattedNumber = number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ',');
+         // Verifica se è un numero valido
+         if (!isNaN(number)) {
+             // Formatta il numero con 2 decimali e virgole per le migliaia
+             var formattedNumber = number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ',');
 
-            // Aggiorna il valore dell'input
-            document.getElementById('budget').value = formattedNumber;
-        } else {
-            document.getElementById('budget').value = value.replace(/[^0-9]/g, '');
-        }*/
+             // Aggiorna il valore dell'input
+             document.getElementById('budget').value = formattedNumber;
+         } else {
+             document.getElementById('budget').value = value.replace(/[^0-9]/g, '');
+         }*/
 
     }
 
