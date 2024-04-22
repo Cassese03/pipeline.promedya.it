@@ -745,7 +745,7 @@ class HomeController extends Controller
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
             $statistiche_categoria_chiusura =
-                DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_contatto, \'%Y\') desc, DATE_FORMAT(Data_contatto, \'%m\') desc');
+                DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') desc, DATE_FORMAT(Data_Probabile_Chiusura, \'%m\')');
 
             $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
                                                       (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
