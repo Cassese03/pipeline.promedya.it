@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Bug Budget">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Aggiunta nuovo grafica statistica x chiusura" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -448,7 +444,7 @@
       <workItem from="1712328507739" duration="1328000" />
       <workItem from="1713280415010" duration="969000" />
       <workItem from="1713537921639" duration="832000" />
-      <workItem from="1713780520981" duration="1742000" />
+      <workItem from="1713780520981" duration="2041000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -738,7 +734,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713538759772</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Aggiunta nuovo grafica statistica x chiusura">
+      <option name="closed" value="true" />
+      <created>1713782574033</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1713782574033</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -748,7 +752,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Gestione Disdette" />
     <MESSAGE value="Fix Richieste da Giovanni" />
     <MESSAGE value="Inserimento nuove colonne" />
     <MESSAGE value="Inserimento nuove colonne NOTA" />
@@ -773,7 +776,8 @@
     <MESSAGE value="Aggiungi Nuova Disdetta" />
     <MESSAGE value="Fix Grafica" />
     <MESSAGE value="Fix Bug Budget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Bug Budget" />
+    <MESSAGE value="Aggiunta nuovo grafica statistica x chiusura" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta nuovo grafica statistica x chiusura" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
