@@ -345,7 +345,7 @@ class HomeController extends Controller
                 $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
                 $segnalato = Segnalato::all();
                 $categoria = DB::select('select * from categoria ORDER BY id');
-                return View::make('rows', compact('utente', 'segnalato','categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
+                return View::make('rows', compact('utente', 'segnalato', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
             }
             $rows = DB::select('select * from pipeline order by Id desc');
             $operatori = DB::select('select * from operatori');
@@ -357,7 +357,7 @@ class HomeController extends Controller
             $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
-            return View::make('rows', compact('utente', 'rows', 'zone','categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
+            return View::make('rows', compact('utente', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
         } else {
             return Redirect::to('login');
         }
@@ -744,6 +744,8 @@ class HomeController extends Controller
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
+            $statistiche_categoria_chiusura =
+                DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_contatto, \'%Y\') desc, DATE_FORMAT(Data_contatto, \'%m\') desc');
 
             $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
                                                       (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
@@ -752,7 +754,6 @@ class HomeController extends Controller
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
             $statistiche_corrente_sottogruppo_annuale =
-
                 DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
                                                       (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
                                                       FROM   pipeline
@@ -855,7 +856,7 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('statistiche_sales', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

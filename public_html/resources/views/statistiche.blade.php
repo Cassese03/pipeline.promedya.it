@@ -17,7 +17,7 @@
             <div class="col-xl-3 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
-                    <div class="card-header"  style="color:white;background-color:lightseagreen">
+                    <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
                             Statistiche Budget
                         </h3>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="card-body">
                         <div style="height:240px!important; max-height: 240px!important; max-width: 100%!important;">
-                        <?php foreach ($statistiche_budget as $s){ ?>
+                            <?php foreach ($statistiche_budget as $s){ ?>
                             <div style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
                                 <label style="width: 30%"><?php echo $s->type; ?>
                                 </label>
@@ -174,7 +174,7 @@
                                 <?php } ?>
                                 <div
                                     style="margin:5%;display: flex;align-items:center;justify-content: space-between">
-                                    <label style="width: 25%;font-size:14px" >Obiettivo</label>
+                                    <label style="width: 25%;font-size:14px">Obiettivo</label>
                                     <input type="text"
                                            style="width: 40%;text-align: right;<?php if($differenza_mese<= 0) echo 'color:red;';else echo 'color:green;'?>"
                                            readonly class="form-control"
@@ -210,7 +210,7 @@
                     <!-- /.card-body-->
                 </div>
             </div>
-            <div class="col-xl-6 col-sm-12">
+            <div class="col-xl-4 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -232,7 +232,7 @@
 
                 </div>
             </div>
-            <div class="col-xl-6 col-sm-12">
+            <div class="col-xl-4 col-sm-12">
                 <!-- STACKED BAR CHART -->
                 <div class="card card-success">
                     <div class="card-header">
@@ -255,6 +255,29 @@
                 <!-- /.card -->
 
             </div>
+            <div class="col-xl-4 col-sm-12">
+                <!-- STACKED BAR CHART -->
+                <div class="card card-teal">
+                    <div class="card-header">
+                        <h3 class="card-title">Statistiche x Chiusura</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart">
+                            <canvas id="stackedBarChartChiusura"
+                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            </div>
         </div>
     </section>
 </div>
@@ -263,11 +286,11 @@
 @include('common.footer')
 
 <script type="text/javascript">
+
     function changeData() {
         var data = $('#data_mese').val();
         top.location.href = '/statistiche/' + data;
     }
-
 
 
     // BEST PERFORMER SALES MESE
@@ -962,4 +985,88 @@ options: donutOptions
         data: donutAnnualePERFORMERZONAData,
         options: donutAnnualePERFORMERZONAOptions
     });
+
+
+
+    var stackedBarChartChiusuraCanvas = $('#stackedBarChartChiusura').get(0).getContext('2d')
+
+    var stackedBarChartChiusuraData = {
+        labels: [
+            <?php $mesi = ''; foreach ($statistiche_categoria_chiusura as $s) {
+                if ($s->Data != null && $s->Data != '') {
+                    $mesi = str_replace('\'' . $s->Data . '\',', '', $mesi);
+                    $mesi .= '\'' . $s->Data . '\',';
+
+                }
+            }
+            $mesi = substr($mesi, 0, strlen($mesi) - 1);
+            echo $mesi;
+            ?>],
+        datasets: [
+            <?php
+            $sales = '';
+
+            $mesi_util = trim($mesi, "'");
+
+            $mesi_util = explode("','", $mesi_util);
+
+            foreach ($categoria as $p) {
+                $sales .= '
+                {
+                label: \'' . $p->Categoria . '\',
+                borderColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                backgroundColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                pointRadius: false,
+                borderWidth: 2,
+                data: [';
+                $sales2 = '';
+                foreach ($mesi_util as $m) {
+                    $i = 0;
+                    foreach ($statistiche_categoria_chiusura as $c) {
+                        if ($m == $c->Data) {
+                            if ($c->Categoria == $p->Categoria) {
+                                $i++;
+                                $sales2 .= $c->Val . ',';
+                            }
+                        }
+                    }
+                    if ($i == 0) {
+                        $sales2 .= '0,';
+                    }
+
+                }
+                $sales2 = substr($sales2, 0, strlen($sales2) - 1);
+                $sales .= $sales2 . ']
+                },';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ]
+    }
+
+    var stackedBarChartChiusuraOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                beginAtZero: true
+            },
+            y: {
+                beginAtZero: true
+            },
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+
+    new Chart(stackedBarChartChiusuraCanvas, {
+        type: 'bar',
+        data: stackedBarChartChiusuraData,
+        options: stackedBarChartChiusuraOptions
+    })
 </script>
