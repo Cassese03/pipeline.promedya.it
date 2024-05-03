@@ -311,15 +311,15 @@ class HomeController extends Controller
                     array_push($where, $new_filter);
                     unset($dati['Data_contatto_f']);
                 }
-                if (isset($dati['Data_Probabile_Chiusura_i'])) {
-                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '>=', 'value' => $dati['Data_Probabile_Chiusura_i']];
+                if (isset($dati['Data_Disdetta_i'])) {
+                    $new_filter = ['column' => 'Data_Disdetta', 'operator' => '>=', 'value' => $dati['Data_Disdetta_i']];
                     array_push($where, $new_filter);
-                    unset($dati['Data_Probabile_Chiusura_i']);
+                    unset($dati['Data_Disdetta_i']);
                 }
-                if (isset($dati['Data_Probabile_Chiusura_f'])) {
-                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '<=', 'value' => $dati['Data_Probabile_Chiusura_f']];
+                if (isset($dati['Data_Disdetta_f'])) {
+                    $new_filter = ['column' => 'Data_Disdetta', 'operator' => '<=', 'value' => $dati['Data_Disdetta_f']];
                     array_push($where, $new_filter);
-                    unset($dati['Data_Probabile_Chiusura_f']);
+                    unset($dati['Data_Disdetta_f']);
                 }
                 if (isset($dati['Ragione_Sociale'])) {
                     $new_filter = ['column' => 'Ragione_Sociale', 'operator' => 'like', 'value' => '%' . $dati['Ragione_Sociale'] . '%'];

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix nome statistica grafico" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix ordinamento">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -446,6 +448,9 @@
       <workItem from="1713537921639" duration="832000" />
       <workItem from="1713780520981" duration="2041000" />
       <workItem from="1713782970595" duration="45000" />
+      <workItem from="1713783370203" duration="1263000" />
+      <workItem from="1714488798216" duration="2000" />
+      <workItem from="1714491669786" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -751,7 +756,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713783005869</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Fix ordinamento">
+      <option name="closed" value="true" />
+      <created>1713783434571</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1713783434571</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,7 +774,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Inserimento nuove colonne" />
     <MESSAGE value="Inserimento nuove colonne NOTA" />
     <MESSAGE value="CAMBIO ESITI" />
     <MESSAGE value="Tutti possono vedere e modificare la pagina disdette" />
@@ -786,7 +798,8 @@
     <MESSAGE value="Fix Bug Budget" />
     <MESSAGE value="Aggiunta nuovo grafica statistica x chiusura" />
     <MESSAGE value="Fix nome statistica grafico" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix nome statistica grafico" />
+    <MESSAGE value="Fix ordinamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix ordinamento" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
