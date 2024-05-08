@@ -311,7 +311,7 @@ class HomeController extends Controller
                     array_push($where, $new_filter);
                     unset($dati['Data_contatto_f']);
                 }
-                if (isset($dati['z_i'])) {
+                if (isset($dati['Data_Probabile_Chiusura_i'])) {
                     $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '>=', 'value' => $dati['Data_Probabile_Chiusura_i']];
                     array_push($where, $new_filter);
                     unset($dati['Data_Probabile_Chiusura_i']);
