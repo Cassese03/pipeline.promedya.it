@@ -44,9 +44,10 @@
                                     <?php foreach ($column as $c){ ?>
                                     <th class="no-sort"
                                         style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
-                                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                                            <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                                             <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     </th>
                                     <?php } ?>
@@ -58,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach ($rows as $r){ ?>
-                                <tr style="background: <?php if($r->Vinta == 1) echo 'lightgreen'; if($r->Vinta == 0) echo '#ff6666'; if($r->Vinta == 2) echo 'lightyellow';?>;">
+                                <tr style="background: <?php if($r->Vinta == 2) echo 'lightgreen'; if($r->Vinta == 1) echo '#ff6666'; if($r->Vinta != 1 && $r->Vinta != 2) echo 'lightyellow';?>;">
                                         <?php foreach ($column as $c){ ?>
 
                                         <?php
@@ -98,9 +99,10 @@
                                             if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'Id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, ',', '.'); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
                                         } ?>
                                             <?php if ($c->COLUMN_NAME == 'Vinta') {
-                                            if ($r->{$c->COLUMN_NAME} == 1) echo 'Si';
-                                            if ($r->{$c->COLUMN_NAME} == 0) echo 'No';
-                                            if ($r->{$c->COLUMN_NAME} == 2) echo 'IN CORSO';
+
+                                            foreach ($esito_trattativa as $e) {
+                                                if ($r->{$c->COLUMN_NAME} == $e->id) echo $e->descrizione;
+                                            }
                                         } ?>
                                             <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
                                         <button class="form-control btn-default"
@@ -195,9 +197,10 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>
-                                        <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                        <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                         <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                                        <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
                                     <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
@@ -230,12 +233,9 @@
                                         onchange="check_vinta('aggiungi_vinta')"
                                         id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="2">IN CORSO
-                                    </option>
-                                    <option value="1">SI
-                                    </option>
-                                    <option value="0">NO
-                                    </option>
+                                        <?php foreach ($esito_trattativa as $e){ ?>
+                                    <option value="{{$e->id}}">{{$e->descrizione}}</option>
+                                    <?php } ?>
                                 </select>
                                 <?php } ?>
 
@@ -368,9 +368,10 @@
 
                         <div class="col-md-6 ">
                             <div class="form-group">
-                                <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                                           <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b
                                         style="color:red">*</b></label>
@@ -409,12 +410,9 @@
                                         name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Filtro...
                                     </option>
-                                    <option value="2">IN CORSO
-                                    </option>
-                                    <option value="1">SI
-                                    </option>
-                                    <option value="0">NO
-                                    </option>
+                                        <?php foreach ($esito_trattativa as $e){ ?>
+                                    <option value="{{$e->id}}">{{$e->descrizione}}</option>
+                                    <?php } ?>
                                 </select>
                                 <?php } ?>
 
@@ -667,9 +665,9 @@
 <script type="text/javascript">
     function check_vinta(classname) {
         vinta = $('.' + classname).val();
-        if (vinta == 0)
+        if (vinta == 1)
             $('.' + classname.replace('vinta', 'motivazione')).removeAttr('disabled');
-        if (vinta != 0) {
+        if (vinta != 1) {
             $('.' + classname.replace('vinta', 'motivazione')).attr('disabled', 'disabled');
         }
     }

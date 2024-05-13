@@ -129,6 +129,7 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
@@ -137,6 +138,7 @@ class AjaxController extends Controller
                     <div class="form-group">
                         <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
                             <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
@@ -166,21 +168,13 @@ class AjaxController extends Controller
                                     onchange="check_vinta('duplica_vinta')"
                                     id="<?php echo $c->COLUMN_NAME . $r->Id ?>"
                                     name="<?php echo $c->COLUMN_NAME ?>">
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 2)
-                                    echo 'selected' ?> value="2">IN CORSO
-                                </option>
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 1)
-                                    echo 'selected' ?> value="1">SI
-                                </option>
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 0)
-                                    echo 'selected' ?> value="0">NO
-                                </option>
+                                <?php foreach ($esito_trattativa as $e) { ?>
+                                    <option <?php if ($r->{
+                                        $c->COLUMN_NAME
+                                        } == $e->id)
+                                        echo 'selected' ?>
+                                        value="<?php echo $e->id; ?>"><?php echo $e->descrizione; ?></option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -208,11 +202,11 @@ class AjaxController extends Controller
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
                                 </option>
-                        <?php foreach ($categoria as $c1){ ?>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
-                                    value="<?php echo $c1->descrizione ?>">
-                                    <?php echo $c1->descrizione ?>
-                                </option>
+                                <?php foreach ($categoria as $c1) { ?>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
+                                        value="<?php echo $c1->descrizione ?>">
+                                        <?php echo $c1->descrizione ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                         <?php } ?>
@@ -325,6 +319,7 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
@@ -336,6 +331,7 @@ class AjaxController extends Controller
                             <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Trattativa') echo 'Trattativa'; ?>
                             <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
                                 style="color:red">*</b></label>
@@ -365,21 +361,28 @@ class AjaxController extends Controller
                                     onchange="check_vinta('modifica_vinta')"
                                     id="<?php echo $c->COLUMN_NAME . $r->Id ?>"
                                     name="<?php echo $c->COLUMN_NAME ?>">
-                                <option <?php if ($r->{
+                                <?php foreach ($esito_trattativa as $e) { ?>
+                                    <option <?php if ($r->{
+                                        $c->COLUMN_NAME
+                                        } == $e->id)
+                                        echo 'selected' ?>
+                                        value="<?php echo $e->id; ?>"><?php echo $e->descrizione; ?></option>
+                                <?php } ?>
+                                <!-- <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 2)
-                                    echo 'selected' ?> value="2">IN CORSO
+                                    echo 'selected' */ ?> value="2">IN CORSO
                                 </option>
-                                <option <?php if ($r->{
+                                <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 1)
-                                    echo 'selected' ?> value="1">SI
+                                    echo 'selected' */ ?> value="1">SI
                                 </option>
-                                <option <?php if ($r->{
+                                <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 0)
-                                    echo 'selected' ?> value="0">NO
-                                </option>
+                                    echo 'selected' */ ?> value="0">NO
+                                </option>-->
                             </select>
                         <?php } ?>
 

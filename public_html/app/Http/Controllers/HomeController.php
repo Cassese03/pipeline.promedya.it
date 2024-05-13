@@ -153,10 +153,10 @@ class HomeController extends Controller
             if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
             $id = DB::table('pipeline')->insertGetId($dati);
             DB::select('UPDATE pipeline SET id_padre = ' . $id . ' where id = ' . $id);
-            if ($dati['Vinta'] == 0 || $dati['Vinta'] == 1) {
+            if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
-                if ($dati['Vinta'] == 1) $result = 'vinta'; else $result = 'persa';
-                if ($dati['Vinta'] != 1) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
+                if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
                 $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
@@ -193,10 +193,10 @@ class HomeController extends Controller
             if (isset($dati['Id'])) unset($dati['Id']);
             $id = DB::table('pipeline')->insertGetId($dati);
 
-            if ($dati['Vinta'] == 0 || $dati['Vinta'] == 1) {
+            if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
-                if ($dati['Vinta'] == 1) $result = 'vinta'; else $result = 'persa';
-                if ($dati['Vinta'] != 1) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
+                if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
                 $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
@@ -239,10 +239,10 @@ class HomeController extends Controller
             }
             DB::table('pipeline')->where(['Id' => $id])->update($dati);
             if (isset($dati['Vinta'])) {
-                if ($dati['Vinta'] == 0 || $dati['Vinta'] == 1) {
+                if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                     $motivazione = '';
-                    if ($dati['Vinta'] == 1) $result = 'vinta'; else $result = 'persa';
-                    if ($dati['Vinta'] != 1) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                    if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
+                    if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
                     $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Sales Force';
                     $mail = new  PHPMailer();
                     $mail->isSMTP();
@@ -343,21 +343,23 @@ class HomeController extends Controller
                 $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione) as prodotti FROM prodotto p GROUP BY p.gruppo ');
                 $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
                 $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
+                $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
                 $segnalato = Segnalato::all();
                 $categoria = DB::select('select * from categoria ORDER BY id');
-                return View::make('rows', compact('utente', 'segnalato', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
+                return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
             }
             $rows = DB::select('select * from pipeline order by Id desc');
             $operatori = DB::select('select * from operatori');
             $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
             $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+            $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
             $categoria = DB::select('select * from categoria ORDER BY id');
             $segnalato = Segnalato::all();
             $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
-            return View::make('rows', compact('utente', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
+            return View::make('rows', compact('utente', 'esito_trattativa', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
         } else {
             return Redirect::to('login');
         }
@@ -450,8 +452,8 @@ class HomeController extends Controller
         }
         if (session()->has('utente')) {
             $utente = session('utente');
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' group by MONTH(Data_Probabile_Chiusura)');
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' group by MONTH(Data_Probabile_Chiusura)');
 
             $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ');
 
@@ -462,12 +464,12 @@ class HomeController extends Controller
             $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240931\' and data_mese >= \'20240701\' ')[0]->valore;
             $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < \'20241231\' and data_mese >= \'20241001\' ')[0]->valore;
 
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
 
-            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20240331\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20240631\' and Data_Probabile_Chiusura >= \'20240401\' ')[0]->Vendite;
-            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20240931\' and Data_Probabile_Chiusura >= \'20240701\' ')[0]->Vendite;
-            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20241001\' ')[0]->Vendite;
+            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240331\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240631\' and Data_Probabile_Chiusura >= \'20240401\' ')[0]->Vendite;
+            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240931\' and Data_Probabile_Chiusura >= \'20240701\' ')[0]->Vendite;
+            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20241001\' ')[0]->Vendite;
 
             $differenze_t3 = $vendite_t3 - $budget_t3;
             $differenze_t6 = $vendite_t6 - $budget_t6;
@@ -732,11 +734,11 @@ class HomeController extends Controller
             $utente = session('utente');
             $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
 
-            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
-            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
+            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
+            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
             $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
-            $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '1')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
-            $statistiche_sales_vinte_zona = DB::SELECT('select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 1 and Data_Probabile_Chiusura >= \'2024-01-01\') as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 1 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo');
+            $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
+            $statistiche_sales_vinte_zona = DB::SELECT('select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\') as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo');
             $statistiche_categoria = DB::table('pipeline')
                 ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
                 ->whereNotNull('Categoria')
@@ -748,16 +750,16 @@ class HomeController extends Controller
                 DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') desc, DATE_FORMAT(Data_Probabile_Chiusura, \'%m\')');
 
             $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
-                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
             $statistiche_corrente_sottogruppo_annuale =
                 DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
-                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
             /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
@@ -770,42 +772,42 @@ class HomeController extends Controller
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
             if ($data == 0) {
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1 or Vinta = 0) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 1 or Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or ((Vinta != 2 && Vinta != 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY Vinta
                                                       ORDER  BY Vinta desc');
                 $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY gruppo
                                                       HAVING gruppo is not null
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
                 $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY Sales
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
                 // or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                 $mese_usato = DB::SELECT('SELECT MONTH(NOW()) as mese')[0]->mese;
                 $anno_usato = DB::SELECT('SELECT YEAR(NOW()) as anno')[0]->anno;
             } else {
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 1 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1 or Vinta = 0) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\')) or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 1 or Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\')) or ((Vinta != 2 && Vinta != 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY Vinta
                                                       ORDER  BY Vinta desc');
                 $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY gruppo
                                                       HAVING gruppo is not null
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
                 $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY Sales
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
                 $mese_usato = DB::SELECT('SELECT MONTH(\'' . $data . '\') as mese')[0]->mese;
