@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Labels">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Cambio Colonna Vinta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/rows.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/rows.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/login.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -458,7 +456,8 @@
       <workItem from="1715164314494" duration="621000" />
       <workItem from="1715183741352" duration="49000" />
       <workItem from="1715252271264" duration="81000" />
-      <workItem from="1715588094018" duration="5494000" />
+      <workItem from="1715588094018" duration="5861000" />
+      <workItem from="1715606123046" duration="135000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -804,7 +803,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715252349614</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Cambio Colonna Vinta">
+      <option name="closed" value="true" />
+      <created>1715605956940</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1715605956940</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +821,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dino Fioretti di nuovo email" />
     <MESSAGE value="Tolte date 01-01-1970" />
     <MESSAGE value="Ordinamento per data_disdetta desc" />
     <MESSAGE value="Ordinamento Prodotto Best Performer Annuale&#10; per valore desc" />
@@ -839,7 +845,8 @@
     <MESSAGE value="Fix filtro disdette" />
     <MESSAGE value="Fix filtro disdette 2.0" />
     <MESSAGE value="Fix Labels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Labels" />
+    <MESSAGE value="Cambio Colonna Vinta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambio Colonna Vinta" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
