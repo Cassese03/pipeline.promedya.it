@@ -27,6 +27,7 @@ Route::any('budget', [HomeController::class, 'budget']);
 Route::any('prodotti', [HomeController::class, 'prodotti']);
 Route::any('dipendenti', [HomeController::class, 'dipendenti']);
 Route::any('motivazione', [HomeController::class, 'motivazione']);
+Route::any('esito', [HomeController::class, 'esito']);
 Route::any('categoria', [HomeController::class, 'categoria']);
 Route::any('segnalato', [HomeController::class, 'segnalato']);
 Route::any('privacy', [HomeController::class, 'privacy']);

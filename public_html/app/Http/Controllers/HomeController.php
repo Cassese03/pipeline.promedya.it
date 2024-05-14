@@ -622,6 +622,41 @@ class HomeController extends Controller
         }
     }
 
+    public function esito(Request $request)
+    {
+        $dati = $request->all();
+        if (session()->has('utente')) {
+            if (isset($dati['modifica'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['modifica'])) unset($dati['modifica']);
+                if (isset($dati['id'])) {
+                    $id = $dati['id'];
+                    unset($dati['id']);
+                    DB::table('esito_trattativa')->where(['id' => $id])->update($dati);
+                }
+                return Redirect::to('esito');
+            }
+            if (isset($dati['elimina'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['elimina'])) {
+                    DB::table('esito_trattativa')->where(['id' => $dati['elimina']])->delete();
+                }
+                return Redirect::to('esito');
+            }
+            if (isset($dati['aggiungi'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                DB::table('esito_trattativa')->insert($dati);
+                return Redirect::to('esito');
+            }
+            $utente = session('utente');
+            $table = DB::SELECT('SELECT * FROM esito_trattativa');
+            return View::make('esito', compact('utente', 'table'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
+
     public function dipendenti(Request $request)
     {
         $dati = $request->all();
