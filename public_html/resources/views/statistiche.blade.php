@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1 style="color:#007bff">
-            PROMEDYA | Sales Force
+            PROMEDYA | Smart Sales Force
             <small>&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
         <br>
@@ -140,6 +140,31 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
+            <div class="col-xl-12 col-sm-12" style="display:none;">
+                <!-- Bar chart -->
+                <div class="card card-warning">
+                    <div class="card-header" style="background-color:#ff2800 ">
+                        <h3 class="card-title">
+                            Statistiche Disdetta
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12">
+                            <div class="card-body">
+                                <canvas id="donutDisdetteProdottoChart"
+                                        style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-sm-12">
+                            <div class="card-body">
+                                <canvas id="donutDisdetteSottoProdottoChart"
+                                        style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body-->
+                </div>
+            </div>
             <div class="col-xl-12 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
@@ -284,7 +309,194 @@
 </div>
 <!-- /.container-fluid-->
 @include('common.footer')
+<script type="text/javascript">
 
+    var donutDisdetteProdottoChartCanvas = $('#donutDisdetteProdottoChart').get(0).getContext('2d')
+
+    var donutDisdetteProdottoData = {
+        labels: [
+            <?php
+            $gruppo = '';
+            foreach ($statistiche_disdetta_gruppo_annuale as $s) {
+                if ($s->gruppo != null && $s->gruppo != '') {
+                    $gruppo = str_replace('\'' . $s->gruppo . '\',', '', $gruppo);
+                    $gruppo .= '\'' . $s->gruppo . '\',';
+                }
+            }
+            $gruppo = substr($gruppo, 0, strlen($gruppo) - 1);
+            echo $gruppo;
+            ?>],
+        datasets: [
+            <?php
+
+            $sales = '';
+
+            $esito = '';
+            foreach ($statistiche_disdetta_gruppo_annuale as $s) {
+                if ($s->Esito != null && $s->Esito != '') {
+                    $esito = str_replace('\'' . $s->Esito . '\',', '', $esito);
+                    $esito .= '\'' . $s->Esito . '\',';
+                }
+            }
+            $esito = substr($esito, 0, strlen($esito) - 1);
+
+            $esito_util = trim($esito, "'");
+
+            $esito_util = explode("','", $esito_util);
+
+            foreach ($esito_util as $p) {
+                $sales .= '
+                {
+                label: \'' . $p . '\',
+                borderColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                backgroundColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                pointRadius: false,
+                borderWidth: 2,
+                data: [';
+                $sales2 = '';
+                foreach ($statistiche_disdetta_gruppo_annuale as $m) {
+                    $i = 0;
+                    foreach ($statistiche_disdetta_gruppo_annuale as $c) {
+                        if ($m->gruppo == $c->gruppo) {
+                            if ($c->Esito == $p) {
+                                $i++;
+                                $sales2 .= $c->Val . ',';
+                            }
+                        }
+                    }
+                    if ($i == 0) {
+                        $sales2 .= '0,';
+                    }
+
+                }
+                $sales2 = substr($sales2, 0, strlen($sales2) - 1);
+                $sales .= $sales2 . ']
+                },';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ]
+    }
+
+    var donutDisdetteProdottoOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                beginAtZero: true
+            },
+            y: {
+                beginAtZero: true
+            },
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+
+    new Chart(donutDisdetteProdottoChartCanvas, {
+        type: 'bar',
+        data: donutDisdetteProdottoData,
+        options: donutDisdetteProdottoOptions
+    })
+
+    var donutDisdetteSottoProdottoChartCanvas = $('#donutDisdetteSottoProdottoChart').get(0).getContext('2d')
+
+    var donutDisdetteSottoProdottoData = {
+        labels: [
+            <?php
+            $gruppo = '';
+            foreach ($statistiche_disdetta_sottogruppo_annuale as $s) {
+                if ($s->gruppo != null && $s->gruppo != '') {
+                    $gruppo = str_replace('\'' . $s->gruppo . '\',', '', $gruppo);
+                    $gruppo .= '\'' . $s->gruppo . '\',';
+                }
+            }
+            $gruppo = substr($gruppo, 0, strlen($gruppo) - 1);
+            echo $gruppo;
+            ?>],
+        datasets: [
+            <?php
+
+            $sales = '';
+
+            $esito = '';
+            foreach ($statistiche_disdetta_sottogruppo_annuale as $s) {
+                if ($s->Esito != null && $s->Esito != '') {
+                    $esito = str_replace('\'' . $s->Esito . '\',', '', $esito);
+                    $esito .= '\'' . $s->Esito . '\',';
+                }
+            }
+            $esito = substr($esito, 0, strlen($esito) - 1);
+
+            $esito_util = trim($esito, "'");
+
+            $esito_util = explode("','", $esito_util);
+
+            foreach ($esito_util as $p) {
+                $sales .= '
+                {
+                label: \'' . $p . '\',
+                borderColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                backgroundColor: \'#' . substr(md5(mt_rand()), 0, 6) . '\',
+                pointRadius: false,
+                borderWidth: 2,
+                data: [';
+                $sales2 = '';
+                foreach ($statistiche_disdetta_sottogruppo_annuale as $m) {
+                    $i = 0;
+                    foreach ($statistiche_disdetta_sottogruppo_annuale as $c) {
+                        if ($m->gruppo == $c->gruppo) {
+                            if ($c->Esito == $p) {
+                                $i++;
+                                $sales2 .= $c->Val . ',';
+                            }
+                        }
+                    }
+                    if ($i == 0) {
+                        $sales2 .= '0,';
+                    }
+
+                }
+                $sales2 = substr($sales2, 0, strlen($sales2) - 1);
+                $sales .= $sales2 . ']
+                },';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ]
+    }
+
+    var donutDisdetteSottoProdottoOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                beginAtZero: true
+            },
+            y: {
+                beginAtZero: true
+            },
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+
+    new Chart(donutDisdetteSottoProdottoChartCanvas, {
+        type: 'bar',
+        data: donutDisdetteSottoProdottoData,
+        options: donutDisdetteSottoProdottoOptions
+    })
+</script>
 <script type="text/javascript">
 
     function changeData() {
@@ -987,7 +1199,6 @@ options: donutOptions
     });
 
 
-
     var stackedBarChartChiusuraCanvas = $('#stackedBarChartChiusura').get(0).getContext('2d')
 
     var stackedBarChartChiusuraData = {
@@ -1069,4 +1280,7 @@ options: donutOptions
         data: stackedBarChartChiusuraData,
         options: stackedBarChartChiusuraOptions
     })
+
+
+
 </script>

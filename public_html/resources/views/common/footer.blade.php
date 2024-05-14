@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Sales Force</b> (ver. GT.321.24)
+        <b>Smart Sales Force</b> (ver. GT.321.24)
     </div>
     <strong><a href="#">Promedya SRL</a> - IT 03144930645 </strong>
     {{--&copy; 2024--}}

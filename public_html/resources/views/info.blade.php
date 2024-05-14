@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1 style="color:#007bff">
-            PROMEDYA | Sales Force
+            PROMEDYA | Smart Sales Force
             <small>&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
         <br>
@@ -23,7 +23,7 @@
                 </a>
                 <a class="nav-link"
                    style="font-size: 1.10rem;color:red;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">SALES FORCE</p>
+                    <p style="margin:0;">Smart Sales Force</p>
                 </a>
                 <a class="nav-link"
                    style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">

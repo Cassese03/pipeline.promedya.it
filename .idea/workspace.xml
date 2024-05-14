@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Cambio Colonna Vinta">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix View Login Page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/public/Promedya_Logo_PL.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/public/Promedya_Logo_PL.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/budget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/budget.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/categoria.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/categoria.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/concessionario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/concessionario.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/dipendente.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/disdette.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/info.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/mail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/mail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/motivazione.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/operatori.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/operatori.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/privacy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/privacy.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/prodotti.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/rows.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/rows.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/segnalato.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/work.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/work.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -457,7 +475,8 @@
       <workItem from="1715183741352" duration="49000" />
       <workItem from="1715252271264" duration="81000" />
       <workItem from="1715588094018" duration="5861000" />
-      <workItem from="1715606123046" duration="135000" />
+      <workItem from="1715606123046" duration="220000" />
+      <workItem from="1715607536738" duration="6792000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -811,7 +830,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715605956940</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Fix View Login Page">
+      <option name="closed" value="true" />
+      <created>1715606336070</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1715606336071</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -821,7 +848,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tolte date 01-01-1970" />
     <MESSAGE value="Ordinamento per data_disdetta desc" />
     <MESSAGE value="Ordinamento Prodotto Best Performer Annuale&#10; per valore desc" />
     <MESSAGE value="modifiche per visualizzare meglio le statistiche" />
@@ -846,7 +872,8 @@
     <MESSAGE value="Fix filtro disdette 2.0" />
     <MESSAGE value="Fix Labels" />
     <MESSAGE value="Cambio Colonna Vinta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambio Colonna Vinta" />
+    <MESSAGE value="Fix View Login Page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix View Login Page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

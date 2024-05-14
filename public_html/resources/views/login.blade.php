@@ -40,7 +40,7 @@
 
         {{--<img style="margin:0 auto;display:block;height: auto;width: 100%;padding:40px"
              src="<?php echo URL::asset('logo_promedya.png') ?>">--}}
-        <img style="margin:0 auto;display:block;height: auto;width: 100%;padding:40px"
+        <img style="margin:0 auto;display:block;height: auto;width: 100%;padding:15px"
              src="<?php echo URL::asset('Promedya_Logo_PL.jpg') ?>">
 <br>
 
