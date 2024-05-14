@@ -656,6 +656,40 @@ class HomeController extends Controller
             return Redirect::to('login');
         }
     }
+    public function opening(Request $request)
+    {
+        $dati = $request->all();
+        if (session()->has('utente')) {
+            if (isset($dati['modifica'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['modifica'])) unset($dati['modifica']);
+                if (isset($dati['id'])) {
+                    $id = $dati['id'];
+                    unset($dati['id']);
+                    DB::table('opening')->where(['id' => $id])->update($dati);
+                }
+                return Redirect::to('opening');
+            }
+            if (isset($dati['elimina'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['elimina'])) {
+                    DB::table('opening')->where(['id' => $dati['elimina']])->delete();
+                }
+                return Redirect::to('opening');
+            }
+            if (isset($dati['aggiungi'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                DB::table('opening')->insert($dati);
+                return Redirect::to('opening');
+            }
+            $utente = session('utente');
+            $table = DB::SELECT('SELECT * FROM opening');
+            return View::make('opening', compact('utente', 'table'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
 
     public function dipendenti(Request $request)
     {

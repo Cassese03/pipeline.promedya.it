@@ -246,6 +246,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="<?php echo URL::asset('opening') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <p>Opening</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?php echo URL::asset('prodotti') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-building"></i>
                                     <p>Prodotti</p>
