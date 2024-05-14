@@ -140,10 +140,10 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-12 col-sm-12" style="display:none;">
+            <div class="col-xl-12 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
-                    <div class="card-header" style="background-color:#ff2800 ">
+                    <div class="card-header" style="background-color:#fa8072">
                         <h3 class="card-title">
                             Statistiche Disdetta
                         </h3>
@@ -340,6 +340,10 @@
             }
             $esito = substr($esito, 0, strlen($esito) - 1);
 
+            $gruppo_util = trim($gruppo, "'");
+
+            $gruppo_util = explode("','", $gruppo_util);
+
             $esito_util = trim($esito, "'");
 
             $esito_util = explode("','", $esito_util);
@@ -354,13 +358,13 @@
                 borderWidth: 2,
                 data: [';
                 $sales2 = '';
-                foreach ($statistiche_disdetta_gruppo_annuale as $m) {
+                foreach ($gruppo_util as $c) {
                     $i = 0;
-                    foreach ($statistiche_disdetta_gruppo_annuale as $c) {
-                        if ($m->gruppo == $c->gruppo) {
-                            if ($c->Esito == $p) {
+                    foreach ($statistiche_disdetta_gruppo_annuale as $m) {
+                        if ($c == $m->gruppo) {
+                            if ($p == $m->Esito) {
                                 $i++;
-                                $sales2 .= $c->Val . ',';
+                                $sales2 .= $m->Val . ',';
                             }
                         }
                     }
@@ -433,6 +437,10 @@
             }
             $esito = substr($esito, 0, strlen($esito) - 1);
 
+            $gruppo_util = trim($gruppo, "'");
+
+            $gruppo_util = explode("','", $gruppo_util);
+
             $esito_util = trim($esito, "'");
 
             $esito_util = explode("','", $esito_util);
@@ -447,13 +455,13 @@
                 borderWidth: 2,
                 data: [';
                 $sales2 = '';
-                foreach ($statistiche_disdetta_sottogruppo_annuale as $m) {
+                foreach ($gruppo_util as $c) {
                     $i = 0;
-                    foreach ($statistiche_disdetta_sottogruppo_annuale as $c) {
-                        if ($m->gruppo == $c->gruppo) {
-                            if ($c->Esito == $p) {
+                    foreach ($statistiche_disdetta_sottogruppo_annuale as $m) {
+                        if ($c == $m->gruppo) {
+                            if ($p == $m->Esito) {
                                 $i++;
-                                $sales2 .= $c->Val . ',';
+                                $sales2 .= $m->Val . ',';
                             }
                         }
                     }
