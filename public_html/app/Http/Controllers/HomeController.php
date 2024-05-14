@@ -104,6 +104,16 @@ class HomeController extends Controller
                     array_push($where, $new_filter);
                     unset($dati['Data_Disdetta_f']);
                 }
+                if (isset($dati['Data_Chiusura_i'])) {
+                    $new_filter = ['column' => 'Data_Chiusura', 'operator' => '>=', 'value' => $dati['Data_Chiusura_i']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_Chiusura_i']);
+                }
+                if (isset($dati['Data_Chiusura_f'])) {
+                    $new_filter = ['column' => 'Data_Chiusura', 'operator' => '<=', 'value' => $dati['Data_Chiusura_f']];
+                    array_push($where, $new_filter);
+                    unset($dati['Data_Chiusura_f']);
+                }
                 if (isset($dati['Ragione_Sociale'])) {
                     $new_filter = ['column' => 'Ragione_Sociale', 'operator' => 'like', 'value' => '%' . $dati['Ragione_Sociale'] . '%'];
                     array_push($where, $new_filter);
@@ -950,7 +960,7 @@ class HomeController extends Controller
                 Data_Probabile_Chiusura >= 20240101
                 AND Data_Probabile_Chiusura <= 20241231
               )');
-            $valore_disdette = DB::SELECT('select SUM(Valore_Contratto) AS valore from disdette where (Esito = 0) and (Data_Disdetta >= 20240101 and Data_Disdetta <= 20241231)');
+            $valore_disdette = DB::SELECT('select SUM(Valore_Contratto) AS valore from disdette where (Esito = 0) and (Data_Disdetta >= 20230701 and Data_Disdetta <= 20241231)');
             $opening = DB::SELECT('SELECT Val_Opening FROM opening where Anno = YEAR(CURDATE())');
             $differenza_opening = (($canone_successivo[0]->valore - $valore_disdette[0]->valore) * 100 ) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - $valore_disdette[0]->valore);
