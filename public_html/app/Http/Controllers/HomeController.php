@@ -906,7 +906,21 @@ class HomeController extends Controller
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
 
-            return View::make('statistiche', compact('statistiche_sales', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            $canone_successivo = DB::select('SELECT
+              SUM(Inc_Canone_AS) as valore
+            FROM
+              pipeline
+            WHERE
+              (Vinta = 2)
+              AND (
+                Data_Probabile_Chiusura >= 20240101
+                AND Data_Probabile_Chiusura <= 20241231
+              )');
+            $valore_disdette = DB::SELECT('select SUM(Valore_Contratto) AS valore from disdette where (Esito = 0) and (Data_Disdetta >= 20240101 and Data_Disdetta <= 20241231)');
+            $opening = DB::SELECT('SELECT Val_Opening FROM opening where Anno = YEAR(CURDATE())');
+            $differenza_opening = (($canone_successivo[0]->valore - $valore_disdette[0]->valore) * 100 ) / $opening[0]->Val_Opening;
+            $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - $valore_disdette[0]->valore);
+            return View::make('statistiche', compact('opening', 'differenza_opening','opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

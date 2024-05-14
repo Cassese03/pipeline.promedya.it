@@ -140,7 +140,7 @@
                     <!-- /.card-body -->
                 </div>
             </div>--}}
-            <div class="col-xl-12 col-sm-12">
+            <div class="col-xl-8 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
                     <div class="card-header" style="background-color:#fa8072">
@@ -163,6 +163,77 @@
                         </div>
                     </div>
                     <!-- /.card-body-->
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-12">
+                <div class="card-body" style="padding:0!important;">
+                    <div class="card card-warning">
+                        <div class="card-header" style="color:white;background-color:lightseagreen">
+                            <h3 class="card-title">
+                                Opening
+                            </h3>
+                        </div>
+                        <div class="card-body" style="padding:0!important;">
+                            <div
+                                style="height:260px!important; max-height: 260px!important; max-width: 100%!important;">
+
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 60%">Opening Anno in Corso</label>
+                                    <input type="text"
+                                           style="width: 25%;margin-right:5%;text-align: right;color:black"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($opening[0]->Val_Opening,2,',',' ');?>">
+                                    <input type="text"
+                                           style="border-color:transparent;background-color:transparent;width: 15%;text-align: right;color:black"
+                                           readonly class="form-control"
+                                           value="">
+                                </div>
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 60%">Canone Anno Succesivo</label>
+                                    <input type="text"
+                                           style="width: 25%;margin-right:5%;text-align: right;color:blue;"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($canone_successivo[0]->valore,2,',',' ');?>">
+                                    <input type="text"
+                                           style="border-color:transparent;background-color:transparent;width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                           readonly class="form-control"
+                                           value="">
+
+                                </div>
+
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 60%">Disdette Anno in Corso</label>
+                                    <input type="text"
+                                           style="width: 25%;margin-right:5%;text-align: right;color:red;"
+                                           readonly class="form-control"
+                                           value="-<?php echo number_format($valore_disdette[0]->valore,2,',',' ');?>">
+                                    <input type="text"
+                                           style="border-color:transparent;background-color:transparent;width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                           readonly class="form-control"
+                                           value="">
+                                    </div>
+                                <div
+                                    style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
+                                    <label style="width: 60%">Opening Anno Successivo</label>
+                                   <input type="text"
+                                           style="width: 25%;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($opening_anno_successivo,2,',',' ');?>">
+                                    <input type="text"
+                                            style="width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                            readonly class="form-control"
+                                            value="<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo '-';?><?php echo number_format($differenza_opening,2,',',' ').'%';?>">
+                                </div>
+                            </div>
+                            {{-- <canvas id="donutBUDGETChart"
+                                     style="height:  250px!important; max-height: 250px!important; max-width: 100%!important;"></canvas>--}}
+                        </div>
+                        <!-- /.card-body-->
+
+                    </div>
                 </div>
             </div>
             <div class="col-xl-12 col-sm-12">
@@ -1288,7 +1359,6 @@ options: donutOptions
         data: stackedBarChartChiusuraData,
         options: stackedBarChartChiusuraOptions
     })
-
 
 
 </script>

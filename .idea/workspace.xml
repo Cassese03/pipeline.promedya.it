@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserimento Tabella Esito">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Statistiche">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -459,7 +460,8 @@
       <workItem from="1715588094018" duration="5861000" />
       <workItem from="1715606123046" duration="220000" />
       <workItem from="1715607536738" duration="6792000" />
-      <workItem from="1715690770794" duration="714000" />
+      <workItem from="1715690770794" duration="1049000" />
+      <workItem from="1715696841432" duration="2431000" />
     </task>
     <task id="LOCAL-00001" summary="modifhce gruppo zona">
       <option name="closed" value="true" />
@@ -837,7 +839,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715691039158</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Statistiche">
+      <option name="closed" value="true" />
+      <created>1715691827288</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1715691827288</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -847,7 +857,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modifiche per visualizzare meglio le statistiche" />
     <MESSAGE value="Inserimento sottogruppo" />
     <MESSAGE value="Inserimento statistiche grafico sottogruppo" />
     <MESSAGE value="Fix Grafica 1.1" />
@@ -872,7 +881,8 @@
     <MESSAGE value="Fix View Login Page" />
     <MESSAGE value="Modifhce 13/05/2024" />
     <MESSAGE value="Inserimento Tabella Esito" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inserimento Tabella Esito" />
+    <MESSAGE value="Statistiche" />
+    <option name="LAST_COMMIT_MESSAGE" value="Statistiche" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -881,6 +891,11 @@
           <url>file://$PROJECT_DIR$/public_html/resources/views/info.blade.php</url>
           <line>29</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php</url>
+          <line>384</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
