@@ -463,14 +463,9 @@
       <workItem from="1715690770794" duration="1049000" />
       <workItem from="1715696841432" duration="3057000" />
       <workItem from="1715701192084" duration="2973000" />
-    </task>
-    <task id="LOCAL-00003" summary="Fix QUERY ZONA SU FILTRO">
-      <option name="closed" value="true" />
-      <created>1708593864565</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1708593864565</updated>
+      <workItem from="1715843818300" duration="133000" />
+      <workItem from="1715855236520" duration="4641000" />
+      <workItem from="1715874992301" duration="6000" />
     </task>
     <task id="LOCAL-00004" summary="Fix ZONA VUOTA SU FILTRO">
       <option name="closed" value="true" />
@@ -856,7 +851,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715701293170</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Fix filtra disdette + statistiche OPENING">
+      <option name="closed" value="true" />
+      <created>1715843945668</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1715843945668</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -903,7 +906,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php</url>
-          <line>384</line>
+          <line>395</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
