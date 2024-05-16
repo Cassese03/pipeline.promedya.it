@@ -214,18 +214,18 @@
                                            style="border-color:transparent;background-color:transparent;width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
                                            readonly class="form-control"
                                            value="">
-                                    </div>
+                                </div>
                                 <div
                                     style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
                                     <label style="width: 60%">Opening Anno Successivo</label>
-                                   <input type="text"
+                                    <input type="text"
                                            style="width: 25%;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
                                            readonly class="form-control"
                                            value="<?php echo number_format($opening_anno_successivo,2,',',' ');?>">
                                     <input type="text"
-                                            style="width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
-                                            readonly class="form-control"
-                                            value="<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo '-';?><?php echo number_format($differenza_opening,2,',',' ').'%';?>">
+                                           style="width: 15%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                           readonly class="form-control"
+                                           value="<?php echo number_format($differenza_opening,2,',',' ').'%';?>">
                                 </div>
                             </div>
                             {{-- <canvas id="donutBUDGETChart"

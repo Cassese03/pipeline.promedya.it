@@ -949,6 +949,7 @@ class HomeController extends Controller
 
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
+            $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
 
             $canone_successivo = DB::select('SELECT
               SUM(Inc_Canone_AS) as valore
@@ -957,11 +958,15 @@ class HomeController extends Controller
             WHERE
               (Vinta = 2)
               AND (
-                Data_Probabile_Chiusura >= 20240101
-                AND Data_Probabile_Chiusura <= 20241231
+                Data_Probabile_Chiusura >= '.$opening[0]->Anno.'0101
+                AND Data_Probabile_Chiusura <= '.$opening[0]->Anno.'1231
               )');
-            $valore_disdette = DB::SELECT('select SUM(Valore_Contratto) AS valore from disdette where (Esito = 0) and (Data_Disdetta >= 20230701 and Data_Disdetta <= 20241231)');
-            $opening = DB::SELECT('SELECT Val_Opening FROM opening where Anno = YEAR(CURDATE())');
+            $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Ricontrattato) - SUM(Valore_Contratto)),SUM(Valore_Contratto)) AS valore from disdette where (Data_Disdetta >= '.($opening[0]->Anno-1).'0701 and Data_Disdetta <= '.$opening[0]->Anno.'0630) group by esito');
+            $x = 0;
+            foreach ($valore_disdette as $v){
+                $x = $x + $v->valore;
+            }
+            $valore_disdette[0]->valore = $x;
             $differenza_opening = (($canone_successivo[0]->valore - $valore_disdette[0]->valore) * 100 ) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - $valore_disdette[0]->valore);
             return View::make('statistiche', compact('opening', 'differenza_opening','opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
