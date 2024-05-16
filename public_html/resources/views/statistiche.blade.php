@@ -110,7 +110,6 @@
                                        value="<?php echo number_format($valore_disdette[2]->valore,2,',',' ');?>">
 
                             </div>
-                            <div style="width: 41%"></div>
                             <div style="width: 41%">
                                 <label style="font-size:0.85rem!important">Opening AS</label>
                                 <input type="text"
@@ -118,7 +117,9 @@
                                        readonly class="form-control"
                                        value="<?php echo number_format($opening_anno_successivo,2,',',' ');?>">
 
+
                             </div>
+                            <div style="width: 41%"></div>
                             <div style="width: 41%">
                                 <label style="font-size:0.85rem!important">Valore(delta)</label>
                                 <div style="display:flex">
