@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Gestione Opening Pipeline">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -463,15 +465,8 @@
       <workItem from="1715701192084" duration="2973000" />
       <workItem from="1715843818300" duration="133000" />
       <workItem from="1715855236520" duration="4641000" />
-      <workItem from="1715874992301" duration="71000" />
-    </task>
-    <task id="LOCAL-00005" summary="Fix grafica filtro e aggiungi pipeline">
-      <option name="closed" value="true" />
-      <created>1708688619748</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1708688619748</updated>
+      <workItem from="1715874992301" duration="144000" />
+      <workItem from="1715934491285" duration="542000" />
     </task>
     <task id="LOCAL-00006" summary="Fix grafica MESI ORDINAMENTO PER DATA E NON VARCHAR, TUTTI POSSONO VEDERE LE TABELLE MA SOLO GIOVANNI LE PUO' modificare">
       <option name="closed" value="true" />
@@ -857,7 +852,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715875032516</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Gestione Opening Pipeline">
+      <option name="closed" value="true" />
+      <created>1715875131102</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1715875131102</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -904,7 +907,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php</url>
-          <line>395</line>
+          <line>402</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

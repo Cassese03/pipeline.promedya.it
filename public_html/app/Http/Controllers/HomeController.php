@@ -961,10 +961,11 @@ class HomeController extends Controller
                 Data_Probabile_Chiusura >= '.$opening[0]->Anno.'0101
                 AND Data_Probabile_Chiusura <= '.$opening[0]->Anno.'1231
               )');
+            $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= '.($opening[0]->Anno-1).'0701 and Data_Disdetta <= '.$opening[0]->Anno.'0630)');
             $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= '.($opening[0]->Anno-1).'0701 and Data_Disdetta <= '.$opening[0]->Anno.'0630) group by esito');
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore+$valore_disdette[1]->valore+$valore_disdette[2]->valore)) * 100 ) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore+$valore_disdette[1]->valore+$valore_disdette[2]->valore));
-            return View::make('statistiche', compact('opening', 'differenza_opening','opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            return View::make('statistiche', compact('opening','ricontrattati', 'differenza_opening','opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
             return Redirect::to('login');
         }

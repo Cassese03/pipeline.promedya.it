@@ -71,30 +71,45 @@
                         <div
                             style="display:flex;flex-wrap: wrap;margin:1.5% 1.5% 4% 1.5%;gap:5%;">
 
-                            <div style="width: 41%">
-                                <label style="font-size:0.85rem!important">Opening AC</label>
+                            <div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Opening (Anno Corrente)</label>
                                 <input type="text"
-                                       style="width: 60%;margin-right:5%;text-align: right;color:black"
+                                       style="width: 60%;margin-right:5%;text-align: right;color:black;font-weight: bolder"
                                        readonly class="form-control"
                                        value="<?php echo number_format($opening[0]->Val_Opening,2,',',' ');?>">
 
                             </div>
-                            <div style="width: 41%">
-                                <label style="font-size:0.85rem!important">Canone AS</label>
+                            <div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Canoni (Anno Successivo)</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:blue;"
                                        readonly class="form-control"
                                        value="<?php echo number_format($canone_successivo[0]->valore,2,',',' ');?>">
                             </div>
 
-                            <div style="width: 41%">
+                            <div style="width: 46%">
                                 <label style="font-size:0.85rem!important">Disdette</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
                                        value="-<?php echo number_format($valore_disdette[0]->valore,2,',',' ');?>">
+                            </div><div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Caring</label>
+                                <input type="text"
+                                       style="width: 60%;margin-right:5%;text-align: right;color:blue;"
+                                       readonly class="form-control"
+                                       value="<?php echo number_format($valore_disdette[2]->valore,2,',',' ');?>">
+
                             </div>
-                            <div style="width: 41%">
+
+                            <div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Recuperati</label>
+                                <input type="text"
+                                       style="width: 60%;margin-right:5%;text-align: right;color:blue;"
+                                       readonly class="form-control"
+                                       value="<?php echo number_format($ricontrattati[0]->valore,2,',',' ');?>">
+                            </div>
+                            <div style="width: 46%">
                                 <label style="font-size:0.85rem!important">Recuperati per Differenza</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
@@ -102,16 +117,8 @@
                                        value="-<?php echo number_format($valore_disdette[1]->valore,2,',',' ');?>">
 
                             </div>
-                            <div style="width: 41%">
-                                <label style="font-size:0.85rem!important">Caring</label>
-                                <input type="text"
-                                       style="width: 60%;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
-                                       readonly class="form-control"
-                                       value="<?php echo number_format($valore_disdette[2]->valore,2,',',' ');?>">
-
-                            </div>
-                            <div style="width: 41%">
-                                <label style="font-size:0.85rem!important">Opening AS</label>
+                            <div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Opening (Anno Successivo)</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
                                        readonly class="form-control"
@@ -119,14 +126,13 @@
 
 
                             </div>
-                            <div style="width: 41%"></div>
-                            <div style="width: 41%">
-                                <label style="font-size:0.85rem!important">Valore(delta)</label>
+                            <div style="width: 46%">
+                                <label style="font-size:0.85rem!important">Valore (Delta)</label>
                                 <div style="display:flex">
                                     <input type="text"
                                            style="width: 8em;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
                                            readonly class="form-control"
-                                           value="<?php echo number_format($opening_anno_successivo,2,',',' ');?>">
+                                           value="<?php echo number_format($opening_anno_successivo - $opening[0]->Val_Opening ,2,',',' ');?>">
                                     <input type="text"
                                            style="width: 5em;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
                                            readonly class="form-control"
