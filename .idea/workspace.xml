@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Statistiche Disdetta in BIANCO" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Ordinamento Grafici">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -464,14 +467,7 @@
       <workItem from="1715874992301" duration="144000" />
       <workItem from="1715934491285" duration="1272000" />
       <workItem from="1715937610620" duration="69000" />
-    </task>
-    <task id="LOCAL-00009" summary="Fix Grafica">
-      <option name="closed" value="true" />
-      <created>1710259613031</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1710259613031</updated>
+      <workItem from="1715937749595" duration="1378000" />
     </task>
     <task id="LOCAL-00010" summary="Fix Richieste da Giovanni">
       <option name="closed" value="true" />
@@ -857,7 +853,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715937666155</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Ordinamento Grafici">
+      <option name="closed" value="true" />
+      <created>1715937791481</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1715937791481</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -867,7 +871,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix info page" />
     <MESSAGE value="Inserita tabella categoria" />
     <MESSAGE value="Tutti possono modificare la gestione invio mail" />
     <MESSAGE value="Inserimento Valore_Annuale_Lordo su Dipendente" />
@@ -892,7 +895,8 @@
     <MESSAGE value="Fix filtra disdette + statistiche OPENING" />
     <MESSAGE value="Gestione Opening Pipeline" />
     <MESSAGE value="Statistiche Disdetta in BIANCO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Statistiche Disdetta in BIANCO" />
+    <MESSAGE value="Ordinamento Grafici" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ordinamento Grafici" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -904,7 +908,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php</url>
-          <line>403</line>
+          <line>405</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

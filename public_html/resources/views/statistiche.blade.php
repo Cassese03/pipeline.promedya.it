@@ -92,8 +92,9 @@
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
-                                       value="-<?php echo number_format($valore_disdette[0]->valore,2,',',' ');?>">
-                            </div><div style="width: 46%">
+                                       value="-<?php echo number_format($valore_disdette[0]->valore + $valore_disdette[2]->valore,2,',',' ');?>">
+                            </div>
+                            <div style="width: 46%">
                                 <label style="font-size:0.85rem!important">Caring</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:blue;"
