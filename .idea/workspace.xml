@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Gestione Opening Pipeline">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Gestione Opening Pipeline" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -466,15 +462,7 @@
       <workItem from="1715843818300" duration="133000" />
       <workItem from="1715855236520" duration="4641000" />
       <workItem from="1715874992301" duration="144000" />
-      <workItem from="1715934491285" duration="542000" />
-    </task>
-    <task id="LOCAL-00006" summary="Fix grafica MESI ORDINAMENTO PER DATA E NON VARCHAR, TUTTI POSSONO VEDERE LE TABELLE MA SOLO GIOVANNI LE PUO' modificare">
-      <option name="closed" value="true" />
-      <created>1709638801365</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1709638801365</updated>
+      <workItem from="1715934491285" duration="1272000" />
     </task>
     <task id="LOCAL-00007" summary="Fix grafico su statistica">
       <option name="closed" value="true" />
@@ -860,7 +848,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715875131102</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Gestione Opening Pipeline">
+      <option name="closed" value="true" />
+      <created>1715935767758</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1715935767758</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
