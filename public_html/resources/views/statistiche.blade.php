@@ -233,7 +233,8 @@
                 <div class="card card-warning">
                     <div class="card-header" style="background-color:#fa8072">
                         <h3 class="card-title" style="color:white">
-                            Statistiche Disdetta
+                            Statistiche Disdette
+
                         </h3>
                     </div>
                     <div class="row">
