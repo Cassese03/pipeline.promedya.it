@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Check Disdette">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Differenza Label">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -468,14 +468,8 @@
       <workItem from="1715937610620" duration="69000" />
       <workItem from="1715937749595" duration="2061000" />
       <workItem from="1715940984300" duration="156000" />
-    </task>
-    <task id="LOCAL-00011" summary="Inserimento nuove colonne">
-      <option name="closed" value="true" />
-      <created>1710264480698</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1710264480698</updated>
+      <workItem from="1716200495360" duration="103000" />
+      <workItem from="1716202328217" duration="138000" />
     </task>
     <task id="LOCAL-00012" summary="Inserimento nuove colonne NOTA">
       <option name="closed" value="true" />
@@ -861,7 +855,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715939511520</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Differenza Label">
+      <option name="closed" value="true" />
+      <created>1716200579932</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1716200579932</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -871,7 +873,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tutti possono modificare la gestione invio mail" />
     <MESSAGE value="Inserimento Valore_Annuale_Lordo su Dipendente" />
     <MESSAGE value="Sintassi lead in disdetta" />
     <MESSAGE value="Esito Required" />
@@ -896,7 +897,8 @@
     <MESSAGE value="Statistiche Disdetta in BIANCO" />
     <MESSAGE value="Ordinamento Grafici" />
     <MESSAGE value="Check Disdette" />
-    <option name="LAST_COMMIT_MESSAGE" value="Check Disdette" />
+    <MESSAGE value="Differenza Label" />
+    <option name="LAST_COMMIT_MESSAGE" value="Differenza Label" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

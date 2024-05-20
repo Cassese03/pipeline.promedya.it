@@ -193,7 +193,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <?php foreach ($column as $c){
-                        if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre'){ ?>
+                        if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura'){ ?>
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>

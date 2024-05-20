@@ -133,7 +133,7 @@ class AjaxController extends Controller
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
-            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') { ?>
+            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') { ?>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
@@ -323,7 +323,7 @@ class AjaxController extends Controller
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         foreach ($column as $c) {
-            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') {
+            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') {
                 ?>
                 <div class="col-md-6">
                     <div class="form-group">
