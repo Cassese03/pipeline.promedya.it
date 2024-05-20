@@ -111,7 +111,7 @@
                                        value="<?php echo number_format($ricontrattati[0]->valore,2,',',' ');?>">
                             </div>
                             <div style="width: 46%">
-                                <label style="font-size:0.85rem!important">Recuperati per Differenza</label>
+                                <label style="font-size:0.85rem!important">Differenza su Canoni (Anno Successivo)</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
