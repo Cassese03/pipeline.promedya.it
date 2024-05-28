@@ -867,7 +867,7 @@ class HomeController extends Controller
                 $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
-                                                      WHERE  ((Vinta = 1 or Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or ((Vinta != 2 && Vinta != 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
+                                                      WHERE  ((Vinta = 2 or Vinta != 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or ((Vinta = 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY Vinta
                                                       ORDER  BY Vinta desc');
                 $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo

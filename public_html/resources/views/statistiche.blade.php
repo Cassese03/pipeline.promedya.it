@@ -111,7 +111,8 @@
                                        value="<?php echo number_format($ricontrattati[0]->valore,2,',',' ');?>">
                             </div>
                             <div style="width: 46%">
-                                <label style="font-size:0.85rem!important">Differenza su Canoni (Anno Successivo)</label>
+                                <label style="font-size:0.85rem!important">Differenza su Canoni (Anno
+                                    Successivo)</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
@@ -403,6 +404,73 @@
 @include('common.footer')
 <script type="text/javascript">
 
+    var donutMESEChartCanvas = $('#donutMESEChart').get(0).getContext('2d')
+    var donutMESEData = {
+        labels: [
+            <?php $sales = '';
+            foreach ($statistiche_corrente as $s) {
+                $val = '';
+                if ($s->Vinta == 1) {
+                    $val = 'PERSA';
+                } else {
+                    if ($s->Vinta == 2) {
+                        $val = 'VINTA';
+                    } else {
+                        $val = 'IN CORSO';
+                    }
+                }
+
+                $sales .= '\'' . $val . '\',';
+            }
+            $sales = substr($sales, 0, strlen($sales) - 1);
+            echo $sales;
+            ?>
+        ],
+        datasets: [
+            {
+                data: [
+                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
+                        $sales .= $s->Val . ',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+                backgroundColor: [
+
+                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
+                        $sales .= '\'#' . substr(md5(mt_rand()), 0, 6) . '\',';
+
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+
+                ],
+
+                borderColor: [
+                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
+                        $sales .= '\'#999999\',';
+                    }
+                    $sales = substr($sales, 0, strlen($sales) - 1);
+                    echo $sales;
+                    ?>
+                ],
+            }
+        ]
+    }
+    var donutMESEOptions = {
+        datasetLabel: false,
+        maintainAspectRatio: false,
+        responsive: true,
+    }
+
+    new Chart(donutMESEChartCanvas, {
+        type: 'polarArea',
+        data: donutMESEData,
+        options: donutMESEOptions
+    });
     var donutDisdetteProdottoChartCanvas = $('#donutDisdetteProdottoChart').get(0).getContext('2d')
 
     var donutDisdetteProdottoData = {
@@ -1029,66 +1097,6 @@ options: donutOptions
 
     // STATISTICHE MESE CORRENTE
 
-    var donutMESEChartCanvas = $('#donutMESEChart').get(0).getContext('2d')
-    var donutMESEData = {
-        labels: [
-            <?php $sales = '';
-            foreach ($statistiche_corrente as $s) {
-                $val = '';
-                if ($s->Vinta == 0) $val = 'PERSA';
-                if ($s->Vinta == 1) $val = 'VINTA';
-                if ($s->Vinta == 2) $val = 'IN CORSO';
-                $sales .= '\'' . $val . '\',';
-            }
-            $sales = substr($sales, 0, strlen($sales) - 1);
-            echo $sales;
-            ?>
-        ],
-        datasets: [
-            {
-                data: [
-                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
-                        $sales .= $s->Val . ',';
-                    }
-                    $sales = substr($sales, 0, strlen($sales) - 1);
-                    echo $sales;
-                    ?>
-
-                ],
-                backgroundColor: [
-
-                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
-                        $sales .= '\'#' . substr(md5(mt_rand()), 0, 6) . '\',';
-
-                    }
-                    $sales = substr($sales, 0, strlen($sales) - 1);
-                    echo $sales;
-                    ?>
-
-                ],
-
-                borderColor: [
-                    <?php $sales = ''; foreach ($statistiche_corrente as $s) {
-                        $sales .= '\'#999999\',';
-                    }
-                    $sales = substr($sales, 0, strlen($sales) - 1);
-                    echo $sales;
-                    ?>
-                ],
-            }
-        ]
-    }
-    var donutMESEOptions = {
-        datasetLabel: false,
-        maintainAspectRatio: false,
-        responsive: true,
-    }
-
-    new Chart(donutMESEChartCanvas, {
-        type: 'polarArea',
-        data: donutMESEData,
-        options: donutMESEOptions
-    });
 
 
     var donuteAnnualePERFORMERChartCanvas = $('#donutAnnualePERFORMERChart').get(0).getContext('2d')
