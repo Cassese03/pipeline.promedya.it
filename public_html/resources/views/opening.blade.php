@@ -98,7 +98,8 @@
                     <label for="Val_Opening">
                         Valore Opening
                     </label>
-                    <input class="form-control" name="Val_Opening" id="Val_Opening" value="{{ number_format($p->Val_Opening,2,',','') }}">
+                    <input type="number" class="form-control" name="Val_Opening" id="Val_Opening"
+                           value="{{ number_format($p->Val_Opening,2,'.','') }}">
                     <div class="clearfix"></div>
                 </div>
 
