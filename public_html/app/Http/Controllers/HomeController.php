@@ -202,7 +202,7 @@ class HomeController extends Controller
             if (isset($dati['duplica'])) unset($dati['duplica']);
             if (isset($dati['Id'])) unset($dati['Id']);
             $id = DB::table('pipeline')->insertGetId($dati);
-
+            DB::select('UPDATE pipeline SET id = ' . $id . ' where id = ' . $id);
             if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
