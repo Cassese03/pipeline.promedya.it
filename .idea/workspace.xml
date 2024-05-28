@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Non piu' modificabile probabilita chiusura in rows">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/opening.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/opening.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Tipe Number" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -473,15 +470,7 @@
       <workItem from="1716202328217" duration="138000" />
       <workItem from="1716220006132" duration="319000" />
       <workItem from="1716303144828" duration="1316000" />
-      <workItem from="1716884612805" duration="68000" />
-    </task>
-    <task id="LOCAL-00013" summary="CAMBIO ESITI">
-      <option name="closed" value="true" />
-      <created>1710318792329</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1710318792329</updated>
+      <workItem from="1716884612805" duration="96000" />
     </task>
     <task id="LOCAL-00014" summary="Tutti possono vedere e modificare la pagina disdette">
       <option name="closed" value="true" />
@@ -867,7 +856,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716220209858</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Tipe Number">
+      <option name="closed" value="true" />
+      <created>1716884698525</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1716884698525</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -877,8 +874,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Sintassi lead in disdetta" />
-    <MESSAGE value="Esito Required" />
     <MESSAGE value="Aggiungi Nuova Disdetta" />
     <MESSAGE value="Fix Grafica" />
     <MESSAGE value="Fix Bug Budget" />
@@ -902,7 +897,9 @@
     <MESSAGE value="Check Disdette" />
     <MESSAGE value="Differenza Label" />
     <MESSAGE value="Fix Non piu' modificabile probabilita chiusura in rows" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Non piu' modificabile probabilita chiusura in rows" />
+    <MESSAGE value="Tipe" />
+    <MESSAGE value="Tipe Number" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tipe Number" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
