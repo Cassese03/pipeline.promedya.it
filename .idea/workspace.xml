@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Tipe Number" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Order By Valore">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -471,38 +474,10 @@
       <workItem from="1716220006132" duration="319000" />
       <workItem from="1716303144828" duration="1316000" />
       <workItem from="1716884612805" duration="96000" />
-    </task>
-    <task id="LOCAL-00014" summary="Tutti possono vedere e modificare la pagina disdette">
-      <option name="closed" value="true" />
-      <created>1710340386640</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1710340386640</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Dino Fioretti di nuovo email">
-      <option name="closed" value="true" />
-      <created>1710342133607</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1710342133608</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Tolte date 01-01-1970">
-      <option name="closed" value="true" />
-      <created>1710520205604</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1710520205604</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Ordinamento per data_disdetta desc">
-      <option name="closed" value="true" />
-      <created>1710522005533</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1710522005533</updated>
+      <workItem from="1716884822004" duration="1243000" />
+      <workItem from="1716901745220" duration="813000" />
+      <workItem from="1716903658337" duration="74000" />
+      <workItem from="1717058154897" duration="292000" />
     </task>
     <task id="LOCAL-00018" summary="Ordinamento Prodotto Best Performer Annuale&#10; per valore desc">
       <option name="closed" value="true" />
@@ -864,7 +839,39 @@
       <option name="project" value="LOCAL" />
       <updated>1716884698525</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Step">
+      <option name="closed" value="true" />
+      <created>1716884835774</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1716884835774</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Fix Statistiche">
+      <option name="closed" value="true" />
+      <created>1716902173023</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1716902173023</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Fix DUPLICA">
+      <option name="closed" value="true" />
+      <created>1716902555147</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1716902555147</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Order By Valore">
+      <option name="closed" value="true" />
+      <created>1716903725349</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1716903725350</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -874,10 +881,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Aggiungi Nuova Disdetta" />
-    <MESSAGE value="Fix Grafica" />
-    <MESSAGE value="Fix Bug Budget" />
-    <MESSAGE value="Aggiunta nuovo grafica statistica x chiusura" />
     <MESSAGE value="Fix nome statistica grafico" />
     <MESSAGE value="Fix ordinamento" />
     <MESSAGE value="Fix filtro disdette" />
@@ -899,7 +902,11 @@
     <MESSAGE value="Fix Non piu' modificabile probabilita chiusura in rows" />
     <MESSAGE value="Tipe" />
     <MESSAGE value="Tipe Number" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tipe Number" />
+    <MESSAGE value="Step" />
+    <MESSAGE value="Fix Statistiche" />
+    <MESSAGE value="Fix DUPLICA" />
+    <MESSAGE value="Order By Valore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order By Valore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -908,11 +915,6 @@
           <url>file://$PROJECT_DIR$/public_html/resources/views/info.blade.php</url>
           <line>29</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php</url>
-          <line>405</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
