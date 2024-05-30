@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Mail su Disdette IN COPIA A TUTTI" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="CAMBIATO OGGETTO IN MAIL" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -476,14 +476,7 @@
       <workItem from="1716903658337" duration="74000" />
       <workItem from="1717058154897" duration="497000" />
       <workItem from="1717058872056" duration="37000" />
-    </task>
-    <task id="LOCAL-00020" summary="Inserimento sottogruppo">
-      <option name="closed" value="true" />
-      <created>1710762873803</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1710762873803</updated>
+      <workItem from="1717059172409" duration="47000" />
     </task>
     <task id="LOCAL-00021" summary="Inserimento statistiche grafico sottogruppo">
       <option name="closed" value="true" />
@@ -869,7 +862,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717058903433</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="CAMBIATO OGGETTO IN MAIL">
+      <option name="closed" value="true" />
+      <created>1717059214506</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1717059214506</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -879,7 +880,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix filtro disdette" />
     <MESSAGE value="Fix filtro disdette 2.0" />
     <MESSAGE value="Fix Labels" />
     <MESSAGE value="Cambio Colonna Vinta" />
@@ -904,7 +904,8 @@
     <MESSAGE value="Order By Valore" />
     <MESSAGE value="Mail su Disdette" />
     <MESSAGE value="Mail su Disdette IN COPIA A TUTTI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mail su Disdette IN COPIA A TUTTI" />
+    <MESSAGE value="CAMBIATO OGGETTO IN MAIL" />
+    <option name="LAST_COMMIT_MESSAGE" value="CAMBIATO OGGETTO IN MAIL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

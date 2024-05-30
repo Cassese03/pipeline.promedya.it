@@ -34,7 +34,7 @@ class HomeController extends Controller
             $id = DB::table('disdette')->insertGetId($dati);
             $mail_send = 'Salve <br>
             è stata inserita la <strong>DISDETTA</strong> ' . $id . '
-            <br> SALES : ' . $dati['Sales'] . '
+            <br><br> SALES : ' . $dati['Sales'] . '
             <br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '
             <br> PRODOTTO : ' . $dati['Prodotto'] . '
             <br> DATA DISDETTA : ' . date('d-m-Y', strtotime($dati['Data_Disdetta'])) . '
