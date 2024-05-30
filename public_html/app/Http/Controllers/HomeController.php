@@ -54,8 +54,14 @@ class HomeController extends Controller
             $mail->Username = 'hd.sviluppo@promedya.it';
             $mail->Password = '!!promedya@@2023';
             $mail->setFrom('commerciale@promedya.it');
+            $mail->addBCC('umberto.limone@promedya.it');
             $mail->addBCC('alessandro.aniello@promedya.it');
+            $mail->addBCC('dino.fioretti@promedya.it');
+            $mail->addBCC('francesco.napolitano@promedya.it');
+            $mail->addBCC('daniela.dellacorte@promedya.it');
             $mail->addBCC('giovanni.tutino@promedya.it');
+            $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+            $mail->addBCC('generoso.pelosi@promedya.it');
             $mail->addBCC('lorenzo.cassese@promedya.it');
             $mail->addAddress('promedya.srl@gmail.com');
             $mail->IsHTML(true);
