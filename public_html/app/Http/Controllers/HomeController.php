@@ -226,7 +226,7 @@ class HomeController extends Controller
                 $mail->addBCC('lorenzo.cassese@promedya.it');
                 $mail->addAddress('promedya.srl@gmail.com');
                 $mail->IsHTML(true);
-                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force';
+                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | VENDITA';
                 $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
                 $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                 if ($send == 1) $mail->send();
