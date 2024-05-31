@@ -33,15 +33,16 @@
                                 <label style="width: 30%"><?php echo $s->type; ?>
                                 </label>
                                 <input type="text"
-                                       style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;';else echo 'font-weight:bolder;'; ?>"
+                                       style="width: 40%;margin-right:5%;text-align: right;<?php if($s->type == 'Budget') echo 'font-weight:bolder;'; if($s->type == 'Budget Progressivo')echo 'color:blue;'; ?>@if($s->type == 'Vendite') @if($statistiche_budget[2]->valore < $statistiche_budget[1]->valore) color:red; @else color:green; @endif @endif"
                                        readonly class="form-control"
                                        value="<?php echo number_format($s->valore,2,',',' ');?>">
                                 <input type="text" class="form-control"
-                                       style="width: 25%;text-align: right;<?php if($s->type != 'Budget') echo 'color:blue;';else echo 'font-weight:bolder;'; ?>"
+                                       style="width: 25%;text-align: right;<?php if($s->type == 'Budget') echo 'font-weight:bolder;'; if($s->type == 'Budget Progressivo')echo 'color:blue;'; ?>@if($s->type == 'Vendite') @if($statistiche_budget[2]->valore < $statistiche_budget[1]->valore) color:red; @else color:green; @endif @endif"
                                        readonly
-                                       value="<?php if($s->type == 'Budget') echo '100%'; else echo number_format((1 - (floatval($statistiche_budget[0]->valore-$statistiche_budget[1]->valore)/$statistiche_budget[0]->valore))*100,2,',','').'%';?>">
+                                       value="<?php if($s->type == 'Budget') echo '100%'; if($s->type == 'Vendite') echo number_format((1 - (floatval($statistiche_budget[0]->valore-$statistiche_budget[2]->valore)/$statistiche_budget[0]->valore))*100,2,',','').'%';if($s->type == 'Budget Progressivo') echo number_format((1 - (floatval($statistiche_budget[0]->valore-$statistiche_budget[1]->valore)/$statistiche_budget[0]->valore))*100,2,',','').'%';?>">
                             </div>
                             <?php } ?>
+
                             <div style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
                                 <label style="width: 30%">Obiettivo</label>
                                 <input type="text"

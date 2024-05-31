@@ -899,7 +899,11 @@ class HomeController extends Controller
                                                       WHERE  (DATE_FORMAT(Data_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
-            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
+            $annoCorrente = date("Y");
+            $meseCorrente = date("m");
+            $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
+            $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
+            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
             $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
             $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
             $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();

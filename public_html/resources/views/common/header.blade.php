@@ -248,25 +248,25 @@
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('motivazione') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <i class="nav-icon fas fa-circle-notch"></i>
                                     <p>Motivazioni</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('esito') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <i class="nav-icon fas fa-check"></i>
                                     <p>Esito Trattativa</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('incentivi') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <i class="nav-icon fas fa-chart-area"></i>
                                     <p>Incentivi</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('opening') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <i class="nav-icon fas fa-chart-pie"></i>
                                     <p>Opening</p>
                                 </a>
                             </li>
@@ -284,7 +284,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo URL::asset('segnalato') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-check"></i>
+                                    <i class="nav-icon fas fa-exclamation"></i>
                                     <p>Segnalato</p>
                                 </a>
                             </li>

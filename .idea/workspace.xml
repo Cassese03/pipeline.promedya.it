@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Modifiche varie per PRIVACY">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Allinemento Grafico">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -488,15 +487,7 @@
       <workItem from="1717139986452" duration="143000" />
       <workItem from="1717140184612" duration="1205000" />
       <workItem from="1717152284186" duration="663000" />
-      <workItem from="1717166167194" duration="965000" />
-    </task>
-    <task id="LOCAL-00025" summary="Cambio Colore e inserimento info">
-      <option name="closed" value="true" />
-      <created>1710869395971</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1710869395971</updated>
+      <workItem from="1717166167194" duration="2469000" />
     </task>
     <task id="LOCAL-00026" summary="Fix info page">
       <option name="closed" value="true" />
@@ -882,7 +873,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717152946960</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Allinemento Grafico">
+      <option name="closed" value="true" />
+      <created>1717167367739</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1717167367739</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -892,7 +891,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifhce 13/05/2024" />
     <MESSAGE value="Inserimento Tabella Esito" />
     <MESSAGE value="Statistiche" />
     <MESSAGE value="Inserimento Statistica OPENING" />
@@ -917,7 +915,8 @@
     <MESSAGE value="Statistiche Incentivi" />
     <MESSAGE value="Statistiche Incentivi + GESTIONE MOBILE" />
     <MESSAGE value="Modifiche varie per PRIVACY" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifiche varie per PRIVACY" />
+    <MESSAGE value="Allinemento Grafico" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allinemento Grafico" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
