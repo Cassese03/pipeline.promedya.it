@@ -66,7 +66,7 @@
                 <div class="card card-warning" style="height:95%">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
-                            Statistiche Target Annuale
+                            Statistiche Target
                         </h3>
                     </div>
                     <div class="card-body">
