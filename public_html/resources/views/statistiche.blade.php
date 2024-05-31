@@ -155,7 +155,7 @@
                 <div class="card card-warning">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
-                            Statistiche Incentivi
+                            Statistiche Target Annuale
                         </h3>
                     </div>
                     <div class="card-body">
@@ -165,19 +165,14 @@
                                     Descrizione Obiettivo Vendite
                                 </label>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
                                     Target 2024
                                 </label>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
                                     Vendite
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
-                                    Incentivi
                                 </label>
                             </div>
                             @foreach($incentivi as $i)
@@ -186,7 +181,7 @@
                                            readonly type="text" class="form-control"
                                            value="{{ $i->desc_obiettivo }}">
                                 </div>
-                                <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                <div class="col-4" style="margin-top:1%;margin-bottom:1%;">
                                     <input style="text-align: right;font-weight: bolder" readonly type="text"
                                            class="form-control"
                                            value="{{ number_format($i->target,2,',',' ') }}">
@@ -194,7 +189,7 @@
                                 @if ($i->desc_obiettivo == 'Services')
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'SERVIZI')
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-4" style="margin-top:1%;margin-bottom:1%;">
                                                 <input style="text-align: right;font-weight:bolder;color:blue;"
                                                        readonly
                                                        type="text"
@@ -202,13 +197,13 @@
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
+                                           {{-- <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
@@ -217,21 +212,21 @@
 
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'Vendite_NEW')
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-4" style="margin-top:1%;margin-bottom:1%;">
                                                 <input style="text-align: right;font-weight:bolder;color:blue;"
                                                        readonly
                                                        type="text"
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
-
+{{--
                                             <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
@@ -239,21 +234,21 @@
                                 @if ($i->desc_obiettivo == 'Subscription Existing Customer')
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'Vendite_OLD')
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-4" style="margin-top:1%;margin-bottom:1%;">
                                                 <input style="text-align: right;font-weight:bolder;color:blue;"
                                                        readonly
                                                        type="text"
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
-
+{{--
                                             <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
@@ -292,7 +287,7 @@
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+                                        {{--    <div style="display:flex;margin-top:1%;margin-bottom:1%;">
 
                                                 <label
                                                     style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
@@ -303,7 +298,7 @@
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
@@ -325,7 +320,7 @@
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+                                            {{--<div style="display:flex;margin-top:1%;margin-bottom:1%;">
 
                                                 <label
                                                     style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
@@ -335,7 +330,7 @@
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
@@ -354,7 +349,7 @@
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
-
+{{--
                                             <div style="display:flex;margin-top:1%;margin-bottom:1%;">
 
                                                 <label
@@ -365,7 +360,7 @@
                                                     readonly type="text"
                                                     class="form-control"
                                                     value="{{ number_format($i->incentivo,2,',',' ') }}">
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endforeach
                                 @endif
