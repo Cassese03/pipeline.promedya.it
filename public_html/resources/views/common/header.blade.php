@@ -44,6 +44,19 @@
     <script src="<?php echo URL::asset('backend/plugins/jquery/jquery.min.js') ?>"></script>
 
     <style>
+        @media only screen and (min-width: 700px) {
+
+            .telefonino {
+                display: none!important;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            .large_device {
+                display: none !important;
+            }
+        }
+
         .scroll {
             width: 1px;
             height: 1px;

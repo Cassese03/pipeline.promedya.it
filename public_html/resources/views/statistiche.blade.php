@@ -151,7 +151,6 @@
 
                 </div>
             </div>
-
             <div class="col-12">
                 <div class="card card-warning">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
@@ -160,8 +159,8 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
+                        <div class="row large_device">
+                            <div class="col-4">
                                 <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
                                     Descrizione Obiettivo Vendite
                                 </label>
@@ -176,15 +175,16 @@
                                     Vendite
                                 </label>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
                                     Incentivi
                                 </label>
                             </div>
                             @foreach($incentivi as $i)
-                                <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                <div class="col-4" style="margin-top:1%;margin-bottom:1%;">
                                     <input style="text-align: left;font-size:0.90rem!important;font-weight: bolder"
-                                           readonly type="text" class="form-control" value="{{ $i->desc_obiettivo }}">
+                                           readonly type="text" class="form-control"
+                                           value="{{ $i->desc_obiettivo }}">
                                 </div>
                                 <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
                                     <input style="text-align: right;font-weight: bolder" readonly type="text"
@@ -195,13 +195,14 @@
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'SERVIZI')
                                             <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
-                                                <input style="text-align: right;font-weight:bolder;color:blue;" readonly
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
                                                        type="text"
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
@@ -217,13 +218,14 @@
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'Vendite_NEW')
                                             <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
-                                                <input style="text-align: right;font-weight:bolder;color:blue;" readonly
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
                                                        type="text"
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
@@ -238,14 +240,127 @@
                                     @foreach($statistiche_incentivi as $si)
                                         @if($si->type == 'Vendite_OLD')
                                             <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
-                                                <input style="text-align: right;font-weight:bolder;color:blue;" readonly
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
                                                        type="text"
                                                        class="form-control"
                                                        value="{{ number_format($si->valore,2,',',' '); }}">
                                             </div>
 
-                                            <div class="col-3" style="margin-top:1%;margin-bottom:1%;">
+                                            <div class="col-2" style="margin-top:1%;margin-bottom:1%;">
                                                 <input
+                                                    style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
+                                                    readonly type="text"
+                                                    class="form-control"
+                                                    value="{{ number_format($i->incentivo,2,',',' ') }}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                            @endforeach
+                        </div>
+                        <div class="d-flex flex-column telefonino">
+                            @foreach($incentivi as $i)
+                                <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+                                    <input style="text-align: center;font-size:0.90rem!important;font-weight: bolder"
+                                           readonly type="text" class="form-control"
+                                           value="{{ $i->desc_obiettivo }}">
+                                </div>
+
+                                <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+                                    <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                        Target 2024
+                                    </label>
+                                    <input style="text-align: right;font-weight: bolder" readonly type="text"
+                                           class="form-control"
+                                           value="{{ number_format($i->target,2,',',' ') }}">
+                                </div>
+                                @if ($i->desc_obiettivo == 'Services')
+                                    @foreach($statistiche_incentivi as $si)
+                                        @if($si->type == 'SERVIZI')
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Vendite
+                                                </label>
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
+                                                       type="text"
+                                                       class="form-control"
+                                                       value="{{ number_format($si->valore,2,',',' '); }}">
+                                            </div>
+
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Incentivi
+                                                </label>
+                                                <input
+                                                    style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
+                                                    readonly type="text"
+                                                    class="form-control"
+                                                    value="{{ number_format($i->incentivo,2,',',' ') }}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                @if ($i->desc_obiettivo == 'Subscription New Customer')
+
+                                    @foreach($statistiche_incentivi as $si)
+                                        @if($si->type == 'Vendite_NEW')
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Vendite
+                                                </label>
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
+                                                       type="text"
+                                                       class="form-control"
+                                                       value="{{ number_format($si->valore,2,',',' '); }}">
+                                            </div>
+
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Incentivi
+                                                </label><input
+                                                    style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
+                                                    readonly type="text"
+                                                    class="form-control"
+                                                    value="{{ number_format($i->incentivo,2,',',' ') }}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                @if ($i->desc_obiettivo == 'Subscription Existing Customer')
+                                    @foreach($statistiche_incentivi as $si)
+                                        @if($si->type == 'Vendite_OLD')
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Vendite
+                                                </label>
+                                                <input style="text-align: right;font-weight:bolder;color:blue;"
+                                                       readonly
+                                                       type="text"
+                                                       class="form-control"
+                                                       value="{{ number_format($si->valore,2,',',' '); }}">
+                                            </div>
+
+                                            <div style="display:flex;margin-top:1%;margin-bottom:1%;">
+
+                                                <label
+                                                    style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
+                                                    Incentivi
+                                                </label><input
                                                     style="text-align: right;font-weight:bolder;@if($i->target>$si->valore)color:red; @else color:green; @endif"
                                                     readonly type="text"
                                                     class="form-control"
@@ -260,7 +375,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-12 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
