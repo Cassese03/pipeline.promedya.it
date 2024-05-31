@@ -29,6 +29,7 @@ Route::any('dipendenti', [HomeController::class, 'dipendenti']);
 Route::any('motivazione', [HomeController::class, 'motivazione']);
 Route::any('esito', [HomeController::class, 'esito']);
 Route::any('opening', [HomeController::class, 'opening']);
+Route::any('incentivi', [HomeController::class, 'incentivi']);
 Route::any('categoria', [HomeController::class, 'categoria']);
 Route::any('segnalato', [HomeController::class, 'segnalato']);
 Route::any('privacy', [HomeController::class, 'privacy']);

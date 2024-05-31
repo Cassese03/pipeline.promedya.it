@@ -774,6 +774,41 @@ class HomeController extends Controller
         }
     }
 
+    public function incentivi(Request $request)
+    {
+        $dati = $request->all();
+        if (session()->has('utente')) {
+            if (isset($dati['modifica'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['modifica'])) unset($dati['modifica']);
+                if (isset($dati['id'])) {
+                    $id = $dati['id'];
+                    unset($dati['id']);
+                    DB::table('incentivi')->where(['id' => $id])->update($dati);
+                }
+                return Redirect::to('incentivi');
+            }
+            if (isset($dati['elimina'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['elimina'])) {
+                    DB::table('incentivi')->where(['id' => $dati['elimina']])->delete();
+                }
+                return Redirect::to('incentivi');
+            }
+            if (isset($dati['aggiungi'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                DB::table('incentivi')->insert($dati);
+                return Redirect::to('incentivi');
+            }
+            $utente = session('utente');
+            $table = DB::SELECT('SELECT * FROM incentivi');
+            return View::make('incentivi', compact('utente', 'table'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
+
     public function segnalato(Request $request)
     {
         $dati = $request->all();

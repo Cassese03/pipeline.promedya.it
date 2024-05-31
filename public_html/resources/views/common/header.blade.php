@@ -259,6 +259,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="<?php echo URL::asset('incentivi') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-exclamation"></i>
+                                    <p>Incentivi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?php echo URL::asset('opening') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-exclamation"></i>
                                     <p>Opening</p>
