@@ -225,7 +225,7 @@
                     <li class="nav-item">
                         <a href="<?php echo URL::asset('') ?>" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>Statistiche</p>
+                            <p>Statistiche (KPI)</p>
                         </a>
                     </li>
                     <li class="nav-item">
