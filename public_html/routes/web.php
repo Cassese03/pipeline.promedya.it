@@ -44,4 +44,5 @@ Route::any('ajax/riga_ajax/{Id}', [AjaxController::class, 'riga_ajax']);
 Route::any('ajax/duplica_ajax/{Id}', [AjaxController::class, 'duplica_ajax']);
 
 Route::any('ajax/modifica_ajax_DISDETTA/{Id}', [AjaxController::class, 'modifica_ajax_DISDETTA']);
+Route::any('ajax/duplica_ajax_DISDETTA/{Id}', [AjaxController::class, 'duplica_ajax_DISDETTA']);
 
