@@ -889,14 +889,14 @@ class HomeController extends Controller
                                                       (SELECT gruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  (DATE_FORMAT(Data_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0701 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $statistiche_disdetta_sottogruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
                                                       (SELECT sottogruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  (DATE_FORMAT(Data_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0701 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))). '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $annoCorrente = date("Y");

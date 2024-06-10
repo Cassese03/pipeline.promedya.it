@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Allinemento Grafico">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Statistiche Disdette Aggiornate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -487,63 +485,15 @@
       <workItem from="1717139986452" duration="143000" />
       <workItem from="1717140184612" duration="1205000" />
       <workItem from="1717152284186" duration="663000" />
-      <workItem from="1717166167194" duration="2469000" />
-    </task>
-    <task id="LOCAL-00026" summary="Fix info page">
-      <option name="closed" value="true" />
-      <created>1710948428833</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1710948428833</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Fix info page">
-      <option name="closed" value="true" />
-      <created>1710953922539</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1710953922539</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Inserita tabella categoria">
-      <option name="closed" value="true" />
-      <created>1711018873211</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1711018873211</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Tutti possono modificare la gestione invio mail">
-      <option name="closed" value="true" />
-      <created>1711034517768</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1711034517768</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Inserimento Valore_Annuale_Lordo su Dipendente">
-      <option name="closed" value="true" />
-      <created>1711466992024</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1711466992024</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Sintassi lead in disdetta">
-      <option name="closed" value="true" />
-      <created>1712301427438</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1712301427438</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Esito Required">
-      <option name="closed" value="true" />
-      <created>1712328414491</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1712328414491</updated>
+      <workItem from="1717166167194" duration="2740000" />
+      <workItem from="1717168998746" duration="23000" />
+      <workItem from="1717398687741" duration="405000" />
+      <workItem from="1717400351729" duration="107000" />
+      <workItem from="1717400846608" duration="76000" />
+      <workItem from="1717404451955" duration="103000" />
+      <workItem from="1717418671087" duration="600000" />
+      <workItem from="1717486797126" duration="1037000" />
+      <workItem from="1718008371730" duration="554000" />
     </task>
     <task id="LOCAL-00033" summary="Esito Required">
       <option name="closed" value="true" />
@@ -881,7 +831,63 @@
       <option name="project" value="LOCAL" />
       <updated>1717167367739</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Cambiamenti Grafici">
+      <option name="closed" value="true" />
+      <created>1717168903802</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1717168903802</updated>
+    </task>
+    <task id="LOCAL-00076" summary="TOLTO ANNUALE">
+      <option name="closed" value="true" />
+      <created>1717169015762</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1717169015762</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Fix statistiche mensili">
+      <option name="closed" value="true" />
+      <created>1717399090808</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1717399090809</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Fix statistiche mensili">
+      <option name="closed" value="true" />
+      <created>1717400456560</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1717400456560</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Fix Mail">
+      <option name="closed" value="true" />
+      <created>1717400918213</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1717400918213</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Cambio Query">
+      <option name="closed" value="true" />
+      <created>1717404547427</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1717404547427</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Inserimento Scritta">
+      <option name="closed" value="true" />
+      <created>1717488178414</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1717488178415</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -891,13 +897,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Inserimento Tabella Esito" />
-    <MESSAGE value="Statistiche" />
-    <MESSAGE value="Inserimento Statistica OPENING" />
-    <MESSAGE value="GESTIONE TABELLE OPENING" />
-    <MESSAGE value="Fix filtra disdette + statistiche OPENING" />
-    <MESSAGE value="Gestione Opening Pipeline" />
-    <MESSAGE value="Statistiche Disdetta in BIANCO" />
     <MESSAGE value="Ordinamento Grafici" />
     <MESSAGE value="Check Disdette" />
     <MESSAGE value="Differenza Label" />
@@ -916,7 +915,14 @@
     <MESSAGE value="Statistiche Incentivi + GESTIONE MOBILE" />
     <MESSAGE value="Modifiche varie per PRIVACY" />
     <MESSAGE value="Allinemento Grafico" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allinemento Grafico" />
+    <MESSAGE value="Cambiamenti Grafici" />
+    <MESSAGE value="TOLTO ANNUALE" />
+    <MESSAGE value="Fix statistiche mensili" />
+    <MESSAGE value="Fix Mail" />
+    <MESSAGE value="Cambio Query" />
+    <MESSAGE value="Inserimento Scritta" />
+    <MESSAGE value="Statistiche Disdette Aggiornate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Statistiche Disdette Aggiornate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -925,6 +931,11 @@
           <url>file://$PROJECT_DIR$/public_html/resources/views/info.blade.php</url>
           <line>29</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php</url>
+          <line>900</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
