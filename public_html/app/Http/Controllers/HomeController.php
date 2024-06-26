@@ -77,6 +77,43 @@ class HomeController extends Controller
             if (isset($dati['Id'])) unset($dati['Id']);
             if (isset($dati['Id_Padre'])) unset($dati['Id_Padre']);
             $id = DB::table('disdette')->insertGetId($dati);
+            $mail_send = 'Salve <br>
+            è stata inserita la <strong>DISDETTA</strong> ' . $id . '
+            <br><br> SALES : ' . $dati['Sales'] . '
+            <br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '
+            <br> PRODOTTO : ' . $dati['Prodotto'] . '
+            <br> DATA DISDETTA : ' . date('d-m-Y', strtotime($dati['Data_Disdetta'])) . '
+            <br> VALORE : ' . number_format($dati['Valore_Contratto'], 2, ',', '.') . ' €
+            <br> Motivazione : ' . $dati['Motivazione'] . '
+            <br>
+            <br> Grazie
+            <br> Promedya SRL
+            <br> Team Smart Sales Force';
+            $mail = new  PHPMailer();
+            $mail->isSMTP();
+            $mail->CharSet = 'utf-8';
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'posta.promedya.it';
+            $mail->Port = '465';
+            $mail->Username = 'hd.sviluppo@promedya.it';
+            $mail->Password = '!!promedya@@2023';
+            $mail->setFrom('commerciale@promedya.it');
+            $mail->addBCC('umberto.limone@promedya.it');
+            $mail->addBCC('alessandro.aniello@promedya.it');
+            $mail->addBCC('dino.fioretti@promedya.it');
+            $mail->addBCC('francesco.napolitano@promedya.it');
+            $mail->addBCC('daniela.dellacorte@promedya.it');
+            $mail->addBCC('giovanni.tutino@promedya.it');
+            $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+            $mail->addBCC('generoso.pelosi@promedya.it');
+            $mail->addBCC('lorenzo.cassese@promedya.it');
+            $mail->addAddress('promedya.srl@gmail.com');
+            $mail->IsHTML(true);
+            $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | DISDETTA';
+            $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
+            $send = DB::SELECT('SELECT valore from mail')[0]->valore;
+            if ($send == 1) $mail->send();
             return Redirect::to('disdette');
         }
         if (isset($dati['elimina'])) {

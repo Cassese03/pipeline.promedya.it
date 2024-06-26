@@ -437,7 +437,7 @@ class AjaxController extends Controller
                         <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
                             <select style="width:100%"
-                                    class="form-control modifica_motivazione" <?php if ($r->Vinta != 0) echo ' disabled="disabled"'; ?>
+                                    class="form-control modifica_motivazione" <?php if ($r->Vinta != 1) echo ' disabled="disabled"'; ?>
                                     id="<?php echo $c->COLUMN_NAME; ?>"
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
