@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Inserimento Duplica Disdette">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix excel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/footer.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,22 +498,10 @@
       <workItem from="1718198615224" duration="703000" />
       <workItem from="1718705871608" duration="1011000" />
       <workItem from="1718811391340" duration="447000" />
-    </task>
-    <task id="LOCAL-00035" summary="Fix Grafica">
-      <option name="closed" value="true" />
-      <created>1713538414796</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1713538414796</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Fix Bug Budget">
-      <option name="closed" value="true" />
-      <created>1713538759772</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1713538759772</updated>
+      <workItem from="1719386817524" duration="564000" />
+      <workItem from="1719910602712" duration="337000" />
+      <workItem from="1720079742775" duration="2152000" />
+      <workItem from="1720088450823" duration="308000" />
     </task>
     <task id="LOCAL-00037" summary="Aggiunta nuovo grafica statistica x chiusura">
       <option name="closed" value="true" />
@@ -893,7 +879,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718010432911</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Fix">
+      <option name="closed" value="true" />
+      <created>1719387220380</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1719387220380</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Fix excel">
+      <option name="closed" value="true" />
+      <created>1720088750063</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1720088750063</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -903,8 +905,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Check Disdette" />
-    <MESSAGE value="Differenza Label" />
     <MESSAGE value="Fix Non piu' modificabile probabilita chiusura in rows" />
     <MESSAGE value="Tipe" />
     <MESSAGE value="Tipe Number" />
@@ -928,7 +928,9 @@
     <MESSAGE value="Inserimento Scritta" />
     <MESSAGE value="Statistiche Disdette Aggiornate" />
     <MESSAGE value="Inserimento Duplica Disdette" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inserimento Duplica Disdette" />
+    <MESSAGE value="Fix" />
+    <MESSAGE value="Fix excel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix excel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

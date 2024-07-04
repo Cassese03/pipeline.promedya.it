@@ -44,11 +44,12 @@
                                     <?php foreach ($column as $c){ ?>
                                     <th class="no-sort"
                                         style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
-                                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
                                             <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
-                                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                                            <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     </th>
                                     <?php } ?>
                                     <th class="no-sort"
@@ -197,18 +198,19 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>
-                                        <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                        <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                         <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
                                         <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
-                                        <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                                        <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                                        <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b style="color:red">*</b></label>
                                     <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
                                 <input
                                         <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Vendita_Budget') echo 'required'; ?>
-                                    <?php if ($c->COLUMN_NAME == 'Val_Ven_AC' || $c->COLUMN_NAME == 'Val_Can_AC' || $c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS') echo 'min="0"'; else if ($c->DATA_TYPE == 'float' || $c->DATA_TYPE == 'int') echo 'min="0"'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Val_Ven_AC' || $c->COLUMN_NAME == 'Val_Can_AC' || $c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'min="0"'; else if ($c->DATA_TYPE == 'float' || $c->DATA_TYPE == 'int') echo 'min="0"'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') echo 'required'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') echo 'required'; ?>
                                     <?php if ($c->DATA_TYPE == 'varchar' && $c->COLUMN_NAME != 'Note') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -362,17 +364,18 @@
                 <div class="modal-body">
                     <div class="row">
                         <?php foreach ($column as $c){ ?>
-                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Note'){ ?>
+                            <?php if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Vendita_Budget' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare' && $c->COLUMN_NAME != 'Note'){ ?>
 
                             <?php if ($c->COLUMN_NAME != 'Sales'){ ?>
 
                         <div class="col-md-6 ">
                             <div class="form-group">
-                                <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
-                                           <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                                           <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                                           <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     <b
                                         style="color:red">*</b></label>
                                     <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->DATA_TYPE != 'date' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente'){ ?>
