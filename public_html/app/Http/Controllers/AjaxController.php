@@ -50,6 +50,12 @@ class AjaxController extends Controller
                         ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
                     else
                         ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                }
+                if ($c->COLUMN_NAME == 'Inc_Anno_Solare') {
+                    if (isset(${$c->COLUMN_NAME}))
+                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                    else
+                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
                 } ?>
 
                 <td class="no-sort"
