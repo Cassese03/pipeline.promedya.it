@@ -84,7 +84,7 @@
                                             if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;?>
                                                 border-color: grey; border-width:1px">
                                             <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
-                                            if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, ',', '.'); else {
+                                            if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, '.', ''); else {
                                                 if ($r->{$c->COLUMN_NAME} != null && $r->{$c->COLUMN_NAME} != '01-01-1970') {
                                                     if ($c->DATA_TYPE != 'date') echo $r->{$c->COLUMN_NAME}; else echo date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
                                                 }
