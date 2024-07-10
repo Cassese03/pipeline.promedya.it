@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Fix Incentivo anno solare">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Gestioni giorni disdette">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -503,22 +503,8 @@
       <workItem from="1720079742775" duration="2152000" />
       <workItem from="1720088450823" duration="308000" />
       <workItem from="1720105165272" duration="2057000" />
-    </task>
-    <task id="LOCAL-00038" summary="Fix nome statistica grafico">
-      <option name="closed" value="true" />
-      <created>1713783005869</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1713783005869</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Fix ordinamento">
-      <option name="closed" value="true" />
-      <created>1713783434571</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1713783434571</updated>
+      <workItem from="1720108226190" duration="296000" />
+      <workItem from="1720596414271" duration="676000" />
     </task>
     <task id="LOCAL-00040" summary="Fix filtro disdette">
       <option name="closed" value="true" />
@@ -896,7 +882,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720106559116</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Inserimento totali su anno solare">
+      <option name="closed" value="true" />
+      <created>1720108511747</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1720108511747</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Gestioni giorni disdette">
+      <option name="closed" value="true" />
+      <created>1720597317370</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1720597317370</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -906,8 +908,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tipe" />
-    <MESSAGE value="Tipe Number" />
     <MESSAGE value="Step" />
     <MESSAGE value="Fix Statistiche" />
     <MESSAGE value="Fix DUPLICA" />
@@ -931,7 +931,9 @@
     <MESSAGE value="Fix" />
     <MESSAGE value="Fix excel" />
     <MESSAGE value="Fix Incentivo anno solare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Incentivo anno solare" />
+    <MESSAGE value="Inserimento totali su anno solare" />
+    <MESSAGE value="Gestioni giorni disdette" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gestioni giorni disdette" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
