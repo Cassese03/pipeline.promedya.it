@@ -926,14 +926,14 @@ class HomeController extends Controller
                                                       (SELECT gruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0701 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))) . '0630
+                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $statistiche_disdetta_sottogruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
                                                       (SELECT sottogruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0701 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))). '0630
+                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))). '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $annoCorrente = date("Y");
@@ -1078,8 +1078,8 @@ class HomeController extends Controller
                 Data_Probabile_Chiusura >= ' . $opening[0]->Anno . '0101
                 AND Data_Probabile_Chiusura <= ' . $opening[0]->Anno . '1231
               )');
-            $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0701 and Data_Disdetta <= ' . $opening[0]->Anno . '0630)');
-            $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0701 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
+            $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630)');
+            $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
             $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
