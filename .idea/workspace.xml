@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Gestioni giorni disdette">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="gestione excel su pipeline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -505,14 +506,10 @@
       <workItem from="1720105165272" duration="2057000" />
       <workItem from="1720108226190" duration="296000" />
       <workItem from="1720596414271" duration="676000" />
-    </task>
-    <task id="LOCAL-00040" summary="Fix filtro disdette">
-      <option name="closed" value="true" />
-      <created>1714742865945</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1714742865945</updated>
+      <workItem from="1720619658272" duration="684000" />
+      <workItem from="1720623921379" duration="273000" />
+      <workItem from="1720624294541" duration="42000" />
+      <workItem from="1720687448080" duration="1794000" />
     </task>
     <task id="LOCAL-00041" summary="Fix filtro disdette">
       <option name="closed" value="true" />
@@ -898,7 +895,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720597317370</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="gestione excel su pipeline">
+      <option name="closed" value="true" />
+      <created>1720620452947</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1720620452948</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -908,7 +913,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Step" />
     <MESSAGE value="Fix Statistiche" />
     <MESSAGE value="Fix DUPLICA" />
     <MESSAGE value="Order By Valore" />
@@ -933,7 +937,8 @@
     <MESSAGE value="Fix Incentivo anno solare" />
     <MESSAGE value="Inserimento totali su anno solare" />
     <MESSAGE value="Gestioni giorni disdette" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gestioni giorni disdette" />
+    <MESSAGE value="gestione excel su pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="gestione excel su pipeline" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

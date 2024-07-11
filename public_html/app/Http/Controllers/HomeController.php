@@ -62,8 +62,8 @@ class HomeController extends Controller
             $mail->addBCC('giovanni.tutino@promedya.it');
             $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
             $mail->addBCC('generoso.pelosi@promedya.it');
-            $mail->addBCC('lorenzo.cassese@promedya.it');
             $mail->addAddress('promedya.srl@gmail.com');
+            $mail->addBCC('lorenzo.cassese@promedya.it');
             $mail->IsHTML(true);
             $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | DISDETTA';
             $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
@@ -105,10 +105,10 @@ class HomeController extends Controller
             $mail->addBCC('francesco.napolitano@promedya.it');
             $mail->addBCC('daniela.dellacorte@promedya.it');
             $mail->addBCC('giovanni.tutino@promedya.it');
+            $mail->addAddress('promedya.srl@gmail.com');
             $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
             $mail->addBCC('generoso.pelosi@promedya.it');
             $mail->addBCC('lorenzo.cassese@promedya.it');
-            $mail->addAddress('promedya.srl@gmail.com');
             $mail->IsHTML(true);
             $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | DISDETTA';
             $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
@@ -241,7 +241,7 @@ class HomeController extends Controller
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
                 if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
-                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> CANONE A/S : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
                 $mail->CharSet = 'utf-8';
@@ -260,10 +260,10 @@ class HomeController extends Controller
                 $mail->addBCC('giovanni.tutino@promedya.it');
                 $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
                 $mail->addBCC('generoso.pelosi@promedya.it');
-                $mail->addBCC('lorenzo.cassese@promedya.it');
                 $mail->addAddress('promedya.srl@gmail.com');
+                $mail->addBCC('lorenzo.cassese@promedya.it');
                 $mail->IsHTML(true);
-                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | VENDITA';
+                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
                 $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
                 $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                 if ($send == 1) $mail->send();
@@ -281,7 +281,7 @@ class HomeController extends Controller
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
                 if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
-                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . '€ <br> CANONE A/S : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
                 $mail->CharSet = 'utf-8';
@@ -295,14 +295,14 @@ class HomeController extends Controller
                 $mail->addBCC('umberto.limone@promedya.it');
                 $mail->addBCC('alessandro.aniello@promedya.it');
                 $mail->addBCC('francesco.napolitano@promedya.it');
-                $mail->addBCC('lorenzo.cassese@promedya.it');
                 $mail->addBCC('daniela.dellacorte@promedya.it');
                 $mail->addBCC('giovanni.tutino@promedya.it');
                 $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
                 $mail->addBCC('generoso.pelosi@promedya.it');
                 $mail->addAddress('promedya.srl@gmail.com');
+                $mail->addBCC('lorenzo.cassese@promedya.it');
                 $mail->IsHTML(true);
-                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | VENDITA';
+                $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
                 $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
                 $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                 if ($send == 1) $mail->send();
@@ -327,7 +327,7 @@ class HomeController extends Controller
                     $motivazione = '';
                     if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
                     if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
-                    $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Val_Ven_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                    $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> SALES : ' . $dati['Sales'] . '<br> RAGIONE SOCIALE : ' . $dati['Ragione_Sociale'] . '<br>TIPO : ' . $dati['Tipo_Cliente'] . '<br> CATEGORIA : ' . $dati['Categoria'] . '<br> PRODOTTO : ' . $dati['Prodotto'] . '<br> DATA CONTATTO : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> DATA CHIUSURA : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> VALORE : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> CANONE A/S : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                     $mail = new  PHPMailer();
                     $mail->isSMTP();
                     $mail->CharSet = 'utf-8';
@@ -349,7 +349,7 @@ class HomeController extends Controller
                     $mail->addAddress('promedya.srl@gmail.com');
                     $mail->addBCC('lorenzo.cassese@promedya.it');
                     $mail->IsHTML(true);
-                    $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | VENDITA';
+                    $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
                     $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
                     $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                     if ($send == 1) $mail->send();
@@ -926,14 +926,14 @@ class HomeController extends Controller
                                                       (SELECT gruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))) . '0630
+                                                      WHERE  Data_Disdetta >= ' . (date('Y', (strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y', (strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $statistiche_disdetta_sottogruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
                                                       (SELECT sottogruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
-                                                      WHERE  Data_Disdetta >= ' . (date('Y',(strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y',(strtotime('now')))). '0630
+                                                      WHERE  Data_Disdetta >= ' . (date('Y', (strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y', (strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
             $annoCorrente = date("Y");
