@@ -39,7 +39,7 @@ class HomeController extends Controller
             <br> PRODOTTO : ' . $dati['Prodotto'] . '
             <br> DATA DISDETTA : ' . date('d-m-Y', strtotime($dati['Data_Disdetta'])) . '
             <br> VALORE : ' . number_format($dati['Valore_Contratto'], 2, ',', '.') . ' €
-            <br> Motivazione : ' . $dati['Motivazione'] . '
+            <br> <strong>Motivazione</strong> : ' . $dati['Motivazione'] . '
             <br>
             <br> Grazie
             <br> Promedya SRL
@@ -84,7 +84,7 @@ class HomeController extends Controller
             <br> PRODOTTO : ' . $dati['Prodotto'] . '
             <br> DATA DISDETTA : ' . date('d-m-Y', strtotime($dati['Data_Disdetta'])) . '
             <br> VALORE : ' . number_format($dati['Valore_Contratto'], 2, ',', '.') . ' €
-            <br> Motivazione : ' . $dati['Motivazione'] . '
+            <br> <strong>Motivazione</strong> : ' . $dati['Motivazione'] . '
             <br>
             <br> Grazie
             <br> Promedya SRL
@@ -240,7 +240,7 @@ class HomeController extends Controller
             if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
-                if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>Motivazione</strong> : ' . $dati['Motivazione'];
                 $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br> <strong>Tipo Cliente</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
@@ -280,7 +280,7 @@ class HomeController extends Controller
             if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
-                if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>Motivazione</strong> : ' . $dati['Motivazione'];
                 $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br> <strong>Tipo Cliente</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . '€ <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
@@ -326,7 +326,7 @@ class HomeController extends Controller
                 if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                     $motivazione = '';
                     if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
-                    if ($dati['Vinta'] != 2) $motivazione = '<br> MOTIVAZIONE : ' . $dati['Motivazione'];
+                    if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>Motivazione</strong> : ' . $dati['Motivazione'];
                     $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br><strong>Tipo Cliente</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
                     $mail = new  PHPMailer();
                     $mail->isSMTP();
