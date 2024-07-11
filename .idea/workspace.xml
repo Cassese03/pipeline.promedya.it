@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="gestione excel su pipeline">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-    </list>
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="MODIFICHE EMAIL" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -509,15 +506,7 @@
       <workItem from="1720619658272" duration="684000" />
       <workItem from="1720623921379" duration="273000" />
       <workItem from="1720624294541" duration="42000" />
-      <workItem from="1720687448080" duration="1794000" />
-    </task>
-    <task id="LOCAL-00041" summary="Fix filtro disdette">
-      <option name="closed" value="true" />
-      <created>1714742975205</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1714742975205</updated>
+      <workItem from="1720687448080" duration="1897000" />
     </task>
     <task id="LOCAL-00042" summary="Fix filtro disdette 2.0">
       <option name="closed" value="true" />
@@ -903,7 +892,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720620452948</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="MODIFICHE EMAIL">
+      <option name="closed" value="true" />
+      <created>1720689333392</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1720689333392</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -913,7 +910,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix Statistiche" />
     <MESSAGE value="Fix DUPLICA" />
     <MESSAGE value="Order By Valore" />
     <MESSAGE value="Mail su Disdette" />
@@ -938,7 +934,8 @@
     <MESSAGE value="Inserimento totali su anno solare" />
     <MESSAGE value="Gestioni giorni disdette" />
     <MESSAGE value="gestione excel su pipeline" />
-    <option name="LAST_COMMIT_MESSAGE" value="gestione excel su pipeline" />
+    <MESSAGE value="MODIFICHE EMAIL" />
+    <option name="LAST_COMMIT_MESSAGE" value="MODIFICHE EMAIL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
