@@ -241,30 +241,30 @@ class HomeController extends Controller
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
                 if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>MOTIVAZIONE</strong> : ' . $dati['Motivazione'];
-                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br> <strong>TIPO CLIENTE</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br> <strong>TIPO CLIENTE</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> <strong>CANONE A/C</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Inc_Canone_AS'], 2, ',', '.') . ' € ' . $motivazione . ' .<br ><br > Grazie <br > Promedya SRL < br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
-                $mail->CharSet = 'utf-8';
+                $mail->CharSet = 'utf - 8';
                 $mail->SMTPAuth = true;
                 $mail->SMTPSecure = 'ssl';
-                $mail->Host = 'posta.promedya.it';
+                $mail->Host = 'posta . promedya . it';
                 $mail->Port = '465';
-                $mail->Username = 'hd.sviluppo@promedya.it';
+                $mail->Username = 'hd . sviluppo@promedya . it';
                 $mail->Password = '!!promedya@@2023';
-                $mail->setFrom('commerciale@promedya.it');
-                $mail->addBCC('umberto.limone@promedya.it');
-                $mail->addBCC('alessandro.aniello@promedya.it');
-                $mail->addBCC('dino.fioretti@promedya.it');
-                $mail->addBCC('francesco.napolitano@promedya.it');
-                $mail->addBCC('daniela.dellacorte@promedya.it');
-                $mail->addBCC('giovanni.tutino@promedya.it');
-                $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
-                $mail->addBCC('generoso.pelosi@promedya.it');
-                $mail->addAddress('promedya.srl@gmail.com');
-                $mail->addBCC('lorenzo.cassese@promedya.it');
+                $mail->setFrom('commerciale@promedya . it');
+                $mail->addBCC('umberto . limone@promedya . it');
+                $mail->addBCC('alessandro . aniello@promedya . it');
+                $mail->addBCC('dino . fioretti@promedya . it');
+                $mail->addBCC('francesco . napolitano@promedya . it');
+                $mail->addBCC('daniela . dellacorte@promedya . it');
+                $mail->addBCC('giovanni . tutino@promedya . it');
+                $mail->addBCC('giuseppe . manuguerra@wolterskluwer . com');
+                $mail->addBCC('generoso . pelosi@promedya . it');
+                $mail->addAddress('promedya . srl@gmail . com');
+                $mail->addBCC('lorenzo . cassese@promedya . it');
                 $mail->IsHTML(true);
                 $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
-                $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
+                $mail->Body = ' < span style = "font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px" > ' . $mail_send . '</span > ';
                 $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                 if ($send == 1) $mail->send();
             }
@@ -280,30 +280,30 @@ class HomeController extends Controller
             if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                 $motivazione = '';
                 if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
-                if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>MOTIVAZIONE</strong> : ' . $dati['Motivazione'];
-                $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br> <strong>TIPO CLIENTE</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . '€ <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                if ($dati['Vinta'] != 2) $motivazione = ' < br> <strong > MOTIVAZIONE</strong > : ' . $dati['Motivazione'];
+                $mail_send = 'Salve < br> la < strong>LEAD </strong > ' . $id . ' è stata < strong>' . strtoupper($result) . ' </strong >.<br > <br > <strong > SALES</strong > : ' . $dati['Sales'] . ' < br> <strong > RAGIONE SOCIALE </strong > : ' . $dati['Ragione_Sociale'] . ' < br> <strong > TIPO CLIENTE </strong > : ' . $dati['Tipo_Cliente'] . ' < br> <strong > CATEGORIA</strong > : ' . $dati['Categoria'] . ' < br> <strong > PRODOTTO</strong > : ' . $dati['Prodotto'] . ' < br> <strong > DATA CONTATTO </strong > : ' . date('d - m - Y', strtotime($dati['Data_contatto'])) . ' < br> <strong > DATA CHIUSURA </strong > : ' . date('d - m - Y', strtotime($dati['Data_Probabile_Chiusura'])) . ' < br> <strong > VALORE BUDGET </strong > : ' . number_format($dati['Vendita_Budget'], 2, ',', ' . ') . ' € < br> <strong > CANONE A / C </strong > : ' . number_format($dati['Val_Can_AC'], 2, ',', ' . ') . ' € < br> <strong > CANONE A / S </strong > : ' . number_format($dati['Inc_Canone_AS'], 2, ',', ' . ') . ' € ' . $motivazione . ' .<br ><br > Grazie <br > Promedya SRL < br> Team Smart Sales Force';
                 $mail = new  PHPMailer();
                 $mail->isSMTP();
-                $mail->CharSet = 'utf-8';
+                $mail->CharSet = 'utf - 8';
                 $mail->SMTPAuth = true;
                 $mail->SMTPSecure = 'ssl';
-                $mail->Host = 'posta.promedya.it';
+                $mail->Host = 'posta . promedya . it';
                 $mail->Port = '465';
-                $mail->Username = 'hd.sviluppo@promedya.it';
+                $mail->Username = 'hd . sviluppo@promedya . it';
                 $mail->Password = '!!promedya@@2023';
-                $mail->setFrom('commerciale@promedya.it');
-                $mail->addBCC('umberto.limone@promedya.it');
-                $mail->addBCC('alessandro.aniello@promedya.it');
-                $mail->addBCC('francesco.napolitano@promedya.it');
-                $mail->addBCC('daniela.dellacorte@promedya.it');
-                $mail->addBCC('giovanni.tutino@promedya.it');
-                $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
-                $mail->addBCC('generoso.pelosi@promedya.it');
-                $mail->addAddress('promedya.srl@gmail.com');
-                $mail->addBCC('lorenzo.cassese@promedya.it');
+                $mail->setFrom('commerciale@promedya . it');
+                $mail->addBCC('umberto . limone@promedya . it');
+                $mail->addBCC('alessandro . aniello@promedya . it');
+                $mail->addBCC('francesco . napolitano@promedya . it');
+                $mail->addBCC('daniela . dellacorte@promedya . it');
+                $mail->addBCC('giovanni . tutino@promedya . it');
+                $mail->addBCC('giuseppe . manuguerra@wolterskluwer . com');
+                $mail->addBCC('generoso . pelosi@promedya . it');
+                $mail->addAddress('promedya . srl@gmail . com');
+                $mail->addBCC('lorenzo . cassese@promedya . it');
                 $mail->IsHTML(true);
                 $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
-                $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
+                $mail->Body = ' < span style = "font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px" > ' . $mail_send . '</span > ';
                 $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                 if ($send == 1) $mail->send();
             }
@@ -326,31 +326,31 @@ class HomeController extends Controller
                 if ($dati['Vinta'] == 1 || $dati['Vinta'] == 2) {
                     $motivazione = '';
                     if ($dati['Vinta'] == 2) $result = 'vinta'; else $result = 'persa';
-                    if ($dati['Vinta'] != 2) $motivazione = '<br> <strong>MOTIVAZIONE</strong> : ' . $dati['Motivazione'];
-                    $mail_send = 'Salve <br> la <strong>LEAD</strong> ' . $id . ' è stata <strong>' . strtoupper($result) . '</strong>.<br> <br> <strong>SALES</strong> : ' . $dati['Sales'] . '<br> <strong>RAGIONE SOCIALE</strong> : ' . $dati['Ragione_Sociale'] . '<br><strong>TIPO CLIENTE</strong> : ' . $dati['Tipo_Cliente'] . '<br> <strong>CATEGORIA</strong> : ' . $dati['Categoria'] . '<br> <strong>PRODOTTO</strong> : ' . $dati['Prodotto'] . '<br> <strong>DATA CONTATTO</strong> : ' . date('d-m-Y', strtotime($dati['Data_contatto'])) . '<br> <strong>DATA CHIUSURA</strong> : ' . date('d-m-Y', strtotime($dati['Data_Probabile_Chiusura'])) . '<br> <strong>VALORE BUDGET</strong> : ' . number_format($dati['Vendita_Budget'], 2, ',', '.') . ' € <br> <strong>CANONE A/S</strong> : ' . number_format($dati['Val_Can_AC'], 2, ',', '.') . ' € ' . $motivazione . '.<br><br> Grazie <br> Promedya SRL <br> Team Smart Sales Force';
+                    if ($dati['Vinta'] != 2) $motivazione = ' < br> <strong > MOTIVAZIONE</strong > : ' . $dati['Motivazione'];
+                    $mail_send = 'Salve < br> la < strong>LEAD </strong > ' . $id . ' è stata < strong>' . strtoupper($result) . ' </strong >.<br > <br > <strong > SALES</strong > : ' . $dati['Sales'] . ' < br> <strong > RAGIONE SOCIALE </strong > : ' . $dati['Ragione_Sociale'] . ' < br><strong > TIPO CLIENTE </strong > : ' . $dati['Tipo_Cliente'] . ' < br> <strong > CATEGORIA</strong > : ' . $dati['Categoria'] . ' < br> <strong > PRODOTTO</strong > : ' . $dati['Prodotto'] . ' < br> <strong > DATA CONTATTO </strong > : ' . date('d - m - Y', strtotime($dati['Data_contatto'])) . ' < br> <strong > DATA CHIUSURA </strong > : ' . date('d - m - Y', strtotime($dati['Data_Probabile_Chiusura'])) . ' < br> <strong > VALORE BUDGET </strong > : ' . number_format($dati['Vendita_Budget'], 2, ',', ' . ') . ' € < br> <strong > CANONE A / C </strong > : ' . number_format($dati['Val_Can_AC'], 2, ',', ' . ') . ' € < br> <strong > CANONE A / S </strong > : ' . number_format($dati['Inc_Canone_AS'], 2, ',', ' . ') . ' € ' . $motivazione . ' .<br ><br > Grazie <br > Promedya SRL < br> Team Smart Sales Force';
                     $mail = new  PHPMailer();
                     $mail->isSMTP();
-                    $mail->CharSet = 'utf-8';
+                    $mail->CharSet = 'utf - 8';
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'ssl';
-                    $mail->Host = 'posta.promedya.it';
+                    $mail->Host = 'posta . promedya . it';
                     $mail->Port = '465';
-                    $mail->Username = 'hd.sviluppo@promedya.it';
+                    $mail->Username = 'hd . sviluppo@promedya . it';
                     $mail->Password = '!!promedya@@2023';
-                    $mail->setFrom('commerciale@promedya.it');
-                    $mail->addBCC('umberto.limone@promedya.it');
-                    $mail->addBCC('alessandro.aniello@promedya.it');
-                    $mail->addBCC('dino.fioretti@promedya.it');
-                    $mail->addBCC('francesco.napolitano@promedya.it');
-                    $mail->addBCC('daniela.dellacorte@promedya.it');
-                    $mail->addBCC('giovanni.tutino@promedya.it');
-                    $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
-                    $mail->addBCC('generoso.pelosi@promedya.it');
-                    $mail->addAddress('promedya.srl@gmail.com');
-                    $mail->addBCC('lorenzo.cassese@promedya.it');
+                    $mail->setFrom('commerciale@promedya . it');
+                    $mail->addBCC('umberto . limone@promedya . it');
+                    $mail->addBCC('alessandro . aniello@promedya . it');
+                    $mail->addBCC('dino . fioretti@promedya . it');
+                    $mail->addBCC('francesco . napolitano@promedya . it');
+                    $mail->addBCC('daniela . dellacorte@promedya . it');
+                    $mail->addBCC('giovanni . tutino@promedya . it');
+                    $mail->addBCC('giuseppe . manuguerra@wolterskluwer . com');
+                    $mail->addBCC('generoso . pelosi@promedya . it');
+                    $mail->addAddress('promedya . srl@gmail . com');
+                    $mail->addBCC('lorenzo . cassese@promedya . it');
                     $mail->IsHTML(true);
                     $mail->Subject = 'PROMEDYA SRL - Smart Sales Force | TRATTATIVA ' . strtoupper($result);
-                    $mail->Body = '<span style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px">' . $mail_send . '</span>';
+                    $mail->Body = ' < span style = "font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px" > ' . $mail_send . '</span > ';
                     $send = DB::SELECT('SELECT valore from mail')[0]->valore;
                     if ($send == 1) $mail->send();
                 }
@@ -360,7 +360,7 @@ class HomeController extends Controller
         }
         if (session()->has('utente')) {
             $utente = session('utente');
-            $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
+            $column = DB::select('SELECT * FROM INFORMATION_SCHEMA . COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
             if (isset($dati['filtra'])) {
                 $dati = array_filter($dati, static function ($var) {
                     return $var !== null;
@@ -445,541 +445,555 @@ class HomeController extends Controller
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
             return View::make('rows', compact('utente', 'esito_trattativa', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
         } else {
-            return Redirect::to('login');
-        }
-    }
-
-    public function concessionario(Request $request)
-    {
-
-        $dati = $request->all();
-
-        if (isset($dati['aggiungi'])) {
-            if (isset($dati['_token'])) unset($dati['_token']);
-            if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-            DB::table('pipeline_concessionario')->insert($dati);
-            return Redirect::to('concessionario');
-        }
-        if (isset($dati['elimina'])) {
-            DB::table('pipeline_concessionario')->delete($dati['elimina']);
-            return Redirect::to('concessionario');
-        }
-        if (isset($dati['modifica'])) {
-            if (isset($dati['_token'])) unset($dati['_token']);
-            if (isset($dati['modifica'])) unset($dati['modifica']);
-            if (isset($dati['Id'])) {
-                $id = $dati['Id'];
-                unset($dati['Id']);
+                return Redirect::to('login');
             }
-            DB::table('pipeline_concessionario')->where(['Id' => $id])->update($dati);
-            return Redirect::to('concessionario');
-
         }
-        if (session()->has('utente')) {
-            $utente = session('utente');
-            $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline_concessionario\'');
-            if (isset($dati['filtra'])) {
-                foreach ($column as $c) {
-                    if ($c->COLUMN_NAME != 'Id' && $c->DATA_TYPE != 'date') {
-                        if ($dati[$c->COLUMN_NAME] == null) {
-                            unset($dati[$c->COLUMN_NAME]);
-                        }
-                        if (isset($dati[$c->COLUMN_NAME]) && ($dati[$c->COLUMN_NAME] == 'Nessun Filtro...' || $dati[$c->COLUMN_NAME] == '' || $dati[$c->COLUMN_NAME] == 'undefined' || $dati[$c->COLUMN_NAME] == null)) {
-                            unset($dati[$c->COLUMN_NAME]);
+
+        public
+        function concessionario(Request $request)
+        {
+
+            $dati = $request->all();
+
+            if (isset($dati['aggiungi'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                DB::table('pipeline_concessionario')->insert($dati);
+                return Redirect::to('concessionario');
+            }
+            if (isset($dati['elimina'])) {
+                DB::table('pipeline_concessionario')->delete($dati['elimina']);
+                return Redirect::to('concessionario');
+            }
+            if (isset($dati['modifica'])) {
+                if (isset($dati['_token'])) unset($dati['_token']);
+                if (isset($dati['modifica'])) unset($dati['modifica']);
+                if (isset($dati['Id'])) {
+                    $id = $dati['Id'];
+                    unset($dati['Id']);
+                }
+                DB::table('pipeline_concessionario')->where(['Id' => $id])->update($dati);
+                return Redirect::to('concessionario');
+
+            }
+            if (session()->has('utente')) {
+                $utente = session('utente');
+                $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline_concessionario\'');
+                if (isset($dati['filtra'])) {
+                    foreach ($column as $c) {
+                        if ($c->COLUMN_NAME != 'Id' && $c->DATA_TYPE != 'date') {
+                            if ($dati[$c->COLUMN_NAME] == null) {
+                                unset($dati[$c->COLUMN_NAME]);
+                            }
+                            if (isset($dati[$c->COLUMN_NAME]) && ($dati[$c->COLUMN_NAME] == 'Nessun Filtro...' || $dati[$c->COLUMN_NAME] == '' || $dati[$c->COLUMN_NAME] == 'undefined' || $dati[$c->COLUMN_NAME] == null)) {
+                                unset($dati[$c->COLUMN_NAME]);
+                            }
                         }
                     }
+                    $where = [];
+                    if ($dati['Data_i'] == null) unset($dati['Data_i']); else {
+                        $new_filter = ['column' => 'Data', 'operator' => '>=', 'value' => $dati['Data_i']];
+                        array_push($where, $new_filter);
+                        unset($dati['Data_i']);
+                    }
+                    if ($dati['Data_f'] == null) unset($dati['Data_f']); else {
+                        $new_filter = ['column' => 'Data', 'operator' => '<=', 'value' => $dati['Data_f']];
+                        array_push($where, $new_filter);
+                        unset($dati['Data_f']);
+                    }
+                    unset($dati['_token']);
+                    unset($dati['filtra']);
+                    $rows = DB::TABLE('pipeline_concessionario')->select(DB::raw('*'))->where($dati)->where($where)->orderBy('Id', 'desc')->get();
+                    $operatori = DB::select('select * from operatori');
+                    $dipendenti = DB::select('select * from dipendente');
+                    $segnalato = Segnalato::all();
+                    return View::make('concessionario', compact('utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
                 }
-                $where = [];
-                if ($dati['Data_i'] == null) unset($dati['Data_i']); else {
-                    $new_filter = ['column' => 'Data', 'operator' => '>=', 'value' => $dati['Data_i']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_i']);
-                }
-                if ($dati['Data_f'] == null) unset($dati['Data_f']); else {
-                    $new_filter = ['column' => 'Data', 'operator' => '<=', 'value' => $dati['Data_f']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_f']);
-                }
-                unset($dati['_token']);
-                unset($dati['filtra']);
-                $rows = DB::TABLE('pipeline_concessionario')->select(DB::raw('*'))->where($dati)->where($where)->orderBy('Id', 'desc')->get();
-                $operatori = DB::select('select * from operatori');
+                $rows = DB::select('select * from pipeline_concessionario order by Id desc');
                 $dipendenti = DB::select('select * from dipendente');
+                $operatori = DB::select('select * from operatori');
+                $prodotto = DB::select('select * from prodotto');
                 $segnalato = Segnalato::all();
-                return View::make('concessionario', compact('utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+                $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
+                return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+            } else {
+                return Redirect::to('login');
             }
-            $rows = DB::select('select * from pipeline_concessionario order by Id desc');
-            $dipendenti = DB::select('select * from dipendente');
-            $operatori = DB::select('select * from operatori');
-            $prodotto = DB::select('select * from prodotto');
-            $segnalato = Segnalato::all();
-            $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
-            return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function budget(Request $request)
-    {
-        $dati = $request->all();
-        for ($i = 1; $i < 13; $i++) {
-            if (isset($dati['budget_' . $i])) {
-                if (strlen($i) == 1) {
-                    $y = '0' . $i;
-                } else {
-                    $y = $i;
+        public
+        function budget(Request $request)
+        {
+            $dati = $request->all();
+            for ($i = 1; $i < 13; $i++) {
+                if (isset($dati['budget_' . $i])) {
+                    if (strlen($i) == 1) {
+                        $y = '0' . $i;
+                    } else {
+                        $y = $i;
+                    }
+                    DB::select('UPDATE budget set budget = ' . $dati['budget_' . $i] . ' WHERE data_mese = \'2024-' . $y . '-01\' ');
+                    return Redirect::to('budget');
                 }
-                DB::select('UPDATE budget set budget = ' . $dati['budget_' . $i] . ' WHERE data_mese = \'2024-' . $y . '-01\' ');
-                return Redirect::to('budget');
+            }
+            if (session()->has('utente')) {
+                $utente = session('utente');
+                $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+                $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' group by MONTH(Data_Probabile_Chiusura)');
+
+                $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ');
+
+                $budget_annuale = DB::select('SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ')[0]->valore;
+
+                $budget_t3 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240331\' and data_mese >= \'20240101\' ')[0]->valore;
+                $budget_t6 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240631\' and data_mese >= \'20240401\' ')[0]->valore;
+                $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240931\' and data_mese >= \'20240701\' ')[0]->valore;
+                $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < \'20241231\' and data_mese >= \'20241001\' ')[0]->valore;
+
+                $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+
+                $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240331\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+                $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240631\' and Data_Probabile_Chiusura >= \'20240401\' ')[0]->Vendite;
+                $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240931\' and Data_Probabile_Chiusura >= \'20240701\' ')[0]->Vendite;
+                $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20241001\' ')[0]->Vendite;
+
+                $differenze_t3 = $vendite_t3 - $budget_t3;
+                $differenze_t6 = $vendite_t6 - $budget_t6;
+                $differenze_t9 = $vendite_t9 - $budget_t9;
+                $differenze_t12 = $vendite_t12 - $budget_t12;
+
+                return View::make('budget', compact('utente', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
+                    , 'budget_t3', 'vendite_t3', 'differenze_t3'
+                    , 'budget_t6', 'vendite_t6', 'differenze_t6'
+                    , 'budget_t9', 'vendite_t9', 'differenze_t9'
+                    , 'budget_t12', 'vendite_t12', 'differenze_t12'));
+            } else {
+                return Redirect::to('login');
             }
         }
-        if (session()->has('utente')) {
-            $utente = session('utente');
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' group by MONTH(Data_Probabile_Chiusura)');
 
-            $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ');
+        public
+        function work(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                $utente = session('utente');
 
-            $budget_annuale = DB::select('SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ')[0]->valore;
-
-            $budget_t3 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240331\' and data_mese >= \'20240101\' ')[0]->valore;
-            $budget_t6 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240631\' and data_mese >= \'20240401\' ')[0]->valore;
-            $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240931\' and data_mese >= \'20240701\' ')[0]->valore;
-            $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < \'20241231\' and data_mese >= \'20241001\' ')[0]->valore;
-
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-
-            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240331\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240631\' and Data_Probabile_Chiusura >= \'20240401\' ')[0]->Vendite;
-            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240931\' and Data_Probabile_Chiusura >= \'20240701\' ')[0]->Vendite;
-            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20241001\' ')[0]->Vendite;
-
-            $differenze_t3 = $vendite_t3 - $budget_t3;
-            $differenze_t6 = $vendite_t6 - $budget_t6;
-            $differenze_t9 = $vendite_t9 - $budget_t9;
-            $differenze_t12 = $vendite_t12 - $budget_t12;
-
-            return View::make('budget', compact('utente', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
-                , 'budget_t3', 'vendite_t3', 'differenze_t3'
-                , 'budget_t6', 'vendite_t6', 'differenze_t6'
-                , 'budget_t9', 'vendite_t9', 'differenze_t9'
-                , 'budget_t12', 'vendite_t12', 'differenze_t12'));
-        } else {
-            return Redirect::to('login');
+                return View::make('work', compact('utente'));
+            } else {
+                return Redirect::to('login');
+            }
         }
-    }
 
-    public function work(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            $utente = session('utente');
-
-            return View::make('work', compact('utente'));
-        } else {
-            return Redirect::to('login');
-        }
-    }
-
-    public function categoria(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('categoria')->where(['id' => $id])->update($dati);
+        public
+        function categoria(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('categoria')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('categoria');
                 }
-                return Redirect::to('categoria');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('categoria')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('categoria')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('categoria');
                 }
-                return Redirect::to('categoria');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('categoria')->insert($dati);
+                    return Redirect::to('categoria');
+                }
+                $utente = session('utente');
+                $categoria = DB::SELECT('SELECT * FROM categoria');
+                return View::make('categoria', compact('utente', 'categoria'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('categoria')->insert($dati);
-                return Redirect::to('categoria');
-            }
-            $utente = session('utente');
-            $categoria = DB::SELECT('SELECT * FROM categoria');
-            return View::make('categoria', compact('utente', 'categoria'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function prodotti(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('prodotto')->where(['id' => $id])->update($dati);
+        public
+        function prodotti(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('prodotto')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('prodotti');
                 }
-                return Redirect::to('prodotti');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('prodotto')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('prodotto')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('prodotti');
                 }
-                return Redirect::to('prodotti');
-            }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('prodotto')->insert($dati);
-                return Redirect::to('prodotti');
-            }
-            $utente = session('utente');
-            $prodotti = DB::SELECT('SELECT * FROM prodotto');
-            return View::make('prodotti', compact('utente', 'prodotti'));
-        } else {
-            return Redirect::to('login');
-        }
-    }
-
-    public function mail(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                $id = 1;
-                DB::table('mail')->where(['id' => $id])->update($dati);
-                return Redirect::to('mail');
-            }
-            $utente = session('utente');
-            $mail = DB::SELECT('SELECT * FROM mail');
-            return View::make('mail', compact('utente', 'mail'));
-        } else {
-            return Redirect::to('login');
-        }
-    }
-
-    public function motivazione(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('motivazione')->where(['id' => $id])->update($dati);
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('prodotto')->insert($dati);
+                    return Redirect::to('prodotti');
                 }
-                return Redirect::to('motivazione');
+                $utente = session('utente');
+                $prodotti = DB::SELECT('SELECT * FROM prodotto');
+                return View::make('prodotti', compact('utente', 'prodotti'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
+        }
+
+        public
+        function mail(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    $id = 1;
+                    DB::table('mail')->where(['id' => $id])->update($dati);
+                    return Redirect::to('mail');
+                }
+                $utente = session('utente');
+                $mail = DB::SELECT('SELECT * FROM mail');
+                return View::make('mail', compact('utente', 'mail'));
+            } else {
+                return Redirect::to('login');
+            }
+        }
+
+        public
+        function motivazione(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('motivazione')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('motivazione');
+                }
                 if (isset($dati['elimina'])) {
-                    DB::table('motivazione')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('motivazione')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('motivazione');
                 }
-                return Redirect::to('motivazione');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('motivazione')->insert($dati);
+                    return Redirect::to('motivazione');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM motivazione');
+                return View::make('motivazione', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('motivazione')->insert($dati);
-                return Redirect::to('motivazione');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM motivazione');
-            return View::make('motivazione', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function esito(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('esito_trattativa')->where(['id' => $id])->update($dati);
+        public
+        function esito(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('esito_trattativa')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('esito');
                 }
-                return Redirect::to('esito');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('esito_trattativa')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('esito_trattativa')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('esito');
                 }
-                return Redirect::to('esito');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('esito_trattativa')->insert($dati);
+                    return Redirect::to('esito');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM esito_trattativa');
+                return View::make('esito', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('esito_trattativa')->insert($dati);
-                return Redirect::to('esito');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM esito_trattativa');
-            return View::make('esito', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function opening(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('opening')->where(['id' => $id])->update($dati);
+        public
+        function opening(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('opening')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('opening');
                 }
-                return Redirect::to('opening');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('opening')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('opening')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('opening');
                 }
-                return Redirect::to('opening');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('opening')->insert($dati);
+                    return Redirect::to('opening');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM opening');
+                return View::make('opening', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('opening')->insert($dati);
-                return Redirect::to('opening');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM opening');
-            return View::make('opening', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function dipendenti(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('dipendente')->where(['id' => $id])->update($dati);
+        public
+        function dipendenti(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('dipendente')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('dipendenti');
                 }
-                return Redirect::to('dipendenti');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('dipendente')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('dipendente')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('dipendenti');
                 }
-                return Redirect::to('dipendenti');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('dipendente')->insert($dati);
+                    return Redirect::to('dipendenti');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM dipendente');
+                return View::make('dipendente', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('dipendente')->insert($dati);
-                return Redirect::to('dipendenti');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM dipendente');
-            return View::make('dipendente', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function incentivi(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('incentivi')->where(['id' => $id])->update($dati);
+        public
+        function incentivi(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('incentivi')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('incentivi');
                 }
-                return Redirect::to('incentivi');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('incentivi')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('incentivi')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('incentivi');
                 }
-                return Redirect::to('incentivi');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('incentivi')->insert($dati);
+                    return Redirect::to('incentivi');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM incentivi');
+                return View::make('incentivi', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('incentivi')->insert($dati);
-                return Redirect::to('incentivi');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM incentivi');
-            return View::make('incentivi', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function segnalato(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('segnalato')->where(['id' => $id])->update($dati);
+        public
+        function segnalato(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('segnalato')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('segnalato');
                 }
-                return Redirect::to('segnalato');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('segnalato')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('segnalato')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('segnalato');
                 }
-                return Redirect::to('segnalato');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('segnalato')->insert($dati);
+                    return Redirect::to('segnalato');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM segnalato');
+                return View::make('segnalato', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('segnalato')->insert($dati);
-                return Redirect::to('segnalato');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM segnalato');
-            return View::make('segnalato', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function operatori(Request $request)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            if (isset($dati['modifica'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['modifica'])) unset($dati['modifica']);
-                if (isset($dati['id'])) {
-                    $id = $dati['id'];
-                    unset($dati['id']);
-                    DB::table('operatori')->where(['id' => $id])->update($dati);
+        public
+        function operatori(Request $request)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                if (isset($dati['modifica'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['modifica'])) unset($dati['modifica']);
+                    if (isset($dati['id'])) {
+                        $id = $dati['id'];
+                        unset($dati['id']);
+                        DB::table('operatori')->where(['id' => $id])->update($dati);
+                    }
+                    return Redirect::to('operatori');
                 }
-                return Redirect::to('operatori');
-            }
-            if (isset($dati['elimina'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
                 if (isset($dati['elimina'])) {
-                    DB::table('operatori')->where(['id' => $dati['elimina']])->delete();
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['elimina'])) {
+                        DB::table('operatori')->where(['id' => $dati['elimina']])->delete();
+                    }
+                    return Redirect::to('operatori');
                 }
-                return Redirect::to('operatori');
+                if (isset($dati['aggiungi'])) {
+                    if (isset($dati['_token'])) unset($dati['_token']);
+                    if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
+                    DB::table('operatori')->insert($dati);
+                    return Redirect::to('operatori');
+                }
+                $utente = session('utente');
+                $table = DB::SELECT('SELECT * FROM operatori');
+                return View::make('operatori', compact('utente', 'table'));
+            } else {
+                return Redirect::to('login');
             }
-            if (isset($dati['aggiungi'])) {
-                if (isset($dati['_token'])) unset($dati['_token']);
-                if (isset($dati['aggiungi'])) unset($dati['aggiungi']);
-                DB::table('operatori')->insert($dati);
-                return Redirect::to('operatori');
-            }
-            $utente = session('utente');
-            $table = DB::SELECT('SELECT * FROM operatori');
-            return View::make('operatori', compact('utente', 'table'));
-        } else {
-            return Redirect::to('login');
         }
-    }
 
-    public function statistiche(Request $request, $data = 0)
-    {
-        $dati = $request->all();
-        if (session()->has('utente')) {
-            $utente = session('utente');
-            $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
-            $statistiche_disdetta_gruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
+        public
+        function statistiche(Request $request, $data = 0)
+        {
+            $dati = $request->all();
+            if (session()->has('utente')) {
+                $utente = session('utente');
+                $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
+                $statistiche_disdetta_gruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
                                                       (SELECT gruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
                                                       WHERE  Data_Disdetta >= ' . (date('Y', (strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y', (strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
-            $statistiche_disdetta_sottogruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
+                $statistiche_disdetta_sottogruppo_annuale = DB::SELECT('SELECT CAST(SUM(Valore_Contratto) as Decimal(20,2)) as Val,
                                                       (SELECT sottogruppo from prodotto where descrizione = disdette.Prodotto) as gruppo,
                                                       IF(disdette.esito = 0,\'DISDETTA\',if(disdette.esito = 1,\'RIENTRO\',\'CONTATTATO\')) AS Esito
                                                       FROM   disdette
                                                       WHERE  Data_Disdetta >= ' . (date('Y', (strtotime('now'))) - 1) . '0704 and Data_Disdetta <= ' . (date('Y', (strtotime('now')))) . '0630
                                                       GROUP  BY gruppo,disdette.esito
                                                       ORDER  BY gruppo,CAST(SUM(Valore_Contratto) as Decimal(20,2)) desc ');
-            $annoCorrente = date("Y");
-            $meseCorrente = date("m");
-            $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
-            $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
-            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
-            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
-            $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
-            $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
-            $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\') as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo) f order by f.Val DESC');
-            $statistiche_categoria = DB::table('pipeline')
-                ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
-                ->whereNotNull('Categoria')
-                ->groupBy('Categoria', DB::raw('DATE_FORMAT(Data_contatto, \'%Y - %M\')'))
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
-                ->get();
-            $statistiche_categoria_chiusura =
-                DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') desc, DATE_FORMAT(Data_Probabile_Chiusura, \'%m\')');
+                $annoCorrente = date("Y");
+                $meseCorrente = date("m");
+                $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
+                $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
+                $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
+                $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
+                $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
+                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
+                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\') as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo) f order by f.Val DESC');
+                $statistiche_categoria = DB::table('pipeline')
+                    ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
+                    ->whereNotNull('Categoria')
+                    ->groupBy('Categoria', DB::raw('DATE_FORMAT(Data_contatto, \'%Y - %M\')'))
+                    ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
+                    ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
+                    ->get();
+                $statistiche_categoria_chiusura =
+                    DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') desc, DATE_FORMAT(Data_Probabile_Chiusura, \'%m\')');
 
-            $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
                                                       (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
-            $statistiche_corrente_sottogruppo_annuale =
-                DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                $statistiche_corrente_sottogruppo_annuale =
+                    DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
                                                       (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
-            /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
-            $categoria = DB::SELECT('SELECT Categoria FROM pipeline where Categoria is not null GROUP BY Categoria');
+                /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
+                $categoria = DB::SELECT('SELECT Categoria FROM pipeline where Categoria is not null GROUP BY Categoria');
 
-            $statistiche_mensili = DB::table('pipeline')
-                ->select(DB::raw("DATE_FORMAT(Data_contatto,'%Y - %M') AS Data"), DB::raw('CAST(SUM(Val_Ven_AC) as Decimal(20,2)) AS Val'))
-                ->groupBy(DB::raw('DATE_FORMAT(Data_contatto,\'%Y - %M\') '))
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
-                ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
-                ->get();
-            if ($data == 0) {
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
-                $statistiche_corrente = DB::select('SELECT f.Vinta, SUM(Val) AS Val FROM (SELECT IF(Vinta = 2,2,IF(Vinta = 1,1,3)) AS Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
+                $statistiche_mensili = DB::table('pipeline')
+                    ->select(DB::raw("DATE_FORMAT(Data_contatto,'%Y - %M') AS Data"), DB::raw('CAST(SUM(Val_Ven_AC) as Decimal(20,2)) AS Val'))
+                    ->groupBy(DB::raw('DATE_FORMAT(Data_contatto,\'%Y - %M\') '))
+                    ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%Y\')'), 'DESC')
+                    ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
+                    ->get();
+                if ($data == 0) {
+                    $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
+                    $statistiche_corrente = DB::select('SELECT f.Vinta, SUM(Val) AS Val FROM (SELECT IF(Vinta = 2,2,IF(Vinta = 1,1,3)) AS Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2 or Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or ((Vinta != 1 and Vinta != 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY Vinta
@@ -987,88 +1001,88 @@ class HomeController extends Controller
                                                       GROUP BY f.Vinta
                                                       ORDER BY f.Vinta DESC ');
 
-                $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
+                    $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY gruppo
                                                       HAVING gruppo is not null
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
-                $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
+                    $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
                                                       GROUP  BY Sales
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
-                // or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
-                $mese_usato = DB::SELECT('SELECT MONTH(NOW()) as mese')[0]->mese;
-                $anno_usato = DB::SELECT('SELECT YEAR(NOW()) as anno')[0]->anno;
-            } else {
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
-                $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
+                    // or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
+                    $mese_usato = DB::SELECT('SELECT MONTH(NOW()) as mese')[0]->mese;
+                    $anno_usato = DB::SELECT('SELECT YEAR(NOW()) as anno')[0]->anno;
+                } else {
+                    $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
+                    $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 1 or Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\')) or ((Vinta != 2 && Vinta != 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY Vinta
                                                       ORDER  BY Vinta desc');
-                $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
+                    $statistiche_corrente_prodotto = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY gruppo
                                                       HAVING gruppo is not null
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
-                $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
+                    $statistiche_corrente_sales = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,Sales
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY Sales
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
-                $mese_usato = DB::SELECT('SELECT MONTH(\'' . $data . '\') as mese')[0]->mese;
-                $anno_usato = DB::SELECT('SELECT YEAR(\'' . $data . '\') as anno')[0]->anno;
-            }
-            switch ($mese_usato) {
-                case 1:
-                    $mese_usato = 'Gennaio';
-                    break;
-                case 2:
-                    $mese_usato = 'Febbraio';
-                    break;
-                case 3:
-                    $mese_usato = 'Marzo';
-                    break;
-                case 4:
-                    $mese_usato = 'Aprile';
-                    break;
-                case 5:
-                    $mese_usato = 'Maggio';
-                    break;
-                case 6:
-                    $mese_usato = 'Giugno';
-                    break;
-                case 7:
-                    $mese_usato = 'Luglio';
-                    break;
-                case 8:
-                    $mese_usato = 'Agosto';
-                    break;
-                case 9:
-                    $mese_usato = 'Settembre';
-                    break;
-                case 10:
-                    $mese_usato = 'Ottobre';
-                    break;
-                case 11:
-                    $mese_usato = 'Novembre';
-                    break;
-                case 12:
-                    $mese_usato = 'Dicembre';
-                    break;
-                default:
-                    $mese_usato = '';
-                    break;
-            }
+                    $mese_usato = DB::SELECT('SELECT MONTH(\'' . $data . '\') as mese')[0]->mese;
+                    $anno_usato = DB::SELECT('SELECT YEAR(\'' . $data . '\') as anno')[0]->anno;
+                }
+                switch ($mese_usato) {
+                    case 1:
+                        $mese_usato = 'Gennaio';
+                        break;
+                    case 2:
+                        $mese_usato = 'Febbraio';
+                        break;
+                    case 3:
+                        $mese_usato = 'Marzo';
+                        break;
+                    case 4:
+                        $mese_usato = 'Aprile';
+                        break;
+                    case 5:
+                        $mese_usato = 'Maggio';
+                        break;
+                    case 6:
+                        $mese_usato = 'Giugno';
+                        break;
+                    case 7:
+                        $mese_usato = 'Luglio';
+                        break;
+                    case 8:
+                        $mese_usato = 'Agosto';
+                        break;
+                    case 9:
+                        $mese_usato = 'Settembre';
+                        break;
+                    case 10:
+                        $mese_usato = 'Ottobre';
+                        break;
+                    case 11:
+                        $mese_usato = 'Novembre';
+                        break;
+                    case 12:
+                        $mese_usato = 'Dicembre';
+                        break;
+                    default:
+                        $mese_usato = '';
+                        break;
+                }
 
-            $mese_usato = $mese_usato . ' - ' . $anno_usato;
+                $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
-            $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
+                $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
 
-            $canone_successivo = DB::select('SELECT
+                $canone_successivo = DB::select('SELECT
               SUM(Inc_Canone_AS) as valore
             FROM
               pipeline
@@ -1078,70 +1092,74 @@ class HomeController extends Controller
                 Data_Probabile_Chiusura >= ' . $opening[0]->Anno . '0101
                 AND Data_Probabile_Chiusura <= ' . $opening[0]->Anno . '1231
               )');
-            $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630)');
-            $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
-            $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
-            $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
-            $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
-            $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
+                $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630)');
+                $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
+                $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
+                $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
+                $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
+                $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
 
-            return View::make('statistiche', compact('opening', 'incentivi', 'statistiche_incentivi', 'ricontrattati', 'differenza_opening', 'opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
-        } else {
+                return View::make('statistiche', compact('opening', 'incentivi', 'statistiche_incentivi', 'ricontrattati', 'differenza_opening', 'opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
+            } else {
+                return Redirect::to('login');
+            }
+        }
+
+        public
+        function logout(Request $request)
+        {
+            session()->flush();
+
             return Redirect::to('login');
         }
-    }
 
-    public function logout(Request $request)
-    {
-        session()->flush();
-
-        return Redirect::to('login');
-    }
-
-    public function privacy(Request $request)
-    {
-        return View::make('privacy');
-    }
-
-    public function info(Request $request)
-    {
-        return View::make('info');
-    }
-
-    public function login(Request $request)
-    {
-
-
-        $dati = $request->all();
-
-        $error = '';
-
-        if (isset($dati['login'])) {
-
-            $utenti = DB::select('SELECT * from operatori where abilitato = 1 and email = \'' . htmlentities($dati['username'], 3, 'UTF-8' . '') . '\' and password = \'' . htmlentities($dati['password'], 3, 'UTF-8' . '') . '\'');
-
-            if (sizeof($utenti) > 0) {
-
-                $utente = $utenti[0];
-                session(['utente' => $utente]);
-                session()->save();
-
-            } else $error = 'Inserisci email e password corretti';
-            $utenti = DB::select('SELECT * from operatori where abilitato = 1 and username = \'' . htmlentities($dati['username'], 3, 'UTF-8' . '') . '\' and password = \'' . htmlentities($dati['password'], 3, 'UTF-8' . '') . '\'');
-
-            if (sizeof($utenti) > 0) {
-
-                $utente = $utenti[0];
-                session(['utente' => $utente]);
-                session()->save();
-
-            } else $error = 'Inserisci username e password corretti';
+        public
+        function privacy(Request $request)
+        {
+            return View::make('privacy');
         }
 
-        if (session()->has('utente')) {
-            return Redirect::to('');
-        } else {
-            return View::make('login', compact('error'));
+        public
+        function info(Request $request)
+        {
+            return View::make('info');
+        }
+
+        public
+        function login(Request $request)
+        {
+
+
+            $dati = $request->all();
+
+            $error = '';
+
+            if (isset($dati['login'])) {
+
+                $utenti = DB::select('SELECT * from operatori where abilitato = 1 and email = \'' . htmlentities($dati['username'], 3, 'UTF-8' . '') . '\' and password = \'' . htmlentities($dati['password'], 3, 'UTF-8' . '') . '\'');
+
+                if (sizeof($utenti) > 0) {
+
+                    $utente = $utenti[0];
+                    session(['utente' => $utente]);
+                    session()->save();
+
+                } else $error = 'Inserisci email e password corretti';
+                $utenti = DB::select('SELECT * from operatori where abilitato = 1 and username = \'' . htmlentities($dati['username'], 3, 'UTF-8' . '') . '\' and password = \'' . htmlentities($dati['password'], 3, 'UTF-8' . '') . '\'');
+
+                if (sizeof($utenti) > 0) {
+
+                    $utente = $utenti[0];
+                    session(['utente' => $utente]);
+                    session()->save();
+
+                } else $error = 'Inserisci username e password corretti';
+            }
+
+            if (session()->has('utente')) {
+                return Redirect::to('');
+            } else {
+                return View::make('login', compact('error'));
+            }
         }
     }
-}
