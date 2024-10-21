@@ -20,7 +20,7 @@
                 <div class="card card-warning">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
-                            Statistiche Budget
+                            Statistiche Target Budget
                         </h3>
                         {{--
                                                 <h3 class="card-title" style="background: white;border-color: white;"><?php echo number_format($differenza[0]->valore,2,',',' ');?> € </h3>
@@ -66,7 +66,7 @@
                 <div class="card card-warning" style="height:95%">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
-                            Statistiche Target
+                            Statistiche Target Vendite
                         </h3>
                     </div>
                     <div class="card-body">
@@ -291,7 +291,8 @@
                 <div class="card card-warning">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
                         <h3 class="card-title">
-                            Statistiche Opening
+                            Statistiche Target
+                            Opening
                         </h3>
                     </div>
                     <div class="card-body" style="padding:0!important;">
