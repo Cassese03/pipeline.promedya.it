@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-4">
                                 <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
-                                    Target 2024
+                                    Target
                                 </label>
                             </div>
                             <div class="col-4">
@@ -179,7 +179,7 @@
 
                                 <div style="display:flex;margin-top:1%;margin-bottom:1%;">
                                     <label style="font-size:0.90rem!important;width:100%;text-align:center;color:blue;">
-                                        Target 2024
+                                        Target
                                     </label>
                                     <input style="text-align: right;" readonly type="text"
                                            class="form-control"

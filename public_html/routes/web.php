@@ -24,6 +24,7 @@ Route::any('pipeline', [HomeController::class, 'pipeline']);
 Route::any('disdette', [HomeController::class, 'disdette']);
 Route::any('concessionario', [HomeController::class, 'concessionario']);
 Route::any('budget', [HomeController::class, 'budget']);
+Route::any('budget_annuale/{anno}', [HomeController::class, 'budget_annuale']);
 Route::any('prodotti', [HomeController::class, 'prodotti']);
 Route::any('dipendenti', [HomeController::class, 'dipendenti']);
 Route::any('motivazione', [HomeController::class, 'motivazione']);

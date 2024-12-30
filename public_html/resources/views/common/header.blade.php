@@ -235,6 +235,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo URL::asset('budget_annuale/'.date('Y',strtotime('now'))) ?>" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
+                            <p>Budget Storico</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link">
                             <i class="nav-icon fas fa-address-book"></i>
                             <p>Tabelle</p>

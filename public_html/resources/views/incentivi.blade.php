@@ -33,6 +33,7 @@
                 <th class="no-sort">Target</th>
                 @if ($utente->username == 'Giovanni Tutino')
                     <th class="no-sort">Incentivo</th>
+                    <th class="no-sort">Anno</th>
                 @endif
                 <th class="no-sort">Azioni</th>
             </tr>
@@ -48,6 +49,7 @@
                         </td>
                     @else
                         <td>{{ $p->incentivo }}</td>
+                        <td>{{ $p->anno }}</td>
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf

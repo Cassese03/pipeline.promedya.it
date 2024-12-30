@@ -532,30 +532,41 @@ class HomeController extends Controller
                 } else {
                     $y = $i;
                 }
-                DB::select('UPDATE budget set budget = ' . $dati['budget_' . $i] . ' WHERE data_mese = \'2024-' . $y . '-01\' ');
+                DB::select('UPDATE budget set budget = ' . $dati['budget_' . $i] . ' WHERE data_mese = CONCAT(YEAR(CURDATE()),\'-' . $y . '-01\') ');
                 return Redirect::to('budget');
             }
         }
         if (session()->has('utente')) {
+            $check = DB::select('SELECT * FROM budget WHERE data_mese = CONCAT(YEAR(CURDATE()),\'-01-01\')');
+            if (sizeof($check) <= 0) {
+                for ($i = 1; $i < 13; $i++) {
+                    if (strlen($i) == 1) {
+                        $y = '0' . $i;
+                    } else {
+                        $y = $i;
+                    }
+                    DB::select('INSERT INTO budget (data_mese,budget) VALUES (CONCAT(YEAR(CURDATE()),\'-' . $y . '-01\'),0)');
+                }
+            }
             $utente = session('utente');
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' group by MONTH(Data_Probabile_Chiusura)');
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ')[0]->Vendite;
+            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') group by MONTH(Data_Probabile_Chiusura)');
 
-            $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ');
+            $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\') ');
 
-            $budget_annuale = DB::select('SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\' ')[0]->valore;
+            $budget_annuale = DB::select('SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\') ')[0]->valore;
 
-            $budget_t3 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240331\' and data_mese >= \'20240101\' ')[0]->valore;
-            $budget_t6 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240631\' and data_mese >= \'20240401\' ')[0]->valore;
-            $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < \'20240931\' and data_mese >= \'20240701\' ')[0]->valore;
-            $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < \'20241231\' and data_mese >= \'20241001\' ')[0]->valore;
+            $budget_t3 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(YEAR(CURDATE()),\'0331\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\') ')[0]->valore;
+            $budget_t6 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(YEAR(CURDATE()),\'0631\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0401\') ')[0]->valore;
+            $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(YEAR(CURDATE()),\'0931\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0701\') ')[0]->valore;
+            $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'1001\') ')[0]->valore;
 
-            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ')[0]->Vendite;
 
-            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240331\' and Data_Probabile_Chiusura >= \'20240101\' ')[0]->Vendite;
-            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240631\' and Data_Probabile_Chiusura >= \'20240401\' ')[0]->Vendite;
-            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20240931\' and Data_Probabile_Chiusura >= \'20240701\' ')[0]->Vendite;
-            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20241001\' ')[0]->Vendite;
+            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'0331\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ')[0]->Vendite;
+            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'0631\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0401\') ')[0]->Vendite;
+            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'0931\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0701\') ')[0]->Vendite;
+            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'1001\') ')[0]->Vendite;
 
             $differenze_t3 = $vendite_t3 - $budget_t3;
             $differenze_t6 = $vendite_t6 - $budget_t6;
@@ -563,6 +574,50 @@ class HomeController extends Controller
             $differenze_t12 = $vendite_t12 - $budget_t12;
 
             return View::make('budget', compact('utente', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
+                , 'budget_t3', 'vendite_t3', 'differenze_t3'
+                , 'budget_t6', 'vendite_t6', 'differenze_t6'
+                , 'budget_t9', 'vendite_t9', 'differenze_t9'
+                , 'budget_t12', 'vendite_t12', 'differenze_t12'));
+        } else {
+            return Redirect::to('login');
+        }
+    }
+
+    public
+    function budget_annuale(Request $request, $anno)
+    {
+        $dati = $request->all();
+        for ($i = 1; $i < 13; $i++) {
+            if (isset($dati['budget_' . $i])) {
+                return Redirect::to('budget_annuale');
+            }
+        }
+        if (session()->has('utente')) {
+            $utente = session('utente');
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'1231\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0101\') ')[0]->Vendite;
+            $vendite_mensili = DB::SELECT('SELECT MONTH(Data_Probabile_Chiusura) AS Mese,Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'1231\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0101\') group by MONTH(Data_Probabile_Chiusura)');
+
+            $budget = DB::SELECT('SELECT MONTH(data_mese) as data_mese,budget FROM budget where data_mese <= CONCAT(\'' . $anno . '\',\'1231\') and data_mese >= CONCAT(\'' . $anno . '\',\'0101\') ');
+
+            $budget_annuale = DB::select('SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(\'' . $anno . '\',\'1231\') and data_mese >= CONCAT(\'' . $anno . '\',\'0101\') ')[0]->valore;
+
+            $budget_t3 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(\'' . $anno . '\',\'0331\') and data_mese >= CONCAT(\'' . $anno . '\',\'0101\') ')[0]->valore;
+            $budget_t6 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(\'' . $anno . '\',\'0631\') and data_mese >= CONCAT(\'' . $anno . '\',\'0401\') ')[0]->valore;
+            $budget_t9 = DB::select(' SELECT SUM(budget) as valore from budget where data_mese < CONCAT(\'' . $anno . '\',\'0931\') and data_mese >= CONCAT(\'' . $anno . '\',\'0701\') ')[0]->valore;
+            $budget_t12 = DB::select('SELECT SUM(budget) as valore from budget where data_mese < CONCAT(\'' . $anno . '\',\'1231\') and data_mese >= CONCAT(\'' . $anno . '\',\'1001\') ')[0]->valore;
+
+            $vendite_annuale = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'1231\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0101\') ')[0]->Vendite;
+            $vendite_t3 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'0331\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0101\') ')[0]->Vendite;
+            $vendite_t6 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'0631\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0401\') ')[0]->Vendite;
+            $vendite_t9 = DB::SELECT(' SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'0931\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'0701\') ')[0]->Vendite;
+            $vendite_t12 = DB::SELECT('SELECT Coalesce(SUM(Vendita_Budget),0) as Vendite FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(\'' . $anno . '\',\'1231\') and Data_Probabile_Chiusura >= CONCAT(\'' . $anno . '\',\'1001\') ')[0]->Vendite;
+
+            $differenze_t3 = $vendite_t3 - $budget_t3;
+            $differenze_t6 = $vendite_t6 - $budget_t6;
+            $differenze_t9 = $vendite_t9 - $budget_t9;
+            $differenze_t12 = $vendite_t12 - $budget_t12;
+
+            return View::make('budget_annuale', compact('utente','anno', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
                 , 'budget_t3', 'vendite_t3', 'differenze_t3'
                 , 'budget_t6', 'vendite_t6', 'differenze_t6'
                 , 'budget_t9', 'vendite_t9', 'differenze_t9'
@@ -954,11 +1009,11 @@ class HomeController extends Controller
             $meseCorrente = date("m");
             $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
             $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
-            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= \'20240101\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' )');
-            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' ) - (SELECT SUM(budget) as valore from budget where data_mese <= \'20241231\' and data_mese >= \'20240101\') as valore ');
+            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') )');
+            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) as valore ');
             $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
             $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
-            $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\') as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= \'2024-01-01\' group by o.Gruppo) f order by f.Val DESC');
+            $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
             $statistiche_categoria = DB::table('pipeline')
                 ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
                 ->whereNotNull('Categoria')
@@ -1097,7 +1152,7 @@ class HomeController extends Controller
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
             $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
-            $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'20241231\' and Data_Probabile_Chiusura >= \'20240101\' and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
+            $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
 
             return View::make('statistiche', compact('opening', 'incentivi', 'statistiche_incentivi', 'ricontrattati', 'differenza_opening', 'opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {
