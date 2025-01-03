@@ -617,7 +617,7 @@ class HomeController extends Controller
             $differenze_t9 = $vendite_t9 - $budget_t9;
             $differenze_t12 = $vendite_t12 - $budget_t12;
 
-            return View::make('budget_annuale', compact('utente','anno', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
+            return View::make('budget_annuale', compact('utente', 'anno', 'vendite_annuale', 'vendite_mensili', 'budget', 'budget_annuale'
                 , 'budget_t3', 'vendite_t3', 'differenze_t3'
                 , 'budget_t6', 'vendite_t6', 'differenze_t6'
                 , 'budget_t9', 'vendite_t9', 'differenze_t9'
@@ -1009,11 +1009,7 @@ class HomeController extends Controller
             $meseCorrente = date("m");
             $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
             $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
-            $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') )');
-            $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) as valore ');
             $statistiche_sales = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->groupBy('Sales')->get();
-            $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
-            $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
             $statistiche_categoria = DB::table('pipeline')
                 ->select('Categoria', DB::raw("DATE_FORMAT(Data_contatto, '%Y - %M') AS Data"), DB::raw('SUM(Val_Ven_AC) AS Val'))
                 ->whereNotNull('Categoria')
@@ -1024,20 +1020,7 @@ class HomeController extends Controller
             $statistiche_categoria_chiusura =
                 DB::SELECT('select Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') AS Data, SUM(Val_Ven_AC) AS Val from pipeline where Categoria is not null and DATE_FORMAT(Data_Probabile_Chiusura, \'%m\') >  DATE_FORMAT(NOW(), \'%m\') and DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') >= DATE_FORMAT(NOW(), \'%Y\') group by Categoria, DATE_FORMAT(Data_Probabile_Chiusura, \'%Y - %M\') order by DATE_FORMAT(Data_Probabile_Chiusura, \'%Y\') desc, DATE_FORMAT(Data_Probabile_Chiusura, \'%m\')');
 
-            $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
-                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
-                                                      FROM   pipeline
-                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
-                                                      GROUP  BY gruppo
-                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
-            $statistiche_corrente_sottogruppo_annuale =
-                DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
-                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
-                                                      FROM   pipeline
-                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
-                                                      GROUP  BY gruppo
-                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
-            /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
+
             $categoria = DB::SELECT('SELECT Categoria FROM pipeline where Categoria is not null GROUP BY Categoria');
 
             $statistiche_mensili = DB::table('pipeline')
@@ -1047,6 +1030,11 @@ class HomeController extends Controller
                 ->orderBy(DB::raw('DATE_FORMAT(Data_contatto, \'%m\')'), 'DESC')
                 ->get();
             if ($data == 0) {
+                $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) as valore ');
+                $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
+                $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
+                $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
+                $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') )');
                 $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
                 $statistiche_corrente = DB::select('SELECT f.Vinta, SUM(Val) AS Val FROM (SELECT IF(Vinta = 2,2,IF(Vinta = 1,1,3)) AS Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
@@ -1070,7 +1058,33 @@ class HomeController extends Controller
                 // or (Vinta = 2 and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\''.$data.'\',\'%Y - %M\'))
                 $mese_usato = DB::SELECT('SELECT MONTH(NOW()) as mese')[0]->mese;
                 $anno_usato = DB::SELECT('SELECT YEAR(NOW()) as anno')[0]->anno;
+                $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
+                                                      FROM   pipeline
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      GROUP  BY gruppo
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
+                $statistiche_corrente_sottogruppo_annuale =
+                    DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))) as Percentuale
+                                                      FROM   pipeline
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(NOW(),\'%Y\'))
+                                                      GROUP  BY gruppo
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
+                /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
+                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
+                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
+
             } else {
+                $annoCorrente = date("Y",strtotime($data));
+                $meseCorrente = date("m",strtotime($data));
+                $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
+                $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
+                $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) as valore ');
+                $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
+                $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(\''.$data.'\')');
+                $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(\''.$data.'\')');
+                $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') )');
                 $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
@@ -1088,6 +1102,25 @@ class HomeController extends Controller
                                                       WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
                                                       GROUP  BY Sales
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');
+                $statistiche_corrente_prodotto_annuale = DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT gruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(\'' . $data . '\',\'%Y\'))) as Percentuale
+                                                      FROM   pipeline
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(\'' . $data . '\',\'%Y\'))
+                                                      GROUP  BY gruppo
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
+                $statistiche_corrente_sottogruppo_annuale =
+                    DB::select('SELECT CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT sottogruppo from prodotto where descrizione = pipeline.Prodotto) as gruppo,
+                                                      (SELECT SUM(Val_Ven_AC) from pipeline WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(\'' . $data . '\',\'%Y\'))) as Percentuale
+                                                      FROM   pipeline
+                                                      WHERE  ((Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y\') = DATE_FORMAT(\'' . $data . '\',\'%Y\'))
+                                                      GROUP  BY gruppo
+                                                      ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
+
+                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime($data)) . '-01-01')->groupBy('Sales')->get();
+
+                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
+
+                /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
                 $mese_usato = DB::SELECT('SELECT MONTH(\'' . $data . '\') as mese')[0]->mese;
                 $anno_usato = DB::SELECT('SELECT YEAR(\'' . $data . '\') as anno')[0]->anno;
             }
@@ -1135,7 +1168,6 @@ class HomeController extends Controller
 
             $mese_usato = $mese_usato . ' - ' . $anno_usato;
 
-            $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
 
             $canone_successivo = DB::select('SELECT
               SUM(Inc_Canone_AS) as valore
@@ -1151,8 +1183,6 @@ class HomeController extends Controller
             $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
-            $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE())');
-            $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
 
             return View::make('statistiche', compact('opening', 'incentivi', 'statistiche_incentivi', 'ricontrattati', 'differenza_opening', 'opening_anno_successivo', 'statistiche_sales', 'valore_disdette', 'canone_successivo', 'statistiche_disdetta_sottogruppo_annuale', 'statistiche_disdetta_gruppo_annuale', 'statistiche_corrente_sottogruppo_annuale', 'statistiche_budget_mensile', 'statistiche_corrente_prodotto', 'statistiche_corrente_prodotto_annuale', 'statistiche_corrente_sales', 'statistiche_sales_vinte', 'statistiche_sales_vinte_zona', 'differenza', 'statistiche_budget', 'statistiche_categoria', 'statistiche_categoria_chiusura', 'mese_usato', 'categoria', 'statistiche_mensili', 'statistiche_corrente', 'column'));
         } else {

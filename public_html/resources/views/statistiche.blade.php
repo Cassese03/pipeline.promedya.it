@@ -4,12 +4,18 @@
 @include('common.header')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" style="display: flex;justify-content: space-between">
         <h1 style="color:#007bff">
             PROMEDYA | Smart Sales Force
             <small>&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
+        <div style="display: flex;">
+            <h1 style="color:#007bff">
+                Esercizio
+                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+            </h1>
+            <input type="number" min="2024" step="1" max="2100"  value="{{intval(explode('-',$mese_usato)[1])}}" onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
+        </div>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -480,7 +486,6 @@
 
                 </div>
             </div>
-
             <div class="col-xl-12 col-sm-12" style="display:flex;width: 100%;gap: 2%;">
                 <!-- Bar chart -->
                 <div class="card card-fuchsia" style="width: 60%;">
@@ -510,24 +515,6 @@
 
                 </div>
             </div>
-            {{--<div class="col-xl-3 col-sm-12">
-                <div class="card card-danger">
-                    <div class="card-header">
-                        <h3 class="card-title">Statistiche Sales LEAD (TOTALE)</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="donutChart"
-                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-            </div>--}}
             <div class="col-xl-12 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-warning">
@@ -554,7 +541,6 @@
                     <!-- /.card-body-->
                 </div>
             </div>
-
             <div class="col-xl-4 col-sm-12">
                 <!-- Bar chart -->
                 <div class="card card-primary">
