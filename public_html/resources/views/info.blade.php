@@ -27,7 +27,7 @@
                 </a>
                 <a class="nav-link"
                    style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Versione : GT.321.24</p>
+                    <p style="margin:0;">Versione : GT.389.25</p>
                 </a>
                 <a class="nav-link"
                    style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
