@@ -1076,15 +1076,15 @@ class HomeController extends Controller
                 $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->get();
 
             } else {
-                $annoCorrente = date("Y",strtotime($data));
-                $meseCorrente = date("m",strtotime($data));
+                $annoCorrente = date("Y", strtotime($data));
+                $meseCorrente = date("m", strtotime($data));
                 $giornoCorrente = cal_days_in_month(CAL_GREGORIAN, $meseCorrente, $annoCorrente);
                 $last_of_month = $annoCorrente . $meseCorrente . $giornoCorrente;
-                $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) as valore ');
-                $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
-                $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(\''.$data.'\')');
-                $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(\''.$data.'\')');
-                $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(\''.$data.'\'),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\''.$data.'\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\''.$data.'\'),\'0101\') )');
+                $differenza = DB::SELECT('SELECT (SELECT Coalesce(SUM(Vendita_Budget),0) as valore FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') ) - (SELECT SUM(budget) as valore from budget where data_mese <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and data_mese >= CONCAT(YEAR(\'' . $data . '\'),\'0101\')) as valore ');
+                $statistiche_incentivi = DB::SELECT('(SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_OLD\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'OLD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite_NEW\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') and Prodotto not in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\') and Tipo_Cliente = \'LEAD\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'SERVIZI\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') and Prodotto in (SELECT Descrizione from prodotto where sottogruppo = \'SERVIZI\' or gruppo = \'ARCA SVILUPPO\'))');
+                $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(\'' . $data . '\')');
+                $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(\'' . $data . '\')');
+                $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and data_mese >= CONCAT(YEAR(\'' . $data . '\'),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(\'' . $data . '\'),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') )');
                 $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
@@ -1181,6 +1181,24 @@ class HomeController extends Controller
               )');
             $ricontrattati = DB::select('SELECT SUM(Valore_Ricontrattato) as valore  from disdette where Esito = 1 and  (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630)');
             $valore_disdette = DB::SELECT('select if(Esito = 1,ABS(SUM(Valore_Contratto) - SUM(Valore_Ricontrattato)),SUM(Valore_Contratto)) AS valore,Esito from disdette where (Data_Disdetta >= ' . ($opening[0]->Anno - 1) . '0704 and Data_Disdetta <= ' . $opening[0]->Anno . '0630) group by esito');
+
+            if (sizeof($valore_disdette) == 0) {
+                $valore_disdette = [];
+                for ($i = 0; $i <= 2; $i++) {
+                    $valore_disdette[$i] = (object)['valore' => 0, 'Esito' => $i];
+                }
+            }
+
+            if (sizeof($valore_disdette) == 1) {
+                for ($i = 1; $i <= 2; $i++) {
+                    $valore_disdette[$i] = (object)['valore' => 0, 'Esito' => $i];
+                }
+            }
+            if (sizeof($valore_disdette) == 2) {
+                for ($i = 2; $i <= 2; $i++) {
+                    $valore_disdette[$i] = (object)['valore' => 0, 'Esito' => $i];
+                }
+            }
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
 
