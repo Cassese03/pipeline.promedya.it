@@ -889,13 +889,20 @@
 
     // BEST PERFORMER SALES MESE
     // STATISTICHE MESE CORRENTE
-
+    <?php
+    $sales = '';
+    $total = 0;
+    foreach ($statistiche_corrente_sales as $s) {
+        $total += $s->Val;
+    }
+    ?>
     var donutMESESalesChartCanvas = $('#donutMESESalesChart').get(0).getContext('2d')
     var donutMESESalesData = {
         labels: [
             <?php $sales = '';
             foreach ($statistiche_corrente_sales as $s) {
-                $sales .= '\'' . $s->Sales . '\',';
+
+                $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
             }
             $sales = substr($sales, 0, strlen($sales) - 1);
             echo $sales;
@@ -1312,17 +1319,19 @@ options: donutOptions
     // STATISTICHE MESE CORRENTE
 
 
-    var donuteAnnualePERFORMERChartCanvas = $('#donutAnnualePERFORMERChart').get(0).getContext('2d')
+    var donuteAnnualePERFORMERChartCanvas = $('\donutAnnualePERFORMERChart').get(0).getContext('2d')
     <?php
     $sales = '';
     $total = 0;
-    foreach($statistiche_sales_vinte as $s){$total += $s->Val;}
+    foreach ($statistiche_sales_vinte as $s) {
+        $total += $s->Val;
+    }
     ?>
     var donutAnnualePERFORMERData = {
         labels: [
             <?php $sales = ''; foreach ($statistiche_sales_vinte as $s) {
                 if ($s->Sales != null && $s->Sales != '')
-                $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
+                    $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
 
             }
             $sales = substr($sales, 0, strlen($sales) - 1);
