@@ -14,7 +14,8 @@
                 Esercizio
                 <small>&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
-            <input type="number" min="2024" step="1" max="2100"  value="{{intval(explode('-',$mese_usato)[1])}}" onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
+            <input type="number" min="2024" step="1" max="2100" value="{{intval(explode('-',$mese_usato)[1])}}"
+                   onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
         </div>
     </section>
     <!-- Main content -->
@@ -1312,11 +1313,17 @@ options: donutOptions
 
 
     var donuteAnnualePERFORMERChartCanvas = $('#donutAnnualePERFORMERChart').get(0).getContext('2d')
+    <?php
+    $sales = '';
+    $total = 0;
+    foreach($statistiche_sales_vinte as $s){$total += $s->Val;}
+    ?>
     var donutAnnualePERFORMERData = {
         labels: [
             <?php $sales = ''; foreach ($statistiche_sales_vinte as $s) {
                 if ($s->Sales != null && $s->Sales != '')
-                    $sales .= '\'' . $s->Sales . '\',';
+                $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
+
             }
             $sales = substr($sales, 0, strlen($sales) - 1);
             echo $sales;
