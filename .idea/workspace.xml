@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="MODIFICHE EMAIL" />
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="solo un esercizio non due">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/incentivi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/incentivi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,14 +42,12 @@
     &quot;assignee&quot;: &quot;Cassese03&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="2b3a6ae3-b699-496c-a93a-83bb39007429" />
-        <option name="url" value="https://github.com/Cassese03/pipeline.promedya.it.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Cassese03/pipeline.promedya.it.git&quot;,
+    &quot;accountId&quot;: &quot;2b3a6ae3-b699-496c-a93a-83bb39007429&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -295,6 +298,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
@@ -330,6 +334,14 @@
       <TestRunner configuration_file="$PROJECT_DIR$/public_html/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.26053.13" />
+        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.26053.13" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -507,158 +519,27 @@
       <workItem from="1720623921379" duration="273000" />
       <workItem from="1720624294541" duration="42000" />
       <workItem from="1720687448080" duration="1897000" />
-    </task>
-    <task id="LOCAL-00042" summary="Fix filtro disdette 2.0">
-      <option name="closed" value="true" />
-      <created>1715183783597</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1715183783597</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Fix Labels">
-      <option name="closed" value="true" />
-      <created>1715252349614</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1715252349614</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Cambio Colonna Vinta">
-      <option name="closed" value="true" />
-      <created>1715605956940</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1715605956940</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Fix View Login Page">
-      <option name="closed" value="true" />
-      <created>1715606336070</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1715606336071</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Modifhce 13/05/2024">
-      <option name="closed" value="true" />
-      <created>1715690826696</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1715690826696</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Inserimento Tabella Esito">
-      <option name="closed" value="true" />
-      <created>1715691039158</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1715691039158</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Statistiche">
-      <option name="closed" value="true" />
-      <created>1715691827288</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1715691827288</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Inserimento Statistica OPENING">
-      <option name="closed" value="true" />
-      <created>1715699364615</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1715699364615</updated>
-    </task>
-    <task id="LOCAL-00050" summary="GESTIONE TABELLE OPENING">
-      <option name="closed" value="true" />
-      <created>1715699918588</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1715699918588</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Fix filtra disdette + statistiche OPENING">
-      <option name="closed" value="true" />
-      <created>1715701293170</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1715701293170</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Fix filtra disdette + statistiche OPENING">
-      <option name="closed" value="true" />
-      <created>1715843945668</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1715843945668</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Gestione Opening Pipeline">
-      <option name="closed" value="true" />
-      <created>1715875032516</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1715875032516</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Gestione Opening Pipeline">
-      <option name="closed" value="true" />
-      <created>1715875131102</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1715875131102</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Gestione Opening Pipeline">
-      <option name="closed" value="true" />
-      <created>1715935767758</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1715935767758</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Statistiche Disdetta in BIANCO">
-      <option name="closed" value="true" />
-      <created>1715937642010</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1715937642010</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Statistiche Disdetta in BIANCO">
-      <option name="closed" value="true" />
-      <created>1715937666155</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1715937666155</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Ordinamento Grafici">
-      <option name="closed" value="true" />
-      <created>1715937791481</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1715937791481</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Check Disdette">
-      <option name="closed" value="true" />
-      <created>1715939511520</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1715939511520</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Differenza Label">
-      <option name="closed" value="true" />
-      <created>1716200579932</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1716200579932</updated>
+      <workItem from="1720707001841" duration="363000" />
+      <workItem from="1720708050834" duration="699000" />
+      <workItem from="1723102930830" duration="211000" />
+      <workItem from="1723103241533" duration="1410000" />
+      <workItem from="1723105851549" duration="30000" />
+      <workItem from="1729496256252" duration="78000" />
+      <workItem from="1735574628215" duration="2229000" />
+      <workItem from="1735806350962" duration="1602000" />
+      <workItem from="1735834830859" duration="9818000" />
+      <workItem from="1738331960391" duration="668000" />
+      <workItem from="1739291649318" duration="164000" />
+      <workItem from="1741253849427" duration="6721000" />
+      <workItem from="1741793840304" duration="14000" />
+      <workItem from="1742479831125" duration="28000" />
+      <workItem from="1742480014322" duration="105000" />
+      <workItem from="1744367112106" duration="469000" />
+      <workItem from="1744375673504" duration="1568000" />
+      <workItem from="1744378519632" duration="162000" />
+      <workItem from="1744379930902" duration="226000" />
+      <workItem from="1744382524053" duration="53000" />
+      <workItem from="1744644666705" duration="944000" />
     </task>
     <task id="LOCAL-00061" summary="Fix Non piu' modificabile probabilita chiusura in rows">
       <option name="closed" value="true" />
@@ -900,7 +781,159 @@
       <option name="project" value="LOCAL" />
       <updated>1720689333392</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Fix Mail">
+      <option name="closed" value="true" />
+      <created>1720707365050</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1720707365051</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Fix Mail Motivazione">
+      <option name="closed" value="true" />
+      <created>1720708093111</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708093111</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Fix Mail &lt;strong&gt;Tipo Cliente&lt;/strong&gt;">
+      <option name="closed" value="true" />
+      <created>1720708156499</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708156499</updated>
+    </task>
+    <task id="LOCAL-00094" summary="FIX MAIL MOTIVAZIONE UPPER CASE">
+      <option name="closed" value="true" />
+      <created>1720708742160</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708742160</updated>
+    </task>
+    <task id="LOCAL-00095" summary="AGGIUNTA CANONE ANNO CORRENTE IN EMAIL">
+      <option name="closed" value="true" />
+      <created>1723103141010</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1723103141011</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Fix mail">
+      <option name="closed" value="true" />
+      <created>1723105749357</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1723105749357</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Fix labels">
+      <option name="closed" value="true" />
+      <created>1729496316742</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1729496316743</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Grafiche e nuovo anno">
+      <option name="closed" value="true" />
+      <created>1735576871425</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1735576871426</updated>
+    </task>
+    <task id="LOCAL-00099" summary="new blade">
+      <option name="closed" value="true" />
+      <created>1735576881590</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1735576881590</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Fix statistiche anno nuovo">
+      <option name="closed" value="true" />
+      <created>1735917672879</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1735917672879</updated>
+    </task>
+    <task id="LOCAL-00101" summary="New Versione">
+      <option name="closed" value="true" />
+      <created>1735917732227</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1735917732227</updated>
+    </task>
+    <task id="LOCAL-00102" summary="DataContatto initial value">
+      <option name="closed" value="true" />
+      <created>1738332625731</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1738332625732</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Fix Bug dati mancanti su disdette">
+      <option name="closed" value="true" />
+      <created>1741274464333</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1741274464333</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Update SMTP configuration to use new host and credentials">
+      <option name="closed" value="true" />
+      <created>1742480109831</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1742480109831</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Order by desc su Sales Best Performer annuale">
+      <option name="closed" value="true" />
+      <created>1744367585837</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1744367585837</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Percentuale su Sales Best Performer annuale">
+      <option name="closed" value="true" />
+      <created>1744377284754</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1744377284755</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Anche su mese corrente">
+      <option name="closed" value="true" />
+      <created>1744378610123</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1744378610123</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Anche su mese corrente">
+      <option name="closed" value="true" />
+      <created>1744380150715</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1744380150717</updated>
+    </task>
+    <task id="LOCAL-00109" summary="solo un esercizio non due">
+      <option name="closed" value="true" />
+      <created>1744382568518</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1744382568519</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -910,24 +943,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix DUPLICA" />
-    <MESSAGE value="Order By Valore" />
-    <MESSAGE value="Mail su Disdette" />
-    <MESSAGE value="Mail su Disdette IN COPIA A TUTTI" />
-    <MESSAGE value="CAMBIATO OGGETTO IN MAIL" />
-    <MESSAGE value="Inserito Ulteriore spazio" />
-    <MESSAGE value="Statistiche Incentivi" />
-    <MESSAGE value="Statistiche Incentivi + GESTIONE MOBILE" />
-    <MESSAGE value="Modifiche varie per PRIVACY" />
-    <MESSAGE value="Allinemento Grafico" />
-    <MESSAGE value="Cambiamenti Grafici" />
-    <MESSAGE value="TOLTO ANNUALE" />
-    <MESSAGE value="Fix statistiche mensili" />
-    <MESSAGE value="Fix Mail" />
-    <MESSAGE value="Cambio Query" />
-    <MESSAGE value="Inserimento Scritta" />
-    <MESSAGE value="Statistiche Disdette Aggiornate" />
-    <MESSAGE value="Inserimento Duplica Disdette" />
     <MESSAGE value="Fix" />
     <MESSAGE value="Fix excel" />
     <MESSAGE value="Fix Incentivo anno solare" />
@@ -935,7 +950,25 @@
     <MESSAGE value="Gestioni giorni disdette" />
     <MESSAGE value="gestione excel su pipeline" />
     <MESSAGE value="MODIFICHE EMAIL" />
-    <option name="LAST_COMMIT_MESSAGE" value="MODIFICHE EMAIL" />
+    <MESSAGE value="Fix Mail" />
+    <MESSAGE value="Fix Mail Motivazione" />
+    <MESSAGE value="Fix Mail &lt;strong&gt;Tipo Cliente&lt;/strong&gt;" />
+    <MESSAGE value="FIX MAIL MOTIVAZIONE UPPER CASE" />
+    <MESSAGE value="AGGIUNTA CANONE ANNO CORRENTE IN EMAIL" />
+    <MESSAGE value="Fix mail" />
+    <MESSAGE value="Fix labels" />
+    <MESSAGE value="Grafiche e nuovo anno" />
+    <MESSAGE value="new blade" />
+    <MESSAGE value="Fix statistiche anno nuovo" />
+    <MESSAGE value="New Versione" />
+    <MESSAGE value="DataContatto initial value" />
+    <MESSAGE value="Fix Bug dati mancanti su disdette" />
+    <MESSAGE value="Update SMTP configuration to use new host and credentials" />
+    <MESSAGE value="Order by desc su Sales Best Performer annuale" />
+    <MESSAGE value="Percentuale su Sales Best Performer annuale" />
+    <MESSAGE value="Anche su mese corrente" />
+    <MESSAGE value="solo un esercizio non due" />
+    <option name="LAST_COMMIT_MESSAGE" value="solo un esercizio non due" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -944,11 +977,6 @@
           <url>file://$PROJECT_DIR$/public_html/resources/views/info.blade.php</url>
           <line>29</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php</url>
-          <line>937</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -14,7 +14,8 @@
                 Esercizio
                 <small>&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
-            <input type="number" min="2024" step="1" max="2100"  value="{{intval(explode('-',$mese_usato)[1])}}" onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
+            <input type="number" class="form-control" min="2024" step="1" max="2100" value="{{intval(explode('-',$mese_usato)[1])}}"
+                   onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
         </div>
     </section>
     <!-- Main content -->
@@ -71,9 +72,19 @@
             <div class="col-xl-4 col-sm-12">
                 <div class="card card-warning" style="height:95%">
                     <div class="card-header" style="color:white;background-color:lightseagreen">
-                        <h3 class="card-title">
-                            Statistiche Target Vendite
-                        </h3>
+                        <div style="display:flex;justify-content:space-between">
+                            <h3 class="card-title">
+                                Statistiche Target Vendite
+                            </h3>
+                            <div style="display: flex;justify-content: flex-start">
+                            <label for="semestre" style="text-align: center">
+                                Semestre
+                            </label>
+                            <input style="margin-left: 5%;height: 75%" onchange="top.location.href= window.location.href.replace(window.location.search,'') + '?semestre=' + this.value"
+                                   class="form-control" value="{{$semestre}}" type="number" step="1" min="1" max="2"
+                                   name="semestre" id="semestre">
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row large_device" style="height: 100%">
@@ -1322,13 +1333,15 @@ options: donutOptions
     <?php
     $sales = '';
     $total = 0;
-    foreach($statistiche_sales_vinte as $s){$total += $s->Val;}
+    foreach ($statistiche_sales_vinte as $s) {
+        $total += $s->Val;
+    }
     ?>
     var donutAnnualePERFORMERData = {
         labels: [
             <?php $sales = ''; foreach ($statistiche_sales_vinte as $s) {
                 if ($s->Sales != null && $s->Sales != '')
-                $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
+                    $sales .= '\'' . $s->Sales . ' (' . number_format(floatval(floatval($s->Val) * 100) / floatval($total), 2, ',', ' ') . '%)\',';
 
             }
             $sales = substr($sales, 0, strlen($sales) - 1);

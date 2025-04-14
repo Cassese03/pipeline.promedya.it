@@ -34,6 +34,7 @@
                 @if ($utente->username == 'Giovanni Tutino')
                     <th class="no-sort">Incentivo</th>
                     <th class="no-sort">Anno</th>
+                    <th class="no-sort">Semestre</th>
                 @endif
                 <th class="no-sort">Azioni</th>
             </tr>
@@ -50,6 +51,7 @@
                     @else
                         <td>{{ $p->incentivo }}</td>
                         <td>{{ $p->anno }}</td>
+                        <td>{{ $p->semestre }}</td>
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -117,6 +119,11 @@
                     </label>
                     <input class="form-control" type="number" step="0.01" min="0" name="incentivo" id="incentivo"
                            value="{{ $p->incentivo }}">
+                    <label for="semestre">
+                        Semestre
+                    </label>
+                    <input class="form-control" type="number" step="1" min="1" max="2" name="semestre" id="semestre"
+                           value="{{ $p->semestre }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -160,6 +167,11 @@
                             Incentivo
                         </label>
                         <input class="form-control" type="number" step="0.01" min="0" name="incentivo" id="incentivo">
+                        <label for="semestre">
+                            Semestre
+                        </label>
+                        <input class="form-control" type="number" step="1" min="1" max="2" name="semestre" id="semestre">
+                        <div class="clearfix"></div>
                     </div>
                     <div class=" clearfix">
                     </div>
