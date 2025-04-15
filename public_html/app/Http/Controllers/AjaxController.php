@@ -533,11 +533,6 @@ class AjaxController extends Controller
     {
         $dati = file_get_contents("php://input");
         $json = json_decode($dati);
-        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
-        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
-        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
-        $operatori = DB::select('select * from operatori');
-        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'id') {
@@ -736,4 +731,19 @@ class AjaxController extends Controller
             <?php } ?>
         <?php } ?>
     <?php }
+
+    public
+    function duplica_ajax_INCENTIVI($id)
+    {
+        $r = DB::select('SELECT * from incentivi where Id = ' . $id);
+        if (sizeof($r) > 0) {
+            $r= $r[0];
+            ?>
+                document.getElementById('desc_obiettivo_agg').value = '<?php echo $r->desc_obiettivo; ?>';
+                document.getElementById('target_agg').value = '<?php echo $r->target; ?>';
+                document.getElementById('incentivo_agg').value = '<?php echo $r->incentivo; ?>';
+                document.getElementById('semestre_agg').value = '<?php echo $r->semestre; ?>';
+            <?php
+        }
+    }
 }
