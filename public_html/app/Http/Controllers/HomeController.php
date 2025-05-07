@@ -1081,8 +1081,8 @@ class HomeController extends Controller
                                                       GROUP  BY gruppo
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
                 /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
-                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
-                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->groupBy('Sales')->orderByDesc('Val')->get();
+                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Vendita_Budget) as Decimal(20,2)) as Val,(SELECT SUM(Vendita_Budget) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'-12-31\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'-01-01\') and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'-12-31\') group by o.Gruppo) f order by f.Val DESC');
+                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Vendita_Budget) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime('now')) . '-01-01')->where('Data_Probabile_Chiusura', '<=', date('Y', strtotime('now')) . '-12-31')->groupBy('Sales')->orderByDesc('Val')->get();
 
             } else {
                 $annoCorrente = date("Y", strtotime($data));
@@ -1126,9 +1126,8 @@ class HomeController extends Controller
 
                                                       ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc ');
 
-                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime($data)) . '-01-01')->groupBy('Sales')->orderByDesc('Val')->get();
-
-                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val,(SELECT SUM(Val_Ven_AC) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\') group by o.Gruppo) f order by f.Val DESC');
+                $statistiche_sales_vinte = DB::TABLE('pipeline')->select(DB::raw('Sales,CAST(SUM(Vendita_Budget) as Decimal(20,2)) as Val'))->where('Vinta', '=', '2')->where('Data_Probabile_Chiusura', '>=', date('Y', strtotime($data)) . '-01-01')->where('Data_Probabile_Chiusura', '<=', date('Y', strtotime($data)) . '-12-31')->groupBy('Sales')->orderByDesc('Val')->get();
+                $statistiche_sales_vinte_zona = DB::SELECT('SELECT * from (select o.Gruppo as Sales,CAST(SUM(Vendita_Budget) as Decimal(20,2)) as Val,(SELECT SUM(Vendita_Budget) from pipeline where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\')  and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'-12-31\')) as Percentuale from pipeline left join  operatori o on o.username = pipeline.Sales where Vinta = 2 and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'-01-01\') and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'-12-31\') group by o.Gruppo) f order by f.Val DESC');
 
                 /*ORDER  BY CAST(SUM(Val_Ven_AC) as Decimal(20,2)) desc');*/
                 $mese_usato = DB::SELECT('SELECT MONTH(\'' . $data . '\') as mese')[0]->mese;
