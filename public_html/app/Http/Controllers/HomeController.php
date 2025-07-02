@@ -507,7 +507,8 @@ class HomeController extends Controller
                 $operatori = DB::select('select * from operatori');
                 $dipendenti = DB::select('select * from dipendente');
                 $segnalato = Segnalato::all();
-                return View::make('concessionario', compact('utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+                $prodotto = DB::select('select * from prodotto');
+                return View::make('concessionario', compact('prodotto','utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
             }
             $rows = DB::select('select * from pipeline_concessionario order by Id desc');
             $dipendenti = DB::select('select * from dipendente');
