@@ -533,6 +533,11 @@ class AjaxController extends Controller
     {
         $dati = file_get_contents("php://input");
         $json = json_decode($dati);
+        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+        $operatori = DB::select('select * from operatori');
+        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'id') {

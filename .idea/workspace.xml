@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="solo un esercizio non due">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="Correzione Disdette">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/resources/views/incentivi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/incentivi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/AjaxController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/concessionario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/concessionario.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/statistiche.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -338,8 +338,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.26053.13" />
-        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.26053.13" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PS-251.26094.133" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.26094.133" />
       </set>
     </attachedChunks>
   </component>
@@ -539,39 +539,12 @@
       <workItem from="1744378519632" duration="162000" />
       <workItem from="1744379930902" duration="226000" />
       <workItem from="1744382524053" duration="53000" />
-      <workItem from="1744644666705" duration="944000" />
-    </task>
-    <task id="LOCAL-00061" summary="Fix Non piu' modificabile probabilita chiusura in rows">
-      <option name="closed" value="true" />
-      <created>1716220209858</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1716220209858</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Tipe Number">
-      <option name="closed" value="true" />
-      <created>1716884698525</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1716884698525</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Step">
-      <option name="closed" value="true" />
-      <created>1716884835774</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1716884835774</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Fix Statistiche">
-      <option name="closed" value="true" />
-      <created>1716902173023</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1716902173023</updated>
+      <workItem from="1744644666705" duration="1094000" />
+      <workItem from="1744732184817" duration="864000" />
+      <workItem from="1746602983788" duration="3120000" />
+      <workItem from="1746614321607" duration="716000" />
+      <workItem from="1751470289564" duration="907000" />
+      <workItem from="1753450111421" duration="1849000" />
     </task>
     <task id="LOCAL-00065" summary="Fix DUPLICA">
       <option name="closed" value="true" />
@@ -933,7 +906,39 @@
       <option name="project" value="LOCAL" />
       <updated>1744382568519</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Incentivi a semestre e non più annuale">
+      <option name="closed" value="true" />
+      <created>1744645772054</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1744645772055</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Duplica su incentivi">
+      <option name="closed" value="true" />
+      <created>1744733036642</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1744733036643</updated>
+    </task>
+    <task id="LOCAL-00112" summary="fix anno">
+      <option name="closed" value="true" />
+      <created>1746615043580</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1746615043580</updated>
+    </task>
+    <task id="LOCAL-00113" summary="mancava prodotto">
+      <option name="closed" value="true" />
+      <created>1751471153136</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1751471153136</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -943,11 +948,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix" />
-    <MESSAGE value="Fix excel" />
-    <MESSAGE value="Fix Incentivo anno solare" />
-    <MESSAGE value="Inserimento totali su anno solare" />
-    <MESSAGE value="Gestioni giorni disdette" />
     <MESSAGE value="gestione excel su pipeline" />
     <MESSAGE value="MODIFICHE EMAIL" />
     <MESSAGE value="Fix Mail" />
@@ -968,7 +968,12 @@
     <MESSAGE value="Percentuale su Sales Best Performer annuale" />
     <MESSAGE value="Anche su mese corrente" />
     <MESSAGE value="solo un esercizio non due" />
-    <option name="LAST_COMMIT_MESSAGE" value="solo un esercizio non due" />
+    <MESSAGE value="Incentivi a semestre e non più annuale" />
+    <MESSAGE value="Duplica su incentivi" />
+    <MESSAGE value="fix anno" />
+    <MESSAGE value="mancava prodotto" />
+    <MESSAGE value="Correzione Disdette" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correzione Disdette" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

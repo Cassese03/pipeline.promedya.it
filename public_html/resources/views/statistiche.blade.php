@@ -1,5 +1,15 @@
 <?php $utente = session('utente'); ?>
 <?php $differenza_mese = $statistiche_budget_mensile[1]->valore - $statistiche_budget_mensile[0]->valore; ?>
+<?php $esito1 = 0;$esito2 = 0;$esito3 = 0; ?>
+<?php foreach ($valore_disdette as $v) {
+    if ($v->Esito == 0) $esito1 += $v->valore;
+} ?>
+<?php foreach ($valore_disdette as $v) {
+    if ($v->Esito == 1) $esito2 += $v->valore;
+} ?>
+<?php foreach ($valore_disdette as $v) {
+    if ($v->Esito == 2) $esito3 += $v->valore;
+} ?>
 
 @include('common.header')
 <div class="content-wrapper">
@@ -14,7 +24,8 @@
                 Esercizio
                 <small>&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
-            <input type="number" class="form-control" min="2024" step="1" max="2100" value="{{intval(explode('-',$mese_usato)[1])}}"
+            <input type="number" class="form-control" min="2024" step="1" max="2100"
+                   value="{{intval(explode('-',$mese_usato)[1])}}"
                    onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
         </div>
     </section>
@@ -77,12 +88,13 @@
                                 Statistiche Target Vendite
                             </h3>
                             <div style="display: flex;justify-content: flex-start">
-                            <label for="semestre" style="text-align: center">
-                                Semestre
-                            </label>
-                            <input style="margin-left: 5%;height: 75%" onchange="top.location.href= window.location.href.replace(window.location.search,'') + '?semestre=' + this.value"
-                                   class="form-control" value="{{$semestre}}" type="number" step="1" min="1" max="2"
-                                   name="semestre" id="semestre">
+                                <label for="semestre" style="text-align: center">
+                                    Semestre
+                                </label>
+                                <input style="margin-left: 5%;height: 75%"
+                                       onchange="top.location.href= window.location.href.replace(window.location.search,'') + '?semestre=' + this.value"
+                                       class="form-control" value="{{$semestre}}" type="number" step="1" min="1" max="2"
+                                       name="semestre" id="semestre">
                             </div>
                         </div>
                     </div>
@@ -337,14 +349,14 @@
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
-                                       value="-<?php echo number_format($valore_disdette[0]->valore + $valore_disdette[2]->valore,2,',',' ');?>">
+                                       value="-<?php echo number_format($esito1 + $esito3,2,',',' ');?>">
                             </div>
                             <div style="width: 46%">
                                 <label style="font-size:0.85rem!important">Caring</label>
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:blue;"
                                        readonly class="form-control"
-                                       value="<?php echo number_format($valore_disdette[2]->valore,2,',',' ');?>">
+                                       value="<?php echo number_format($esito3,2,',',' ');?>">
 
                             </div>
 
@@ -361,7 +373,7 @@
                                 <input type="text"
                                        style="width: 60%;margin-right:5%;text-align: right;color:red;"
                                        readonly class="form-control"
-                                       value="-<?php echo number_format($valore_disdette[1]->valore,2,',',' ');?>">
+                                       value="-<?php echo number_format($esito2,2,',',' ');?>">
 
                             </div>
                             <div style="width: 46%">
