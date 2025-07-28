@@ -8,9 +8,6 @@
       <PhpSpecSuiteConfiguration>
         <option name="myPath" value="$PROJECT_DIR$/public_html" />
       </PhpSpecSuiteConfiguration>
-      <PhpSpecSuiteConfiguration>
-        <option name="myPath" value="$PROJECT_DIR$/public_html" />
-      </PhpSpecSuiteConfiguration>
     </suites>
   </component>
 </project>

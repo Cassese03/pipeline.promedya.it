@@ -248,6 +248,12 @@
       <path value="$PROJECT_DIR$/public_html/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/public_html/vendor/twbs/bootstrap" />
       <path value="$PROJECT_DIR$/public_html/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/public_html/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/public_html/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/public_html/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/public_html/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/public_html/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/public_html/vendor/markbaker/matrix" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

@@ -38,6 +38,8 @@ Route::any('operatori', [HomeController::class, 'operatori']);
 Route::any('info', [HomeController::class, 'info']);
 Route::any('mail', [HomeController::class, 'mail']);
 Route::any('logout', [HomeController::class, 'logout']);
+Route::get('import-disdette', [App\Http\Controllers\HomeController::class, 'importDisdette'])->name('import-disdette');
+Route::post('import-disdette', [App\Http\Controllers\HomeController::class, 'importDisdettePost'])->name('import-disdette.post');
 
 
 Route::any('ajax/modifica_ajax/{Id}', [AjaxController::class, 'modifica_ajax']);

@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\ExcelServiceProvider;
 
 /**<
  * Controller principale della pipeline
@@ -508,7 +510,7 @@ class HomeController extends Controller
                 $dipendenti = DB::select('select * from dipendente');
                 $segnalato = Segnalato::all();
                 $prodotto = DB::select('select * from prodotto');
-                return View::make('concessionario', compact('prodotto','utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
+                return View::make('concessionario', compact('prodotto', 'utente', 'dipendenti', 'rows', 'operatori', 'segnalato', 'column'));
             }
             $rows = DB::select('select * from pipeline_concessionario order by Id desc');
             $dipendenti = DB::select('select * from dipendente');
@@ -1275,4 +1277,73 @@ class HomeController extends Controller
             return View::make('login', compact('error'));
         }
     }
+
+    public function importDisdette()
+    {
+        $utente = session('utente');
+        return view('import-disdette', compact('utente'));
+    }
+
+    public function importDisdettePost(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xls,xlsx',
+        ]);
+
+        $file = $request->file('file');
+
+        // Importa con calcolo delle formule
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($file);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
+
+        $datiPreparati = [];
+        foreach ($rows as $i => $row) {
+            if ($i == 0) continue;
+
+            $esito = 0;
+            if (isset($row[12])) {
+                $valoreEsito = trim((string)$row[12]);
+                if ($valoreEsito == 'Recuperato') {
+                    $esito = 1;
+                }
+                if ($valoreEsito == 'Non Recuperabile') {
+                    $esito = 0;
+                }
+                if ($valoreEsito == 'Recuperabile') {
+                    $esito = 2;
+                }
+            }
+
+            $datiPreparati[] = [
+                'Data_Disdetta' => is_numeric($row[0]) ?
+                    \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(floatval($row[0]))->format('Y-m-d') :
+                    date('Y-m-d'),
+                'Sales' => $row[7] ?? null,         // H
+                'Ragione_Sociale' => $row[8] ?? null, // I
+                'Valore_Contratto' => $row[10] ?? null, // K
+                'Valore_Ricontrattato' => $row[11] ?? null, // L
+                'Esito' => $esito,
+                'Prodotto' => $row[14] ?? null,     // O
+                'Motivazione' => trim($worksheet->getCell('Q' . ($i + 1))->getCalculatedValue() ?? ''),
+            ];
+        }
+
+        //dd($datiPreparati);
+
+        foreach ($datiPreparati as $dati) {
+            if ($dati["Sales"] == null && $dati["Ragione_Sociale"] == null && $dati["Valore_Contratto"] == null
+                && $dati["Valore_Ricontrattato"] == null
+                && $dati["Esito"] == 0
+                && $dati["Prodotto"] == null
+                && $dati["Motivazione"] == "")
+                continue;
+            DB::table('disdette')->insert($dati);
+        }
+
+        return back()->with('success', 'File importato correttamente!');
+    }
+
 }

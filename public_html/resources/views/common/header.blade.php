@@ -223,6 +223,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo URL::asset('import-disdette') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-file-excel"></i>
+                            <p>Importatore Excel Disdette</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo URL::asset('') ?>" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>Statistiche (KPI)</p>
