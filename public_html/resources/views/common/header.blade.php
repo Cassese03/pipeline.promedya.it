@@ -157,6 +157,9 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button:active {
             background: blue !important;
         }
+        .submenu-item {
+            padding-left: 20px;
+        }
 
     </style>
 
@@ -223,12 +226,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo URL::asset('import-disdette') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-file-excel"></i>
-                            <p>Importatore Excel Disdette</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="<?php echo URL::asset('') ?>" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>Statistiche (KPI)</p>
@@ -252,64 +249,78 @@
                             <p>Tabelle</p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('dipendenti') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-user-check"></i>
                                     <p>Dipendenti</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('motivazione') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-circle-notch"></i>
                                     <p>Motivazioni</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('esito') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-check"></i>
                                     <p>Esito Trattativa</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('incentivi') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-chart-area"></i>
                                     <p>Incentivi</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('opening') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-chart-pie"></i>
                                     <p>Opening</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('prodotti') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-building"></i>
                                     <p>Prodotti</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('categoria') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-ad"></i>
                                     <p>Categoria</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('segnalato') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-exclamation"></i>
                                     <p>Segnalato</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('operatori') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>Sales</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
                                 <a href="<?php echo URL::asset('mail') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-envelope"></i>
                                     <p>Mail</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Servizi</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item submenu-item">  <!-- aggiunta classe submenu-item -->
+                                <a href="<?php echo URL::asset('import-disdette') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-file-excel"></i>
+                                    <p>Import Excel Disdette</p>
                                 </a>
                             </li>
                         </ul>

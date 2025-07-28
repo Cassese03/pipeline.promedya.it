@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="import excel">
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -560,22 +552,8 @@
       <workItem from="1753689988254" duration="2977000" />
       <workItem from="1753694637259" duration="2333000" />
       <workItem from="1753697319381" duration="124000" />
-    </task>
-    <task id="LOCAL-00066" summary="Order By Valore">
-      <option name="closed" value="true" />
-      <created>1716903725349</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1716903725350</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Mail su Disdette">
-      <option name="closed" value="true" />
-      <created>1717058650557</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1717058650557</updated>
+      <workItem from="1753697447961" duration="177000" />
+      <workItem from="1753698017309" duration="170000" />
     </task>
     <task id="LOCAL-00068" summary="Mail su Disdette IN COPIA A TUTTI">
       <option name="closed" value="true" />
@@ -953,7 +931,23 @@
       <option name="project" value="LOCAL" />
       <updated>1753452038671</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="import excel">
+      <option name="closed" value="true" />
+      <created>1753697459980</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1753697459980</updated>
+    </task>
+    <task id="LOCAL-00116" summary="import excel">
+      <option name="closed" value="true" />
+      <created>1753697625900</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1753697625900</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
