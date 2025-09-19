@@ -27,7 +27,7 @@
             <div class="row">
                 <div style="display: flex;width: 100%;justify-content: center">
                     <div style="min-width: 360px;">
-                        <ul class="charts-css legend legend-rectangle">
+                        <ul class="charts-css legend legend-rectangle" style="flex-direction: row">
                             <li>CONTATTATO</li>
                             <li>DISDETTA</li>
                             <li>RIENTRO</li>
