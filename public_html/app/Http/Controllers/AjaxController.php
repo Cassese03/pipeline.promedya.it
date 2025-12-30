@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Segnalato;
+
+use App\Models\CF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -138,6 +140,8 @@ class AjaxController extends Controller
         $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
+        $cfs = CF::all();
+
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') { ?>
                 <div class="col-md-6">
@@ -150,7 +154,7 @@ class AjaxController extends Controller
                             <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
                                 style="color:red">*</b></label>
-                        <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
+                        <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
                             <input
                                 <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->Id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                 <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -158,6 +162,79 @@ class AjaxController extends Controller
                                 <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                 value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
                         <?php } ?>
+                        <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
+                                <style>
+                                    .select2-container .select2-selection--single {
+                                        height: 50px;
+                                    }
+                                </style>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select id="clientiSelect" class="form-control select2" id="{{$c->COLUMN_NAME}}" name="{{$c->COLUMN_NAME}}"
+                                            onchange="toggleAccordion()">
+                                            <?php
+                                                foreach($cfs as $cf) {
+                                                    $selected = '';
+                                                    if($cf->Descrizione == $r->Ragione_Sociale)
+                                                    $selected = 'selected';
+                                                    echo '<option '.$selected.' value="'.$cf->Descrizione.'"> '.$cf->Descrizione.'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button id="accordionButton" class="btn btn-outline-secondary" type="button"
+                                                data-toggle="collapse" data-target="#accordionContent"
+                                                aria-expanded="false" aria-controls="accordionContent" disabled>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="accordionContent">
+                                    <div class="card card-body" id="contenuto">
+                                    </div>
+                                </div>
+                                <script> 
+ 
+                                     function toggleAccordion() {
+                                            var selectElement = document.getElementById('clientiSelect');
+                                            var accordionButton = document.getElementById('accordionButton');
+                                            var accordionContent = document.getElementById('accordionContent');
+
+                                            if (selectElement.value !== "") {
+                                                var selectedValue = document.getElementById("clientiSelect").value;
+
+                                                console.log(selectedValue);
+
+                                                var result = cfs.filter((e) => e.Descrizione.includes(selectedValue))[0]
+                                    
+                                                accordionButton.removeAttribute('disabled');
+                                                accordionContent.classList.add('show');
+                                            
+                                                var content = document.getElementById("contenuto").innerHTML = `
+                                                <div class="form-group">
+                                                        <label>Codice Sap</b>  </label>
+                                                        <input class="form-control" value='${result.xCodSap}' disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Partita Iva</b></label>
+                                                        <input class="form-control" value='${result.PartitaIva}' disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Canone Annualep</b></label>
+                                                        <input class="form-control" value='${parseFloat(result.xImpAss).toFixed(2).replace('.', ',')} €' disabled>
+                                                </div> 
+                                                `
+
+                                            } else {
+                                                accordionButton.setAttribute('disabled', 'disabled');
+                                                accordionContent.classList.remove('show');
+                                            }
+                                        }
+
+                                  
+                                </script>
+                                <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                             <select style="width:100%" class="form-control"
                                     id="<?php echo $c->COLUMN_NAME; ?>"
@@ -329,6 +406,8 @@ class AjaxController extends Controller
         $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
+        $cfs = CF::all();
+
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') {
                 ?>
@@ -343,7 +422,7 @@ class AjaxController extends Controller
                             <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
                                 style="color:red">*</b></label>
-                        <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
+                        <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta'  && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
                             <input
                                 <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->Id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                 <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->Id . '" name="' . $c->COLUMN_NAME . '"'; ?>
@@ -364,6 +443,79 @@ class AjaxController extends Controller
                                 <?php } ?>
                             </select>
                         <?php } ?>
+                         <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
+                                <style>
+                                    .select2-container .select2-selection--single {
+                                        height: 50px;
+                                    }
+                                </style>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select id="clientiSelect" class="form-control select2" id="{{$c->COLUMN_NAME}}" name="{{$c->COLUMN_NAME}}"
+                                            onchange="toggleAccordion()">
+                                            <?php
+                                                foreach($cfs as $cf) {
+                                                    $selected = '';
+                                                    if($cf->Descrizione == $r->Ragione_Sociale)
+                                                    $selected = 'selected';
+                                                    echo '<option '.$selected.' value="'.$cf->Descrizione.'"> '.$cf->Descrizione.'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button id="accordionButton" class="btn btn-outline-secondary" type="button"
+                                                data-toggle="collapse" data-target="#accordionContent"
+                                                aria-expanded="false" aria-controls="accordionContent" disabled>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="accordionContent">
+                                    <div class="card card-body" id="contenuto">
+                                    </div>
+                                </div>
+                                <script> 
+ 
+                                     function toggleAccordion() {
+                                            var selectElement = document.getElementById('clientiSelect');
+                                            var accordionButton = document.getElementById('accordionButton');
+                                            var accordionContent = document.getElementById('accordionContent');
+
+                                            if (selectElement.value !== "") {
+                                                var selectedValue = document.getElementById("clientiSelect").value;
+
+                                                console.log(selectedValue);
+
+                                                var result = cfs.filter((e) => e.Descrizione.includes(selectedValue))[0]
+                                    
+                                                accordionButton.removeAttribute('disabled');
+                                                accordionContent.classList.add('show');
+                                            
+                                                var content = document.getElementById("contenuto").innerHTML = `
+                                                <div class="form-group">
+                                                        <label>Codice Sap</b>  </label>
+                                                        <input class="form-control" value='${result.xCodSap}' disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Partita Iva</b></label>
+                                                        <input class="form-control" value='${result.PartitaIva}' disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Canone Annualep</b></label>
+                                                        <input class="form-control" value='${parseFloat(result.xImpAss).toFixed(2).replace('.', ',')} €' disabled>
+                                                </div> 
+                                                `
+
+                                            } else {
+                                                accordionButton.setAttribute('disabled', 'disabled');
+                                                accordionContent.classList.remove('show');
+                                            }
+                                        }
+
+                                  
+                                </script>
+                                <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
                             <select style="width:100% " class="form-control modifica_vinta"
                                     onchange="check_vinta('modifica_vinta')"

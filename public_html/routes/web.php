@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\CFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AjaxController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\AjaxController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// require __DIR__.'/api.php';
 
 Route::any('', [HomeController::class, 'primapagina']);
 Route::any('/statistiche/{data}', [HomeController::class, 'statistiche']);
