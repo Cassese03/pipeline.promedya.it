@@ -17,18 +17,25 @@
         @else
 
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
-                    id="aggiungi_motivazione"
-                    onclick="aggiungi()" name="aggiungi_motivazione">
+                    id="aggiungi_incentivo"
+                    onclick="aggiungi()" name="aggiungi_incentivo">
                 Aggiungi
-                Nuova
-                Motivazione
+                Nuovo
+                Incentivo
             </button>
         @endif
+
         <table id="example3" class="table table-bordered datatable">
             <thead>
             <tr>
                 <th class="no-sort">Id</th>
-                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Obiettivo</th>
+                <th class="no-sort">Target</th>
+                @if ($utente->username == 'Giovanni Tutino')
+                    <th class="no-sort">Incentivo</th>
+                    <th class="no-sort">Anno</th>
+                    <th class="no-sort">Semestre</th>
+                @endif
                 <th class="no-sort">Azioni</th>
             </tr>
             </thead>
@@ -36,11 +43,15 @@
             @foreach($table as $p)
                 <tr>
                     <td>{{ $p->id}}</td>
-                    <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->desc_obiettivo}}</td>
+                    <td>{{ $p->target }}</td>
                     @if ($utente->username != 'Giovanni Tutino')
-                        <td>
+                        <td style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
                         </td>
                     @else
+                        <td>{{ $p->incentivo }}</td>
+                        <td>{{ $p->anno }}</td>
+                        <td>{{ $p->semestre }}</td>
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -54,6 +65,10 @@
                                             <path
                                                 d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                         </svg>
+                                    </button>
+                                    <button type="button" onclick="duplica(<?php echo $p->id;?>)"
+                                            class="form-control btn-warning">
+                                        <i class="fa fa-clone" aria-hidden="true" style="color: white"></i>
                                     </button>
                                     <button type="submit" name="elimina" value="<?php echo $p->id;?>"
                                             class="form-control btn-danger">
@@ -81,22 +96,38 @@
 @include('common.footer')
 
 <?php foreach ($table as $p){ ?>
-<form method="post" enctype="multipart/form-data" action="/motivazione">
+<form method="post" enctype="multipart/form-data" action="/incentivi">
     @csrf
     <div class="modal fade" id="modal_modifica_<?php echo $p->id;?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Prodotto</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Incentivo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="descrizione">
-                        Descrizione
+                    <label for="desc_obiettivo">
+                        Descrizione Obiettivo
                     </label>
-                    <input class="form-control" name="descrizione" id="descrizione" value="{{ $p->descrizione }}">
+                    <input class="form-control" name="desc_obiettivo" id="desc_obiettivo"
+                           value="{{ $p->desc_obiettivo }}">
+                    <label for="target">
+                        Target
+                    </label>
+                    <input class="form-control" type="number" step="0.01" min="0" name="target" id="target"
+                           value="{{ $p->target }}">
+                    <label for="incentivo">
+                        Incentivo
+                    </label>
+                    <input class="form-control" type="number" step="0.01" min="0" name="incentivo" id="incentivo"
+                           value="{{ $p->incentivo }}">
+                    <label for="semestre">
+                        Semestre
+                    </label>
+                    <input class="form-control" type="number" step="1" min="1" max="2" name="semestre" id="semestre"
+                           value="{{ $p->semestre }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -114,14 +145,14 @@
 
 
 <form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova motivazione?')" enctype="multipart/form-data"
-      action="/motivazione">
+      onsubmit="return confirm('Sei sicuro di voler aggiungere il nuovo incentivo?')" enctype="multipart/form-data"
+      action="/incentivi">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea motivazione</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea incentivo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -129,9 +160,22 @@
                 <div class="modal-body">
                     <div class="row">
                         <label for="descrizione">
-                            Descrizione
+                            Descrizione Obiettivo
                         </label>
-                        <input class="form-control" name="descrizione" id="descrizione">
+                        <input class="form-control" name="desc_obiettivo" id="desc_obiettivo_agg">
+                        <label for="target">
+                            Target
+                        </label>
+                        <input class="form-control" type="number" step="0.01" min="0" name="target" id="target_agg">
+                        <label for="incentivo">
+                            Incentivo
+                        </label>
+                        <input class="form-control" type="number" step="0.01" min="0" name="incentivo" id="incentivo_agg">
+                        <label for="semestre">
+                            Semestre
+                        </label>
+                        <input class="form-control" type="number" step="1" min="1" max="2" name="semestre" id="semestre_agg">
+                        <div class="clearfix"></div>
                     </div>
                     <div class=" clearfix">
                     </div>
@@ -157,4 +201,21 @@
         $('#modal_modifica_' + id).modal('show');
     }
 
+    function duplica(id) {
+        duplica_ajax(id);
+        $('#modal_duplica_' + id).modal('show');
+    }
+
+    function duplica_ajax(id) {
+
+        $.ajax({
+            url: '<?php echo URL::asset('ajax/duplica_ajax_INCENTIVI') ?>/' + id,
+            type: "POST",
+            //contentType: "application/json",
+            data: {}
+        }).done(function (result) {
+            $('#modal_aggiungi').modal('show');
+            eval(result);
+        });
+    }
 </script>

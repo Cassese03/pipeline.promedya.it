@@ -52,6 +52,12 @@ class AjaxController extends Controller
                         ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
                     else
                         ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                }
+                if ($c->COLUMN_NAME == 'Inc_Anno_Solare') {
+                    if (isset(${$c->COLUMN_NAME}))
+                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                    else
+                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
                 } ?>
 
                 <td class="no-sort"
@@ -131,17 +137,21 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
+        $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         $cfs = CF::all();
 
         foreach ($column as $c) {
-            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') { ?>
+            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') { ?>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                        <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
-                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
                                 style="color:red">*</b></label>
                         <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
@@ -242,21 +252,13 @@ class AjaxController extends Controller
                                     onchange="check_vinta('duplica_vinta')"
                                     id="<?php echo $c->COLUMN_NAME . $r->Id ?>"
                                     name="<?php echo $c->COLUMN_NAME ?>">
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 2)
-                                    echo 'selected' ?> value="2">IN CORSO
-                                </option>
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 1)
-                                    echo 'selected' ?> value="1">SI
-                                </option>
-                                <option <?php if ($r->{
-                                    $c->COLUMN_NAME
-                                    } == 0)
-                                    echo 'selected' ?> value="0">NO
-                                </option>
+                                <?php foreach ($esito_trattativa as $e) { ?>
+                                    <option <?php if ($r->{
+                                        $c->COLUMN_NAME
+                                        } == $e->id)
+                                        echo 'selected' ?>
+                                        value="<?php echo $e->id; ?>"><?php echo $e->descrizione; ?></option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -284,21 +286,12 @@ class AjaxController extends Controller
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
                                 </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'COMMERCIALISTA') echo 'selected'; ?>
-                                    value="COMMERCIALISTA">
-                                    COMMERCIALISTA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'AZIENDA') echo 'selected'; ?>
-                                    value="AZIENDA">
-                                    AZIENDA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'CONSULENTE DEL LAVORO') echo 'selected'; ?>
-                                    value="CONSULENTE DEL LAVORO">
-                                    CONSULENTE DEL LAVORO
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'ALTRO') echo 'selected'; ?> value="ALTRO">
-                                    ALTRO
-                                </option>
+                                <?php foreach ($categoria as $c1) { ?>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
+                                        value="<?php echo $c1->descrizione ?>">
+                                        <?php echo $c1->descrizione ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -410,19 +403,23 @@ class AjaxController extends Controller
         $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
         $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
         $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
+        $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
         $cfs = CF::all();
 
         foreach ($column as $c) {
-            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre') {
+            if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') {
                 ?>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>
-                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                             <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
-                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Trattativa') echo 'Trattativa'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                            <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                             <b
                                 style="color:red">*</b></label>
                         <?php if ($c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Vinta'  && $c->COLUMN_NAME != 'Ragione_Sociale' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Segnalato' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Prodotto' && $c->COLUMN_NAME != 'Dipendente' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria' && $c->COLUMN_NAME != 'Tipo_Cliente') { ?>
@@ -524,21 +521,28 @@ class AjaxController extends Controller
                                     onchange="check_vinta('modifica_vinta')"
                                     id="<?php echo $c->COLUMN_NAME . $r->Id ?>"
                                     name="<?php echo $c->COLUMN_NAME ?>">
-                                <option <?php if ($r->{
+                                <?php foreach ($esito_trattativa as $e) { ?>
+                                    <option <?php if ($r->{
+                                        $c->COLUMN_NAME
+                                        } == $e->id)
+                                        echo 'selected' ?>
+                                        value="<?php echo $e->id; ?>"><?php echo $e->descrizione; ?></option>
+                                <?php } ?>
+                                <!-- <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 2)
-                                    echo 'selected' ?> value="2">IN CORSO
+                                    echo 'selected' */ ?> value="2">IN CORSO
                                 </option>
-                                <option <?php if ($r->{
+                                <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 1)
-                                    echo 'selected' ?> value="1">SI
+                                    echo 'selected' */ ?> value="1">SI
                                 </option>
-                                <option <?php if ($r->{
+                                <option <?php /*if ($r->{
                                     $c->COLUMN_NAME
                                     } == 0)
-                                    echo 'selected' ?> value="0">NO
-                                </option>
+                                    echo 'selected' */ ?> value="0">NO
+                                </option>-->
                             </select>
                         <?php } ?>
 
@@ -566,21 +570,12 @@ class AjaxController extends Controller
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
                                 </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'COMMERCIALISTA') echo 'selected'; ?>
-                                    value="COMMERCIALISTA">
-                                    COMMERCIALISTA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'AZIENDA') echo 'selected'; ?>
-                                    value="AZIENDA">
-                                    AZIENDA
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'CONSULENTE DEL LAVORO') echo 'selected'; ?>
-                                    value="CONSULENTE DEL LAVORO">
-                                    CONSULENTE DEL LAVORO
-                                </option>
-                                <option <?php if ($r->{$c->COLUMN_NAME} == 'ALTRO') echo 'selected'; ?> value="ALTRO">
-                                    ALTRO
-                                </option>
+                                <?php foreach ($categoria as $c1) { ?>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == $c1->descrizione) echo 'selected'; ?>
+                                        value="<?php echo $c1->descrizione ?>">
+                                        <?php echo $c1->descrizione ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                         <?php } ?>
 
@@ -602,7 +597,7 @@ class AjaxController extends Controller
                         <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
                             <select style="width:100%"
-                                    class="form-control modifica_motivazione" <?php if ($r->Vinta != 0) echo ' disabled="disabled"'; ?>
+                                    class="form-control modifica_motivazione" <?php if ($r->Vinta != 1) echo ' disabled="disabled"'; ?>
                                     id="<?php echo $c->COLUMN_NAME; ?>"
                                     name="<?php echo $c->COLUMN_NAME; ?>">
                                 <option value="">Inserisci Valore...
@@ -684,4 +679,228 @@ class AjaxController extends Controller
             <?php } ?>
         <?php } ?>
     <?php }
+
+    public
+    function modifica_ajax_DISDETTA($id)
+    {
+        $dati = file_get_contents("php://input");
+        $json = json_decode($dati);
+        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+        $operatori = DB::select('select * from operatori');
+        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
+
+        foreach ($column as $c) {
+            if ($c->COLUMN_NAME != 'id') {
+                ?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <b
+                                style="color:red">*</b></label>
+                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Prodotto') { ?>
+                            <input
+                                <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
+                        <?php } else { ?>
+                            <?php if ($c->COLUMN_NAME == 'Esito') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="undefined">Nessun Esito...
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">
+                                        CONTATTATO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">RIENTRO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">DISDETTA
+                                    </option>
+                                </select>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                <select style="width:100%"
+                                        class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                    <?php foreach ($motivazione as $m) { ?>
+                                        <option
+                                            value="<?php echo $m->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $m->descrizione) echo 'selected'; ?> >
+                                            <?php echo $m->descrizione; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Note') { ?>
+
+                                <textarea rows="8" cols="100"
+                                          onKeyUp="converti(<?php echo '\'' . $c->COLUMN_NAME . '\''; ?>)"
+                                          class="form-control" type="text" id="<?php echo $c->COLUMN_NAME; ?>"
+                                          name="<?php echo $c->COLUMN_NAME; ?>"><?php echo $r->{
+                                    $c->COLUMN_NAME
+                                    }; ?></textarea>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Sales') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <?php foreach ($operatori as $o) { ?>
+                                        <option
+                                            value="<?php echo $o->username; ?>" <?php if ($o->username == $r->{$c->COLUMN_NAME}) echo 'selected'; ?> >
+                                            <?php echo $o->username; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+
+                            <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
+                                <select style="width:100% " class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                    <?php foreach ($prodotto as $s) { ?>
+                                        <option
+                                            value="<?php echo $s->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >
+                                            <?php echo $s->descrizione; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php }
+
+
+    public
+    function duplica_ajax_DISDETTA($id)
+    {
+        $dati = file_get_contents("php://input");
+        $json = json_decode($dati);
+        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
+        $r = DB::select('SELECT * from disdette where Id = ' . $id)[0];
+        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'disdette\'');
+        $operatori = DB::select('select * from operatori');
+        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
+
+        foreach ($column as $c) {
+            if ($c->COLUMN_NAME != 'id') {
+                ?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <b
+                                style="color:red">*</b></label>
+                        <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Motivazione' && $c->COLUMN_NAME != 'Sales' && $c->COLUMN_NAME != 'Note' && $c->COLUMN_NAME != 'Prodotto') { ?>
+                            <input
+                                <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . $r->id . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . $r->id . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
+                        <?php } else { ?>
+                            <?php if ($c->COLUMN_NAME == 'Esito') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="undefined">Nessun Esito...
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 2) echo 'selected'; ?> value="2">
+                                        CONTATTATO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 1) echo 'selected'; ?> value="1">RIENTRO
+                                    </option>
+                                    <option <?php if ($r->{$c->COLUMN_NAME} == 0) echo 'selected'; ?> value="0">DISDETTA
+                                    </option>
+                                </select>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                <select style="width:100%"
+                                        class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                    <?php foreach ($motivazione as $m) { ?>
+                                        <option
+                                            value="<?php echo $m->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $m->descrizione) echo 'selected'; ?> >
+                                            <?php echo $m->descrizione; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Note') { ?>
+
+                                <textarea rows="8" cols="100"
+                                          onKeyUp="converti(<?php echo '\'' . $c->COLUMN_NAME . '\''; ?>)"
+                                          class="form-control" type="text" id="<?php echo $c->COLUMN_NAME; ?>"
+                                          name="<?php echo $c->COLUMN_NAME; ?>"><?php echo $r->{
+                                    $c->COLUMN_NAME
+                                    }; ?></textarea>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Sales') { ?>
+                                <select style="width:100%" class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <?php foreach ($operatori as $o) { ?>
+                                        <option
+                                            value="<?php echo $o->username; ?>" <?php if ($o->username == $r->{$c->COLUMN_NAME}) echo 'selected'; ?> >
+                                            <?php echo $o->username; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+
+                            <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
+                                <select style="width:100% " class="form-control"
+                                        id="<?php echo $c->COLUMN_NAME; ?>"
+                                        name="<?php echo $c->COLUMN_NAME; ?>">
+                                    <option value="">Inserisci Valore...
+                                    </option>
+                                    <?php foreach ($prodotto as $s) { ?>
+                                        <option
+                                            value="<?php echo $s->descrizione; ?>"
+                                            <?php if ($r->{$c->COLUMN_NAME} == $s->descrizione) echo 'selected'; ?> >
+                                            <?php echo $s->descrizione; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
+
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php }
+
+    public
+    function duplica_ajax_INCENTIVI($id)
+    {
+        $r = DB::select('SELECT * from incentivi where Id = ' . $id);
+        if (sizeof($r) > 0) {
+            $r= $r[0];
+            ?>
+                document.getElementById('desc_obiettivo_agg').value = '<?php echo $r->desc_obiettivo; ?>';
+                document.getElementById('target_agg').value = '<?php echo $r->target; ?>';
+                document.getElementById('incentivo_agg').value = '<?php echo $r->incentivo; ?>';
+                document.getElementById('semestre_agg').value = '<?php echo $r->semestre; ?>';
+            <?php
+        }
+    }
 }

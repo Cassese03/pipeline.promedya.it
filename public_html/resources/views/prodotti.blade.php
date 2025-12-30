@@ -1,49 +1,53 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    @if ($utente->username != 'Giovanni Tutino')
-        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
-                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
-        </div>
-    @else
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-        <section class="content" style="margin:5%;">
-
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 style="color:#007bff">
+            PROMEDYA | Smart Sales Force
+            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        </h1>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="margin:5%;">
+        @if ($utente->username != 'Giovanni Tutino')
+            <div>
+            </div>
+        @else
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_prodotto"
                     onclick="aggiungi()" name="aggiungi_prodotto">
                 Aggiungi
                 Nuovo
                 Prodotto
             </button>
-            <table id="example3" class="table table-bordered datatable">
-                <thead>
+        @endif
+        <table id="example3" class="table table-bordered datatable">
+            <thead>
+            <tr>
+                <th class="no-sort">Id</th>
+                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Gruppo</th>
+                <th class="no-sort">Sottogruppo</th>
+                <th class="no-sort">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($prodotti as $p)
                 <tr>
-                    <th class="no-sort">Id</th>
-                    <th class="no-sort">Descrizione</th>
-                    <th class="no-sort">Gruppo</th>
-                    <th class="no-sort">Azioni</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($prodotti as $p)
-                    <tr>
-                        <td>{{ $p->id}}</td>
-                        <td>{{ $p->descrizione }}</td>
-                        <td>{{ $p->gruppo }}</td>
-                        <form enctype="multipart/form-data" method="post"
-                              onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                            @csrf
-                            <td class="no-sort"
-                                style="background:white;border-width:1px">
+                    <td>{{ $p->id}}</td>
+                    <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->gruppo }}</td>
+                    <td>{{ $p->sottogruppo }}</td>
+                    <form enctype="multipart/form-data" method="post"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                        @csrf
+                        <td class="no-sort"
+                            style="background:white;border-width:1px">
+                            @if ($utente->username != 'Giovanni Tutino')
+                                <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
+                                </div>
+                            @else
                                 <div style="display:flex;gap: 2px;">
                                     <button type="button" onclick="modifica(<?php echo $p->id;?>)"
                                             class="form-control btn-primary">
@@ -64,14 +68,14 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </td>
-                        </form>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </section>
-    @endif
+                            @endif
+                        </td>
+                    </form>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </section>
 </div>
 <!-- /.container-fluid-->
 
@@ -99,6 +103,10 @@
                         Gruppo
                     </label>
                     <input class="form-control" name="gruppo" id="gruppo" value="{{ $p->gruppo }}">
+                    <label for="sottogruppo">
+                        SottoGruppo
+                    </label>
+                    <input class="form-control" name="sottogruppo" id="sottogruppo" value="{{ $p->sottogruppo }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -139,6 +147,10 @@
                             Gruppo
                         </label>
                         <input class="form-control" name="gruppo" id="gruppo">
+                        <label for="sottogruppo">
+                            SottoGruppo
+                        </label>
+                        <input class="form-control" name="sottogruppo" id="sottogruppo">
 
                     </div>
                     <div class=" clearfix">

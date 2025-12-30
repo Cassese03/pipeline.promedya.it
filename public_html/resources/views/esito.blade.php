@@ -17,11 +17,11 @@
         @else
 
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
-                    id="aggiungi_motivazione"
-                    onclick="aggiungi()" name="aggiungi_motivazione">
+                    id="aggiungi_esito"
+                    onclick="aggiungi()" name="aggiungi_esito">
                 Aggiungi
-                Nuova
-                Motivazione
+                Nuovo
+                esito
             </button>
         @endif
         <table id="example3" class="table table-bordered datatable">
@@ -81,13 +81,13 @@
 @include('common.footer')
 
 <?php foreach ($table as $p){ ?>
-<form method="post" enctype="multipart/form-data" action="/motivazione">
+<form method="post" enctype="multipart/form-data" action="/esito">
     @csrf
     <div class="modal fade" id="modal_modifica_<?php echo $p->id;?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Prodotto</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Esito</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -114,14 +114,14 @@
 
 
 <form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova motivazione?')" enctype="multipart/form-data"
-      action="/motivazione">
+      onsubmit="return confirm('Sei sicuro di voler aggiungere il nuovo esito?')" enctype="multipart/form-data"
+      action="/esito">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea motivazione</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea esito</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

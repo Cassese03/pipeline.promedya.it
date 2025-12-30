@@ -1,48 +1,49 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    @if ($utente->username != 'Giovanni Tutino')
-        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
-                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
-        </div>
-    @else
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-        <section class="content" style="margin:5%;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 style="color:#007bff">
+            PROMEDYA | Smart Sales Force
+            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        </h1>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="margin:5%;">
 
+        @if ($utente->username == 'Giovanni Tutino')
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_operatori"
                     onclick="aggiungi()" name="aggiungi_operatori">
                 Aggiungi
                 Nuovo
                 Operatore
             </button>
-            <table id="example3" class="table table-bordered datatable">
-                <thead>
+
+        @endif
+        <table id="example3" class="table table-bordered datatable">
+            <thead>
+            <tr>
+                <th class="no-sort">Id</th>
+                <th class="no-sort">Username</th>
+                <th class="no-sort">Email</th>
+                <th class="no-sort">Password</th>
+                <th class="no-sort">Gruppo</th>
+                <th class="no-sort">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($table as $p)
                 <tr>
-                    <th class="no-sort">Id</th>
-                    <th class="no-sort">Username</th>
-                    <th class="no-sort">Email</th>
-                    <th class="no-sort">Password</th>
-                    <th class="no-sort">Gruppo</th>
-                    <th class="no-sort">Azioni</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($table as $p)
-                    <tr>
-                        <td>{{ $p->id}}</td>
-                        <td>{{ $p->username }}</td>
-                        <td>{{ $p->email }}</td>
-                        <td>{{ $p->password }}</td>
-                        <td>{{ $p->gruppo }}</td>
+                    <td>{{ $p->id}}</td>
+                    <td>{{ $p->username }}</td>
+                    <td>{{ $p->email }}</td>
+                    <td>{{ $p->password }}</td>
+                    <td>{{ $p->gruppo }}</td>
+
+                    @if ($utente->username != 'Giovanni Tutino')
+                        <div></div>
+                    @else
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -74,12 +75,12 @@
                                 </div>
                             </td>
                         </form>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </section>
-    @endif
+                    @endif
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </section>
 </div>
 <!-- /.container-fluid-->
 

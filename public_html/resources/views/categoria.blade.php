@@ -15,13 +15,11 @@
             <div>
             </div>
         @else
-
-            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
-                    id="aggiungi_motivazione"
-                    onclick="aggiungi()" name="aggiungi_motivazione">
+            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_categoria"
+                    onclick="aggiungi()" name="aggiungi_categoria">
                 Aggiungi
-                Nuova
-                Motivazione
+                Nuovo
+                categoria
             </button>
         @endif
         <table id="example3" class="table table-bordered datatable">
@@ -33,19 +31,19 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($table as $p)
+            @foreach($categoria as $p)
                 <tr>
                     <td>{{ $p->id}}</td>
                     <td>{{ $p->descrizione }}</td>
-                    @if ($utente->username != 'Giovanni Tutino')
-                        <td>
-                        </td>
-                    @else
-                        <form enctype="multipart/form-data" method="post"
-                              onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                            @csrf
-                            <td class="no-sort"
-                                style="background:white;border-width:1px">
+                    <form enctype="multipart/form-data" method="post"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                        @csrf
+                        <td class="no-sort"
+                            style="background:white;border-width:1px">
+                            @if ($utente->username != 'Giovanni Tutino')
+                                <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
+                                </div>
+                            @else
                                 <div style="display:flex;gap: 2px;">
                                     <button type="button" onclick="modifica(<?php echo $p->id;?>)"
                                             class="form-control btn-primary">
@@ -66,9 +64,9 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </td>
-                        </form>
-                    @endif
+                            @endif
+                        </td>
+                    </form>
                 </tr>
             @endforeach
             </tbody>
@@ -80,14 +78,14 @@
 
 @include('common.footer')
 
-<?php foreach ($table as $p){ ?>
-<form method="post" enctype="multipart/form-data" action="/motivazione">
+<?php foreach ($categoria as $p){ ?>
+<form method="post" enctype="multipart/form-data" action="/categoria">
     @csrf
     <div class="modal fade" id="modal_modifica_<?php echo $p->id;?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Prodotto</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica categoria</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -114,24 +112,26 @@
 
 
 <form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova motivazione?')" enctype="multipart/form-data"
-      action="/motivazione">
+      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova categoria?')" enctype="multipart/form-data"
+      action="/categoria">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea motivazione</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea categoria</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
+
                         <label for="descrizione">
                             Descrizione
                         </label>
                         <input class="form-control" name="descrizione" id="descrizione">
+
                     </div>
                     <div class=" clearfix">
                     </div>

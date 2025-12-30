@@ -1,42 +1,49 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    @if ($utente->username != 'Giovanni Tutino')
-        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
-                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
-        </div>
-    @else
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-        <section class="content" style="margin:5%;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 style="color:#007bff">
+            PROMEDYA | Smart Sales Force
+            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        </h1>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="margin:5%;">
+        @if ($utente->username != 'Giovanni Tutino')
+            <div>
+            </div>
+        @else
 
-            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_dipendente"
+            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
+                    id="aggiungi_dipendente"
                     onclick="aggiungi()" name="aggiungi_dipendente">
                 Aggiungi
                 Nuovo
                 Dipendente
             </button>
+        @endif
+
             <table id="example3" class="table table-bordered datatable">
-                <thead>
+            <thead>
+            <tr>
+                <th class="no-sort">Id</th>
+                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Valore Annuale Lordo</th>
+                <th class="no-sort">Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($table as $p)
                 <tr>
-                    <th class="no-sort">Id</th>
-                    <th class="no-sort">Descrizione</th>
-                    <th class="no-sort">Azioni</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($table as $p)
-                    <tr>
-                        <td>{{ $p->id}}</td>
-                        <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->id}}</td>
+                    <td>{{ $p->descrizione }}</td>
+                    <td>{{ $p->Valore_Annuale_Lordo }}</td>
+                    @if ($utente->username != 'Giovanni Tutino')
+                        <td style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
+                        </td>
+                    @else
                         <form enctype="multipart/form-data" method="post"
                               onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                             @csrf
@@ -64,12 +71,12 @@
                                 </div>
                             </td>
                         </form>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </section>
-    @endif
+                    @endif
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </section>
 </div>
 <!-- /.container-fluid-->
 
@@ -93,6 +100,10 @@
                         Descrizione
                     </label>
                     <input class="form-control" name="descrizione" id="descrizione" value="{{ $p->descrizione }}">
+                    <label for="Valore_Annuale_Lordo">
+                        Valore Annuale Lordo
+                    </label>
+                    <input class="form-control" name="Valore_Annuale_Lordo" id="Valore_Annuale_Lordo" value="{{ $p->Valore_Annuale_Lordo }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -128,6 +139,10 @@
                             Descrizione
                         </label>
                         <input class="form-control" name="descrizione" id="descrizione">
+                        <label for="Valore_Annuale_Lordo">
+                            Valore Annuale Lordo
+                        </label>
+                        <input class="form-control" name="Valore_Annuale_Lordo" id="Valore_Annuale_Lordo">
                     </div>
                     <div class=" clearfix">
                     </div>

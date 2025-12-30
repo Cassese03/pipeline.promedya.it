@@ -17,18 +17,19 @@
         @else
 
             <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px"
-                    id="aggiungi_motivazione"
-                    onclick="aggiungi()" name="aggiungi_motivazione">
+                    id="aggiungi_opening"
+                    onclick="aggiungi()" name="aggiungi_opening">
                 Aggiungi
-                Nuova
-                Motivazione
+                Nuovo
+                Opening
             </button>
         @endif
         <table id="example3" class="table table-bordered datatable">
             <thead>
             <tr>
                 <th class="no-sort">Id</th>
-                <th class="no-sort">Descrizione</th>
+                <th class="no-sort">Valore Opening</th>
+                <th class="no-sort">Anno</th>
                 <th class="no-sort">Azioni</th>
             </tr>
             </thead>
@@ -36,7 +37,8 @@
             @foreach($table as $p)
                 <tr>
                     <td>{{ $p->id}}</td>
-                    <td>{{ $p->descrizione }}</td>
+                    <td>{{ number_format($p->Val_Opening,2,',','') }}</td>
+                    <td>{{ $p->Anno }}</td>
                     @if ($utente->username != 'Giovanni Tutino')
                         <td>
                         </td>
@@ -81,22 +83,23 @@
 @include('common.footer')
 
 <?php foreach ($table as $p){ ?>
-<form method="post" enctype="multipart/form-data" action="/motivazione">
+<form method="post" enctype="multipart/form-data" action="/opening">
     @csrf
     <div class="modal fade" id="modal_modifica_<?php echo $p->id;?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Prodotto</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica opening</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="descrizione">
-                        Descrizione
+                    <label for="Val_Opening">
+                        Valore Opening
                     </label>
-                    <input class="form-control" name="descrizione" id="descrizione" value="{{ $p->descrizione }}">
+                    <input type="number" step="0.01" class="form-control" name="Val_Opening" id="Val_Opening"
+                           value="{{ number_format($p->Val_Opening,2,'.','') }}">
                     <div class="clearfix"></div>
                 </div>
 
@@ -114,24 +117,28 @@
 
 
 <form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova motivazione?')" enctype="multipart/form-data"
-      action="/motivazione">
+      onsubmit="return confirm('Sei sicuro di voler aggiungere il nuovo opening?')" enctype="multipart/form-data"
+      action="/opening">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea motivazione</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea opening</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <label for="descrizione">
-                            Descrizione
+                        <label for="Val_Opening">
+                            Valore Opening
                         </label>
-                        <input class="form-control" name="descrizione" id="descrizione">
+                        <input class="form-control" name="Val_Opening" id="Val_Opening">
+                        <label for="Anno">
+                            Anno
+                        </label>
+                        <input class="form-control" name="Anno" id="Anno">
                     </div>
                     <div class=" clearfix">
                     </div>

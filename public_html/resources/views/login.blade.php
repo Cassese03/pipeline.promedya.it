@@ -40,9 +40,10 @@
 
         {{--<img style="margin:0 auto;display:block;height: auto;width: 100%;padding:40px"
              src="<?php echo URL::asset('logo_promedya.png') ?>">--}}
-        <img style="margin:0 auto;display:block;height: auto;width: 100%;padding:40px"
+        <img style="margin:0 auto;display:block;height: auto;width: 100%;padding:15px"
              src="<?php echo URL::asset('Promedya_Logo_PL.jpg') ?>">
 <br>
+
         @if(isset($risposta) && $risposta != '')
             <p class="login-box-msg" style="color:red">{{ $risposta }}</p>
         @endif
@@ -75,6 +76,9 @@
                 </div>
                 <!-- /.col -->
             </div>
+
+            <img style="margin:0 auto;display:block;height: auto;width: 100%;padding:15px"
+                 src="<?php echo URL::asset('LogoWkiPartner.png') ?>">
         </form>
 
     </div>

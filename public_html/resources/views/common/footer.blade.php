@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Sales Force</b> (ver. GT.321.24)
+        <b>Smart Sales Force</b> (ver. GT.389.25)
     </div>
     <strong><a href="#">Promedya SRL</a> - IT 03144930645 </strong>
     {{--&copy; 2024--}}
@@ -45,9 +45,10 @@
 <script src="<?php echo URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
 <script src="<?php echo URL::asset('bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
@@ -68,7 +69,7 @@
             pagingType: "simple",
             dom: 'lBfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'excel', 'copy', 'csv', 'pdf', 'print'
             ],
             columnDefs: [
                 {targets: 'no-sort', orderable: false,},

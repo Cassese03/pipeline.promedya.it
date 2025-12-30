@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="">
+    <list default="true" id="54c7dd48-cecf-4528-bee8-98c897a54322" name="Changes" comment="import excel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_html/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/resources/views/common/header.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +34,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Cassese03&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Cassese03/pipeline.promedya.it.git&quot;,
+    &quot;accountId&quot;: &quot;2b3a6ae3-b699-496c-a93a-83bb39007429&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -270,6 +282,12 @@
       <path value="$PROJECT_DIR$/public_html/vendor/almasaeed2010/adminlte" />
       <path value="$PROJECT_DIR$/public_html/vendor/twbs/bootstrap" />
       <path value="$PROJECT_DIR$/public_html/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/public_html/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/public_html/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/public_html/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/public_html/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/public_html/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/public_html/vendor/markbaker/matrix" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -284,13 +302,15 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;modifiche&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/pipeline.promedya.it/public_html/resources/views&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -318,6 +338,14 @@
       <TestRunner configuration_file="$PROJECT_DIR$/public_html/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PS-251.26094.133" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.26094.133" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -397,7 +425,529 @@
       <workItem from="1707414760055" duration="4297000" />
       <workItem from="1707487522158" duration="796000" />
       <workItem from="1707490228099" duration="20000" />
+      <workItem from="1708594201370" duration="76000" />
+      <workItem from="1708688226212" duration="392000" />
+      <workItem from="1709291539841" duration="281000" />
+      <workItem from="1709638245743" duration="752000" />
+      <workItem from="1709639271376" duration="45000" />
+      <workItem from="1709891841357" duration="193000" />
+      <workItem from="1710255685634" duration="3581000" />
+      <workItem from="1710262451969" duration="2472000" />
+      <workItem from="1710265130546" duration="288000" />
+      <workItem from="1710318615626" duration="1174000" />
+      <workItem from="1710340359022" duration="30000" />
+      <workItem from="1710340396615" duration="604000" />
+      <workItem from="1710342095882" duration="46000" />
+      <workItem from="1710429871469" duration="622000" />
+      <workItem from="1710519996475" duration="212000" />
+      <workItem from="1710520684402" duration="235000" />
+      <workItem from="1710521367758" duration="638000" />
+      <workItem from="1710754607171" duration="83000" />
+      <workItem from="1710759322281" duration="1896000" />
+      <workItem from="1710771959786" duration="282000" />
+      <workItem from="1710775658725" duration="598000" />
+      <workItem from="1710778733913" duration="49000" />
+      <workItem from="1710778832243" duration="82000" />
+      <workItem from="1710781774012" duration="216000" />
+      <workItem from="1710868916694" duration="490000" />
+      <workItem from="1710943476461" duration="3689000" />
+      <workItem from="1710952696958" duration="1226000" />
+      <workItem from="1711018059677" duration="821000" />
+      <workItem from="1711034465720" duration="59000" />
+      <workItem from="1711466667283" duration="328000" />
+      <workItem from="1711469919797" duration="11000" />
+      <workItem from="1712301375034" duration="178000" />
+      <workItem from="1712328364888" duration="114000" />
+      <workItem from="1712328507739" duration="1328000" />
+      <workItem from="1713280415010" duration="969000" />
+      <workItem from="1713537921639" duration="832000" />
+      <workItem from="1713780520981" duration="2041000" />
+      <workItem from="1713782970595" duration="45000" />
+      <workItem from="1713783370203" duration="1263000" />
+      <workItem from="1714488798216" duration="2000" />
+      <workItem from="1714491669786" duration="11000" />
+      <workItem from="1714742730668" duration="840000" />
+      <workItem from="1715164314494" duration="621000" />
+      <workItem from="1715183741352" duration="49000" />
+      <workItem from="1715252271264" duration="81000" />
+      <workItem from="1715588094018" duration="5861000" />
+      <workItem from="1715606123046" duration="220000" />
+      <workItem from="1715607536738" duration="6792000" />
+      <workItem from="1715690770794" duration="1049000" />
+      <workItem from="1715696841432" duration="3057000" />
+      <workItem from="1715701192084" duration="2973000" />
+      <workItem from="1715843818300" duration="133000" />
+      <workItem from="1715855236520" duration="4641000" />
+      <workItem from="1715874992301" duration="144000" />
+      <workItem from="1715934491285" duration="1272000" />
+      <workItem from="1715937610620" duration="69000" />
+      <workItem from="1715937749595" duration="2061000" />
+      <workItem from="1715940984300" duration="156000" />
+      <workItem from="1716200495360" duration="103000" />
+      <workItem from="1716202328217" duration="138000" />
+      <workItem from="1716220006132" duration="319000" />
+      <workItem from="1716303144828" duration="1316000" />
+      <workItem from="1716884612805" duration="96000" />
+      <workItem from="1716884822004" duration="1243000" />
+      <workItem from="1716901745220" duration="813000" />
+      <workItem from="1716903658337" duration="74000" />
+      <workItem from="1717058154897" duration="497000" />
+      <workItem from="1717058872056" duration="37000" />
+      <workItem from="1717059172409" duration="47000" />
+      <workItem from="1717059979588" duration="33000" />
+      <workItem from="1717081623000" duration="3376000" />
+      <workItem from="1717139986452" duration="143000" />
+      <workItem from="1717140184612" duration="1205000" />
+      <workItem from="1717152284186" duration="663000" />
+      <workItem from="1717166167194" duration="2740000" />
+      <workItem from="1717168998746" duration="23000" />
+      <workItem from="1717398687741" duration="405000" />
+      <workItem from="1717400351729" duration="107000" />
+      <workItem from="1717400846608" duration="76000" />
+      <workItem from="1717404451955" duration="103000" />
+      <workItem from="1717418671087" duration="600000" />
+      <workItem from="1717486797126" duration="1037000" />
+      <workItem from="1718008371730" duration="2049000" />
+      <workItem from="1718096016283" duration="738000" />
+      <workItem from="1718198615224" duration="703000" />
+      <workItem from="1718705871608" duration="1011000" />
+      <workItem from="1718811391340" duration="447000" />
+      <workItem from="1719386817524" duration="564000" />
+      <workItem from="1719910602712" duration="337000" />
+      <workItem from="1720079742775" duration="2152000" />
+      <workItem from="1720088450823" duration="308000" />
+      <workItem from="1720105165272" duration="2057000" />
+      <workItem from="1720108226190" duration="296000" />
+      <workItem from="1720596414271" duration="676000" />
+      <workItem from="1720619658272" duration="684000" />
+      <workItem from="1720623921379" duration="273000" />
+      <workItem from="1720624294541" duration="42000" />
+      <workItem from="1720687448080" duration="1897000" />
+      <workItem from="1720707001841" duration="363000" />
+      <workItem from="1720708050834" duration="699000" />
+      <workItem from="1723102930830" duration="211000" />
+      <workItem from="1723103241533" duration="1410000" />
+      <workItem from="1723105851549" duration="30000" />
+      <workItem from="1729496256252" duration="78000" />
+      <workItem from="1735574628215" duration="2229000" />
+      <workItem from="1735806350962" duration="1602000" />
+      <workItem from="1735834830859" duration="9818000" />
+      <workItem from="1738331960391" duration="668000" />
+      <workItem from="1739291649318" duration="164000" />
+      <workItem from="1741253849427" duration="6721000" />
+      <workItem from="1741793840304" duration="14000" />
+      <workItem from="1742479831125" duration="28000" />
+      <workItem from="1742480014322" duration="105000" />
+      <workItem from="1744367112106" duration="469000" />
+      <workItem from="1744375673504" duration="1568000" />
+      <workItem from="1744378519632" duration="162000" />
+      <workItem from="1744379930902" duration="226000" />
+      <workItem from="1744382524053" duration="53000" />
+      <workItem from="1744644666705" duration="1094000" />
+      <workItem from="1744732184817" duration="864000" />
+      <workItem from="1746602983788" duration="3120000" />
+      <workItem from="1746614321607" duration="716000" />
+      <workItem from="1751470289564" duration="907000" />
+      <workItem from="1753450111421" duration="1872000" />
+      <workItem from="1753689988254" duration="2977000" />
+      <workItem from="1753694637259" duration="2333000" />
+      <workItem from="1753697319381" duration="124000" />
+      <workItem from="1753697447961" duration="177000" />
+      <workItem from="1753698017309" duration="170000" />
     </task>
+    <task id="LOCAL-00068" summary="Mail su Disdette IN COPIA A TUTTI">
+      <option name="closed" value="true" />
+      <created>1717058903433</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1717058903433</updated>
+    </task>
+    <task id="LOCAL-00069" summary="CAMBIATO OGGETTO IN MAIL">
+      <option name="closed" value="true" />
+      <created>1717059214506</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1717059214506</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Inserito Ulteriore spazio">
+      <option name="closed" value="true" />
+      <created>1717060006176</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1717060006176</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Statistiche Incentivi">
+      <option name="closed" value="true" />
+      <created>1717140122218</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1717140122218</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Statistiche Incentivi + GESTIONE MOBILE">
+      <option name="closed" value="true" />
+      <created>1717141395038</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1717141395038</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Modifiche varie per PRIVACY">
+      <option name="closed" value="true" />
+      <created>1717152946960</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1717152946960</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Allinemento Grafico">
+      <option name="closed" value="true" />
+      <created>1717167367739</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1717167367739</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Cambiamenti Grafici">
+      <option name="closed" value="true" />
+      <created>1717168903802</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1717168903802</updated>
+    </task>
+    <task id="LOCAL-00076" summary="TOLTO ANNUALE">
+      <option name="closed" value="true" />
+      <created>1717169015762</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1717169015762</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Fix statistiche mensili">
+      <option name="closed" value="true" />
+      <created>1717399090808</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1717399090809</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Fix statistiche mensili">
+      <option name="closed" value="true" />
+      <created>1717400456560</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1717400456560</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Fix Mail">
+      <option name="closed" value="true" />
+      <created>1717400918213</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1717400918213</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Cambio Query">
+      <option name="closed" value="true" />
+      <created>1717404547427</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1717404547427</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Inserimento Scritta">
+      <option name="closed" value="true" />
+      <created>1717488178414</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1717488178415</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Statistiche Disdette Aggiornate">
+      <option name="closed" value="true" />
+      <created>1718008939644</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1718008939644</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Inserimento Duplica Disdette">
+      <option name="closed" value="true" />
+      <created>1718010432911</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1718010432911</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Fix">
+      <option name="closed" value="true" />
+      <created>1719387220380</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1719387220380</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Fix excel">
+      <option name="closed" value="true" />
+      <created>1720088750063</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1720088750063</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Fix Incentivo anno solare">
+      <option name="closed" value="true" />
+      <created>1720106559115</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1720106559116</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Inserimento totali su anno solare">
+      <option name="closed" value="true" />
+      <created>1720108511747</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1720108511747</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Gestioni giorni disdette">
+      <option name="closed" value="true" />
+      <created>1720597317370</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1720597317370</updated>
+    </task>
+    <task id="LOCAL-00089" summary="gestione excel su pipeline">
+      <option name="closed" value="true" />
+      <created>1720620452947</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1720620452948</updated>
+    </task>
+    <task id="LOCAL-00090" summary="MODIFICHE EMAIL">
+      <option name="closed" value="true" />
+      <created>1720689333392</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1720689333392</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Fix Mail">
+      <option name="closed" value="true" />
+      <created>1720707365050</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1720707365051</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Fix Mail Motivazione">
+      <option name="closed" value="true" />
+      <created>1720708093111</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708093111</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Fix Mail &lt;strong&gt;Tipo Cliente&lt;/strong&gt;">
+      <option name="closed" value="true" />
+      <created>1720708156499</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708156499</updated>
+    </task>
+    <task id="LOCAL-00094" summary="FIX MAIL MOTIVAZIONE UPPER CASE">
+      <option name="closed" value="true" />
+      <created>1720708742160</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1720708742160</updated>
+    </task>
+    <task id="LOCAL-00095" summary="AGGIUNTA CANONE ANNO CORRENTE IN EMAIL">
+      <option name="closed" value="true" />
+      <created>1723103141010</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1723103141011</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Fix mail">
+      <option name="closed" value="true" />
+      <created>1723105749357</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1723105749357</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Fix labels">
+      <option name="closed" value="true" />
+      <created>1729496316742</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1729496316743</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Grafiche e nuovo anno">
+      <option name="closed" value="true" />
+      <created>1735576871425</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1735576871426</updated>
+    </task>
+    <task id="LOCAL-00099" summary="new blade">
+      <option name="closed" value="true" />
+      <created>1735576881590</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1735576881590</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Fix statistiche anno nuovo">
+      <option name="closed" value="true" />
+      <created>1735917672879</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1735917672879</updated>
+    </task>
+    <task id="LOCAL-00101" summary="New Versione">
+      <option name="closed" value="true" />
+      <created>1735917732227</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1735917732227</updated>
+    </task>
+    <task id="LOCAL-00102" summary="DataContatto initial value">
+      <option name="closed" value="true" />
+      <created>1738332625731</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1738332625732</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Fix Bug dati mancanti su disdette">
+      <option name="closed" value="true" />
+      <created>1741274464333</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1741274464333</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Update SMTP configuration to use new host and credentials">
+      <option name="closed" value="true" />
+      <created>1742480109831</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1742480109831</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Order by desc su Sales Best Performer annuale">
+      <option name="closed" value="true" />
+      <created>1744367585837</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1744367585837</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Percentuale su Sales Best Performer annuale">
+      <option name="closed" value="true" />
+      <created>1744377284754</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1744377284755</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Anche su mese corrente">
+      <option name="closed" value="true" />
+      <created>1744378610123</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1744378610123</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Anche su mese corrente">
+      <option name="closed" value="true" />
+      <created>1744380150715</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1744380150717</updated>
+    </task>
+    <task id="LOCAL-00109" summary="solo un esercizio non due">
+      <option name="closed" value="true" />
+      <created>1744382568518</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1744382568519</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Incentivi a semestre e non più annuale">
+      <option name="closed" value="true" />
+      <created>1744645772054</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1744645772055</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Duplica su incentivi">
+      <option name="closed" value="true" />
+      <created>1744733036642</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1744733036643</updated>
+    </task>
+    <task id="LOCAL-00112" summary="fix anno">
+      <option name="closed" value="true" />
+      <created>1746615043580</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1746615043580</updated>
+    </task>
+    <task id="LOCAL-00113" summary="mancava prodotto">
+      <option name="closed" value="true" />
+      <created>1751471153136</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1751471153136</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Correzione Disdette">
+      <option name="closed" value="true" />
+      <created>1753452038671</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1753452038671</updated>
+    </task>
+    <task id="LOCAL-00115" summary="import excel">
+      <option name="closed" value="true" />
+      <created>1753697459980</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1753697459980</updated>
+    </task>
+    <task id="LOCAL-00116" summary="import excel">
+      <option name="closed" value="true" />
+      <created>1753697625900</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1753697625900</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,5 +955,44 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="MODIFICHE EMAIL" />
+    <MESSAGE value="Fix Mail" />
+    <MESSAGE value="Fix Mail Motivazione" />
+    <MESSAGE value="Fix Mail &lt;strong&gt;Tipo Cliente&lt;/strong&gt;" />
+    <MESSAGE value="FIX MAIL MOTIVAZIONE UPPER CASE" />
+    <MESSAGE value="AGGIUNTA CANONE ANNO CORRENTE IN EMAIL" />
+    <MESSAGE value="Fix mail" />
+    <MESSAGE value="Fix labels" />
+    <MESSAGE value="Grafiche e nuovo anno" />
+    <MESSAGE value="new blade" />
+    <MESSAGE value="Fix statistiche anno nuovo" />
+    <MESSAGE value="New Versione" />
+    <MESSAGE value="DataContatto initial value" />
+    <MESSAGE value="Fix Bug dati mancanti su disdette" />
+    <MESSAGE value="Update SMTP configuration to use new host and credentials" />
+    <MESSAGE value="Order by desc su Sales Best Performer annuale" />
+    <MESSAGE value="Percentuale su Sales Best Performer annuale" />
+    <MESSAGE value="Anche su mese corrente" />
+    <MESSAGE value="solo un esercizio non due" />
+    <MESSAGE value="Incentivi a semestre e non più annuale" />
+    <MESSAGE value="Duplica su incentivi" />
+    <MESSAGE value="fix anno" />
+    <MESSAGE value="mancava prodotto" />
+    <MESSAGE value="Correzione Disdette" />
+    <MESSAGE value="import excel" />
+    <option name="LAST_COMMIT_MESSAGE" value="import excel" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/public_html/resources/views/info.blade.php</url>
+          <line>29</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

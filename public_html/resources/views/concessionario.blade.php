@@ -6,8 +6,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                PROMEDYA | Sales Force
+            <h1 style="color:#007bff">
+                PROMEDYA | Smart Sales Force
                 <small>&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
             <br>
@@ -214,6 +214,7 @@
                                     <?php if ($c->DATA_TYPE == 'varchar') echo 'onKeyUp="converti(\'' . $c->COLUMN_NAME . '\')" style="width:100%" class="form-control" type="text" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'float') echo 'style="width:100%" class="form-control" type="number" min="0" step="0.01" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'int') echo 'style="width:100%" class="form-control" type="number" min="0" step="1" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>
+                                    <?php if ($c->DATA_TYPE == 'date' && $c->COLUMN_NAME == 'Data') echo 'value="' . date('Y-m-d', strtotime('now')) . '"'; ?>
                                     <?php if ($c->DATA_TYPE == 'date') echo 'style="width:100%" class="form-control" type="date" id="' . $c->COLUMN_NAME . '" name="' . $c->COLUMN_NAME . '"'; ?>>
 
 
