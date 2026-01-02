@@ -1217,6 +1217,8 @@ class HomeController extends Controller
                     $valore_disdette[$i] = (object)['valore' => 0, 'Esito' => $i];
                 }
             }
+            if ($opening[0]->Val_Opening <= 0) $opening[0]->Val_Opening =  1;
+
             $differenza_opening = (($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore)) * 100) / $opening[0]->Val_Opening;
             $opening_anno_successivo = $opening[0]->Val_Opening + ($canone_successivo[0]->valore - ($valore_disdette[0]->valore + $valore_disdette[1]->valore + $valore_disdette[2]->valore));
 

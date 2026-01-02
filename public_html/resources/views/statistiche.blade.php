@@ -47,6 +47,8 @@
                     <div class="card-body">
                         <div style="height:262px!important; max-height: 262px!important; max-width: 100%!important;">
                             <?php foreach ($statistiche_budget as $s){ ?>
+                                <?php if($statistiche_budget[0]->valore == 0 || $statistiche_budget[0]->valore == null) $statistiche_budget[0]->valore = 1;?>
+
                             <div style="margin:5%;display: flex;align-content:self-end;justify-content: space-between">
                                 <label style="width: 30%"><?php echo $s->type; ?>
                                 </label>
@@ -425,6 +427,9 @@
                             <div
                                 style="height:240px!important; max-height: 233px!important; max-width: 100%!important;">
                                 <?php foreach ($statistiche_budget_mensile as $s){ ?>
+                                    <?php if($statistiche_budget_mensile[0]->valore == 0 || $statistiche_budget_mensile[0]->valore == null) $statistiche_budget_mensile[0]->valore = 1;?>
+
+
                                 <div
                                     style="margin:5%;display: flex;align-items:center;justify-content: space-between">
                                     <label style="width: 25%;font-size:14px"><?php echo $s->type; ?>
