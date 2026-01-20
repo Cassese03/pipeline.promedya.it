@@ -1,89 +1,76 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+    <section class="content-header" style="padding: 1.5rem;">
+        <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 0;">
+            Gestione Operatori
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
     </section>
-    <!-- Main content -->
-    <section class="content" style="margin:5%;">
 
+    <section class="content" style="padding: 0 1.5rem 1.5rem;">
         @if ($utente->username == 'Giovanni Tutino')
-            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_operatori"
-                    onclick="aggiungi()" name="aggiungi_operatori">
-                Aggiungi
-                Nuovo
-                Operatore
-            </button>
-
+            <div style="margin-bottom: 1.5rem;">
+                <button class="btn btn-primary" style="padding: 0.75rem 2rem;" id="aggiungi_operatori" onclick="aggiungi()">
+                    <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+                    Aggiungi Nuovo Operatore
+                </button>
+            </div>
         @endif
-        <table id="example3" class="table table-bordered datatable">
-            <thead>
-            <tr>
-                <th class="no-sort">Id</th>
-                <th class="no-sort">Username</th>
-                <th class="no-sort">Email</th>
-                <th class="no-sort">Password</th>
-                <th class="no-sort">Gruppo</th>
-                <th class="no-sort">Azioni</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($table as $p)
-                <tr>
-                    <td>{{ $p->id}}</td>
-                    <td>{{ $p->username }}</td>
-                    <td>{{ $p->email }}</td>
-                    <td>{{ $p->password }}</td>
-                    <td>{{ $p->gruppo }}</td>
 
-                    @if ($utente->username != 'Giovanni Tutino')
-                        <div></div>
-                    @else
-                        <form enctype="multipart/form-data" method="post"
-                              onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                            @csrf
-                            <td class="no-sort"
-                                style="background:white;border-width:1px">
-                                <div style="display:flex;gap: 2px;">
-                                    <button type="button" onclick="modifica(<?php echo $p->id;?>)"
-                                            class="form-control btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                            <path
-                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                        </svg>
-                                    </button>
-                                    <button type="button" onclick="modifica_password(<?php echo $p->id;?>)"
-                                            class="form-control btn-primary">
-                                        Password
-                                    </button>
-                                    <button type="submit" name="elimina" value="<?php echo $p->id;?>"
-                                            class="form-control btn-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path
-                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                            <path
-                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </form>
-                    @endif
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        <div class="card animate-fadeIn">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-users-cog" style="margin-right: 0.5rem;"></i>Elenco Operatori</h3>
+            </div>
+            <div class="card-body" style="overflow-x: auto;">
+                <table id="example3" class="table table-bordered datatable" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th class="no-sort">ID</th>
+                            <th class="no-sort">Username</th>
+                            <th class="no-sort">Email</th>
+                            <th class="no-sort">Password</th>
+                            <th class="no-sort">Gruppo</th>
+                            <th class="no-sort" style="width: 150px; text-align: center;">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($table as $p)
+                        <tr>
+                            <td style="font-weight: 600; color: #4366F6;">{{ $p->id}}</td>
+                            <td style="font-weight: 500;">{{ $p->username }}</td>
+                            <td>{{ $p->email }}</td>
+                            <td style="font-family: var(--font-mono);">{{ $p->password }}</td>
+                            <td>{{ $p->gruppo }}</td>
+
+                            @if ($utente->username != 'Giovanni Tutino')
+                                <td style="text-align: center;"><span style="color: #94A3B8; font-size: 0.875rem;">—</span></td>
+                            @else
+                                <form enctype="multipart/form-data" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                                    @csrf
+                                    <td class="no-sort" style="background:white;">
+                                        <div style="display:flex; gap: 0.5rem; justify-content: center;">
+                                            <button type="button" onclick="modifica(<?php echo $p->id;?>)" class="btn btn-primary" style="padding: 0.5rem 0.75rem;" title="Modifica">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" onclick="modifica_password(<?php echo $p->id;?>)" class="btn btn-warning" style="padding: 0.5rem 0.75rem;" title="Password">
+                                                <i class="fas fa-key"></i>
+                                            </button>
+                                            <button type="submit" name="elimina" value="<?php echo $p->id;?>" class="btn btn-danger" style="padding: 0.5rem 0.75rem;" title="Elimina">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </form>
+                            @endif
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 </div>
-<!-- /.container-fluid-->
-
 
 @include('common.footer')
 
@@ -94,31 +81,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Segnalazione</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title">Modifica Operatore</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label for="username">
-                        username
-                    </label>
-                    <input class="form-control" name="username" id="username" value="{{ $p->username }}">
-                    <label for="email">
-                        email
-                    </label>
-                    <input class="form-control" name="email" id="email" value="{{ $p->email }}">
-                    <label for="gruppo">
-                        gruppo
-                    </label>
-                    <input class="form-control" name="gruppo" id="gruppo" value="{{ $p->gruppo }}">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" name="username" id="username" value="{{ $p->username }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" name="email" id="email" value="{{ $p->email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="gruppo">Gruppo</label>
+                        <input class="form-control" name="gruppo" id="gruppo" value="{{ $p->gruppo }}">
+                    </div>
                 </div>
-
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?php echo $p->id;?>">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
-                    <input type="submit" class="btn btn-primary pull-right" name="modifica" value="Modifica"
-                           style="margin-right:5px;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                    <input type="submit" class="btn btn-primary" name="modifica" value="Modifica">
                 </div>
             </div>
         </div>
@@ -130,23 +113,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Modifica Password</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title">Modifica Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label for="password">
-                        Password
-                    </label>
-                    <input class="form-control" name="password" id="password">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" name="password" id="password">
+                    </div>
                 </div>
-
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?php echo $p->id;?>">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
-                    <input type="submit" class="btn btn-primary pull-right" name="modifica" value="Modifica Password"
-                           style="margin-right:5px;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                    <input type="submit" class="btn btn-primary" name="modifica" value="Modifica Password">
                 </div>
             </div>
         </div>
@@ -154,61 +133,40 @@
 </form>
 <?php } ?>
 
-
-<form method="post"
-      onsubmit="return confirm('Sei sicuro di voler aggiungere il nuovo operatori?')" enctype="multipart/form-data"
-      action="/operatori">
+<form method="post" onsubmit="return confirm('Sei sicuro di voler aggiungere il nuovo operatori?')" enctype="multipart/form-data" action="/operatori">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea operatori</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title">Crea Operatore</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <label for="username">
-                            username
-                        </label>
+                    <div class="form-group">
+                        <label for="username">Username</label>
                         <input class="form-control" name="username" id="username">
-                        <label for="email">
-                            email
-                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
                         <input class="form-control" name="email" id="email">
-                        <label for="password">
-                            password
-                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
                         <input class="form-control" name="password" id="password">
                     </div>
-                    <div class=" clearfix">
-                    </div>
                 </div>
-
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
-                    <input type="submit" class="btn btn-primary pull-right" name="aggiungi" value="Aggiungi"
-                           style="margin-right:5px;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                    <input type="submit" class="btn btn-primary" name="aggiungi" value="Aggiungi">
                 </div>
             </div>
         </div>
     </div>
 </form>
 
-<script type="text/javascript">
-
-    function aggiungi() {
-        $('#modal_aggiungi').modal('show');
-    }
-
-    function modifica(id) {
-        $('#modal_modifica_' + id).modal('show');
-    }
-
-    function modifica_password(id) {
-        $('#modal_modifica_password_' + id).modal('show');
-    }
-
+<script>
+function aggiungi() { $('#modal_aggiungi').modal('show'); }
+function modifica(id) { $('#modal_modifica_' + id).modal('show'); }
+function modifica_password(id) { $('#modal_modifica_password_' + id).modal('show'); }
 </script>

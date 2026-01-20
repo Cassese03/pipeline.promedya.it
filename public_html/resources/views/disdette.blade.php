@@ -2,24 +2,22 @@
 @include('common.header')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+    <!-- Content Header -->
+    <section class="content-header" style="padding: 1.5rem;">
+        <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">
+            Gestione Disdette
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
-        <button class="form-control btn-primary" style="border-radius:25px" id="aggiungi_disdetta"
-                onclick="aggiungi()" name="aggiungi_disdetta">
-            Aggiungi
-            Nuova
-            Disdetta
-        </button>
-        <br>
-        <button class="form-control btn-danger" style="border-radius:25px" id="filtra_disdetta" onclick="filtra()"
-                name="filtra_disdetta">
-            Filtri / Ricerca
-        </button>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button class="btn btn-primary" style="padding: 0.75rem 2rem;" id="aggiungi_disdetta" onclick="aggiungi()" name="aggiungi_disdetta">
+                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+                Aggiungi Nuova Disdetta
+            </button>
+            <button class="btn btn-danger" style="padding: 0.75rem 2rem;" id="filtra_disdetta" onclick="filtra()" name="filtra_disdetta">
+                <i class="fas fa-filter" style="margin-right: 0.5rem;"></i>
+                Filtri / Ricerca
+            </button>
+        </div>
     </section>
     <!-- Main content -->
     <section class="content">

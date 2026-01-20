@@ -2,45 +2,37 @@
 
 @include('common.header')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+    <!-- Content Header -->
+    <section class="content-header" style="padding: 1.5rem;">
+        <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 0;">
+            Budget Annuale
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
     </section>
+    
     <!-- Main content -->
-    <section class="content-body" style="margin: 2%;">
-        <div class="row" style="margin:2%">
-            <div class="col-lg-3 col-md-12 col-sm-12"
-                 style="display: flex;justify-content: center;align-items: center"></div>
-            <div class="col-lg-3 col-md-12 col-sm-12"><label for="input">ESERCIZIO</label>
-                <input style="text-align:right;font-weight: bolder" type="number"
-                       value="<?php echo $anno;?>" onchange="check_anno()" id="new_anno" step="1" min="2000" max="2100"
-                       class="form-control">
-            </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">VENDITA ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder;color:blue;" readonly type="text"
-                       value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
-            </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">BUDGET ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder" type="text"
-                       value="<?php echo number_format($budget_annuale,2,',',' ');?>" readonly
-                       class="form-control">
-            </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">OBIETTIVO ANNUALE</label>
-                <input
-                    style="text-align:right;font-weight: bolder;<?php $differenza = (floatval($vendite_annuale) - floatval($budget_annuale)); if($differenza <= 0) echo 'color:red;';else echo 'color:green;'?>"
-                    id="differenza"
-                    readonly
-                    value="<?php echo number_format($differenza,2,',',' ');?>"
-                    type="text" <?php if ($differenza < 0) echo 'style="color:red"'; ?>
-                    class="form-control">
-            </div>
+    <section class="content-body" style="padding: 0 1.5rem 1.5rem;">
+        <div class="card animate-fadeIn">
+            <div class="card-body">
+                <div class="row" style="margin-bottom: 1.5rem;">
+                    <div class="col-lg-3 col-md-12 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <label for="input" style="font-weight: 600; color: #1E293B;">ESERCIZIO</label>
+                        <input style="text-align:right;font-weight: bolder" type="number" value="<?php echo $anno;?>" onchange="check_anno()" id="new_anno" step="1" min="2000" max="2100" class="form-control">
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12">
+                        <label for="input" style="font-weight: 600; color: #1E293B;">VENDITA ANNUALE</label>
+                        <input style="text-align:right;font-weight: bolder;color:#4366F6;" readonly type="text" value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12">
+                        <label for="input" style="font-weight: 600; color: #1E293B;">BUDGET ANNUALE</label>
+                        <input style="text-align:right;font-weight: bolder" type="text" value="<?php echo number_format($budget_annuale,2,',',' ');?>" readonly class="form-control">
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12">
+                        <label for="input" style="font-weight: 600; color: #1E293B;">OBIETTIVO ANNUALE</label>
+                        <input style="text-align:right;font-weight: bolder;<?php $differenza = (floatval($vendite_annuale) - floatval($budget_annuale)); if($differenza <= 0) echo 'color:red;';else echo 'color:green;'?>" id="differenza" readonly value="<?php echo number_format($differenza,2,',',' ');?>" type="text" class="form-control">
+                    </div>
+                </div>
             <div style="overflow-x:scroll">
                 <?php for ($i = 0;
                            $i < 4;
@@ -165,10 +157,10 @@
                 <?php } ?>
             </div>
         </div>
+    </div>
 
-        <div style="display:flex;justify-content:center;align-content:center;">
-            <h6 style="margin-top:5%;"><strong>(Ven)</strong> Vendite - <strong>(Bgt)</strong>
-                Budget - <strong>(Obt)</strong> Obiettivo</h6>
+        <div style="display:flex;justify-content:center;align-content:center; padding: 1.5rem 0;">
+            <h6><strong>(Ven)</strong> Vendite - <strong>(Bgt)</strong> Budget - <strong>(Obt)</strong> Obiettivo</h6>
         </div>
     </section>
 </div>

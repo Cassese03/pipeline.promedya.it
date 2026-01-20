@@ -14,19 +14,20 @@
 @include('common.header')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header" style="display: flex;justify-content: space-between">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-        </h1>
-        <div style="display: flex;">
-            <h1 style="color:#007bff">
-                Esercizio
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
-            </h1>
-            <input type="number" class="form-control" min="2024" step="1" max="2100"
-                   value="{{intval(explode('-',$mese_usato)[1])}}"
-                   onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
+    <section class="content-header" style="padding: 1.5rem;">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin: 0;">
+                    PROMEDYA | Smart Sales Force
+                    <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
+                </h1>
+            </div>
+            <div class="col-md-4" style="display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
+                <label style="font-weight: 600; margin: 0; color: #1E293B;">Esercizio</label>
+                <input type="number" class="form-control" min="2024" step="1" max="2100" style="width: 120px;"
+                       value="{{intval(explode('-',$mese_usato)[1])}}"
+                       onchange="top.location.href = '/statistiche/'+this.value+'-12-31';">
+            </div>
         </div>
     </section>
     <!-- Main content -->
@@ -90,7 +91,7 @@
                                 Statistiche Target Vendite
                             </h3>
                             <div style="display: flex;justify-content: flex-start">
-                                <label for="semestre" style="text-align: center">
+                                <label for="semestre" style="text-align: center!important;margin-top: 5px!important;color: white!important">
                                     Semestre
                                 </label>
                                 <input style="margin-left: 5%;height: 75%"
@@ -417,8 +418,8 @@
                             Statistiche {{$mese_usato}}
                         </h3>
 
-                        <div class="card-tools">
-                            <input type="date" class="btn btn-tool" onchange="changeData()" id="data_mese">
+                        <div class="card-tools" >
+                            <input type="date" class="btn btn-tool" style="color:white!important;" onchange="changeData()" id="data_mese">
                         </div>
                     </div>
                     <div class="row">

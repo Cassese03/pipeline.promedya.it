@@ -14,6 +14,11 @@
 
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Google Fonts - Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="<?php echo URL::asset('backend/plugins/fontawesome-free/css/all.min.css') ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('backend/plugins/fullcalendar/main.css') ?>">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -39,6 +44,10 @@
     <link rel="stylesheet"
           href="<?php echo URL::asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>">
     <link href="<?php echo URL::asset('fullcalendar-5.6.0/lib/main.css') ?>" rel='stylesheet'/>
+    
+    <!-- Custom Modern Design System -->
+    <link rel="stylesheet" href="<?php echo URL::asset('css/custom-design.css') ?>">
+    
     <script src="<?php echo URL::asset('fullcalendar-5.6.0/lib/main.js') ?>"></script>
     <script src="<?php echo URL::asset('fullcalendar-5.6.0/lib/locales-all.js') ?>"></script>
     <script src="<?php echo URL::asset('backend/plugins/jquery/jquery.min.js') ?>"></script>

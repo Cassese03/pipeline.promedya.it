@@ -2,31 +2,40 @@
 @include('common.header')
 <style>
     .obsoleto {
-        background-color: #ffc0cb; /* Cambia il colore di sfondo a tuo piacimento */
+        background-color: #ffc0cb;
     }
 </style>
 <div class="content-wrapper">
     @if ($utente->username != 'Giovanni Tutino')
         <div style="display: flex;justify-content: center;align-items: center;padding-top: 5%;">
-            <img alt="WORK IN PROGRESS" style="min-height: 25vh;min-width: 25vw;"
-                 src="https://www.b-fast.it/wp-content/uploads/2021/08/come-correggere-errore-siamo-spiacenti-non-sei-autorizzato-ad-accedere-a-questa-pagina-in-wordpress.jpg">
+            <div class="card" style="max-width: 600px; text-align: center;">
+                <div class="card-body" style="padding: 3rem;">
+                    <i class="fas fa-lock" style="font-size: 4rem; color: #EF4444; margin-bottom: 1.5rem;"></i>
+                    <h2 style="color: #1E293B; margin-bottom: 1rem;">Accesso Negato</h2>
+                    <p style="color: #64748B; font-size: 1.1rem;">Non hai i permessi per accedere a questa sezione.</p>
+                </div>
+            </div>
         </div>
     @else
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                PROMEDYA Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        <!-- Content Header -->
+        <section class="content-header" style="padding: 1.5rem;">
+            <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">
+                Gestione Clienti
+                <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
-            <br>
-        </section>
-        <!-- Main content -->
-       
-        <section class="content" style="margin:5%;">
-            <button class="form-control btn-primary" style="margin-bottom:5%;border-radius:25px" id="aggiungi_dipendente"
-                    onclick="aggiungi()" name="aggiungi_dipendente">
+            <button class="btn btn-primary" style="padding: 0.75rem 2rem; margin-bottom: 1.5rem;" id="aggiungi_dipendente" onclick="aggiungi()" name="aggiungi_dipendente">
+                <i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>
                 Aggiungi Nuovo Potenziale Cliente
-            </button> 
+            </button>
+        </section>
+       
+        <section class="content" style="padding: 0 1.5rem 1.5rem;">
+            <div class="card animate-fadeIn">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-building" style="margin-right: 0.5rem;"></i>Elenco Clienti</h3>
+                </div>
+                <div class="card-body" style="overflow-x: auto;">
+ 
             <table id="example3" class="table table-bordered datatable">
                 <thead>
                 <tr>
@@ -48,7 +57,9 @@
                     </tr>
                 @endforeach
                 </tbody>
-            </table>
+                </table>
+                </div>
+            </div>
         </section>
     @endif
 </div>

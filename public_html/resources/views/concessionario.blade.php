@@ -1,64 +1,61 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <!-- Main content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1 style="color:#007bff">
-                PROMEDYA | Smart Sales Force
-                <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+        <!-- Content Header -->
+        <section class="content-header" style="padding: 1.5rem;">
+            <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">
+                Gestione Concessionario
+                <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
             </h1>
-            <br>
-            @if ($utente->username == 'Giovanni Tutino')
-                <button class="form-control btn-primary" style="border-radius:25px" id="aggiungi_concessionario"
-                        onclick="aggiungi()" name="aggiungi_concessionario">
-                    Aggiungi
-                    Nuovo
-                    Contatto
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                @if ($utente->username == 'Giovanni Tutino')
+                    <button class="btn btn-primary" style="padding: 0.75rem 2rem;" id="aggiungi_concessionario" onclick="aggiungi()" name="aggiungi_concessionario">
+                        <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+                        Aggiungi Nuovo Contatto
+                    </button>
+                @endif
+                <button class="btn btn-danger" style="padding: 0.75rem 2rem;" id="filtra_concessionario" onclick="filtra()" name="filtra_concessionario">
+                    <i class="fas fa-filter" style="margin-right: 0.5rem;"></i>
+                    Filtri / Ricerca
                 </button>
-                <br>
-            @endif
-            <button class="form-control btn-danger" style="border-radius:25px" id="filtra_concessionario"
-                    onclick="filtra()"
-                    name="filtra_concessionario">
-                Filtri / Ricerca
-            </button>
+            </div>
         </section>
         <!-- Main content -->
         <section class="content">
             <div class="content-wrapper" style="margin:1% 1% 0 1%!important;">
                 <div class="row">
+                <div class="row">
                     <div class="col-lg-12 col-sm-12 col-xs-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <table id="example11" class="table table-bordered datatable"
-                                       style="border-color: grey; border-width:1px;">
-                                    <thead>
-                                    <tr>
-                                        <?php foreach ($column as $c){ ?>
-                                        <th class="no-sort"
-                                            style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px;<?php if($c->COLUMN_NAME == 'Data') echo 'width:7%!important;'?><?php if($c->COLUMN_NAME == 'Prodotto') echo 'width:10%!important;'?>">
-                                                <?php if ($c->COLUMN_NAME != 'Val_Licenza_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Costo_Canone_AS_WKI') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
-                                                <?php if ($c->COLUMN_NAME == 'Val_Licenza_AC') echo 'Valore Licenza'; ?>
-                                                <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone'; ?>
-                                                <?php if ($c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'Costo Canone WKI'; ?>
-                                                <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
-                                        </th>
-                                        <?php } ?>
-
-                                        @if ($utente->username == 'Giovanni Tutino')
-                                            <th class="no-sort"
-                                                style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
-                                                Azioni
+                        <div class="card animate-fadeIn">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-handshake" style="margin-right: 0.5rem;"></i>Elenco Concessionari</h3>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table id="example11" class="table table-bordered datatable m-0" style="width: 100%;">
+                                        <thead>
+                                        <tr>
+                                            <?php foreach ($column as $c){ ?>
+                                            <th class="no-sort" style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px;white-space: nowrap;">
+                                                    <?php if ($c->COLUMN_NAME != 'Val_Licenza_AC' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Costo_Canone_AS_WKI') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                                    <?php if ($c->COLUMN_NAME == 'Val_Licenza_AC') echo 'Valore Licenza'; ?>
+                                                    <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone'; ?>
+                                                    <?php if ($c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'Costo Canone WKI'; ?>
+                                                    <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                             </th>
-                                        @endif
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($rows as $r){ ?>
-                                    <tr>
+                                            <?php } ?>
+
+                                            @if ($utente->username == 'Giovanni Tutino')
+                                                <th class="no-sort" style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px;white-space: nowrap;">
+                                                    Azioni
+                                                </th>
+                                            @endif
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach ($rows as $r){ ?>
+                                        <tr>
                                             <?php foreach ($column as $c){ ?>
 
                                             <?php
@@ -99,9 +96,7 @@
                                                     ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
                                             } ?>
 
-                                        <td class="no-sort"
-                                            style="contain:content;
-                                            <?php if($c->COLUMN_NAME == 'Data') echo 'width:7%!important;'?><?php if($c->COLUMN_NAME == 'Prodotto') echo 'width:10%!important;'?>
+                                        <td class="no-sort" style="white-space: nowrap;
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') echo 'text-align:right;' ;
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
@@ -115,56 +110,36 @@
                                         </td>
                                         <?php } ?>
 
-                                        @if ($utente->username == 'Giovanni Tutino')
-                                            <form enctype="multipart/form-data" method="post">
-                                                @csrf
-                                                <td class="no-sort"
-                                                    style="background:white;border-color: grey; border-width:1px">
-                                                    <div style="display:flex;gap: 2px;">
-                                                        <button type="button" onclick="modifica(<?php echo $r->Id;?>)"
-                                                                class="form-control btn-primary">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                 height="14"
-                                                                 fill="currentColor" class="bi bi-pencil"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                                            </svg>
-                                                        </button>
-                                                        <button type="submit" name="elimina"
-                                                                value="<?php echo $r->Id;?>"
-                                                                class="form-control btn-danger">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                 height="14"
-                                                                 fill="currentColor" class="bi bi-trash"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                                <path
-                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </form>
-                                        @endif
-                                    </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr style="background-color: lightblue">
-                                        <?php foreach ($column as $c){ ?>
-                                        <th class="no-sort"
-                                            style="<?php if ($c->COLUMN_NAME == 'Costo_Licenza_WKI' ||$c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'color:red;';if($c->COLUMN_NAME == 'Ricavi_Canone' || $c->COLUMN_NAME == 'Ricavi_Licenza') echo 'color:green;'?><?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>width:20px;border-color: grey; border-width:1px"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
+                                            @if ($utente->username == 'Giovanni Tutino')
+                                                <form enctype="multipart/form-data" method="post">
+                                                    @csrf
+                                                    <td class="no-sort" style="background:white;border-color: grey; border-width:1px;white-space: nowrap;">
+                                                        <div style="display:flex;gap: 0.5rem; justify-content: center;">
+                                                            <button type="button" onclick="modifica(<?php echo $r->Id;?>)" class="btn btn-primary" style="padding: 0.5rem 0.75rem;" title="Modifica">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="submit" name="elimina" value="<?php echo $r->Id;?>" class="btn btn-danger" style="padding: 0.5rem 0.75rem;" title="Elimina">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </form>
+                                            @endif
+                                        </tr>
                                         <?php } ?>
-                                        @if ($utente->username == 'Giovanni Tutino')
-
-                                            <th class="no-sort"
-                                                style="width:20px;border-color: grey; border-width:1px"></th>
-                                        @endif
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr style="background-color: lightblue">
+                                            <?php foreach ($column as $c){ ?>
+                                            <th class="no-sort" style="<?php if ($c->COLUMN_NAME == 'Costo_Licenza_WKI' ||$c->COLUMN_NAME == 'Costo_Canone_AS_WKI') echo 'color:red;';if($c->COLUMN_NAME == 'Ricavi_Canone' || $c->COLUMN_NAME == 'Ricavi_Licenza') echo 'color:green;'?><?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>border-color: grey; border-width:1px;white-space: nowrap;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
+                                            <?php } ?>
+                                            @if ($utente->username == 'Giovanni Tutino')
+                                                <th class="no-sort" style="border-color: grey; border-width:1px"></th>
+                                            @endif
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

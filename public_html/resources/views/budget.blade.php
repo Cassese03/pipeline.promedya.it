@@ -2,26 +2,27 @@
 
 @include('common.header')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+    <!-- Content Header -->
+    <section class="content-header" style="padding: 1.5rem;">
+        <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 0;">
+            Gestione Budget
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
     </section>
+
     <!-- Main content -->
-    <section class="content-body" style="margin: 2%;">
-        <div class="row" style="margin:2%">
-            <div class="col-lg-3 col-md-12 col-sm-12"
-                 style="display: flex;justify-content: center;align-items: center"></div>
-            <div class="col-lg-3 col-md-12 col-sm-12"></div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">VENDITA ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder;color:blue;" readonly type="text"
-                       value="<?php echo number_format($vendite_annuale,2,',',' ');?>" class="form-control">
-            </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
+    <section class="content-body" style="padding: 0 1.5rem 1.5rem;">
+        <!-- KPI Cards Row -->
+        <div class="row" style="margin-bottom: 1.5rem;">
+            <div class="col-12">
+                <div class="card animate-fadeIn">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>
+                            Riepilogo Annuale
+                        </h3>
+                    </div>
+                    <div class="card-body">
                 <label for="input">BUDGET ANNUALE</label>
                 <input style="text-align:right;font-weight: bolder" type="text"
                        value="<?php echo number_format($budget_annuale,2,',',' ');?>" readonly

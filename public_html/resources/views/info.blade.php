@@ -1,60 +1,50 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1 style="color:#007bff">
-            PROMEDYA | Smart Sales Force
-            <small>&nbsp;&nbsp;<b id="countdown"></b></small>
+    <section class="content-header" style="padding: 1.5rem;">
+        <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 0;">
+            Informazioni Sistema
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <br>
     </section>
-    <!-- Main content -->
 
-    <div class="row">
-        <div class="col-xl-4 col-2"></div>
-        <div class="col-xl-4 col-8"
-             style="border-width: 4px;border-color:black;display: flex;justify-content: start;flex-direction:column;">
-            <span class="border" style="border:2px solid #dee2e6!important;border-color:#007bff!important">
-                <a class="nav-link"
-                   style="font-size: 1.10rem;color:blue;display:flex;justify-content:center;align-content:center;">
-                    <img style="display:block;height: auto;width: 50%;justify-content:center"
-                         src="<?php echo URL::asset('logo_softmaint.jpg') ?>" alt="LOGO">
-                </a>
-                <a class="nav-link"
-                   style="font-size: 1.10rem;color:red;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Smart Sales Force</p>
-                </a>
-                <a class="nav-link"
-                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Versione : GT.389.25</p>
-                </a>
-                <a class="nav-link"
-                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Piattaforma : WEB</p>
-                </a>
-                <a class="nav-link"
-                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p onclick="top.location.href = 'https://softmaint.it'">Copyright : Softmaint SRL - IT 07374571219</p>
-                </a>
-                <a class="nav-link"
-                   style="font-size: 1.10rem;color:red;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">INFORMAZIONI LICENZA</p>
-                </a>
-                <a class="nav-link"
-                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Utente : Promedya SRL - IT 03144930645</p>
-                </a>
-                <a class="nav-link"
-                   style="padding-top:0!important;padding-bottom:0!important;font-size: 1.10rem;color:blue;display:flex;justify-content:start;align-content:center;">
-                    <p style="margin:0;">Numero Licenza : 00124</p>
-                </a>
-            </span>
+    <section class="content" style="padding: 0 1.5rem 1.5rem;">
+        <div class="row">
+            <div class="col-xl-3 col-md-2"></div>
+            <div class="col-xl-6 col-md-8">
+                <div class="card animate-fadeIn">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>Dettagli Sistema</h3>
+                    </div>
+                    <div class="card-body">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <img style="width: 50%; height: auto;" src="<?php echo URL::asset('logo_softmaint.jpg') ?>" alt="LOGO">
+                        </div>
+                        
+                        <div class="info-section" style="margin-bottom: 1.5rem;">
+                            <h4 style="color: #EF4444; font-weight: 600; margin-bottom: 1rem;">Smart Sales Force</h4>
+                            <div style="padding-left: 1rem;">
+                                <p style="margin: 0.5rem 0; color: #4366F6;"><strong>Versione:</strong> GT.389.25</p>
+                                <p style="margin: 0.5rem 0; color: #4366F6;"><strong>Piattaforma:</strong> WEB</p>
+                                <p style="margin: 0.5rem 0; color: #4366F6; cursor: pointer;" onclick="top.location.href = 'https://softmaint.it'">
+                                    <strong>Copyright:</strong> Softmaint SRL - IT 07374571219
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h4 style="color: #EF4444; font-weight: 600; margin-bottom: 1rem;">Informazioni Licenza</h4>
+                            <div style="padding-left: 1rem;">
+                                <p style="margin: 0.5rem 0; color: #4366F6;"><strong>Utente:</strong> Promedya SRL - IT 03144930645</p>
+                                <p style="margin: 0.5rem 0; color: #4366F6;"><strong>Numero Licenza:</strong> 00124</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-2"></div>
         </div>
-        <div class="col-xl-4 col-2"></div>
-    </div>
+    </section>
 </div>
-<!-- /.container-fluid-->
-
 
 @include('common.footer')
