@@ -169,6 +169,7 @@ class AjaxController extends Controller
                                 value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
                         <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
+                                <?php if (count($cfs) > 0) { ?>
                                 <style>
                                     .select2-container .select2-selection--single {
                                         height: 50px;
@@ -176,7 +177,7 @@ class AjaxController extends Controller
                                 </style>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <select id="clientiSelect" class="form-control select2" id="{{$c->COLUMN_NAME}}" name="{{$c->COLUMN_NAME}}"
+                                        <select id="clientiSelect" class="form-control select2" name="<?php echo $c->COLUMN_NAME; ?>"
                                             onchange="toggleAccordion()">
                                             <?php
                                                 foreach($cfs as $cf) {
@@ -200,6 +201,10 @@ class AjaxController extends Controller
                                     <div class="card card-body" id="contenuto">
                                     </div>
                                 </div>
+                                <?php } else { ?>
+                                    <input type="text" class="form-control" name="<?php echo $c->COLUMN_NAME; ?>" 
+                                           value="<?php echo $r->Ragione_Sociale; ?>" style="width:100%">
+                                <?php } ?>
                                 <script> 
  
                                      function toggleAccordion() {
@@ -456,6 +461,7 @@ class AjaxController extends Controller
                             </select>
                         <?php } ?>
                          <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
+                                <?php if (count($cfs) > 0) { ?>
                                 <style>
                                     .select2-container .select2-selection--single {
                                         height: 50px;
@@ -463,7 +469,7 @@ class AjaxController extends Controller
                                 </style>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <select id="clientiSelect" class="form-control select2" id="{{$c->COLUMN_NAME}}" name="{{$c->COLUMN_NAME}}"
+                                        <select id="clientiSelect" class="form-control select2" name="<?php echo $c->COLUMN_NAME; ?>"
                                             onchange="toggleAccordion()">
                                             <?php
                                                 foreach($cfs as $cf) {
@@ -487,6 +493,10 @@ class AjaxController extends Controller
                                     <div class="card card-body" id="contenuto">
                                     </div>
                                 </div>
+                                <?php } else { ?>
+                                    <input type="text" class="form-control" name="<?php echo $c->COLUMN_NAME; ?>" 
+                                           value="<?php echo $r->Ragione_Sociale; ?>" style="width:100%">
+                                <?php } ?>
                                 <script> 
  
                                      function toggleAccordion() {
