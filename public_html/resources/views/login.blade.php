@@ -208,7 +208,7 @@
             
             <div class="row">
                 <div class="col-xs-12">
-                    <input type="submit" class="btn btn-primary btn-block" name="login" value="Login" style="font-size: 1rem; padding: 0.875rem;">
+                    <input style= "font-size: 15px" type="submit" class="btn btn-primary btn-block" name="login" value="Login" style="font-size: 1rem; padding: 0.875rem;">
                 </div>
             </div>
             
