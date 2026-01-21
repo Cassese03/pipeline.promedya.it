@@ -44,7 +44,7 @@
     <!-- Content Header -->
     <section class="content-header" style="padding: 1.5rem;">
         <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 0;">
-            Budget Annuale
+            Smart Sales Force | Budget Annuale
             <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
     </section>

@@ -374,7 +374,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header" style="padding: 1.5rem;">
         <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">
-            PROMEDYA | Smart Sales Force
+            Smart Sales Force | Agenzia
             <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
         <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">

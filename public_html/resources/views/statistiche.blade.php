@@ -18,7 +18,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin: 0;">
-                    PROMEDYA | Smart Sales Force
+                    Smart Sales Force | Statistiche
                     <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
                 </h1>
             </div>

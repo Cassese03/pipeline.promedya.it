@@ -1,8 +1,19 @@
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Smart Sales Force</b> (ver. GT.389.25)
+<footer class="main-footer" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #fff; border-top: 3px solid #4f46e5; padding: 1.5rem 1rem;">
+    <div class="pull-right hidden-xs" style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="background: linear-gradient(135deg, #4f46e5, #2563eb); padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 600; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);">
+            Smart Sales Force
+        </span>
+        <span style="color: #cbd5e1; font-size: 0.875rem; font-weight: 500;">
+            ver. GT.010.26
+        </span>
     </div>
-    <strong><a href="#">Promedya SRL</a> - IT 03144930645 </strong>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-building" style="color: #4f46e5;"></i>
+        <strong style="color: #f1f5f9;">
+            <a href="#" style="color: #60a5fa; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">Promedya SRL</a>
+            <span style="color: #94a3b8; margin-left: 0.5rem;">P.IVA IT 03144930645</span>
+        </strong>
+    </div>
     {{--&copy; 2024--}}
 </footer>
 
