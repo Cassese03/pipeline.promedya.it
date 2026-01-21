@@ -99,6 +99,91 @@
         $('.select2').select2();
     })
 
+    // Enhanced Sidebar Treeview Menu Script & Hover Functionality
+    $(document).ready(function() {
+        var hoverTimer;
+        
+        // Sidebar hover functionality - open on hover when collapsed
+        $('.main-sidebar').hover(
+            function() {
+                // Mouse enter
+                if ($('body').hasClass('sidebar-collapse')) {
+                    clearTimeout(hoverTimer);
+                    $('body').removeClass('sidebar-collapse').addClass('sidebar-open');
+                }
+            },
+            function() {
+                // Mouse leave
+                if ($('body').hasClass('sidebar-open')) {
+                    hoverTimer = setTimeout(function() {
+                        $('body').removeClass('sidebar-open').addClass('sidebar-collapse');
+                    }, 300);
+                }
+            }
+        );
+        
+        // Toggle treeview menu on click
+        $('.nav-item.has-treeview > .nav-link').off('click').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $parentItem = $(this).parent('.nav-item');
+            
+            // Close all OTHER open menus (not the current one)
+            $('.nav-item.has-treeview').not($parentItem).removeClass('menu-open');
+            
+            // Toggle current menu
+            $parentItem.toggleClass('menu-open');
+        });
+        
+        // Don't close menu when clicking on submenu items
+        $('.nav-treeview .nav-link').on('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Mark current page as active
+        var currentUrl = window.location.pathname;
+        var currentFullUrl = window.location.href;
+        
+        $('.nav-sidebar .nav-link').each(function() {
+            var $link = $(this);
+            var linkUrl = $link.attr('href');
+            
+            if (linkUrl && linkUrl !== '<?php echo URL::asset('') ?>') {
+                // Get the path from the link URL
+                var linkPath = linkUrl.replace(window.location.origin, '');
+                
+                // Exact match or starts with (for sub-pages)
+                var isActive = false;
+                
+                // Exact match
+                if (currentFullUrl === linkUrl || currentUrl === linkPath) {
+                    isActive = true;
+                }
+                // Or current URL starts with link URL (for sub-pages) but only if link is longer
+                else if (linkPath.length > 1 && currentUrl.startsWith(linkPath) && currentUrl.charAt(linkPath.length) === '/') {
+                    isActive = true;
+                }
+                
+                if (isActive) {
+                    $link.addClass('active');
+                    
+                    // Open parent menu if this is a submenu item
+                    var $parentTreeview = $link.closest('.nav-treeview');
+                    if ($parentTreeview.length) {
+                        $parentTreeview.parent('.nav-item').addClass('menu-open');
+                        $parentTreeview.show();
+                    }
+                }
+            }
+        });
+        
+        // Keep treeview functionality working with AdminLTE
+        $('[data-widget="treeview"]').each(function() {
+            $(this).Treeview && $(this).Treeview('init');
+        });
+    });
+
 
 </script>
 

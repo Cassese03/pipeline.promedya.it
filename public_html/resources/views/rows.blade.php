@@ -120,6 +120,168 @@
     .legend-modern li:nth-child(3)::before {
         background: #90ee90;
     }
+
+    .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        color: white;
+        border-radius: 20px 20px 0 0;
+        padding: 1.5rem;
+        border: none;
+    }
+
+    .modal-header .modal-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .modal-header .close {
+        color: white;
+        opacity: 0.9;
+        text-shadow: none;
+        font-size: 1.8rem;
+        font-weight: 300;
+    }
+
+    .modal-header .close:hover {
+        opacity: 1;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2rem;
+        background: #f9fafb;
+    }
+
+    .modal-footer {
+        padding: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+        background: white;
+        border-radius: 0 0 20px 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .filter-form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-form-group label {
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 0.95rem;
+    }
+
+    .filter-form-group .form-control,
+    .filter-form-group select {
+        border-radius: 10px;
+        border: 2px solid #e5e7eb;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease;
+        background: white;
+        color: #1f2937;
+        font-size: 0.95rem;
+        font-weight: 500;
+        min-height: 48px;
+        line-height: 1.5;
+        height: auto;
+    }
+
+    .filter-form-group .form-control::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+    }
+
+    .filter-form-group .form-control:focus,
+    .filter-form-group select:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        outline: none;
+        background: white;
+    }
+
+    .filter-form-group select option {
+        color: #1f2937;
+        background: white;
+        padding: 0.5rem;
+    }
+
+    .filter-form-group input[type="date"] {
+        color: #1f2937;
+    }
+
+    .modal-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 500;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .modal-btn--primary {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        color: white;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        cursor: pointer;
+    }
+
+    .modal-btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        color: white;
+    }
+
+    .modal-btn--primary:active {
+        transform: translateY(0);
+    }
+
+    .modal-btn--secondary {
+        background: #f3f4f6;
+        color: #374151;
+        border: 2px solid #e5e7eb;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        pointer-events: auto;
+    }
+
+    .modal-btn--secondary:hover {
+        background: #e5e7eb;
+        transform: translateY(-1px);
+        color: #1f2937;
+    }
+
+    .modal-btn--secondary:active {
+        transform: translateY(0);
+    }
+
+    .date-range-container {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .date-range-container input {
+        flex: 1;
+    }
+
+    .date-range-separator {
+        color: #9ca3af;
+        font-weight: 600;
+    }
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -489,10 +651,13 @@
 <form method="post" enctype="multipart/form-data" action="/pipeline">
     @csrf
     <div class="modal fade" id="modal_filtra">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Filtra Pipeline</h4>
+                    <h4 class="modal-title" id="titolo_modal_mgmov">
+                        <i class="fas fa-filter"></i>
+                        Filtri di Ricerca
+                    </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -504,8 +669,8 @@
 
                             <?php if ($c->COLUMN_NAME != 'Sales'){ ?>
 
-                        <div class="col-md-6 ">
-                            <div class="form-group">
+                        <div class="col-md-6">
+                            <div class="filter-form-group">
                                 <label><?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
@@ -524,13 +689,11 @@
 
                                 <?php } ?>
                                 <?php if ($c->DATA_TYPE == 'date'){ ?>
-                                <div style="display: flex">
-
-                                    <input style="width:50%;" <?php
-                                        echo 'style="width:100%" class="form-control" type="date" id="' .
+                                <div class="date-range-container">
+                                    <input <?php echo 'class="form-control" type="date" id="' .
                                         $c->COLUMN_NAME . '_i" name="' . $c->COLUMN_NAME . '_i"'; ?>>
-                                    <input style="width:50%;" <?php
-                                        echo 'style="width:100%" class="form-control" type="date" id="' .
+                                    <span class="date-range-separator">—</span>
+                                    <input <?php echo 'class="form-control" type="date" id="' .
                                         $c->COLUMN_NAME . '_f" name="' . $c->COLUMN_NAME . '_f"'; ?>>
                                 </div>
 
@@ -649,7 +812,7 @@
                         <?php } ?>
                             <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="filter-form-group">
                                 <label>Sales<b style="color:red">*</b></label>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
                                         name="<?php echo $c->COLUMN_NAME ;?>">
@@ -662,7 +825,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="filter-form-group">
                                 <label>Zona <b style="color:red">*</b></label>
                                 <select style="width:100%" class="form-control"
                                         id="<?php echo $c->COLUMN_NAME;?>_GRUPPO"
@@ -678,7 +841,7 @@
                         <?php } ?>
                             <?php if ($c->COLUMN_NAME == 'Prodotto'){ ?>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="filter-form-group">
                                 <label>Gruppo Prodotto<b style="color:red">*</b></label>
                                 <select style="width:100%" class="form-control" id="gruppo_prodotto"
                                     name="gruppo_prodotto">
@@ -701,9 +864,14 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
-                    <input type="submit" class="btn btn-primary pull-right" name="filtra" value="Filtra"
-                        style="margin-right:5px;">
+                    <button type="button" class="modal-btn modal-btn--secondary" data-dismiss="modal" onclick="$('#modal_filtra').modal('hide');">
+                        <i class="fas fa-times"></i>
+                        Chiudi
+                    </button>
+                    <button type="submit" class="modal-btn modal-btn--primary" name="filtra">
+                        <i class="fas fa-search"></i>
+                        Applica Filtri
+                    </button>
                 </div>
             </div>
         </div>
