@@ -163,7 +163,7 @@
                         <tr>
                                     <?php foreach ($column as $c){ ?>
                                     <th class="no-sort"
-                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
+                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap; <?php if(strtoupper($c->COLUMN_NAME) == 'TIMEINS') echo 'min-width: 180px;'; ?>">
                                             <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                     </th>
                                     <?php } ?>
@@ -200,7 +200,8 @@
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') {if($c->COLUMN_NAME != 'Esito') echo 'text-align:right;';}
                                             if($c->COLUMN_NAME == 'Esito') echo 'text-align:center;';
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
-                                            if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;?>
+                                            if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;
+                                            if($c->COLUMN_NAME == 'timeins') echo 'min-width: 180px; white-space: nowrap;';?>
                                                 border-color: #e5e7eb; border-width:1px">
                                             <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
                                             if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, '.', ''); else {

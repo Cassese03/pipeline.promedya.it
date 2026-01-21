@@ -59,26 +59,26 @@
                 </h3>
             </div>
             <div style="padding: 1.5rem;">
-                <div class="row" style="gap: 1rem;">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="kpi-card">
                             <div class="kpi-label">Esercizio</div>
                             <input style="text-align:center; font-size: 1.5rem; font-weight: 700; border: 2px solid #4f46e5; border-radius: 8px;" type="number" value="<?php echo $anno;?>" onchange="check_anno()" id="new_anno" step="1" min="2000" max="2100" class="form-control">
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="kpi-card">
                             <div class="kpi-label">Vendite Annuali</div>
                             <div class="kpi-value" style="color: #4366F6;">€ <?php echo number_format($vendite_annuale,2,',',' ');?></div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="kpi-card">
                             <div class="kpi-label">Budget Annuale</div>
                             <div class="kpi-value">€ <?php echo number_format($budget_annuale,2,',',' ');?></div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="kpi-card">
                             <div class="kpi-label">Obiettivo Annuale</div>
                             <div class="kpi-value" style="<?php $differenza = (floatval($vendite_annuale) - floatval($budget_annuale)); if($differenza <= 0) echo 'color:#ef4444;';else echo 'color:#10b981;'?>">
