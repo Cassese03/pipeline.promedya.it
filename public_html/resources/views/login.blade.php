@@ -71,17 +71,15 @@
         }
         
         .login-box-body {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 1.5rem !important;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25) !important;
-            padding: 3rem 2.5rem !important;
+            background: white !important;
+            border-radius: 1rem !important;
+            /* padding: 3rem 2.5rem !important; */
         }
         
         .login-logo-img {
             transition: transform 0.3s ease;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); */
+            border-radius: 10px!important;
         }
         
         .login-logo-img:hover {
@@ -99,6 +97,7 @@
             font-size: 1rem;
             transition: all 0.2s;
             background: #FFFFFF;
+            height: 50px;
         }
         
         .form-control:focus {
@@ -190,12 +189,12 @@
 
         <form method="post" enctype="multipart/form-data">
             <div class="form-group has-feedback">
-                <input type="text" name="username" class="form-control" placeholder="Email" required autofocus>
+                <input style = "font-size: 15px" type="text" name="username" class="form-control" placeholder="Email" required autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <br>
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input style = "font-size: 15px" type="password" name="password" class="form-control" placeholder="Password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             
@@ -212,10 +211,15 @@
                     <input type="submit" class="btn btn-primary btn-block" name="login" value="Login" style="font-size: 1rem; padding: 0.875rem;">
                 </div>
             </div>
+            
 
             <img class="partner-logo" style="margin:0 auto;display:block;height: auto;width: 100%;padding:15px"
                  src="<?php echo URL::asset('LogoWkiPartner.png') ?>">
-        </form>
+
+            <p style="text-align: center; color: #64748B; font-size: 15px; margin-top: 1.5rem;">
+                Copyright © <?php echo date('Y'); ?> <strong>Softmaint</strong> | IT 07374571219
+            </p>
+      </form>
     </div>
 </div>
 

@@ -335,6 +335,12 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a href="https://provvigioni.promedya.it" class="nav-link">
+                            <i class="nav-icon fas fa-euro-sign"></i>
+                            <p>Provvigioni</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo URL::asset('info') ?>" class="nav-link">
                             <i class="nav-icon fas fa-info"></i>
                             <p>Info</p>
