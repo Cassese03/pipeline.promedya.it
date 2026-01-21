@@ -1,6 +1,94 @@
 <?php $utente = session('utente'); ?>
 
 @include('common.header')
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .modern-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+    }
+
+    .kpi-card {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .kpi-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #64748B;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+    }
+
+    .kpi-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .month-input-container {
+        background: white;
+        border-radius: 8px;
+        padding: 0.75rem;
+        border: 1px solid #e5e7eb;
+        transition: all 0.2s ease;
+    }
+
+    .month-input-container:hover {
+        border-color: #4f46e5;
+        box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+    }
+
+    .month-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .budget-input {
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .budget-input:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        outline: none;
+    }
+
+    .quarterly-card {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        border-radius: 12px;
+        padding: 1rem;
+        border: 2px solid #3b82f6;
+        margin-top: 0.5rem;
+    }
+
+    .quarterly-title {
+        font-weight: 700;
+        color: #1e40af;
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header -->
     <section class="content-header" style="padding: 1.5rem;">
@@ -13,31 +101,48 @@
     <!-- Main content -->
     <section class="content-body" style="padding: 0 1.5rem 1.5rem;">
         <!-- KPI Cards Row -->
-        <div class="row" style="margin-bottom: 1.5rem;">
-            <div class="col-12">
-                <div class="card animate-fadeIn">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>
-                            Riepilogo Annuale
-                        </h3>
+        <div class="modern-card" style="margin-bottom: 1.5rem;">
+            <div style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; color: #1f2937;">
+                    <i class="fas fa-chart-line" style="margin-right: 0.5rem; color: #4f46e5;"></i>
+                    Riepilogo Annuale
+                </h3>
+            </div>
+            <div style="padding: 1.5rem;">
+                <div class="row" style="gap: 1rem;">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Budget Annuale</div>
+                            <div class="kpi-value">€ <?php echo number_format($budget_annuale,2,',',' ');?></div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                <label for="input">BUDGET ANNUALE</label>
-                <input style="text-align:right;font-weight: bolder" type="text"
-                       value="<?php echo number_format($budget_annuale,2,',',' ');?>" readonly
-                       class="form-control">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Vendite Annuali</div>
+                            <div class="kpi-value" style="color: #4366F6;">€ <?php echo number_format($vendite_annuale,2,',',' ');?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Obiettivo Annuale</div>
+                            <div class="kpi-value" style="<?php $differenza = (floatval($vendite_annuale) - floatval($budget_annuale)); if($differenza <= 0) echo 'color:#ef4444;';else echo 'color:#10b981;'?>">
+                                € <?php echo number_format($differenza,2,',',' ');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-4 col-lg-2 col-md-4 col-sm-4" style="margin-bottom: 2%">
-                <label for="input">OBIETTIVO ANNUALE</label>
-                <input
-                    style="text-align:right;font-weight: bolder;<?php $differenza = (floatval($vendite_annuale) - floatval($budget_annuale)); if($differenza <= 0) echo 'color:red;';else echo 'color:green;'?>"
-                    id="differenza"
-                    readonly
-                    value="<?php echo number_format($differenza,2,',',' ');?>"
-                    type="text" <?php if ($differenza < 0) echo 'style="color:red"'; ?>
-                    class="form-control">
+        </div>
+
+        <!-- Budget Mensile -->
+        <div class="modern-card">  
+            <div style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; color: #1f2937;">
+                    <i class="fas fa-calendar-alt" style="margin-right: 0.5rem; color: #4f46e5;"></i>
+                    Budget Mensile e Trimestrale
+                </h3>
             </div>
+            <div style="padding: 1.5rem;">
             <div style="overflow-x:scroll">
                 <?php for ($i = 0;
                            $i < 4;
@@ -160,15 +265,26 @@
                 </div>
 
                 <?php } ?>
+                </div>
+                
+                <div style="display:flex;justify-content:center;align-content:center; padding: 1.5rem 0; border-top: 1px solid #e5e7eb; margin-top: 1rem; background: #f8fafc;">
+                    <div style="text-align: center;">
+                        <h6 style="color: #64748B; font-weight: 500; margin: 0;">
+                            <span style="display: inline-block; margin: 0 1rem;">
+                                <strong style="color: #4366F6;">(Ven)</strong> Vendite
+                            </span>
+                            <span style="display: inline-block; margin: 0 1rem;">
+                                <strong style="color: #1e293b;">(Bgt)</strong> Budget
+                            </span>
+                            <span style="display: inline-block; margin: 0 1rem;">
+                                <strong style="color: #10b981;">(Obt)</strong> Obiettivo
+                            </span>
+                        </h6>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div style="display:flex;justify-content:center;align-content:center;">
-            <h6 style="margin-top:5%;"><strong>(Ven)</strong> Vendite - <strong>(Bgt)</strong>
-                Budget - <strong>(Obt)</strong> Obiettivo</h6>
-        </div>
     </section>
-</div>
 </div>
 <!-- /.container-fluid-->
 

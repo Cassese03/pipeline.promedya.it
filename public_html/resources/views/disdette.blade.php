@@ -1,5 +1,126 @@
 <?php $utente = session('utente'); ?>
 @include('common.header')
+<style>
+    .action-btn {
+        padding: 0.55rem 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: none;
+        color: #fff !important;
+        box-shadow: 0 8px 18px rgba(67, 102, 246, 0.15);
+        transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    }
+
+    .action-btn i {
+        color: #fff !important;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .action-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .action-btn--edit {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+    }
+
+    .action-btn--duplicate {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    .action-btn--delete {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .header-btn {
+        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        border: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .header-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-btn--primary {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        color: white;
+    }
+
+    .header-btn--filter {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .modern-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+    }
+
+    .legend-modern {
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .legend-modern li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .legend-modern li::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+    .legend-modern li:nth-child(1)::before {
+        background: #fef08a;
+    }
+
+    .legend-modern li:nth-child(2)::before {
+        background: #ff6666;
+    }
+
+    .legend-modern li:nth-child(3)::before {
+        background: #90ee90;
+    }
+</style>
 
 <div class="content-wrapper">
     <!-- Content Header -->
@@ -8,46 +129,46 @@
             Gestione Disdette
             <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
         </h1>
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <button class="btn btn-primary" style="padding: 0.75rem 2rem;" id="aggiungi_disdetta" onclick="aggiungi()" name="aggiungi_disdetta">
-                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <button class="header-btn header-btn--primary" id="aggiungi_disdetta" onclick="aggiungi()" name="aggiungi_disdetta">
+                <i class="fas fa-plus"></i>
                 Aggiungi Nuova Disdetta
             </button>
-            <button class="btn btn-danger" style="padding: 0.75rem 2rem;" id="filtra_disdetta" onclick="filtra()" name="filtra_disdetta">
-                <i class="fas fa-filter" style="margin-right: 0.5rem;"></i>
+            <button class="header-btn header-btn--filter" id="filtra_disdetta" onclick="filtra()" name="filtra_disdetta">
+                <i class="fas fa-filter"></i>
                 Filtri / Ricerca
             </button>
         </div>
     </section>
     <!-- Main content -->
-    <section class="content">
-        <div class="content-wrapper" style="margin:1% 1% 0 1%!important;">
-            <div class="row">
-                <div style="display: flex;width: 100%;justify-content: center">
-                    <div style="min-width: 360px;">
-                        <ul class="charts-css legend legend-rectangle" style="flex-direction: row">
-                            <li>CONTATTATO</li>
-                            <li>DISDETTA</li>
-                            <li>RIENTRO</li>
-                        </ul>
-                    </div>
-                </div>
+    <section class="content" style="padding: 0 1.5rem 1.5rem;">
+        <div style="margin: 0 auto; max-width: 100%;">
+            <div class="legend-modern">
+                <li>CONTATTATO</li>
+                <li>DISDETTA</li>
+                <li>RIENTRO</li>
+            </div>
 
-                <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <div class="box">
-                        <div class="box-body">
-                            <table id="example11" class="table table-bordered datatable"
-                                   style="border-color: grey; border-width:1px;">
-                                <thead>
-                                <tr>
+            <div class="modern-card">
+                <div style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                    <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; color: #1f2937;">
+                        <i class="fas fa-ban" style="margin-right: 0.5rem; color: #4f46e5;"></i>
+                        Elenco Disdette
+                    </h3>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="example11" class="table table-bordered datatable"
+                           style="border-color: #e5e7eb; border-width:1px; margin: 0;">
+                        <thead>
+                        <tr>
                                     <?php foreach ($column as $c){ ?>
                                     <th class="no-sort"
-                                        style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
+                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
                                             <?php echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                     </th>
                                     <?php } ?>
                                     <th class="no-sort"
-                                        style="text-align: center;background-color: lightblue;!important;border-color: grey; border-width:1px">
+                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
                                         Azioni
                                     </th>
                                 </tr>
@@ -74,13 +195,13 @@
                                         } ?>
 
                                     <td class="no-sort"
-                                        style="contain:content;
+                                        style="contain:content; padding: 0.75rem;
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') {if($c->COLUMN_NAME != 'Esito') echo 'text-align:right;';}
                                             if($c->COLUMN_NAME == 'Esito') echo 'text-align:center;';
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
                                             if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;?>
-                                                border-color: grey; border-width:1px">
+                                                border-color: #e5e7eb; border-width:1px">
                                             <?php if ($c->COLUMN_NAME != 'Esito' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
                                             if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, '.', ''); else {
                                                 if ($r->{$c->COLUMN_NAME} != null && $r->{$c->COLUMN_NAME} != '01-01-1970') {
@@ -94,8 +215,8 @@
                                             if ($r->{$c->COLUMN_NAME} == 2) echo 'CONTATTATO';
                                         } ?>
                                             <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
-                                        <button class="form-control btn-default"
-                                                onclick="nota('<?php echo $r->id; ?>');">NOTA
+                                        <button class="btn btn-sm" style="background: linear-gradient(135deg, #6b7280, #4b5563); color: white; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-weight: 500;"
+                                                onclick="nota('<?php echo $r->id; ?>');"><i class="fas fa-sticky-note" style="margin-right: 0.3rem;"></i>NOTA
                                         </button> <?php } ?>
                                                       <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
                                         <div class="progress-bar-label" style="text-align: center"><label
@@ -116,31 +237,19 @@
                                           onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                                         @csrf
                                         <td class="no-sort"
-                                            style="background:white;border-color: grey; border-width:1px">
-                                            <div style="display:flex;gap: 2px;">
+                                            style="background:white; border-color: #e5e7eb; border-width:1px; padding: 0.75rem;">
+                                            <div style="display:flex;gap: 0.5rem; justify-content: center;">
                                                 <button type="button" onclick="modifica(<?php echo $r->id;?>)"
-                                                        class="form-control btn-primary">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                         fill="currentColor" class="bi bi-pencil"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                                    </svg>
+                                                        class="btn action-btn action-btn--edit" title="Modifica">
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button type="button" onclick="duplica(<?php echo $r->id;?>)"
-                                                        class="form-control btn-warning">
-                                                    <i class="fa fa-clone" aria-hidden="true" style="color: white"></i>
+                                                        class="btn action-btn action-btn--duplicate" title="Duplica">
+                                                    <i class="fas fa-clone"></i>
                                                 </button>
                                                 <button type="submit" name="elimina" value="<?php echo $r->id;?>"
-                                                        class="form-control btn-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                         fill="currentColor" class="bi bi-trash"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                        <path
-                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                                    </svg>
+                                                        class="btn action-btn action-btn--delete" title="Elimina">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -149,13 +258,13 @@
                                 <?php } ?>
                                 </tbody>
                                 <tfoot>
-                                <tr style="background-color: lightblue">
+                                <tr style="background: linear-gradient(135deg, #e0f2fe, #bfdbfe);">
                                     <?php foreach ($column as $c){ ?>
                                     <th class="no-sort"
-                                        style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right;'?>width:20px;border-color: grey; border-width:1px"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
+                                        style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right; font-weight: 700;'?>border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; color: #1e40af;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, ',', '.'); ?></th>
                                     <?php } ?>
                                     <th class="no-sort"
-                                        style="width:20px;border-color: grey; border-width:1px"></th>
+                                        style="border-color: #e5e7eb; border-width:1px"></th>
                                 </tr>
                                 </tfoot>
                             </table>
