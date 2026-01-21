@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Segnalato;
 
+use Illuminate\Http\Request;
 use App\Models\CF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -140,7 +141,12 @@ class AjaxController extends Controller
         $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
-        $cfs = CF::all();
+        
+        try {
+            $cfs = CF::all();
+        } catch (\Exception $e) {
+            $cfs = [];
+        }
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') { ?>
@@ -389,6 +395,7 @@ class AjaxController extends Controller
                 </div>
             <?php } ?>
         <?php }
+        return ob_get_clean();
     }
 
     public
@@ -406,7 +413,12 @@ class AjaxController extends Controller
         $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
         $categoria = DB::select('select * from categoria ORDER BY id');
         $segnalato = Segnalato::all();
-        $cfs = CF::all();
+        
+        try {
+            $cfs = CF::all();
+        } catch (\Exception $e) {
+            $cfs = [];
+        }
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') {
@@ -677,8 +689,9 @@ class AjaxController extends Controller
                     </div>
                 </div>
             <?php } ?>
-        <?php } ?>
-    <?php }
+        <?php }
+        return ob_get_clean();
+    }
 
     public
     function modifica_ajax_DISDETTA($id)
@@ -903,4 +916,35 @@ class AjaxController extends Controller
             <?php
         }
     }
+    public function elimina_multiple(Request $request){
+        try {
+            $ids = $request->input('ids');
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Nessun ID fornito'
+                ], 400);
+            }
+            
+            // dd($ids);
+            // Elimina le righe
+            // $deleted = DB::table('pipeline')->whereIn('Id', $ids)->delete();
+            $deleted = DB::table('pipeline')->whereIn('Id', $ids)->update(['Note' => 'cancellato']);
+
+            return response()->json([
+                'success' => true,
+                'message' => "$deleted righe eliminate con successo",
+                'deleted' => $deleted
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Errore durante l\'eliminazione: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
+
+

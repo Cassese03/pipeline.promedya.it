@@ -282,6 +282,93 @@
         color: #9ca3af;
         font-weight: 600;
     }
+
+    .checkbox-cell {
+        width: 50px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .row-checkbox {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: #4f46e5;
+    }
+
+    .selection-bar {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        gap: 1rem;
+        animation: slideInRight 0.3s ease;
+    }
+
+    .selection-bar.active {
+        display: flex;
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .selection-bar-text {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .selection-bar-count {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-weight: 700;
+    }
+
+    .selection-bar-btn {
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .selection-bar-btn--delete {
+        background: #ef4444;
+        color: white;
+    }
+
+    .selection-bar-btn--delete:hover {
+        background: #dc2626;
+        transform: scale(1.05);
+    }
+
+    .selection-bar-btn--cancel {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .selection-bar-btn--cancel:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -335,6 +422,10 @@
                                             <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
                                     </th>
                                     <?php } ?>
+                                    <th class="no-sort checkbox-cell"
+                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem;">
+                                        <input type="checkbox" id="selectAll" class="row-checkbox" title="Seleziona/Deseleziona tutto">
+                                    </th>
                                     <th class="no-sort"
                                         style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
                                         Azioni
@@ -343,7 +434,7 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach ($rows as $r){ ?>
-                                <tr style="background: <?php if($r->Vinta == 2) echo 'lightgreen'; if($r->Vinta == 1) echo '#ff6666'; if($r->Vinta != 1 && $r->Vinta != 2) echo 'lightyellow';?>;">
+                                <tr style="background: <?php if($r->Vinta == 2) echo 'lightgreen'; if($r->Vinta == 1) echo '#ff6666'; if($r->Vinta != 1 && $r->Vinta != 2) echo 'lightyellow';?>;" data-row-id="<?php echo $r->Id; ?>">
                                         <?php foreach ($column as $c){ ?>
 
                                         <?php
@@ -415,6 +506,9 @@
 
                                         </td>
                                         <?php } ?>
+                                        <td class="checkbox-cell" style="border-color: #e5e7eb; border-width:1px; padding: 0.75rem; background: white;">
+                                            <input type="checkbox" class="row-checkbox row-select" data-id="<?php echo $r->Id; ?>">
+                                        </td>
                                         <form enctype="multipart/form-data" method="post"
                                             onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
                                             @csrf
@@ -445,6 +539,7 @@
                                     <th class="no-sort"
                                         style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right; font-weight: 700;'?>border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; color: #1e40af;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, '.', ''); ?></th>
                                     <?php } ?>
+                                    <th class="no-sort checkbox-cell" style="border-color: #e5e7eb; border-width:1px;"></th>
                                     <th class="no-sort" style="border-color: #e5e7eb; border-width:1px"></th>
                                 </tr>
                                 </tfoot>
@@ -457,6 +552,27 @@
     </section>
     <!-- /.content -->
 </div>
+
+<!-- Barra Selezione Multipla -->
+<div class="selection-bar" id="selectionBar">
+    <span class="selection-bar-text">Selezione Multipla attiva</span>
+    <span class="selection-bar-count" id="selectedCount">0</span>
+    <button class="selection-bar-btn selection-bar-btn--delete" onclick="deleteSelectedRows()">
+        <i class="fas fa-trash"></i>
+        Elimina Selezionate
+    </button>
+    <button class="selection-bar-btn selection-bar-btn--cancel" onclick="clearSelection()">
+        <i class="fas fa-times"></i>
+        Annulla
+    </button>
+</div>
+
+<!-- Form per eliminazione multipla
+<form id="deleteMultipleForm" method="post" action="/pipeline" style="display: none;">
+    @csrf
+    <input type="hidden" name="elimina_multiple" id="deleteMultipleIds" value="">
+</form> -->
+
 @include('common.footer')
 
 <form method="post" onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova Lead?')"
@@ -1064,10 +1180,12 @@
         $.ajax({
             url: '<?php echo URL::asset('ajax/modifica_ajax') ?>/' + id,
             type: "POST",
-            //contentType: "application/json",
             data: {}
         }).done(function (result) {
                 $('#ajax_modifica_' + id).html(result);
+            }).fail(function(xhr, status, error) {
+                console.error('Errore AJAX modifica:', error, xhr.responseText);
+                alert('Errore nel caricamento dei dati');
             });
     }
 
@@ -1075,10 +1193,12 @@
         $.ajax({
             url: '<?php echo URL::asset('ajax/duplica_ajax') ?>/' + id,
             type: "POST",
-            contentType: "application/json",
             data: {}
         }).done(function (result) {
                 $('#ajax_duplica_' + id).html(result);
+            }).fail(function(xhr, status, error) {
+                console.error('Errore AJAX duplica:', error, xhr.responseText);
+                alert('Errore nel caricamento dei dati');
             });
     }
 
@@ -1111,4 +1231,91 @@
     function chiudi(id) {
         $('#modal_chiudi_' + id).modal('show');
     }
+
+    // Gestione Selezione Multipla
+    $(document).ready(function() {
+        const selectionBar = $('#selectionBar');
+        const selectedCount = $('#selectedCount');
+
+        // Funzione per ottenere ID selezionati
+        function getSelectedIds() {
+            const ids = [];
+            $('.row-select:checked').each(function() {
+                ids.push($(this).data('id'));
+            });
+            return ids;
+        }
+
+        // Funzione per aggiornare UI
+        function updateSelectionUI() {
+            const selectedIds = getSelectedIds();
+
+            if (selectedIds.length > 0) {
+                selectionBar.addClass('active');
+                selectedCount.text(selectedIds.length);
+            } else {
+                selectionBar.removeClass('active');
+            }
+
+            // Aggiorna stato checkbox "seleziona tutto"
+            const totalCheckboxes = $('.row-select').length;
+            const checkedCheckboxes = $('.row-select:checked').length;
+            $('#selectAll').prop('checked', totalCheckboxes > 0 && totalCheckboxes === checkedCheckboxes);
+        }
+
+        // Checkbox singolo
+        $(document).on('change', '.row-select', function() {
+            updateSelectionUI();
+        });
+
+        // Seleziona/Deseleziona tutto
+        $('#selectAll').on('change', function() {
+            const isChecked = $(this).prop('checked');
+            $('.row-select').prop('checked', isChecked);
+            updateSelectionUI();
+        });
+
+        // Funzione per eliminare righe selezionate
+        window.deleteSelectedRows = function() {
+            const currentSelectedIds = getSelectedIds();
+            
+            if (currentSelectedIds.length === 0) {
+                alert('Nessuna riga selezionata!');
+                return;
+            }
+
+            const message = `Sei sicuro di voler eliminare ${currentSelectedIds.length} ${currentSelectedIds.length === 1 ? 'riga' : 'righe'} selezionate?`;
+            
+            if (confirm(message)) {
+                $.ajax({
+                    url: '/ajax/elimina_multiple',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({ ids: currentSelectedIds }),
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert('Errore: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        const error = xhr.responseJSON ? xhr.responseJSON.message : 'Errore sconosciuto';
+                        alert('Errore durante l\'eliminazione: ' + error);
+                    }
+                });
+            }
+        };
+
+        // Funzione per annullare selezione
+        window.clearSelection = function() {
+            $('.row-select').prop('checked', false);
+            $('#selectAll').prop('checked', false);
+            updateSelectionUI();
+        };
+    });
 </script>

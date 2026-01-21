@@ -50,6 +50,7 @@ Route::any('ajax/duplica_ajax/{Id}', [AjaxController::class, 'duplica_ajax']);
 
 Route::any('ajax/modifica_ajax_DISDETTA/{Id}', [AjaxController::class, 'modifica_ajax_DISDETTA']);
 Route::any('ajax/duplica_ajax_DISDETTA/{Id}', [AjaxController::class, 'duplica_ajax_DISDETTA']);
+Route::post('ajax/elimina_multiple', [AjaxController::class, 'elimina_multiple']);
 
 Route::any('ajax/duplica_ajax_INCENTIVI/{Id}', [AjaxController::class, 'duplica_ajax_INCENTIVI']);
 
