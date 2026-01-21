@@ -168,6 +168,11 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button:active {
             background: blue !important;
         }
+        .form-control {
+            font-size: 0.8rem!important;
+            height: auto!important;
+            padding: 0.375rem 0.75rem!important;
+        }
 
     </style>
 

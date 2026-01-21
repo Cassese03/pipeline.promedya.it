@@ -392,14 +392,13 @@
                                 <label style="font-size:0.85rem!important">Valore (Delta)</label>
                                 <div style="display:flex">
                                     <input type="text"
-                                           style="width: 8em;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
-                                           readonly class="form-control"
-                                           value="<?php echo number_format($opening_anno_successivo - $opening[0]->Val_Opening ,2,',',' ');?>">
+                                        style="width: 60%;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                        readonly class="form-control"
+                                        value="<?php echo number_format($opening_anno_successivo - $opening[0]->Val_Opening ,2,',',' ');?>">
                                     <input type="text"
-                                           style="width: 5em;margin-right:5%;text-align: right;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
-                                           readonly class="form-control"
-                                           value="<?php echo number_format($differenza_opening,2,',','').'%';?>">
-
+                                        style="width: 60%;margin-right:5%;text-align: right;margin-top:5%;<?php if($opening_anno_successivo <= $opening[0]->Val_Opening) echo 'color:red;';else echo 'color:green;';?>"
+                                        readonly class="form-control"
+                                        value="<?php echo number_format($differenza_opening,2,',','').'%';?>">
                                 </div>
                             </div>
                         </div>
