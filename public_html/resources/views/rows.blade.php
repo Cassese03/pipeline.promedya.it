@@ -141,6 +141,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
+        color:white!important;
     }
 
     .modal-header .close {
@@ -375,16 +376,17 @@
     <section class="content-header" style="padding: 1.5rem;">
         <h1 class="text-gradient" style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">
             Smart Sales Force | Agenzia
-            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b id="countdown"></b></small>
+            <small style="display: block; margin-top: 0.5rem; color: #64748B; font-size: 1rem;">&nbsp;&nbsp;<b
+                    id="countdown"></b></small>
         </h1>
         <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
             <button class="header-btn header-btn--primary" id="aggiungi_pipeline" onclick="aggiungi()"
-                name="aggiungi_pipeline">
+                    name="aggiungi_pipeline">
                 <i class="fas fa-plus"></i>
                 Aggiungi Nuovo Contatto
             </button>
             <button class="header-btn header-btn--filter" id="filtra_pipeline" onclick="filtra()"
-                name="filtra_pipeline">
+                    name="filtra_pipeline">
                 <i class="fas fa-filter"></i>
                 Filtri / Ricerca
             </button>
@@ -408,149 +410,153 @@
                 </div>
                 <div style="overflow-x: auto;">
                     <table id="example11" class="table table-bordered datatable"
-                        style="border-color: #e5e7eb; border-width:1px; margin: 0;">
+                           style="border-color: #e5e7eb; border-width:1px; margin: 0;">
                         <thead>
                         <tr>
-                                    <?php foreach ($column as $c){ ?>
-                                    <th class="no-sort"
-                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
-                                            <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
-                                            <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
-                                            <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
-                                            <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
-                                            <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
-                                            <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
-                                    </th>
-                                    <?php } ?>
-                                    <th class="no-sort checkbox-cell"
-                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem;">
-                                        <input type="checkbox" id="selectAll" class="row-checkbox" title="Seleziona/Deseleziona tutto">
-                                    </th>
-                                    <th class="no-sort"
-                                        style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
-                                        Azioni
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach ($rows as $r){ ?>
-                                <tr style="background: <?php if($r->Vinta == 2) echo 'lightgreen'; if($r->Vinta == 1) echo '#ff6666'; if($r->Vinta != 1 && $r->Vinta != 2) echo 'lightyellow';?>;" data-row-id="<?php echo $r->Id; ?>">
-                                        <?php foreach ($column as $c){ ?>
+                            <?php foreach ($column as $c){ ?>
+                            <th class="no-sort"
+                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
+                                    <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                                    <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                            </th>
+                            <?php } ?>
+                            <th class="no-sort checkbox-cell"
+                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem;">
+                                <input type="checkbox" id="selectAll" class="row-checkbox"
+                                       title="Seleziona/Deseleziona tutto">
+                            </th>
+                            <th class="no-sort"
+                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
+                                Azioni
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($rows as $r){ ?>
+                        <tr style="background: <?php if($r->Vinta == 2) echo 'lightgreen'; if($r->Vinta == 1) echo '#ff6666'; if($r->Vinta != 1 && $r->Vinta != 2) echo 'lightyellow';?>;"
+                            data-row-id="<?php echo $r->Id; ?>">
+                                <?php foreach ($column as $c){ ?>
 
-                                        <?php
-                                        if ($c->COLUMN_NAME == 'Val_Ven_AC') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        }
-                                        if ($c->COLUMN_NAME == 'Val_Can_AC') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        }
-                                        if ($c->COLUMN_NAME == 'Vendita_Budget') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        }
-                                        if ($c->COLUMN_NAME == 'Inc_Canone_AS') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        }
-                                        if ($c->COLUMN_NAME == 'Inc_Anno_Solare') {
-                                            if (isset(${$c->COLUMN_NAME}))
-                                                ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
-                                            else
-                                                ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
-                                        } ?>
+                                <?php
+                                if ($c->COLUMN_NAME == 'Val_Ven_AC') {
+                                    if (isset(${$c->COLUMN_NAME}))
+                                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                    else
+                                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                }
+                                if ($c->COLUMN_NAME == 'Val_Can_AC') {
+                                    if (isset(${$c->COLUMN_NAME}))
+                                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                    else
+                                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                }
+                                if ($c->COLUMN_NAME == 'Vendita_Budget') {
+                                    if (isset(${$c->COLUMN_NAME}))
+                                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                    else
+                                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                }
+                                if ($c->COLUMN_NAME == 'Inc_Canone_AS') {
+                                    if (isset(${$c->COLUMN_NAME}))
+                                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                    else
+                                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                }
+                                if ($c->COLUMN_NAME == 'Inc_Anno_Solare') {
+                                    if (isset(${$c->COLUMN_NAME}))
+                                        ${$c->COLUMN_NAME} = ${$c->COLUMN_NAME} + floatval($r->{$c->COLUMN_NAME});
+                                    else
+                                        ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
+                                } ?>
 
-                                        <td class="no-sort" style="contain:content; padding: 0.75rem;
+                            <td class="no-sort" style="contain:content; padding: 0.75rem;
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') echo 'text-align:right;' ;
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
                                             if($c->COLUMN_NAME =='Vinta' || $c->COLUMN_NAME == 'Note') echo 'text-align:center;' ;?>
                                                 border-color: #e5e7eb; border-width:1px">
-                                            <?php if ($c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
-                                            if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'Id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, '.', ''); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
-                                        } ?>
-                                            <?php if ($c->COLUMN_NAME == 'Vinta') {
+                                    <?php if ($c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Note') {
+                                    if (($c->DATA_TYPE == 'int' || $c->DATA_TYPE == 'float') and $c->COLUMN_NAME != 'Id' and $c->COLUMN_NAME != 'Id_Padre' and $c->COLUMN_NAME != 'Probabilita_Chiusura') echo number_format($r->{$c->COLUMN_NAME}, 2, '.', ''); else echo ($c->DATA_TYPE != 'date') ? $r->{$c->COLUMN_NAME} : date('d-m-Y', strtotime($r->{$c->COLUMN_NAME}));
+                                } ?>
+                                    <?php if ($c->COLUMN_NAME == 'Vinta') {
 
-                                            foreach ($esito_trattativa as $e) {
-                                                if ($r->{$c->COLUMN_NAME} == $e->id) echo $e->descrizione;
-                                            }
-                                        } ?>
-                                            <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
-                                            <button class="btn btn-sm" style="background: linear-gradient(135deg, #6b7280, #4b5563); color: white; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-weight: 500;"
-                                                onclick="nota('<?php echo $r->Id; ?>');">
-                                                <i class="fas fa-sticky-note" style="margin-right: 0.3rem;"></i>NOTA
-                                            </button>
-                                            <?php } ?>
-                                            <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
-                                            <div class="progress-bar-label" style="text-align: center"><label
-                                                    style="font-weight: bold">
-                                                    <?php echo $r->{$c->COLUMN_NAME} . '%'; ?>
-                                                </label>
-                                            </div>
-                                            <div class="progress"
-                                                style="height: 7px;color: rgba(46, 204, 113,0.6);background-color: lightgray">
-                                                <div class="progress-bar" role="progressbar"
-                                                    style="width: <?php echo $r->{$c->COLUMN_NAME};?>%;"
-                                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <?php } ?>
+                                    foreach ($esito_trattativa as $e) {
+                                        if ($r->{$c->COLUMN_NAME} == $e->id) echo $e->descrizione;
+                                    }
+                                } ?>
+                                    <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
+                                <button class="btn btn-sm"
+                                        style="background: linear-gradient(135deg, #6b7280, #4b5563); color: white; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-weight: 500;"
+                                        onclick="nota('<?php echo $r->Id; ?>');">
+                                    <i class="fas fa-sticky-note" style="margin-right: 0.3rem;"></i>NOTA
+                                </button>
+                                <?php } ?>
+                                    <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
+                                <div class="progress-bar-label" style="text-align: center"><label
+                                        style="font-weight: bold">
+                                            <?php echo $r->{$c->COLUMN_NAME} . '%'; ?>
+                                    </label>
+                                </div>
+                                <div class="progress"
+                                     style="height: 7px;color: rgba(46, 204, 113,0.6);background-color: lightgray">
+                                    <div class="progress-bar" role="progressbar"
+                                         style="width: <?php echo $r->{$c->COLUMN_NAME};?>%;"
+                                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <?php } ?>
 
-                                        </td>
-                                        <?php } ?>
-                                        <td class="checkbox-cell" style="border-color: #e5e7eb; border-width:1px; padding: 0.75rem; background: white;">
-                                            <input type="checkbox" class="row-checkbox row-select" data-id="<?php echo $r->Id; ?>">
-                                        </td>
-                                        <form enctype="multipart/form-data" method="post"
-                                            onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                                            @csrf
-                                            <td class="no-sort"
-                                                style="background:white; border-color: #e5e7eb; border-width:1px; padding: 0.75rem;">
-                                                <div style="display:flex;gap: 0.5rem; justify-content: center;">
-                                                    <button type="button" onclick="modifica(<?php echo $r->Id;?>)"
-                                                        class="btn action-btn action-btn--edit" title="Modifica">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" onclick="duplica(<?php echo $r->Id;?>)"
-                                                        class="btn action-btn action-btn--duplicate" title="Duplica">
-                                                        <i class="fas fa-clone"></i>
-                                                    </button>
-                                                    <button type="submit" name="elimina" value="<?php echo $r->Id;?>"
-                                                        class="btn action-btn action-btn--delete" title="Elimina">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                    <?php } ?>
-                                </tbody>
-                                <tfoot>
-                                <tr style="background: linear-gradient(135deg, #e0f2fe, #bfdbfe);">
-                                    <?php foreach ($column as $c){ ?>
-                                    <th class="no-sort"
-                                        style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right; font-weight: 700;'?>border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; color: #1e40af;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, '.', ''); ?></th>
-                                    <?php } ?>
-                                    <th class="no-sort checkbox-cell" style="border-color: #e5e7eb; border-width:1px;"></th>
-                                    <th class="no-sort" style="border-color: #e5e7eb; border-width:1px"></th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                            </td>
+                            <?php } ?>
+                            <td class="checkbox-cell"
+                                style="border-color: #e5e7eb; border-width:1px; padding: 0.75rem; background: white;">
+                                <input type="checkbox" class="row-checkbox row-select" data-id="<?php echo $r->Id; ?>">
+                            </td>
+                            <form enctype="multipart/form-data" method="post"
+                                  onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
+                                @csrf
+                                <td class="no-sort"
+                                    style="background:white; border-color: #e5e7eb; border-width:1px; padding: 0.75rem;">
+                                    <div style="display:flex;gap: 0.5rem; justify-content: center;">
+                                        <button type="button" onclick="modifica(<?php echo $r->Id;?>)"
+                                                class="btn action-btn action-btn--edit" title="Modifica">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" onclick="duplica(<?php echo $r->Id;?>)"
+                                                class="btn action-btn action-btn--duplicate" title="Duplica">
+                                            <i class="fas fa-clone"></i>
+                                        </button>
+                                        <button type="submit" name="elimina" value="<?php echo $r->Id;?>"
+                                                class="btn action-btn action-btn--delete" title="Elimina">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        <?php } ?>
+                        </tbody>
+                        <tfoot>
+                        <tr style="background: linear-gradient(135deg, #e0f2fe, #bfdbfe);">
+                            <?php foreach ($column as $c){ ?>
+                            <th class="no-sort"
+                                style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right; font-weight: 700;'?>border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; color: #1e40af;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, '.', ''); ?></th>
+                            <?php } ?>
+                            <th class="no-sort checkbox-cell" style="border-color: #e5e7eb; border-width:1px;"></th>
+                            <th class="no-sort" style="border-color: #e5e7eb; border-width:1px"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- /.content -->
+</div>
+</div>
+</section>
+<!-- /.content -->
 </div>
 
 <!-- Barra Selezione Multipla -->
@@ -570,20 +576,20 @@
 <!-- Form per eliminazione multipla
 <form id="deleteMultipleForm" method="post" action="/pipeline" style="display: none;">
     @csrf
-    <input type="hidden" name="elimina_multiple" id="deleteMultipleIds" value="">
+<input type="hidden" name="elimina_multiple" id="deleteMultipleIds" value="">
 </form> -->
 
 @include('common.footer')
 
 <form method="post" onsubmit="return confirm('Sei sicuro di voler aggiungere la nuova Lead?')"
-    enctype="multipart/form-data" action="/pipeline">
+      enctype="multipart/form-data" action="/pipeline">
     @csrf
     <div class="modal fade" id="modal_aggiungi">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="titolo_modal_mgmov">Crea Pipeline</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h4 class="modal-title" id="titolo_modal_mgmov">Inserimento Contatto</h4>
+                    <button type="button" onclick="$('#modal_aggiungi').modal('hide');" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -617,41 +623,18 @@
 
                                 <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
-                                <style>
-                                    .select2-container .select2-selection--single {
-                                        height: 50px;
-                                    }
-                                </style>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select id="clientiSelect" class="form-control select2" id="{{$c->COLUMN_NAME}}" name="{{$c->COLUMN_NAME}}"
-                                            onchange="toggleAccordion()"></select>
-                                        <div class="input-group-append">
-                                            <button id="accordionButton" class="btn btn-outline-secondary" type="button"
-                                                data-toggle="collapse" data-target="#accordionContent"
-                                                aria-expanded="false" aria-controls="accordionContent" disabled>
-                                                <i class="fas fa-chevron-down"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="collapse" id="accordionContent">
-                                    <div class="card card-body" id="contenuto">
-                                    </div>
-                                </div>
-                                <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Sales') { ?>
+
+                                    <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <?php foreach ($operatori as $o){ ?>
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
+                                        <?php foreach ($operatori as $o){ ?>
                                     <option value="{{$o->username}}" <?php if ($o->username == $utente->username) echo
-                                        'selected'; ?> >{{$o->username}}</option>
+                                    'selected'; ?> >{{$o->username}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
                                 <select style="width:100%" class="form-control aggiungi_vinta"
                                         onchange="check_vinta('aggiungi_vinta')"
                                         id="<?php echo $c->COLUMN_NAME;?>"
@@ -662,9 +645,9 @@
                                 </select>
                                 <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
                                     @foreach($categoria as $c1)
@@ -672,9 +655,9 @@
                                     @endforeach
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
                                     <option value="OLD">OLD
@@ -685,50 +668,51 @@
                                     </option>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
                                 <select style="width:100%" class="form-control aggiungi_segnalato"
-                                    onchange="check_segnalato('aggiungi_segnalato')" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        onchange="check_segnalato('aggiungi_segnalato')"
+                                        id="<?php echo $c->COLUMN_NAME;?>"
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                    <?php foreach ($segnalato as $s){ ?>
+                                        <?php foreach ($segnalato as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
                                 <select style="width:100%" class="form-control aggiungi_motivazione" disabled="disabled"
-                                    id="<?php echo $c->COLUMN_NAME;?>" name="<?php echo $c->COLUMN_NAME ;?>">
+                                        id="<?php echo $c->COLUMN_NAME;?>" name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                    <?php foreach ($motivazione as $m){ ?>
+                                        <?php foreach ($motivazione as $m){ ?>
                                     <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                    <?php foreach ($prodotto as $s){ ?>
+                                        <?php foreach ($prodotto as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
                                 <select style="width:100%" class="form-control aggiungi_dipendente" disabled="disabled"
-                                    id="<?php echo $c->COLUMN_NAME;?>" name="<?php echo $c->COLUMN_NAME ;?>">
+                                        id="<?php echo $c->COLUMN_NAME;?>" name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Inserisci Valore...
                                     </option>
-                                    <?php foreach ($dipendenti as $s){ ?>
+                                        <?php foreach ($dipendenti as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="25">25
                                     </option>
                                     <option value="50">50
@@ -739,11 +723,12 @@
                                     </option>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Note') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Note') { ?>
                                 <textarea rows="8" cols="100"
-                                    onKeyUp="converti(<?php echo '\''. $c->COLUMN_NAME . '\'';?>)" class="form-control"
-                                    type="text" id="<?php echo  $c->COLUMN_NAME ;?>"
-                                    name="<?php echo  $c->COLUMN_NAME ;?>"></textarea>
+                                          onKeyUp="converti(<?php echo '\''. $c->COLUMN_NAME . '\'';?>)"
+                                          class="form-control"
+                                          type="text" id="<?php echo  $c->COLUMN_NAME ;?>"
+                                          name="<?php echo  $c->COLUMN_NAME ;?>"></textarea>
 
                                 <?php } ?>
                             </div>
@@ -755,9 +740,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"  onclick="$('#modal_aggiungi').modal('hide');" >Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="aggiungi" value="Aggiungi"
-                        style="margin-right:5px;">
+                           style="margin-right:5px;">
                 </div>
             </div>
         </div>
@@ -774,7 +759,7 @@
                         <i class="fas fa-filter"></i>
                         Filtri di Ricerca
                     </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal"  onclick="$('#modal_filtra').modal('hide');" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -804,7 +789,7 @@
 
 
                                 <?php } ?>
-                                <?php if ($c->DATA_TYPE == 'date'){ ?>
+                                    <?php if ($c->DATA_TYPE == 'date'){ ?>
                                 <div class="date-range-container">
                                     <input <?php echo 'class="form-control" type="date" id="' .
                                         $c->COLUMN_NAME . '_i" name="' . $c->COLUMN_NAME . '_i"'; ?>>
@@ -820,13 +805,13 @@
                                        class="form-control" list="clienti">
                                 <datalist id="clienti">
                                     @foreach($clienti as $c1)
-                                    <option value="{{$c1->Ragione_Sociale}}">{{$c1->Ragione_Sociale}}</option>
+                                        <option value="{{$c1->Ragione_Sociale}}">{{$c1->Ragione_Sociale}}</option>
                                     @endforeach
                                 </datalist>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="undefined">Nessun Filtro...
                                     </option>
                                         <?php foreach ($esito_trattativa as $e){ ?>
@@ -835,52 +820,52 @@
                                 </select>
                                 <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
-                                    <?php foreach ($segnalato as $s){ ?>
+                                        <?php foreach ($segnalato as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
-                                    <?php foreach ($motivazione as $m){ ?>
+                                        <?php foreach ($motivazione as $m){ ?>
                                     <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
-                                    <?php foreach ($prodotto as $s){ ?>
+                                        <?php foreach ($prodotto as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
 
                                 <?php } ?>
 
-                                <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
-                                    <?php foreach ($dipendenti as $s){ ?>
+                                        <?php foreach ($dipendenti as $s){ ?>
                                     <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
                                     <?php } ?>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
                                     <option value="OLD">OLD
@@ -891,9 +876,9 @@
                                     </option>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="">Nessun Filtro...
                                     </option>
                                     @foreach($categoria as $c1)
@@ -901,9 +886,9 @@
                                     @endforeach
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
                                 <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                    name="<?php echo $c->COLUMN_NAME ;?>">
+                                        name="<?php echo $c->COLUMN_NAME ;?>">
                                     <option value="Nessun Filtro...">Nessun Filtro...
                                     </option>
                                     <option value="25">25
@@ -916,11 +901,12 @@
                                     </option>
                                 </select>
                                 <?php } ?>
-                                <?php if ($c->COLUMN_NAME == 'Note') { ?>
+                                    <?php if ($c->COLUMN_NAME == 'Note') { ?>
                                 <textarea rows="8" cols="100"
-                                    onKeyUp="converti(<?php echo '\''. $c->COLUMN_NAME . '\'';?>)" class="form-control"
-                                    type="text" id="<?php echo  $c->COLUMN_NAME ;?>"
-                                    name="<?php echo  $c->COLUMN_NAME ;?>">Nessun Filtro...</textarea>
+                                          onKeyUp="converti(<?php echo '\''. $c->COLUMN_NAME . '\'';?>)"
+                                          class="form-control"
+                                          type="text" id="<?php echo  $c->COLUMN_NAME ;?>"
+                                          name="<?php echo  $c->COLUMN_NAME ;?>">Nessun Filtro...</textarea>
 
                                 <?php } ?>
                             </div>
@@ -960,11 +946,11 @@
                             <div class="filter-form-group">
                                 <label>Gruppo Prodotto<b style="color:red">*</b></label>
                                 <select style="width:100%" class="form-control" id="gruppo_prodotto"
-                                    name="gruppo_prodotto">
+                                        name="gruppo_prodotto">
                                     <option value="undefined">Nessun Filtro...
                                     </option>
                                     @foreach($gruppo as $g)
-                                    <option value="{{ $g->prodotti }}">{{$g->gruppo}}</option>
+                                        <option value="{{ $g->prodotti }}">{{$g->gruppo}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -980,7 +966,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="modal-btn modal-btn--secondary" data-dismiss="modal" onclick="$('#modal_filtra').modal('hide');">
+                    <button type="button" class="modal-btn modal-btn--secondary" data-dismiss="modal"
+                            onclick="$('#modal_filtra').modal('hide');">
                         <i class="fas fa-times"></i>
                         Chiudi
                     </button>
@@ -1015,7 +1002,7 @@
                     <input type="hidden" name="Id" value="<?php echo $r->Id;?>">
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="modifica" value="modifica"
-                        style="margin-right:5px;">
+                           style="margin-right:5px;">
                 </div>
             </div>
         </div>
@@ -1041,7 +1028,7 @@
                     <input type="hidden" name="Id_Padre" value="<?php echo $r->Id;?>">
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="duplica" value="Duplica"
-                        style="margin-right:5px;">
+                           style="margin-right:5px;">
                 </div>
             </div>
         </div>
@@ -1051,20 +1038,20 @@
 
 
 <?php foreach ($rows as $r){ ?>
-<?php if ($r->Note != ''){ ?>
+    <?php if ($r->Note != ''){ ?>
 <div class="modal fade" id="modal_nota_<?php echo $r->Id ?>">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="titolo_modal_mgmov">Nota Record
-                    <?php echo $r->Id ?>
+                        <?php echo $r->Id ?>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <?php echo $r->Note; ?>
+                    <?php echo $r->Note; ?>
                 <div class=" clearfix">
                 </div>
             </div>
@@ -1077,83 +1064,6 @@
 </div>
 <?php } ?>
 <?php } ?>
-
-<script>
-
-
-    var cfSelected;
-    var cfs = [];
-
-    function toggleAccordion() {
-        var selectElement = document.getElementById('clientiSelect');
-        var accordionButton = document.getElementById('accordionButton');
-        var accordionContent = document.getElementById('accordionContent');
-
-        if (selectElement.value !== "") {
-            var selectedValue = document.getElementById("clientiSelect").value;
-
-            console.log(selectedValue);
-             var result = cfs.filter((e) => e.Descrizione.includes(selectedValue))[0]
- 
-            accordionButton.removeAttribute('disabled');
-            accordionContent.classList.add('show');
-         
-            var content = document.getElementById("contenuto").innerHTML = `
-            <div class="form-group">
-                    <label>Codice Sap</b>  </label>
-                    <input class="form-control" value='${result.xCodSap}' disabled>
-                </div>
-                <div class="form-group">
-                    <label>Partita Iva</b></label>
-                    <input class="form-control" value='${result.PartitaIva}' disabled>
-                </div>
-                <div class="form-group">
-                    <label>Canone Annualep</b></label>
-                    <input class="form-control" value='${parseFloat(result.xImpAss).toFixed(2).replace('.', ',')} €' disabled>
-            </div> 
-            `
-
-        } else {
-           
-            accordionButton.setAttribute('disabled', 'disabled');
-            accordionContent.classList.remove('show');
-        }
-    }
-
-    function fetchCF(callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'api/cf', true);
-        xhr.onreadystatechange = function () {
-            console.log(xhr.status);
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                cfs = [];
-                var data = JSON.parse(xhr.responseText);
-                var clientiSelect = document.getElementById('clientiSelect');
-
-                clientiSelect.innerHTML = '<option value=""> Seleziona un cliente </option>';
-
-                data.forEach(function (cliente) {
-                    var option = document.createElement('option');
-                    option.value = cliente.Descrizione;
-                    option.textContent = cliente.Descrizione;
-                    clientiSelect.appendChild(option);
-                });
-
-                console.log(data);
-                cfs = data;
-
-                $('.select2').select2();
-            }
-        };
-        xhr.send();
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        fetchCF();
-    });
-
-</script>
-
 
 
 <script type="text/javascript">
@@ -1182,11 +1092,11 @@
             type: "POST",
             data: {}
         }).done(function (result) {
-                $('#ajax_modifica_' + id).html(result);
-            }).fail(function(xhr, status, error) {
-                console.error('Errore AJAX modifica:', error, xhr.responseText);
-                alert('Errore nel caricamento dei dati');
-            });
+            $('#ajax_modifica_' + id).html(result);
+        }).fail(function (xhr, status, error) {
+            console.error('Errore AJAX modifica:', error, xhr.responseText);
+            alert('Errore nel caricamento dei dati');
+        });
     }
 
     function duplica_ajax(id) {
@@ -1195,11 +1105,11 @@
             type: "POST",
             data: {}
         }).done(function (result) {
-                $('#ajax_duplica_' + id).html(result);
-            }).fail(function(xhr, status, error) {
-                console.error('Errore AJAX duplica:', error, xhr.responseText);
-                alert('Errore nel caricamento dei dati');
-            });
+            $('#ajax_duplica_' + id).html(result);
+        }).fail(function (xhr, status, error) {
+            console.error('Errore AJAX duplica:', error, xhr.responseText);
+            alert('Errore nel caricamento dei dati');
+        });
     }
 
     function aggiungi() {
@@ -1233,14 +1143,14 @@
     }
 
     // Gestione Selezione Multipla
-    $(document).ready(function() {
+    $(document).ready(function () {
         const selectionBar = $('#selectionBar');
         const selectedCount = $('#selectedCount');
 
         // Funzione per ottenere ID selezionati
         function getSelectedIds() {
             const ids = [];
-            $('.row-select:checked').each(function() {
+            $('.row-select:checked').each(function () {
                 ids.push($(this).data('id'));
             });
             return ids;
@@ -1264,28 +1174,28 @@
         }
 
         // Checkbox singolo
-        $(document).on('change', '.row-select', function() {
+        $(document).on('change', '.row-select', function () {
             updateSelectionUI();
         });
 
         // Seleziona/Deseleziona tutto
-        $('#selectAll').on('change', function() {
+        $('#selectAll').on('change', function () {
             const isChecked = $(this).prop('checked');
             $('.row-select').prop('checked', isChecked);
             updateSelectionUI();
         });
 
         // Funzione per eliminare righe selezionate
-        window.deleteSelectedRows = function() {
+        window.deleteSelectedRows = function () {
             const currentSelectedIds = getSelectedIds();
-            
+
             if (currentSelectedIds.length === 0) {
                 alert('Nessuna riga selezionata!');
                 return;
             }
 
             const message = `Sei sicuro di voler eliminare ${currentSelectedIds.length} ${currentSelectedIds.length === 1 ? 'riga' : 'righe'} selezionate?`;
-            
+
             if (confirm(message)) {
                 $.ajax({
                     url: '/ajax/elimina_multiple',
@@ -1294,8 +1204,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     contentType: 'application/json',
-                    data: JSON.stringify({ ids: currentSelectedIds }),
-                    success: function(response) {
+                    data: JSON.stringify({ids: currentSelectedIds}),
+                    success: function (response) {
                         if (response.success) {
                             alert(response.message);
                             location.reload();
@@ -1303,7 +1213,7 @@
                             alert('Errore: ' + response.message);
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         const error = xhr.responseJSON ? xhr.responseJSON.message : 'Errore sconosciuto';
                         alert('Errore durante l\'eliminazione: ' + error);
                     }
@@ -1312,7 +1222,7 @@
         };
 
         // Funzione per annullare selezione
-        window.clearSelection = function() {
+        window.clearSelection = function () {
             $('.row-select').prop('checked', false);
             $('#selectAll').prop('checked', false);
             updateSelectionUI();
