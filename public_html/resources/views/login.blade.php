@@ -12,12 +12,12 @@
     <link rel="apple-touch-icon" sizes="192x192" href="<?php echo URL::asset('logo_promedya.png') ?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="<?php echo URL::asset('bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('bower_components/font-awesome/css/font-awesome.min.css') ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('bower_components/Ionicons/css/ionicons.min.css') ?>">
@@ -35,7 +35,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .login-page::before {
             content: '';
             position: absolute;
@@ -46,19 +46,19 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: pulse 15s ease-in-out infinite;
         }
-        
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.1); opacity: 0.8; }
         }
-        
+
         .login-box {
             width: 420px;
             position: relative;
             z-index: 10;
             animation: fadeInUp 0.6s ease-out;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -69,27 +69,27 @@
                 transform: translateY(0);
             }
         }
-        
+
         .login-box-body {
             background: white !important;
             border-radius: 1rem !important;
             /* padding: 3rem 2.5rem !important; */
         }
-        
+
         .login-logo-img {
             transition: transform 0.3s ease;
             /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); */
             border-radius: 10px!important;
         }
-        
+
         .login-logo-img:hover {
             transform: scale(1.05);
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-control {
             border: 2px solid #E2E8F0;
             border-radius: 0.75rem;
@@ -99,23 +99,23 @@
             background: #FFFFFF;
             height: 50px;
         }
-        
+
         .form-control:focus {
             border-color: #4366F6;
             box-shadow: 0 0 0 4px rgba(67, 102, 246, 0.1);
             outline: none;
         }
-        
+
         .form-control::placeholder {
             color: #94A3B8;
         }
-        
+
         .form-control-feedback {
             color: #64748B;
             top: 50%;
             transform: translateY(-50%);
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #4366F6 0%, #2D4ADE 100%);
             border: none;
@@ -127,17 +127,17 @@
             box-shadow: 0 4px 6px rgba(67, 102, 246, 0.3);
             width: 100%;
         }
-        
+
         .btn-primary:hover {
             background: linear-gradient(135deg, #2D4ADE 0%, #4366F6 100%);
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(67, 102, 246, 0.4);
         }
-        
+
         .btn-primary:active {
             transform: translateY(0);
         }
-        
+
         .login-box-msg {
             color: #EF4444;
             font-weight: 500;
@@ -147,25 +147,25 @@
             border-radius: 0.5rem;
             border-left: 4px solid #EF4444;
         }
-        
+
         .privacy-link {
             color: #4366F6;
             font-weight: 500;
             text-decoration: none;
             transition: color 0.2s;
         }
-        
+
         .privacy-link:hover {
             color: #2D4ADE;
             text-decoration: underline;
         }
-        
+
         .partner-logo {
             margin-top: 1.5rem;
             opacity: 0.9;
             transition: opacity 0.3s;
         }
-        
+
         .partner-logo:hover {
             opacity: 1;
         }
@@ -197,7 +197,7 @@
                 <input style = "font-size: 15px" type="password" name="password" class="form-control" placeholder="Password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            
+
             <div class="row" style="margin-bottom: 1rem;">
                 <div class="col-xs-8">
                     <a href="/privacy" class="privacy-link">
@@ -205,19 +205,19 @@
                     </a>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-xs-12">
                     <input style= "font-size: 15px" type="submit" class="btn btn-primary btn-block" name="login" value="Login" style="font-size: 1rem; padding: 0.875rem;">
                 </div>
             </div>
-            
+
 
             <img class="partner-logo" style="margin:0 auto;display:block;height: auto;width: 100%;padding:15px"
                  src="<?php echo URL::asset('LogoWkiPartner.png') ?>">
 
             <p style="text-align: center; color: #64748B; font-size: 15px; margin-top: 1.5rem;">
-                Copyright © <?php echo date('Y'); ?> <strong>Softmaint</strong> | IT 07374571219
+                Copyright © 2024 <strong>Softmaint SRL</strong> 
             </p>
       </form>
     </div>
