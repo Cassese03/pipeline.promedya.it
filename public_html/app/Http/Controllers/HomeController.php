@@ -62,7 +62,7 @@ class HomeController extends Controller
             $mail->addBCC('francesco.napolitano@promedya.it');
             $mail->addBCC('daniela.dellacorte@promedya.it');
             $mail->addBCC('giovanni.tutino@promedya.it');
-            // $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+            $mail->addBCC('francesco.sanseverino@wolterskluwer.com');
             $mail->addBCC('generoso.pelosi@promedya.it');
             $mail->addAddress('promedya.srl@gmail.com');
             $mail->addBCC('lorenzo.cassese@promedya.it');
@@ -108,7 +108,7 @@ class HomeController extends Controller
             $mail->addBCC('daniela.dellacorte@promedya.it');
             $mail->addBCC('giovanni.tutino@promedya.it');
             $mail->addAddress('promedya.srl@gmail.com');
-            // $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+            $mail->addBCC('francesco.sanseverino@wolterskluwer.com');
             $mail->addBCC('generoso.pelosi@promedya.it');
             $mail->addBCC('lorenzo.cassese@promedya.it');
             $mail->IsHTML(true);
@@ -260,7 +260,7 @@ class HomeController extends Controller
                 $mail->addBCC('francesco.napolitano@promedya.it');
                 $mail->addBCC('daniela.dellacorte@promedya.it');
                 $mail->addBCC('giovanni.tutino@promedya.it');
-                // $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+                $mail->addBCC('francesco.sanseverino@wolterskluwer.com');
                 $mail->addBCC('generoso.pelosi@promedya.it');
                 $mail->addAddress('promedya.srl@gmail.com');
                 $mail->addBCC('lorenzo.cassese@promedya.it');
@@ -299,7 +299,7 @@ class HomeController extends Controller
                 $mail->addBCC('francesco.napolitano@promedya.it');
                 $mail->addBCC('daniela.dellacorte@promedya.it');
                 $mail->addBCC('giovanni.tutino@promedya.it');
-                // $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+                $mail->addBCC('francesco.sanseverino@wolterskluwer.com');
                 $mail->addBCC('generoso.pelosi@promedya.it');
                 $mail->addAddress('promedya.srl@gmail.com');
                 $mail->addBCC('lorenzo.cassese@promedya.it');
@@ -346,7 +346,7 @@ class HomeController extends Controller
                     $mail->addBCC('francesco.napolitano@promedya.it');
                     $mail->addBCC('daniela.dellacorte@promedya.it');
                     $mail->addBCC('giovanni.tutino@promedya.it');
-                    // $mail->addBCC('giuseppe.manuguerra@wolterskluwer.com');
+                    $mail->addBCC('francesco.sanseverino@wolterskluwer.com');
                     $mail->addBCC('generoso.pelosi@promedya.it');
                     $mail->addAddress('promedya.srl@gmail.com');
                     $mail->addBCC('lorenzo.cassese@promedya.it');
