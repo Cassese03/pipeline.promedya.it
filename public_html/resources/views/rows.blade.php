@@ -971,7 +971,7 @@
                         <i class="fas fa-times"></i>
                         Chiudi
                     </button>
-                    <button type="submit" class="modal-btn modal-btn--primary" name="filtra">
+                    <button type="submit" class="modal-btn modal-btn--primary" value="filtra" name="filtra">
                         <i class="fas fa-search"></i>
                         Applica Filtri
                     </button>
