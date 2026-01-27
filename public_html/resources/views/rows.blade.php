@@ -170,6 +170,25 @@
         border-radius: 0 0 20px 20px;
     }
 
+    /* Classi per ottimizzare larghezza colonne */
+    .col-narrow-xs {
+        width: 100px !important;
+        max-width: 100px !important;
+        min-width: 100px !important;
+    }
+
+    .col-narrow-sm {
+        width: 130px !important;
+        max-width: 130px !important;
+        min-width: 130px !important;
+    }
+
+    .col-narrow-md {
+        width: 160px !important;
+        max-width: 160px !important;
+        min-width: 160px !important;
+    }
+
     .filter-form-group {
         margin-bottom: 1.5rem;
     }
@@ -597,14 +616,23 @@
                         <thead>
                         <tr>
                             <?php foreach ($column as $c){ ?>
-                            <th class="no-sort"
-                                style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
-                                    <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
+                            <th class="no-sort
+                                <?php 
+                                    // Colonne strette per valori piccoli
+                                    if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo ' col-narrow-xs';
+                                    if ($c->COLUMN_NAME == 'Segnalato') echo ' col-narrow-sm';
+                                    if ($c->COLUMN_NAME == 'Vinta') echo ' col-narrow-md';
+                                    if ($c->COLUMN_NAME == 'Data_Probabile_Chiusura' || $c->COLUMN_NAME == 'Data_Contatto') echo ' col-narrow-md';
+                                    if ($c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare') echo ' col-narrow-md';
+                                ?>"
+                                style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 0.75rem 0.5rem; word-wrap: break-word; vertical-align: middle; line-height: 1.3;">
+                                    <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare' && $c->COLUMN_NAME != 'Probabilita_Chiusura') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                     <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Vinta') echo 'Trattativa'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Inc_Canone_AS') echo 'Incremento Canone A/S'; ?>
-                                    <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?><?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo '%'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Inc_Anno_Solare') echo 'Incremento Anno Solare'; ?>
+                                    <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo 'Prob. Chiusura%'; ?>
                             </th>
                             <?php } ?>
                             <th class="no-sort checkbox-cell"
@@ -656,7 +684,15 @@
                                         ${$c->COLUMN_NAME} = floatval($r->{$c->COLUMN_NAME});
                                 } ?>
 
-                            <td class="no-sort" style="contain:content; padding: 0.75rem;
+                            <td class="no-sort
+                                <?php 
+                                    // Colonne strette per valori piccoli
+                                    if ($c->COLUMN_NAME == 'Probabilita_Chiusura') echo ' col-narrow-xs';
+                                    if ($c->COLUMN_NAME == 'Segnalato') echo ' col-narrow-sm';
+                                    if ($c->COLUMN_NAME == 'Vinta') echo ' col-narrow-md';
+                                    if ($c->COLUMN_NAME == 'Data_Probabile_Chiusura' || $c->COLUMN_NAME == 'Data_Contatto') echo ' col-narrow-md';
+                                    if ($c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare') echo ' col-narrow-md';
+                                ?>" style="contain:content; padding: 0.75rem 0.5rem; word-wrap: break-word; vertical-align: middle; line-height: 1.4;
                                         <?php if(($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria') echo 'text-align:left;';
                                             if($c->DATA_TYPE=='int'||$c->DATA_TYPE=='float') echo 'text-align:right;' ;
                                             if($c->DATA_TYPE=='date') echo 'text-align:center;' ;
