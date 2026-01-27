@@ -13,8 +13,69 @@
             <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-envelope-open-text" style="margin-right: 0.5rem;"></i>Impostazioni Email</h3>
             </div>
-            <div class="card-body" style="overflow-x: auto;">
-                <table id="example3" class="table table-bordered datatable" style="width: 100%;">
+            <div class="card-body">
+                <style>
+                    #example3_wrapper {
+                        display: grid !important;
+                        grid-template-columns: 1fr !important;
+                    }
+                    #example3_wrapper .row {
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 1rem !important;
+                        justify-content: flex-start !important;
+                    }
+                    #example3_wrapper .row:first-child {
+                        order: 1 !important;
+                        margin-bottom: 1.5rem !important;
+                    }
+                    #example3_wrapper .row:last-child {
+                        order: 3 !important;
+                        margin-top: 1.5rem !important;
+                    }
+                    #example3 {
+                        order: 2 !important;
+                        margin: 0 !important;
+                    }
+                    #example3_filter {
+                        display: none !important;
+                    }
+                    #example3_length {
+                        margin-bottom: 0 !important;
+                    }
+                    .dt-buttons {
+                        display: flex !important;
+                        gap: 0.5rem !important;
+                    }
+                    .dt-button {
+                        padding: 0.5rem 0.75rem !important;
+                        border: 1px solid #ddd !important;
+                        border-radius: 0.25rem !important;
+                        cursor: pointer !important;
+                        background: white !important;
+                        font-size: 0.875rem !important;
+                    }
+                    .dt-button:hover {
+                        background: #f5f5f5 !important;
+                    }
+                    .paginate_button {
+                        padding: 0.5rem 0.75rem !important;
+                        border: 1px solid #ddd !important;
+                        border-radius: 0.25rem !important;
+                        cursor: pointer !important;
+                        background: white !important;
+                        display: inline-block !important;
+                    }
+                    .paginate_button.active {
+                        background: #4366F6 !important;
+                        color: white !important;
+                        border-color: #4366F6 !important;
+                    }
+                    .paginate_button:hover {
+                        background: #f5f5f5 !important;
+                    }
+                </style>
+                <table id="example3" class="table table-bordered datatable" style="width: 100%; margin: 0;">
                     <thead>
                         <tr>
                             <th class="no-sort">ID</th>
@@ -38,16 +99,12 @@
                                     </span>
                                 @endif
                             </td>
-                            <form enctype="multipart/form-data" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                                @csrf
-                                <td class="no-sort" style="background:white;">
-                                    <div style="display:flex; gap: 0.5rem; justify-content: center;">
-                                        <button type="button" onclick="modifica(<?php echo $m->id;?>)" class="btn btn-primary" style="padding: 0.5rem 0.75rem;" title="Modifica">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </form>
+                            <td class="no-sort" style="text-align: center; white-space: nowrap;">
+                                <button type="button" onclick="modifica(<?php echo $m->id;?>)"
+                                        class="btn btn-primary btn-sm" style="padding: 0.5rem 0.75rem;" title="Modifica">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

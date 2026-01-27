@@ -22,8 +22,69 @@
             <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-award" style="margin-right: 0.5rem;"></i>Elenco Incentivi</h3>
             </div>
-            <div class="card-body" style="overflow-x: auto;">
-                <table id="example3" class="table table-bordered datatable" style="width: 100%;">
+            <div class="card-body">
+                <style>
+                    #example3_wrapper {
+                        display: grid !important;
+                        grid-template-columns: 1fr !important;
+                    }
+                    #example3_wrapper .row {
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 1rem !important;
+                        justify-content: flex-start !important;
+                    }
+                    #example3_wrapper .row:first-child {
+                        order: 1 !important;
+                        margin-bottom: 1.5rem !important;
+                    }
+                    #example3_wrapper .row:last-child {
+                        order: 3 !important;
+                        margin-top: 1.5rem !important;
+                    }
+                    #example3 {
+                        order: 2 !important;
+                        margin: 0 !important;
+                    }
+                    #example3_filter {
+                        display: none !important;
+                    }
+                    #example3_length {
+                        margin-bottom: 0 !important;
+                    }
+                    .dt-buttons {
+                        display: flex !important;
+                        gap: 0.5rem !important;
+                    }
+                    .dt-button {
+                        padding: 0.5rem 0.75rem !important;
+                        border: 1px solid #ddd !important;
+                        border-radius: 0.25rem !important;
+                        cursor: pointer !important;
+                        background: white !important;
+                        font-size: 0.875rem !important;
+                    }
+                    .dt-button:hover {
+                        background: #f5f5f5 !important;
+                    }
+                    .paginate_button {
+                        padding: 0.5rem 0.75rem !important;
+                        border: 1px solid #ddd !important;
+                        border-radius: 0.25rem !important;
+                        cursor: pointer !important;
+                        background: white !important;
+                        display: inline-block !important;
+                    }
+                    .paginate_button.active {
+                        background: #4366F6 !important;
+                        color: white !important;
+                        border-color: #4366F6 !important;
+                    }
+                    .paginate_button:hover {
+                        background: #f5f5f5 !important;
+                    }
+                </style>
+                <table id="example3" class="table table-bordered datatable" style="width: 100%; margin: 0;">
                     <thead>
                         <tr>
                             <th class="no-sort">ID</th>
@@ -43,28 +104,23 @@
                             <td style="font-weight: 600; color: #4366F6;">{{ $p->id}}</td>
                             <td>{{ $p->desc_obiettivo}}</td>
                             <td style="text-align: right; font-family: var(--font-mono);">{{ $p->target }}</td>
-                            @if ($utente->username != 'Giovanni Tutino')
-                                <td style="text-align: center;"><span style="color: #94A3B8; font-size: 0.875rem;">—</span></td>
-                            @else
+                            @if ($utente->username == 'Giovanni Tutino')
                                 <td style="text-align: right; font-family: var(--font-mono);">{{ $p->incentivo }}</td>
                                 <td style="font-weight: 500;">{{ $p->anno }}</td>
                                 <td><span class="badge" style="background: #4366F6; color: white; padding: 0.375rem 0.75rem;">{{ $p->semestre }}°</span></td>
-                                <form enctype="multipart/form-data" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare la riga selezionata?')">
-                                    @csrf
-                                    <td class="no-sort" style="background:white;">
-                                        <div style="display:flex; gap: 0.5rem; justify-content: center;">
-                                            <button type="button" onclick="modifica(<?php echo $p->id;?>)" class="btn btn-primary" style="padding: 0.5rem 0.75rem;" title="Modifica">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" onclick="duplica(<?php echo $p->id;?>)" class="btn btn-warning" style="padding: 0.5rem 0.75rem;" title="Duplica">
-                                                <i class="fa fa-clone"></i>
-                                            </button>
-                                            <button type="submit" name="elimina" value="<?php echo $p->id;?>" class="btn btn-danger" style="padding: 0.5rem 0.75rem;" title="Elimina">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </form>
+                                <td class="no-sort" style="text-align: center; white-space: nowrap;">
+                                    <button type="button" onclick="modifica(<?php echo $p->id;?>)" class="btn btn-primary btn-sm" style="padding: 0.5rem 0.75rem; margin-right: 0.25rem;" title="Modifica">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" onclick="duplica(<?php echo $p->id;?>)" class="btn btn-warning btn-sm" style="padding: 0.5rem 0.75rem; margin-right: 0.25rem;" title="Duplica">
+                                        <i class="fa fa-clone"></i>
+                                    </button>
+                                    <button type="button" onclick="eliminaIncentivo(<?php echo $p->id;?>)" class="btn btn-danger btn-sm" style="padding: 0.5rem 0.75rem;" title="Elimina">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            @else
+                                <td style="text-align: center;"><span style="color: #94A3B8; font-size: 0.875rem;">—</span></td>
                             @endif
                         </tr>
                     @endforeach
@@ -167,5 +223,16 @@ function duplica_ajax(id) {
         $('#modal_aggiungi').modal('show');
         eval(result);
     });
+}
+function eliminaIncentivo(id) {
+    if (confirm('Sei sicuro di voler eliminare la riga selezionata?')) {
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = window.location.href;
+        form.innerHTML = '<input type="hidden" name="_token" value="' + document.querySelector('input[name="_token"]').value + '">' +
+                       '<input type="hidden" name="elimina" value="' + id + '">';
+        document.body.appendChild(form);
+        form.submit();
+    }
 }
 </script>
