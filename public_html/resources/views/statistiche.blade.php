@@ -1493,13 +1493,6 @@ options: donutOptions
     });
 
 
-    new Chart(donutAnnualeProdottoPERFORMERChart, {
-        type: 'bar',
-        data: donutAnnualeProdottoPERFORMERData,
-        options: donutAnnualeProdottoPERFORMEROptions
-    });
-
-
     var donuteAnnualePERFORMERZONAChartCanvas = $('#donutAnnualePERFORMERZONAChart').get(0).getContext('2d')
     var donutAnnualePERFORMERZONAData = {
         labels: [
