@@ -1309,21 +1309,39 @@
                             <div class="filter-form-group">
                                 <label>Sales<b style="color:red">*</b></label>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Sales" onchange="addToFilter('select_Sales', 'Sales_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($operatori as $o){ ?>
-                                            <option value="{{$o->username}}">{{$o->username}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Sales_values" name="Sales" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Sales')">
+                                            <span>Seleziona Sales...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Sales">
+                                            <?php foreach ($operatori as $o){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="sales_{{$o->id}}" value="{{$o->username}}">
+                                                    <label for="sales_{{$o->id}}">{{$o->username}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Sales', 'Sales_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Sales')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Sales_values" name="Sales" placeholder="Selezioni" readonly value="{{ $appliedFilters['Sales'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Sales_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Sales" name="exclude_Sales" value="1">
+                                    <input type="checkbox" id="exclude_Sales" name="exclude_Sales" value="1" {{ isset($appliedFilters['exclude_Sales']) ? 'checked' : '' }}>
                                     <label for="exclude_Sales"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                             </div>
                         </div>
+                            <?php } ?>
+                            <?php if ($c->COLUMN_NAME == 'Sales_GRUPPO') { ?>
                         <div class="col-md-6">
                             <div class="filter-form-group">
                                 <label>Zona <b style="color:red">*</b></label>
