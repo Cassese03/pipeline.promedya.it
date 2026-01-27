@@ -161,13 +161,6 @@ class AjaxController extends Controller
         $esito_trattativa = $cache['tables']['esito_trattativa'];
         $categoria = $cache['tables']['categoria'];
         $segnalato = $cache['tables']['segnalato'];
-        
-        try {
-            // Limita drasticamente per velocità - solo i più recenti
-            $cfs = CF::select('Descrizione')->limit(100)->orderBy('Descrizione')->get();
-        } catch (\Exception $e) {
-            $cfs = [];
-        }
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') { ?>
@@ -192,16 +185,8 @@ class AjaxController extends Controller
                         <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
                             <input type="text" class="form-control" 
                                    name="<?php echo $c->COLUMN_NAME; ?>" 
-                                   list="clientiListDuplica<?php echo $r->Id; ?>"
                                    value="<?php echo htmlspecialchars($r->Ragione_Sociale); ?>" 
-                                   style="width:100%" autocomplete="off">
-                            <?php if (count($cfs) > 0) { ?>
-                            <datalist id="clientiListDuplica<?php echo $r->Id; ?>">
-                                <?php foreach($cfs as $cf) { ?>
-                                    <option value="<?php echo htmlspecialchars($cf->Descrizione); ?>">
-                                <?php } ?>
-                            </datalist>
-                            <?php } ?>
+                                   style="width:100%">
                         <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                             <select style="width:100%" class="form-control"
@@ -392,12 +377,6 @@ class AjaxController extends Controller
         $esito_trattativa = $cache['tables']['esito_trattativa'];
         $categoria = $cache['tables']['categoria'];
         $segnalato = $cache['tables']['segnalato'];
-        
-        try {
-            $cfs = CF::select('Descrizione')->limit(1000)->get();
-        } catch (\Exception $e) {
-            $cfs = [];
-        }
 
         foreach ($column as $c) {
             if ($c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura') {
@@ -437,17 +416,8 @@ class AjaxController extends Controller
                          <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
                             <input type="text" class="form-control" 
                                    name="<?php echo $c->COLUMN_NAME; ?>" 
-                                   list="clientiList<?php echo $r->Id; ?>"
                                    value="<?php echo htmlspecialchars($r->Ragione_Sociale); ?>" 
-                                   style="width:100%"
-                                   autocomplete="off">
-                            <?php if (count($cfs) > 0) { ?>
-                            <datalist id="clientiList<?php echo $r->Id; ?>">
-                                <?php foreach($cfs as $cf) { ?>
-                                    <option value="<?php echo htmlspecialchars($cf->Descrizione); ?>">
-                                <?php } ?>
-                            </datalist>
-                            <?php } ?>
+                                   style="width:100%">
                         <?php } ?>
                                     
                         <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
