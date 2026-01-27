@@ -490,7 +490,8 @@ class HomeController extends Controller
                 $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
                 $segnalato = Segnalato::all();
                 $categoria = DB::select('select * from categoria ORDER BY id');
-                return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
+                $filtersActive = true;
+                return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo', 'filtersActive'));
             }
             $rows = DB::select('select * from pipeline order by Id desc LIMIT 25');
             $operatori = DB::select('select * from operatori');

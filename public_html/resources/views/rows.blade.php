@@ -450,6 +450,13 @@
                 <i class="fas fa-filter"></i>
                 Filtri / Ricerca
             </button>
+            @if(isset($filtersActive) && $filtersActive)
+            <button class="header-btn" id="clear_filters" onclick="window.location.href='/pipeline'"
+                    style="background: #f59e0b; color: white;">
+                <i class="fas fa-times-circle"></i>
+                Togli Filtri
+            </button>
+            @endif
         </div>
     </section>
     <!-- Main content -->
