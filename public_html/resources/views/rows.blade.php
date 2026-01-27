@@ -303,15 +303,21 @@
         border: 2px solid #4f46e5;
         border-radius: 10px;
         margin-top: 0.25rem;
-        max-height: 300px;
-        overflow-y: auto;
+        max-height: 350px;
         z-index: 1000;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: none;
+        flex-direction: column;
     }
 
     .dropdown-menu.show {
-        display: block;
+        display: flex;
+    }
+
+    .dropdown-items-container {
+        overflow-y: auto;
+        max-height: 300px;
+        flex: 1;
     }
 
     .dropdown-item {
@@ -347,6 +353,9 @@
         display: flex;
         gap: 0.5rem;
         background: #f9fafb;
+        position: sticky;
+        bottom: 0;
+        border-radius: 0 0 8px 8px;
     }
 
     .dropdown-actions button {
@@ -1027,6 +1036,7 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Ragione_Sociale">
+                                            <div class="dropdown-items-container">
                                             @php $rsIndex = 0; @endphp
                                             @foreach($clienti as $c1)
                                                 @php $rsIndex++; @endphp
@@ -1035,6 +1045,7 @@
                                                     <label for="ragione_{{$rsIndex}}">{{$c1->Ragione_Sociale}}</label>
                                                 </div>
                                             @endforeach
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Ragione_Sociale', 'Ragione_Sociale_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1061,12 +1072,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Vinta">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($esito_trattativa as $e){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="vinta_{{$e->id}}" value="{{$e->id}}">
                                                     <label for="vinta_{{$e->id}}">{{$e->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Vinta', 'Vinta_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1094,12 +1107,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Segnalato">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($segnalato as $s){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="segnalato_{{$s->id}}" value="{{$s->descrizione}}">
                                                     <label for="segnalato_{{$s->id}}">{{$s->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Segnalato', 'Segnalato_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1126,12 +1141,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Motivazione">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($motivazione as $m){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="motivazione_{{$m->id}}" value="{{$m->descrizione}}">
                                                     <label for="motivazione_{{$m->id}}">{{$m->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Motivazione', 'Motivazione_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1159,12 +1176,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Prodotto">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($prodotto as $s){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="prodotto_{{$s->id}}" value="{{$s->descrizione}}">
                                                     <label for="prodotto_{{$s->id}}">{{$s->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Prodotto', 'Prodotto_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1193,12 +1212,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Dipendente">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($dipendenti as $s){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="dipendente_{{$s->id}}" value="{{$s->descrizione}}">
                                                     <label for="dipendente_{{$s->id}}">{{$s->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Dipendente', 'Dipendente_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1225,6 +1246,7 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Tipo_Cliente">
+                                            <div class="dropdown-items-container">
                                             <div class="dropdown-item">
                                                 <input type="checkbox" id="tipo_OLD" value="OLD">
                                                 <label for="tipo_OLD">OLD</label>
@@ -1236,6 +1258,7 @@
                                             <div class="dropdown-item">
                                                 <input type="checkbox" id="tipo_RIENTRO" value="RIENTRO">
                                                 <label for="tipo_RIENTRO">RIENTRO</label>
+                                            </div>
                                             </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Tipo_Cliente', 'Tipo_Cliente_values')">
@@ -1263,12 +1286,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Categoria">
+                                            <div class="dropdown-items-container">
                                             @foreach($categoria as $c1)
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="categoria_{{ $c1->id }}" value="{{ $c1->descrizione }}">
                                                     <label for="categoria_{{ $c1->id }}">{{ $c1->descrizione }}</label>
                                                 </div>
                                             @endforeach
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Categoria', 'Categoria_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1295,6 +1320,7 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Probabilita_Chiusura">
+                                            <div class="dropdown-items-container">
                                             <div class="dropdown-item">
                                                 <input type="checkbox" id="prob_25" value="25">
                                                 <label for="prob_25">25</label>
@@ -1310,6 +1336,7 @@
                                             <div class="dropdown-item">
                                                 <input type="checkbox" id="prob_100" value="100">
                                                 <label for="prob_100">100</label>
+                                            </div>
                                             </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Probabilita_Chiusura', 'Probabilita_Chiusura_values')">
@@ -1351,12 +1378,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Sales">
+                                            <div class="dropdown-items-container">
                                             <?php foreach ($operatori as $o){ ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="sales_{{$o->id}}" value="{{$o->username}}">
                                                     <label for="sales_{{$o->id}}">{{$o->username}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Sales', 'Sales_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1388,12 +1417,14 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Sales_GRUPPO">
+                                            <div class="dropdown-items-container">
                                             <?php $zIndex = 0; foreach ($zone as $z){ $zIndex++; ?>
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="zona_{{$zIndex}}" value="{{$z->descrizione}}">
                                                     <label for="zona_{{$zIndex}}">{{$z->descrizione}}</label>
                                                 </div>
                                             <?php } ?>
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Sales_GRUPPO', 'Sales_GRUPPO_values')">
                                                     <i class="fas fa-check"></i> Applica
@@ -1425,6 +1456,7 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_gruppo_prodotto">
+                                            <div class="dropdown-items-container">
                                             @php $gIndex = 0; @endphp
                                             @foreach($gruppo as $g)
                                                 @php $gIndex++; @endphp
@@ -1433,6 +1465,7 @@
                                                     <label for="gruppo_{{$gIndex}}">{{$g->gruppo}}</label>
                                                 </div>
                                             @endforeach
+                                            </div>
                                             <div class="dropdown-actions">
                                                 <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_gruppo_prodotto', 'gruppo_prodotto_values')">
                                                     <i class="fas fa-check"></i> Applica
