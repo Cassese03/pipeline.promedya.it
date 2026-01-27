@@ -220,6 +220,66 @@
         color: #1f2937;
     }
 
+    .filter-accumulated {
+        display: flex;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+
+    .filter-accumulated select {
+        flex: 0 0 40%;
+    }
+
+    .filter-accumulated input[type="text"] {
+        flex: 1;
+        background: #f3f4f6;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .filter-accumulated input[type="text"]:read-only {
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+
+    .filter-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .filter-toggle input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #ef4444;
+    }
+
+    .filter-toggle label {
+        margin: 0;
+        cursor: pointer;
+        font-weight: 500;
+        color: #ef4444;
+    }
+
+    .btn-clear-filter {
+        padding: 0.5rem 1rem;
+        background: #6b7280;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .btn-clear-filter:hover {
+        background: #4b5563;
+    }
+
     .modal-btn {
         padding: 0.75rem 1.5rem;
         border-radius: 10px;
@@ -810,96 +870,137 @@
                                 </datalist>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="undefined">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Vinta" onchange="addToFilter('select_Vinta', 'Vinta_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($esito_trattativa as $e){ ?>
-                                    <option value="{{$e->id}}">{{$e->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$e->id}}">{{$e->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Vinta_values" name="Vinta" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Vinta_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Vinta" name="exclude_Vinta" value="1">
+                                    <label for="exclude_Vinta"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Segnalato" onchange="addToFilter('select_Segnalato', 'Segnalato_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($segnalato as $s){ ?>
-                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Segnalato_values" name="Segnalato" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Segnalato_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Segnalato" name="exclude_Segnalato" value="1">
+                                    <label for="exclude_Segnalato"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Motivazione" onchange="addToFilter('select_Motivazione', 'Motivazione_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($motivazione as $m){ ?>
-                                    <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Motivazione_values" name="Motivazione" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Motivazione_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Motivazione" name="exclude_Motivazione" value="1">
+                                    <label for="exclude_Motivazione"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Prodotto" onchange="addToFilter('select_Prodotto', 'Prodotto_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($prodotto as $s){ ?>
-                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Prodotto_values" name="Prodotto" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Prodotto_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Prodotto" name="exclude_Prodotto" value="1">
+                                    <label for="exclude_Prodotto"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
 
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Dipendente" onchange="addToFilter('select_Dipendente', 'Dipendente_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($dipendenti as $s){ ?>
-                                    <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Dipendente_values" name="Dipendente" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Dipendente_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Dipendente" name="exclude_Dipendente" value="1">
+                                    <label for="exclude_Dipendente"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
-                                    <option value="OLD">OLD
-                                    </option>
-                                    <option value="LEAD">LEAD
-                                    </option>
-                                    <option value="RIENTRO">RIENTRO
-                                    </option>
-                                </select>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Tipo_Cliente" onchange="addToFilter('select_Tipo_Cliente', 'Tipo_Cliente_values')">
+                                        <option value="">Seleziona...</option>
+                                        <option value="OLD">OLD</option>
+                                        <option value="LEAD">LEAD</option>
+                                        <option value="RIENTRO">RIENTRO</option>
+                                    </select>
+                                    <input type="text" class="form-control" id="Tipo_Cliente_values" name="Tipo_Cliente" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Tipo_Cliente_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Tipo_Cliente" name="exclude_Tipo_Cliente" value="1">
+                                    <label for="exclude_Tipo_Cliente"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="">Nessun Filtro...
-                                    </option>
-                                    @foreach($categoria as $c1)
-                                        <option value="{{ $c1->descrizione }}">{{ $c1->descrizione }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Categoria" onchange="addToFilter('select_Categoria', 'Categoria_values')">
+                                        <option value="">Seleziona...</option>
+                                        @foreach($categoria as $c1)
+                                            <option value="{{ $c1->descrizione }}">{{ $c1->descrizione }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" class="form-control" id="Categoria_values" name="Categoria" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Categoria_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Categoria" name="exclude_Categoria" value="1">
+                                    <label for="exclude_Categoria"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="Nessun Filtro...">Nessun Filtro...
-                                    </option>
-                                    <option value="25">25
-                                    </option>
-                                    <option value="50">50
-                                    </option>
-                                    <option value="75">75
-                                    </option>
-                                    <option value="100">100
-                                    </option>
-                                </select>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Probabilita_Chiusura" onchange="addToFilter('select_Probabilita_Chiusura', 'Probabilita_Chiusura_values')">
+                                        <option value="">Seleziona...</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="75">75</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <input type="text" class="form-control" id="Probabilita_Chiusura_values" name="Probabilita_Chiusura" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Probabilita_Chiusura_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Probabilita_Chiusura" name="exclude_Probabilita_Chiusura" value="1">
+                                    <label for="exclude_Probabilita_Chiusura"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Note') { ?>
                                 <textarea rows="8" cols="100"
@@ -916,28 +1017,39 @@
                         <div class="col-md-6">
                             <div class="filter-form-group">
                                 <label>Sales<b style="color:red">*</b></label>
-                                <select style="width:100%" class="form-control" id="<?php echo $c->COLUMN_NAME;?>"
-                                        name="<?php echo $c->COLUMN_NAME ;?>">
-                                    <option value="Nessun Filtro...">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Sales" onchange="addToFilter('select_Sales', 'Sales_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($operatori as $o){ ?>
-                                    <option value="{{$o->username}}">{{$o->username}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$o->username}}">{{$o->username}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Sales_values" name="Sales" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Sales_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Sales" name="exclude_Sales" value="1">
+                                    <label for="exclude_Sales"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="filter-form-group">
                                 <label>Zona <b style="color:red">*</b></label>
-                                <select style="width:100%" class="form-control"
-                                        id="<?php echo $c->COLUMN_NAME;?>_GRUPPO"
-                                        name="<?php echo $c->COLUMN_NAME ;?>_GRUPPO">
-                                    <option value="Nessun Filtro...">Nessun Filtro...
-                                    </option>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_Sales_GRUPPO" onchange="addToFilter('select_Sales_GRUPPO', 'Sales_GRUPPO_values')">
+                                        <option value="">Seleziona...</option>
                                         <?php foreach ($zone as $z){ ?>
-                                    <option value="{{$z->descrizione}}">{{$z->descrizione}}</option>
-                                    <?php } ?>
-                                </select>
+                                            <option value="{{$z->descrizione}}">{{$z->descrizione}}</option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="text" class="form-control" id="Sales_GRUPPO_values" name="Sales_GRUPPO" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Sales_GRUPPO_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Sales_GRUPPO" name="exclude_Sales_GRUPPO" value="1">
+                                    <label for="exclude_Sales_GRUPPO"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                             </div>
                         </div>
                         <?php } ?>
@@ -945,14 +1057,20 @@
                         <div class="col-md-6">
                             <div class="filter-form-group">
                                 <label>Gruppo Prodotto<b style="color:red">*</b></label>
-                                <select style="width:100%" class="form-control" id="gruppo_prodotto"
-                                        name="gruppo_prodotto">
-                                    <option value="undefined">Nessun Filtro...
-                                    </option>
-                                    @foreach($gruppo as $g)
-                                        <option value="{{ $g->prodotti }}">{{$g->gruppo}}</option>
-                                    @endforeach
-                                </select>
+                                <div class="filter-accumulated">
+                                    <select class="form-control" id="select_gruppo_prodotto" onchange="addToFilter('select_gruppo_prodotto', 'gruppo_prodotto_values')">
+                                        <option value="">Seleziona...</option>
+                                        @foreach($gruppo as $g)
+                                            <option value="{{ $g->prodotti }}">{{$g->gruppo}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" class="form-control" id="gruppo_prodotto_values" name="gruppo_prodotto" placeholder="Selezioni accumulate" readonly>
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('gruppo_prodotto_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_gruppo_prodotto" name="exclude_gruppo_prodotto" value="1">
+                                    <label for="exclude_gruppo_prodotto"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                             </div>
                         </div>
                         <?php } ?>
@@ -1169,6 +1287,31 @@
         const selectionBar = document.getElementById('selectionBar');
         const selectedCount = document.getElementById('selectedCount');
         const selectAll = document.getElementById('selectAll');
+
+        // Funzione per accumulo filtri
+        window.addToFilter = function(selectId, inputId) {
+            const select = document.getElementById(selectId);
+            const input = document.getElementById(inputId);
+            const value = select.value;
+            
+            if (!value || value === '' || value === 'Nessun Filtro...') return;
+            
+            let currentValues = input.value ? input.value.split(', ') : [];
+            
+            // Aggiungi solo se non esiste già
+            if (!currentValues.includes(value)) {
+                currentValues.push(value);
+                input.value = currentValues.join(', ');
+            }
+            
+            // Reset select
+            select.selectedIndex = 0;
+        };
+
+        // Funzione per pulire un filtro
+        window.clearFilter = function(inputId) {
+            document.getElementById(inputId).value = '';
+        };
 
         // Funzione per ottenere ID selezionati
         function getSelectedIds() {

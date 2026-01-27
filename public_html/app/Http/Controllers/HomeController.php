@@ -367,61 +367,119 @@ class HomeController extends Controller
                 $dati = array_filter($dati, static function ($var) {
                     return $var !== null;
                 });
+                
+                // Funzione helper per gestire filtri multipli con esclusione
+                $handleMultiFilter = function($fieldName, &$query, $values, $isExcluded = false) {
+                    if (empty($values) || trim($values) === '') return;
+                    
+                    // Split per virgola e trim
+                    $valuesArray = array_map('trim', explode(',', $values));
+                    $valuesArray = array_filter($valuesArray); // Rimuovi valori vuoti
+                    
+                    if (count($valuesArray) > 0) {
+                        if ($isExcluded) {
+                            $query->whereNotIn($fieldName, $valuesArray);
+                        } else {
+                            $query->whereIn($fieldName, $valuesArray);
+                        }
+                    }
+                };
+                
+                // Inizia query builder
+                $query = DB::table('pipeline')->select(DB::raw('*'));
+                
+                // Gestione filtri con accumulo
+                $multiFilters = ['Vinta', 'Segnalato', 'Motivazione', 'Prodotto', 'Dipendente', 'Tipo_Cliente', 'Categoria', 'Probabilita_Chiusura', 'Sales'];
+                
+                foreach ($multiFilters as $field) {
+                    if (isset($dati[$field]) && $dati[$field] !== '' && $dati[$field] !== 'Nessun Filtro...') {
+                        $isExcluded = isset($dati['exclude_' . $field]) && $dati['exclude_' . $field] == '1';
+                        $handleMultiFilter($field, $query, $dati[$field], $isExcluded);
+                        unset($dati[$field]);
+                        if (isset($dati['exclude_' . $field])) unset($dati['exclude_' . $field]);
+                    }
+                }
+                
+                // Gestione Zona (Sales_GRUPPO)
+                if (isset($dati['Sales_GRUPPO']) && $dati['Sales_GRUPPO'] !== '' && $dati['Sales_GRUPPO'] !== 'Nessun Filtro...') {
+                    $zones = array_map('trim', explode(',', $dati['Sales_GRUPPO']));
+                    $zones = array_filter($zones);
+                    if (count($zones) > 0) {
+                        $isExcluded = isset($dati['exclude_Sales_GRUPPO']) && $dati['exclude_Sales_GRUPPO'] == '1';
+                        $query->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username');
+                        if ($isExcluded) {
+                            $query->whereNotIn('operatori.gruppo', $zones);
+                        } else {
+                            $query->whereIn('operatori.gruppo', $zones);
+                        }
+                    }
+                    unset($dati['Sales_GRUPPO']);
+                    if (isset($dati['exclude_Sales_GRUPPO'])) unset($dati['exclude_Sales_GRUPPO']);
+                }
+                
+                // Gestione Gruppo Prodotto
+                if (isset($dati['gruppo_prodotto']) && $dati['gruppo_prodotto'] !== '' && $dati['gruppo_prodotto'] !== 'undefined') {
+                    $gruppiProdotti = array_map('trim', explode(',', $dati['gruppo_prodotto']));
+                    $prodottiArray = [];
+                    foreach ($gruppiProdotti as $gruppo) {
+                        $prodotti = explode(',', $gruppo);
+                        $prodottiArray = array_merge($prodottiArray, $prodotti);
+                    }
+                    $prodottiArray = array_filter(array_map('trim', $prodottiArray));
+                    if (count($prodottiArray) > 0) {
+                        $isExcluded = isset($dati['exclude_gruppo_prodotto']) && $dati['exclude_gruppo_prodotto'] == '1';
+                        if ($isExcluded) {
+                            $query->whereNotIn('Prodotto', $prodottiArray);
+                        } else {
+                            $query->whereIn('Prodotto', $prodottiArray);
+                        }
+                    }
+                    unset($dati['gruppo_prodotto']);
+                    if (isset($dati['exclude_gruppo_prodotto'])) unset($dati['exclude_gruppo_prodotto']);
+                }
+                
+                // Gestione Date
+                if (isset($dati['Data_contatto_i'])) {
+                    $query->where('Data_Contatto', '>=', $dati['Data_contatto_i']);
+                    unset($dati['Data_contatto_i']);
+                }
+                if (isset($dati['Data_contatto_f'])) {
+                    $query->where('Data_Contatto', '<=', $dati['Data_contatto_f']);
+                    unset($dati['Data_contatto_f']);
+                }
+                if (isset($dati['Data_Probabile_Chiusura_i'])) {
+                    $query->where('Data_Probabile_Chiusura', '>=', $dati['Data_Probabile_Chiusura_i']);
+                    unset($dati['Data_Probabile_Chiusura_i']);
+                }
+                if (isset($dati['Data_Probabile_Chiusura_f'])) {
+                    $query->where('Data_Probabile_Chiusura', '<=', $dati['Data_Probabile_Chiusura_f']);
+                    unset($dati['Data_Probabile_Chiusura_f']);
+                }
+                
+                // Gestione Ragione Sociale (LIKE)
+                if (isset($dati['Ragione_Sociale']) && $dati['Ragione_Sociale'] !== '') {
+                    $query->where('Ragione_Sociale', 'like', '%' . $dati['Ragione_Sociale'] . '%');
+                    unset($dati['Ragione_Sociale']);
+                }
+                
+                // Rimuovi token e filtra
+                unset($dati['_token']);
+                unset($dati['filtra']);
+                
+                // Applica filtri rimanenti (campi standard)
                 foreach ($column as $c) {
                     if ($c->COLUMN_NAME != 'Id' && $c->DATA_TYPE != 'date') {
-                        if (isset($dati[$c->COLUMN_NAME]) && ($dati[$c->COLUMN_NAME] == 'Nessun Filtro...' || $dati[$c->COLUMN_NAME] == '' || $dati[$c->COLUMN_NAME] == 'undefined' || $dati[$c->COLUMN_NAME] == null)) {
+                        if (isset($dati[$c->COLUMN_NAME]) && ($dati[$c->COLUMN_NAME] == 'Nessun Filtro...' || $dati[$c->COLUMN_NAME] == '' || $dati[$c->COLUMN_NAME] == 'undefined')) {
                             unset($dati[$c->COLUMN_NAME]);
                         }
                     }
                 }
-                $where = [];
-                $prodotti = '';
-                $search = 0;
-                if ($dati['gruppo_prodotto'] == 'undefined') unset($dati['gruppo_prodotto']); else {
-                    $prodotti = $dati['gruppo_prodotto'];
-                    if ($search == 2) $search = 3; else $search = 1;
-                    unset($dati['gruppo_prodotto']);
-                }
-                if ($dati['Sales_GRUPPO'] == 'undefined' || $dati['Sales_GRUPPO'] == 'Nessun Filtro...') unset($dati['Sales_GRUPPO']); else {
-                    $sales = $dati['Sales_GRUPPO'];
-                    if ($search == 1) $search = 3; else $search = 2;
-                    unset($dati['Sales_GRUPPO']);
-                }
-                if (isset($dati['Data_contatto_i'])) {
-                    $new_filter = ['column' => 'Data_Contatto', 'operator' => '>=', 'value' => $dati['Data_contatto_i']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_contatto_i']);
-                }
-                if (isset($dati['Data_contatto_f'])) {
-                    $new_filter = ['column' => 'Data_Contatto', 'operator' => '<=', 'value' => $dati['Data_contatto_f']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_contatto_f']);
-                }
-                if (isset($dati['Data_Probabile_Chiusura_i'])) {
-                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '>=', 'value' => $dati['Data_Probabile_Chiusura_i']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_Probabile_Chiusura_i']);
-                }
-                if (isset($dati['Data_Probabile_Chiusura_f'])) {
-                    $new_filter = ['column' => 'Data_Probabile_Chiusura', 'operator' => '<=', 'value' => $dati['Data_Probabile_Chiusura_f']];
-                    array_push($where, $new_filter);
-                    unset($dati['Data_Probabile_Chiusura_f']);
-                }
-                if (isset($dati['Ragione_Sociale'])) {
-                    $new_filter = ['column' => 'Ragione_Sociale', 'operator' => 'like', 'value' => '%' . $dati['Ragione_Sociale'] . '%'];
-                    array_push($where, $new_filter);
-                    unset($dati['Ragione_Sociale']);
-                }
-                unset($dati['_token']);
-                unset($dati['filtra']);
-                if ($search == 0)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->orderBy('Id', 'desc')->get();
-                if ($search == 1)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('*'))->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->orderBy('Id', 'desc')->get();
-                if ($search == 2)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
-                if ($search == 3)
-                    $rows = DB::TABLE('pipeline')->select(DB::raw('pipeline.*'))->leftJoin('operatori', 'pipeline.sales', '=', 'operatori.username')->where($dati)->where($where)->whereIn('Prodotto', explode(',', $prodotti))->where('operatori.gruppo', '=', $sales)->orderBy('pipeline.Id', 'desc')->get();
+                
+                // Applica WHERE restanti
+                $query->where($dati);
+                
+                // Esegui query
+                $rows = $query->orderBy('pipeline.Id', 'desc')->get();
                 $operatori = DB::select('select * from operatori');
                 $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
                 $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
