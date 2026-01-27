@@ -224,6 +224,7 @@
         display: flex;
         gap: 0.5rem;
         align-items: stretch;
+        position: relative;
     }
 
     .filter-accumulated select {
@@ -240,6 +241,121 @@
     .filter-accumulated input[type="text"]:read-only {
         cursor: not-allowed;
         opacity: 0.8;
+    }
+
+    .custom-dropdown {
+        position: relative;
+        flex: 1;
+    }
+
+    .dropdown-trigger {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.2s;
+    }
+
+    .dropdown-trigger:hover {
+        border-color: #4f46e5;
+    }
+
+    .dropdown-trigger i {
+        transition: transform 0.3s;
+    }
+
+    .dropdown-trigger.open i {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: auto;
+        min-width: 500px;
+        background: white;
+        border: 2px solid #4f46e5;
+        border-radius: 10px;
+        margin-top: 0.25rem;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.2s;
+    }
+
+    .dropdown-item:hover {
+        background: #f3f4f6;
+    }
+
+    .dropdown-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #4f46e5;
+    }
+
+    .dropdown-item label {
+        margin: 0;
+        cursor: pointer;
+        flex: 1;
+        font-weight: 500;
+    }
+
+    .dropdown-actions {
+        padding: 0.5rem;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        gap: 0.5rem;
+        background: #f9fafb;
+    }
+
+    .dropdown-actions button {
+        flex: 1;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .btn-apply {
+        background: #4f46e5;
+        color: white;
+    }
+
+    .btn-apply:hover {
+        background: #4338ca;
+    }
+
+    .btn-cancel {
+        background: #e5e7eb;
+        color: #374151;
+    }
+
+    .btn-cancel:hover {
+        background: #d1d5db;
     }
 
     .filter-toggle {
@@ -868,23 +984,64 @@
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
-                                <input type="text" name="Ragione_Sociale" id="Ragione_Sociale"
-                                       class="form-control" list="clienti">
-                                <datalist id="clienti">
-                                    @foreach($clienti as $c1)
-                                        <option value="{{$c1->Ragione_Sociale}}">{{$c1->Ragione_Sociale}}</option>
-                                    @endforeach
-                                </datalist>
+                                <div class="filter-accumulated">
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Ragione_Sociale')">
+                                            <span>Seleziona Cliente...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Ragione_Sociale">
+                                            @php $rsIndex = 0; @endphp
+                                            @foreach($clienti as $c1)
+                                                @php $rsIndex++; @endphp
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="ragione_{{$rsIndex}}" value="{{$c1->Ragione_Sociale}}">
+                                                    <label for="ragione_{{$rsIndex}}">{{$c1->Ragione_Sociale}}</label>
+                                                </div>
+                                            @endforeach
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Ragione_Sociale', 'Ragione_Sociale_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Ragione_Sociale')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Ragione_Sociale_values" name="Ragione_Sociale" placeholder="Selezioni" readonly value="{{ $appliedFilters['Ragione_Sociale'] ?? '' }}">
+                                    <button type="button" class="btn-clear-filter" onclick="clearFilter('Ragione_Sociale_values')" title="Pulisci"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="filter-toggle">
+                                    <input type="checkbox" id="exclude_Ragione_Sociale" name="exclude_Ragione_Sociale" value="1" {{ isset($appliedFilters['exclude_Ragione_Sociale']) ? 'checked' : '' }}>
+                                    <label for="exclude_Ragione_Sociale"><i class="fas fa-ban"></i> Escludi invece di includere</label>
+                                </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Vinta" onchange="addToFilter('select_Vinta', 'Vinta_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($esito_trattativa as $e){ ?>
-                                            <option value="{{$e->id}}">{{$e->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Vinta_values" name="Vinta" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Vinta')">
+                                            <span>Seleziona Trattativa...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Vinta">
+                                            <?php foreach ($esito_trattativa as $e){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="vinta_{{$e->id}}" value="{{$e->id}}">
+                                                    <label for="vinta_{{$e->id}}">{{$e->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Vinta', 'Vinta_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Vinta')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Vinta_values" name="Vinta" placeholder="Selezioni" readonly>
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Vinta_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
@@ -895,50 +1052,98 @@
 
                                     <?php if ($c->COLUMN_NAME == 'Segnalato') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Segnalato" onchange="addToFilter('select_Segnalato', 'Segnalato_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($segnalato as $s){ ?>
-                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Segnalato_values" name="Segnalato" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Segnalato')">
+                                            <span>Seleziona Segnalato...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Segnalato">
+                                            <?php foreach ($segnalato as $s){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="segnalato_{{$s->id}}" value="{{$s->descrizione}}">
+                                                    <label for="segnalato_{{$s->id}}">{{$s->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Segnalato', 'Segnalato_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Segnalato')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Segnalato_values" name="Segnalato" placeholder="Selezioni" readonly value="{{ $appliedFilters['Segnalato'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Segnalato_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Segnalato" name="exclude_Segnalato" value="1">
+                                    <input type="checkbox" id="exclude_Segnalato" name="exclude_Segnalato" value="1" {{ isset($appliedFilters['exclude_Segnalato']) ? 'checked' : '' }}>
                                     <label for="exclude_Segnalato"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Motivazione') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Motivazione" onchange="addToFilter('select_Motivazione', 'Motivazione_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($motivazione as $m){ ?>
-                                            <option value="{{$m->descrizione}}">{{$m->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Motivazione_values" name="Motivazione" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Motivazione')">
+                                            <span>Seleziona Motivazione...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Motivazione">
+                                            <?php foreach ($motivazione as $m){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="motivazione_{{$m->id}}" value="{{$m->descrizione}}">
+                                                    <label for="motivazione_{{$m->id}}">{{$m->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Motivazione', 'Motivazione_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Motivazione')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Motivazione_values" name="Motivazione" placeholder="Selezioni" readonly value="{{ $appliedFilters['Motivazione'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Motivazione_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Motivazione" name="exclude_Motivazione" value="1">
+                                    <input type="checkbox" id="exclude_Motivazione" name="exclude_Motivazione" value="1" {{ isset($appliedFilters['exclude_Motivazione']) ? 'checked' : '' }}>
                                     <label for="exclude_Motivazione"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
 
                                     <?php if ($c->COLUMN_NAME == 'Prodotto') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Prodotto" onchange="addToFilter('select_Prodotto', 'Prodotto_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($prodotto as $s){ ?>
-                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Prodotto_values" name="Prodotto" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Prodotto')">
+                                            <span>Seleziona Prodotto...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Prodotto">
+                                            <?php foreach ($prodotto as $s){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="prodotto_{{$s->id}}" value="{{$s->descrizione}}">
+                                                    <label for="prodotto_{{$s->id}}">{{$s->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Prodotto', 'Prodotto_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Prodotto')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Prodotto_values" name="Prodotto" placeholder="Selezioni" readonly value="{{ $appliedFilters['Prodotto'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Prodotto_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Prodotto" name="exclude_Prodotto" value="1">
+                                    <input type="checkbox" id="exclude_Prodotto" name="exclude_Prodotto" value="1" {{ isset($appliedFilters['exclude_Prodotto']) ? 'checked' : '' }}>
                                     <label for="exclude_Prodotto"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
 
@@ -946,66 +1151,145 @@
 
                                     <?php if ($c->COLUMN_NAME == 'Dipendente') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Dipendente" onchange="addToFilter('select_Dipendente', 'Dipendente_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($dipendenti as $s){ ?>
-                                            <option value="{{$s->descrizione}}">{{$s->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Dipendente_values" name="Dipendente" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Dipendente')">
+                                            <span>Seleziona Dipendente...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Dipendente">
+                                            <?php foreach ($dipendenti as $s){ ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="dipendente_{{$s->id}}" value="{{$s->descrizione}}">
+                                                    <label for="dipendente_{{$s->id}}">{{$s->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Dipendente', 'Dipendente_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Dipendente')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Dipendente_values" name="Dipendente" placeholder="Selezioni" readonly value="{{ $appliedFilters['Dipendente'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Dipendente_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Dipendente" name="exclude_Dipendente" value="1">
+                                    <input type="checkbox" id="exclude_Dipendente" name="exclude_Dipendente" value="1" {{ isset($appliedFilters['exclude_Dipendente']) ? 'checked' : '' }}>
                                     <label for="exclude_Dipendente"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Tipo_Cliente" onchange="addToFilter('select_Tipo_Cliente', 'Tipo_Cliente_values')">
-                                        <option value="">Seleziona...</option>
-                                        <option value="OLD">OLD</option>
-                                        <option value="LEAD">LEAD</option>
-                                        <option value="RIENTRO">RIENTRO</option>
-                                    </select>
-                                    <input type="text" class="form-control" id="Tipo_Cliente_values" name="Tipo_Cliente" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Tipo_Cliente')">
+                                            <span>Seleziona Tipo Cliente...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Tipo_Cliente">
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="tipo_OLD" value="OLD">
+                                                <label for="tipo_OLD">OLD</label>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="tipo_LEAD" value="LEAD">
+                                                <label for="tipo_LEAD">LEAD</label>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="tipo_RIENTRO" value="RIENTRO">
+                                                <label for="tipo_RIENTRO">RIENTRO</label>
+                                            </div>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Tipo_Cliente', 'Tipo_Cliente_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Tipo_Cliente')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Tipo_Cliente_values" name="Tipo_Cliente" placeholder="Selezioni" readonly value="{{ $appliedFilters['Tipo_Cliente'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Tipo_Cliente_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Tipo_Cliente" name="exclude_Tipo_Cliente" value="1">
+                                    <input type="checkbox" id="exclude_Tipo_Cliente" name="exclude_Tipo_Cliente" value="1" {{ isset($appliedFilters['exclude_Tipo_Cliente']) ? 'checked' : '' }}>
                                     <label for="exclude_Tipo_Cliente"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Categoria') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Categoria" onchange="addToFilter('select_Categoria', 'Categoria_values')">
-                                        <option value="">Seleziona...</option>
-                                        @foreach($categoria as $c1)
-                                            <option value="{{ $c1->descrizione }}">{{ $c1->descrizione }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" class="form-control" id="Categoria_values" name="Categoria" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Categoria')">
+                                            <span>Seleziona Categoria...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Categoria">
+                                            @foreach($categoria as $c1)
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="categoria_{{ $c1->id }}" value="{{ $c1->descrizione }}">
+                                                    <label for="categoria_{{ $c1->id }}">{{ $c1->descrizione }}</label>
+                                                </div>
+                                            @endforeach
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Categoria', 'Categoria_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Categoria')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Categoria_values" name="Categoria" placeholder="Selezioni" readonly value="{{ $appliedFilters['Categoria'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Categoria_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Categoria" name="exclude_Categoria" value="1">
+                                    <input type="checkbox" id="exclude_Categoria" name="exclude_Categoria" value="1" {{ isset($appliedFilters['exclude_Categoria']) ? 'checked' : '' }}>
                                     <label for="exclude_Categoria"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
                                     <?php if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Probabilita_Chiusura" onchange="addToFilter('select_Probabilita_Chiusura', 'Probabilita_Chiusura_values')">
-                                        <option value="">Seleziona...</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="75">75</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    <input type="text" class="form-control" id="Probabilita_Chiusura_values" name="Probabilita_Chiusura" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Probabilita_Chiusura')">
+                                            <span>Seleziona %...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Probabilita_Chiusura">
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="prob_25" value="25">
+                                                <label for="prob_25">25</label>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="prob_50" value="50">
+                                                <label for="prob_50">50</label>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="prob_75" value="75">
+                                                <label for="prob_75">75</label>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <input type="checkbox" id="prob_100" value="100">
+                                                <label for="prob_100">100</label>
+                                            </div>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Probabilita_Chiusura', 'Probabilita_Chiusura_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Probabilita_Chiusura')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Probabilita_Chiusura_values" name="Probabilita_Chiusura" placeholder="Selezioni" readonly value="{{ $appliedFilters['Probabilita_Chiusura'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Probabilita_Chiusura_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Probabilita_Chiusura" name="exclude_Probabilita_Chiusura" value="1">
+                                    <input type="checkbox" id="exclude_Probabilita_Chiusura" name="exclude_Probabilita_Chiusura" value="1" {{ isset($appliedFilters['exclude_Probabilita_Chiusura']) ? 'checked' : '' }}>
                                     <label for="exclude_Probabilita_Chiusura"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                                 <?php } ?>
@@ -1044,17 +1328,33 @@
                             <div class="filter-form-group">
                                 <label>Zona <b style="color:red">*</b></label>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_Sales_GRUPPO" onchange="addToFilter('select_Sales_GRUPPO', 'Sales_GRUPPO_values')">
-                                        <option value="">Seleziona...</option>
-                                        <?php foreach ($zone as $z){ ?>
-                                            <option value="{{$z->descrizione}}">{{$z->descrizione}}</option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="Sales_GRUPPO_values" name="Sales_GRUPPO" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_Sales_GRUPPO')">
+                                            <span>Seleziona Zona...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_Sales_GRUPPO">
+                                            <?php $zIndex = 0; foreach ($zone as $z){ $zIndex++; ?>
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="zona_{{$zIndex}}" value="{{$z->descrizione}}">
+                                                    <label for="zona_{{$zIndex}}">{{$z->descrizione}}</label>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_Sales_GRUPPO', 'Sales_GRUPPO_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_Sales_GRUPPO')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="Sales_GRUPPO_values" name="Sales_GRUPPO" placeholder="Selezioni" readonly value="{{ $appliedFilters['Sales_GRUPPO'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('Sales_GRUPPO_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Sales_GRUPPO" name="exclude_Sales_GRUPPO" value="1">
+                                    <input type="checkbox" id="exclude_Sales_GRUPPO" name="exclude_Sales_GRUPPO" value="1" {{ isset($appliedFilters['exclude_Sales_GRUPPO']) ? 'checked' : '' }}>
                                     <label for="exclude_Sales_GRUPPO"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                             </div>
@@ -1065,17 +1365,35 @@
                             <div class="filter-form-group">
                                 <label>Gruppo Prodotto<b style="color:red">*</b></label>
                                 <div class="filter-accumulated">
-                                    <select class="form-control" id="select_gruppo_prodotto" onchange="addToFilter('select_gruppo_prodotto', 'gruppo_prodotto_values')">
-                                        <option value="">Seleziona...</option>
-                                        @foreach($gruppo as $g)
-                                            <option value="{{ $g->prodotti }}">{{$g->gruppo}}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" class="form-control" id="gruppo_prodotto_values" name="gruppo_prodotto" placeholder="Selezioni accumulate" readonly>
+                                    <div class="custom-dropdown">
+                                        <button type="button" class="dropdown-trigger" onclick="toggleCustomDropdown('dropdown_gruppo_prodotto')">
+                                            <span>Seleziona Gruppo...</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" id="dropdown_gruppo_prodotto">
+                                            @php $gIndex = 0; @endphp
+                                            @foreach($gruppo as $g)
+                                                @php $gIndex++; @endphp
+                                                <div class="dropdown-item">
+                                                    <input type="checkbox" id="gruppo_{{$gIndex}}" value="{{ $g->prodotti }}">
+                                                    <label for="gruppo_{{$gIndex}}">{{$g->gruppo}}</label>
+                                                </div>
+                                            @endforeach
+                                            <div class="dropdown-actions">
+                                                <button type="button" class="btn-apply" onclick="applyCustomDropdown('dropdown_gruppo_prodotto', 'gruppo_prodotto_values')">
+                                                    <i class="fas fa-check"></i> Applica
+                                                </button>
+                                                <button type="button" class="btn-cancel" onclick="cancelCustomDropdown('dropdown_gruppo_prodotto')">
+                                                    <i class="fas fa-times"></i> Annulla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="gruppo_prodotto_values" name="gruppo_prodotto" placeholder="Selezioni" readonly value="{{ $appliedFilters['gruppo_prodotto'] ?? '' }}">
                                     <button type="button" class="btn-clear-filter" onclick="clearFilter('gruppo_prodotto_values')" title="Pulisci"><i class="fas fa-times"></i></button>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_gruppo_prodotto" name="exclude_gruppo_prodotto" value="1">
+                                    <input type="checkbox" id="exclude_gruppo_prodotto" name="exclude_gruppo_prodotto" value="1" {{ isset($appliedFilters['exclude_gruppo_prodotto']) ? 'checked' : '' }}>
                                     <label for="exclude_gruppo_prodotto"><i class="fas fa-ban"></i> Escludi invece di includere</label>
                                 </div>
                             </div>
@@ -1295,25 +1613,63 @@
         const selectedCount = document.getElementById('selectedCount');
         const selectAll = document.getElementById('selectAll');
 
-        // Funzione per accumulo filtri
-        window.addToFilter = function(selectId, inputId) {
-            const select = document.getElementById(selectId);
+        // Funzione per accumulo filtri con dropdown custom
+        window.toggleCustomDropdown = function(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const trigger = dropdown.previousElementSibling;
+            const menu = dropdown;
+            
+            // Pre-seleziona checkbox in base al textfield
+            const inputId = dropdownId.replace('dropdown_', '') + '_values';
             const input = document.getElementById(inputId);
-            const value = select.value;
-            
-            if (!value || value === '' || value === 'Nessun Filtro...') return;
-            
-            let currentValues = input.value ? input.value.split(', ') : [];
-            
-            // Aggiungi solo se non esiste già
-            if (!currentValues.includes(value)) {
-                currentValues.push(value);
-                input.value = currentValues.join(', ');
+            if (input && input.value) {
+                const appliedValues = input.value.split(',').map(v => v.trim());
+                const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => {
+                    cb.checked = appliedValues.includes(cb.value);
+                });
             }
             
-            // Reset select
-            select.selectedIndex = 0;
+            menu.classList.toggle('show');
+            trigger.classList.toggle('open');
+            
+            // Chiudi altri dropdown aperti
+            document.querySelectorAll('.dropdown-menu.show').forEach(m => {
+                if (m !== menu) {
+                    m.classList.remove('show');
+                    m.previousElementSibling.classList.remove('open');
+                }
+            });
         };
+
+        window.applyCustomDropdown = function(dropdownId, inputId) {
+            const checkboxes = document.querySelectorAll(`#${dropdownId} input[type="checkbox"]:checked`);
+            const values = Array.from(checkboxes).map(cb => cb.value);
+            const input = document.getElementById(inputId);
+            
+            input.value = values.join(', ');
+            
+            // Chiudi dropdown
+            document.getElementById(dropdownId).classList.remove('show');
+            document.getElementById(dropdownId).previousElementSibling.classList.remove('open');
+        };
+
+        window.cancelCustomDropdown = function(dropdownId) {
+            document.getElementById(dropdownId).classList.remove('show');
+            document.getElementById(dropdownId).previousElementSibling.classList.remove('open');
+        };
+
+        // Chiudi dropdown quando clicchi fuori
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-dropdown')) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(m => {
+                    m.classList.remove('show');
+                    if (m.previousElementSibling) {
+                        m.previousElementSibling.classList.remove('open');
+                    }
+                });
+            }
+        });
 
         // Funzione per pulire un filtro
         window.clearFilter = function(inputId) {

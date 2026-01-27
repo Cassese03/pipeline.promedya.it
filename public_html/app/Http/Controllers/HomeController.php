@@ -456,10 +456,9 @@ class HomeController extends Controller
                     unset($dati['Data_Probabile_Chiusura_f']);
                 }
                 
-                // Gestione Ragione Sociale (LIKE)
-                if (isset($dati['Ragione_Sociale']) && $dati['Ragione_Sociale'] !== '') {
-                    $query->where('Ragione_Sociale', 'like', '%' . $dati['Ragione_Sociale'] . '%');
-                    unset($dati['Ragione_Sociale']);
+                // Gestione Ragione Sociale (ora con filtro multiplo)
+                if (isset($dati['Ragione_Sociale']) && $dati['Ragione_Sociale'] !== '' && $dati['Ragione_Sociale'] !== 'undefined') {
+                    $handleMultiFilter('Ragione_Sociale', $dati);
                 }
                 
                 // Rimuovi token e filtra
@@ -491,7 +490,20 @@ class HomeController extends Controller
                 $segnalato = Segnalato::all();
                 $categoria = DB::select('select * from categoria ORDER BY id');
                 $filtersActive = true;
-                return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo', 'filtersActive'));
+                
+                // Costruisci array dei filtri applicati per la view
+                $appliedFilters = [];
+                $filterFields = ['Vinta', 'Segnalato', 'Motivazione', 'Prodotto', 'Dipendente', 'Tipo_Cliente', 'Categoria', 'Probabilita_Chiusura', 'Sales', 'Sales_GRUPPO', 'gruppo_prodotto', 'Ragione_Sociale'];
+                foreach ($filterFields as $field) {
+                    if ($request->has($field) && $request->input($field) !== '' && $request->input($field) !== 'undefined') {
+                        $appliedFilters[$field] = $request->input($field);
+                    }
+                    if ($request->has('exclude_' . $field) && $request->input('exclude_' . $field) == '1') {
+                        $appliedFilters['exclude_' . $field] = true;
+                    }
+                }
+                
+                return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo', 'filtersActive', 'appliedFilters'));
             }
             $rows = DB::select('select * from pipeline order by Id desc LIMIT 25');
             $operatori = DB::select('select * from operatori');
@@ -504,7 +516,8 @@ class HomeController extends Controller
             $zone = DB::SELECT('SELECT gruppo as descrizione from operatori WHERE gruppo is not null group by gruppo');
             $gruppo = DB::select('SELECT p.gruppo ,GROUP_CONCAT(p.descrizione)  as prodotti FROM prodotto p GROUP BY p.gruppo ');
             $clienti = DB::select('select Ragione_Sociale from pipeline group by Ragione_Sociale order by Ragione_Sociale ASC');
-            return View::make('rows', compact('utente', 'esito_trattativa', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo'));
+            $appliedFilters = [];
+            return View::make('rows', compact('utente', 'esito_trattativa', 'rows', 'zone', 'categoria', 'motivazione', 'prodotto', 'dipendenti', 'operatori', 'segnalato', 'column', 'clienti', 'gruppo', 'appliedFilters'));
         } else {
             return Redirect::to('login');
         }
