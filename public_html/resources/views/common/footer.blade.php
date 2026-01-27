@@ -25,43 +25,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<!-- jQuery UI 1.11.4 -->
-<script src="<?php echo URL::asset('backend/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
-
-<script src="<?php echo URL::asset('backend/plugins/fullcalendar/main.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/fullcalendar/locales-all.js') ?>"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-
 <script src="<?php echo URL::asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/chart.js/Chart.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/sparklines/sparkline.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/moment/moment.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/daterangepicker/daterangepicker.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/select2/js/select2.js') ?>"></script>
-<script
-    src="<?php echo URL::asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/summernote/summernote-bs4.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 <script src="<?php echo URL::asset('backend/dist/js/adminlte.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/dist/js/demo.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/dist/js/pages/dashboard.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/dist/js/countdown.min.js') ?>"></script>
-<script src="<?php echo URL::asset('backend/dist/js/print.min.js') ?>"></script>
-<script src="<?php echo URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
 <script src="<?php echo URL::asset('bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="<?php echo URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" defer></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js" defer></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js" defer></script>
 
 </body>
 </html>
@@ -70,26 +41,37 @@
 <script>
 
     $(function () {
-        $('.datatable').dataTable({
-            /* No ordering applied by DataTables during initialisation */
+        const table = $('.datatable').DataTable({
             "order": [],
             autoWidth: false,
-            // togliamo la search bar
             searching: false,
-            iDisplayLength: 25,
+            paging: true,
+            pageLength: 25,
             pagingType: "simple",
             dom: 'lBfrtip',
-            buttons: [
-                'excel', 'copy', 'csv', 'pdf', 'print'
-            ],
+            buttons: {
+                dom: {
+                    button: {
+                        className: 'btn btn-sm'
+                    }
+                },
+                buttons: ['excel', 'copy', 'csv']
+            },
             columnDefs: [
-                {targets: 'no-sort', orderable: false,},
+                {targets: 'no-sort', orderable: false}
             ],
-            responsive: true,
+            deferRender: true,
             scrollX: true,
-            scrollY: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
+            info: false,
+            language: {
+                paginate: {
+                    previous: '←',
+                    next: '→'
+                }
+            },
+            initComplete: function() {
+                // Nascondi le righe non visibili dopo l'inizializzazione
+                this.api().page.len(25).draw(false);
             }
         });
 

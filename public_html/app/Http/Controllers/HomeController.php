@@ -434,7 +434,7 @@ class HomeController extends Controller
                 $categoria = DB::select('select * from categoria ORDER BY id');
                 return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo'));
             }
-            $rows = DB::select('select * from pipeline order by Id desc');
+            $rows = DB::select('select * from pipeline order by Id desc LIMIT 25');
             $operatori = DB::select('select * from operatori');
             $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
             $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
@@ -449,6 +449,30 @@ class HomeController extends Controller
         } else {
             return Redirect::to('login');
         }
+    }
+
+    public function pipelineData(Request $request)
+    {
+        $draw = $request->get('draw');
+        $start = $request->get('start', 0);
+        $length = $request->get('length', 25);
+        
+        // Get total records count
+        $totalRecords = DB::table('pipeline')->count();
+        
+        // Get data with pagination
+        $data = DB::table('pipeline')
+            ->orderBy('Id', 'desc')
+            ->skip($start)
+            ->take($length)
+            ->get();
+        
+        return response()->json([
+            'draw' => intval($draw),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords,
+            'data' => $data
+        ]);
     }
 
     public

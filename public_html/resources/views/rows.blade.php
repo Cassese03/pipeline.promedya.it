@@ -9,8 +9,10 @@
         border-radius: 10px;
         border: none;
         color: #fff !important;
-        box-shadow: 0 8px 18px rgba(67, 102, 246, 0.15);
-        transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+        will-change: transform;
+        transform: translateZ(0);
     }
 
     .action-btn i {
@@ -18,25 +20,24 @@
     }
 
     .action-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px) translateZ(0);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .action-btn:active {
-        transform: translateY(0);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+        transform: translateY(0) translateZ(0);
     }
 
     .action-btn--edit {
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        background: #4f46e5;
     }
 
     .action-btn--duplicate {
-        background: linear-gradient(135deg, #f59e0b, #d97706);
+        background: #f59e0b;
     }
 
     .action-btn--delete {
-        background: linear-gradient(135deg, #ef4444, #dc2626);
+        background: #ef4444;
     }
 
     .header-btn {
@@ -47,45 +48,44 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.15s ease;
+        transform: translateZ(0);
     }
 
     .header-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px) translateZ(0);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .header-btn--primary {
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        background: #4f46e5;
         color: white;
     }
 
     .header-btn--filter {
-        background: linear-gradient(135deg, #ef4444, #dc2626);
+        background: #ef4444;
         color: white;
     }
 
     .text-gradient {
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #4f46e5;
     }
 
     .modern-card {
         background: white;
         border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
         border: 1px solid #e5e7eb;
         overflow: hidden;
+        contain: layout style paint;
     }
 
     .legend-modern {
         background: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
         display: flex;
         gap: 2rem;
         align-items: center;
@@ -124,11 +124,12 @@
     .modal-content {
         border-radius: 20px;
         border: none;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        will-change: transform;
     }
 
     .modal-header {
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        background: #4f46e5;
         color: white;
         border-radius: 20px 20px 0 0;
         padding: 1.5rem;
@@ -167,8 +168,6 @@
         border-top: 1px solid #e5e7eb;
         background: white;
         border-radius: 0 0 20px 20px;
-        position: relative;
-        z-index: 1;
     }
 
     .filter-form-group {
@@ -206,7 +205,7 @@
     .filter-form-group .form-control:focus,
     .filter-form-group select:focus {
         border-color: #4f46e5;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
         outline: none;
         background: white;
     }
@@ -226,27 +225,28 @@
         border-radius: 10px;
         font-weight: 500;
         border: none;
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
+        transform: translateZ(0);
     }
 
     .modal-btn--primary {
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        background: #4f46e5;
         color: white;
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
         cursor: pointer;
     }
 
     .modal-btn--primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        transform: translateY(-2px) translateZ(0);
+        box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
         color: white;
     }
 
     .modal-btn--primary:active {
-        transform: translateY(0);
+        transform: translateY(0) translateZ(0);
     }
 
     .modal-btn--secondary {
@@ -254,19 +254,16 @@
         color: #374151;
         border: 2px solid #e5e7eb;
         cursor: pointer;
-        position: relative;
-        z-index: 1;
-        pointer-events: auto;
     }
 
     .modal-btn--secondary:hover {
         background: #e5e7eb;
-        transform: translateY(-1px);
+        transform: translateY(-1px) translateZ(0);
         color: #1f2937;
     }
 
     .modal-btn--secondary:active {
-        transform: translateY(0);
+        transform: translateY(0) translateZ(0);
     }
 
     .date-range-container {
@@ -301,16 +298,18 @@
         position: fixed;
         top: 80px;
         right: 20px;
-        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        background: #4f46e5;
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         z-index: 9999;
         display: none;
         align-items: center;
         gap: 1rem;
         animation: slideInRight 0.3s ease;
+        will-change: transform;
+        transform: translateZ(0);
     }
 
     .selection-bar.active {
@@ -346,10 +345,11 @@
         border: none;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
+        transform: translateZ(0);
     }
 
     .selection-bar-btn--delete {
@@ -359,7 +359,7 @@
 
     .selection-bar-btn--delete:hover {
         background: #dc2626;
-        transform: scale(1.05);
+        transform: scale(1.05) translateZ(0);
     }
 
     .selection-bar-btn--cancel {
@@ -415,7 +415,7 @@
                         <tr>
                             <?php foreach ($column as $c){ ?>
                             <th class="no-sort"
-                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
+                                style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
                                     <?php if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare') echo str_replace('_', ' ', $c->COLUMN_NAME); ?>
                                     <?php if ($c->COLUMN_NAME == 'Val_Ven_AC') echo 'Valore Vendita A/C'; ?>
                                     <?php if ($c->COLUMN_NAME == 'Val_Can_AC') echo 'Valore Canone A/C'; ?>
@@ -425,12 +425,12 @@
                             </th>
                             <?php } ?>
                             <th class="no-sort checkbox-cell"
-                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem;">
+                                style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem;">
                                 <input type="checkbox" id="selectAll" class="row-checkbox"
                                        title="Seleziona/Deseleziona tutto">
                             </th>
                             <th class="no-sort"
-                                style="text-align: center; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
+                                style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; white-space: nowrap;">
                                 Azioni
                             </th>
                         </tr>
@@ -490,7 +490,7 @@
                                 } ?>
                                     <?php if ($c->COLUMN_NAME == 'Note' && ($r->{$c->COLUMN_NAME} != '')) { ?>
                                 <button class="btn btn-sm"
-                                        style="background: linear-gradient(135deg, #6b7280, #4b5563); color: white; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-weight: 500;"
+                                        style="background: #6b7280; color: white; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-weight: 500;"
                                         onclick="nota('<?php echo $r->Id; ?>');">
                                     <i class="fas fa-sticky-note" style="margin-right: 0.3rem;"></i>NOTA
                                 </button>
@@ -540,7 +540,7 @@
                         <?php } ?>
                         </tbody>
                         <tfoot>
-                        <tr style="background: linear-gradient(135deg, #e0f2fe, #bfdbfe);">
+                        <tr style="background: #dbeafe;">
                             <?php foreach ($column as $c){ ?>
                             <th class="no-sort"
                                 style="<?php if(isset(${$c->COLUMN_NAME})) echo 'text-align:right; font-weight: 700;'?>border-color: #e5e7eb; border-width:1px; padding: 1rem 0.75rem; color: #1e40af;"><?php if (isset(${$c->COLUMN_NAME})) echo number_format(${$c->COLUMN_NAME}, 2, '.', ''); ?></th>
@@ -589,7 +589,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="titolo_modal_mgmov">Inserimento Contatto</h4>
-                    <button type="button" onclick="$('#modal_aggiungi').modal('hide');" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -740,7 +740,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"  onclick="$('#modal_aggiungi').modal('hide');" >Chiudi</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="aggiungi" value="Aggiungi"
                            style="margin-right:5px;">
                 </div>
@@ -759,7 +759,7 @@
                         <i class="fas fa-filter"></i>
                         Filtri di Ricerca
                     </h4>
-                    <button type="button" class="close" data-dismiss="modal"  onclick="$('#modal_filtra').modal('hide');" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -966,8 +966,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="modal-btn modal-btn--secondary" data-dismiss="modal"
-                            onclick="$('#modal_filtra').modal('hide');">
+                    <button type="button" class="modal-btn modal-btn--secondary" data-dismiss="modal">
                         <i class="fas fa-times"></i>
                         Chiudi
                     </button>
@@ -989,7 +988,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="titolo_modal_mgmov">Modifica richiesta</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#modal_modifica_<?php echo $r->Id;?>').modal('hide');">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -1000,7 +999,7 @@
 
                 <div class="modal-footer">
                     <input type="hidden" name="Id" value="<?php echo $r->Id;?>">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" onclick="$('#modal_modifica_<?php echo $r->Id;?>').modal('hide');">Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="modifica" value="modifica"
                            style="margin-right:5px;">
                 </div>
@@ -1015,7 +1014,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="titolo_modal_mgmov">Duplica richiesta</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#modal_duplica_<?php echo $r->Id;?>').modal('hide');">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -1026,7 +1025,7 @@
 
                 <div class="modal-footer">
                     <input type="hidden" name="Id_Padre" value="<?php echo $r->Id;?>">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Chiudi</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" onclick="$('#modal_duplica_<?php echo $r->Id;?>').modal('hide');">Chiudi</button>
                     <input type="submit" class="btn btn-primary pull-right" name="duplica" value="Duplica"
                            style="margin-right:5px;">
                 </div>
@@ -1086,30 +1085,53 @@
     }
 
     function modifica_ajax(id) {
-
-        $.ajax({
-            url: '<?php echo URL::asset('ajax/modifica_ajax') ?>/' + id,
-            type: "POST",
-            data: {}
-        }).done(function (result) {
-            $('#ajax_modifica_' + id).html(result);
-        }).fail(function (xhr, status, error) {
-            console.error('Errore AJAX modifica:', error, xhr.responseText);
+        // Mostra un loader minimale
+        $('#ajax_modifica_' + id).html('<div style="text-align:center;padding:2rem;"><i class="fas fa-spinner fa-spin fa-2x" style="color:#4f46e5;"></i></div>');
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?php echo URL::asset('ajax/modifica_ajax') ?>/' + id, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                $('#ajax_modifica_' + id).html(xhr.responseText);
+            } else {
+                console.error('Errore AJAX modifica:', xhr.status);
+                alert('Errore nel caricamento dei dati');
+            }
+        };
+        
+        xhr.onerror = function() {
+            console.error('Errore di rete AJAX modifica');
             alert('Errore nel caricamento dei dati');
-        });
+        };
+        
+        xhr.send();
     }
 
     function duplica_ajax(id) {
-        $.ajax({
-            url: '<?php echo URL::asset('ajax/duplica_ajax') ?>/' + id,
-            type: "POST",
-            data: {}
-        }).done(function (result) {
-            $('#ajax_duplica_' + id).html(result);
-        }).fail(function (xhr, status, error) {
-            console.error('Errore AJAX duplica:', error, xhr.responseText);
+        // Mostra un loader minimale
+        $('#ajax_duplica_' + id).html('<div style="text-align:center;padding:2rem;"><i class="fas fa-spinner fa-spin fa-2x" style="color:#4f46e5;"></i></div>');
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?php echo URL::asset('ajax/duplica_ajax') ?>/' + id, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                $('#ajax_duplica_' + id).html(xhr.responseText);
+            } else {
+                console.error('Errore AJAX duplica:', xhr.status);
+                alert('Errore nel caricamento dei dati');
+            }
+        };
+        
+        xhr.onerror = function() {
+            console.error('Errore di rete AJAX duplica');
             alert('Errore nel caricamento dei dati');
-        });
+        };
+        
+        xhr.send();
     }
 
     function aggiungi() {
@@ -1144,44 +1166,43 @@
 
     // Gestione Selezione Multipla
     $(document).ready(function () {
-        const selectionBar = $('#selectionBar');
-        const selectedCount = $('#selectedCount');
+        const selectionBar = document.getElementById('selectionBar');
+        const selectedCount = document.getElementById('selectedCount');
+        const selectAll = document.getElementById('selectAll');
 
         // Funzione per ottenere ID selezionati
         function getSelectedIds() {
-            const ids = [];
-            $('.row-select:checked').each(function () {
-                ids.push($(this).data('id'));
-            });
-            return ids;
+            const checkboxes = document.querySelectorAll('.row-select:checked');
+            return Array.from(checkboxes).map(cb => cb.dataset.id);
         }
 
         // Funzione per aggiornare UI
         function updateSelectionUI() {
             const selectedIds = getSelectedIds();
+            const totalCheckboxes = document.querySelectorAll('.row-select').length;
 
             if (selectedIds.length > 0) {
-                selectionBar.addClass('active');
-                selectedCount.text(selectedIds.length);
+                selectionBar.classList.add('active');
+                selectedCount.textContent = selectedIds.length;
             } else {
-                selectionBar.removeClass('active');
+                selectionBar.classList.remove('active');
             }
 
             // Aggiorna stato checkbox "seleziona tutto"
-            const totalCheckboxes = $('.row-select').length;
-            const checkedCheckboxes = $('.row-select:checked').length;
-            $('#selectAll').prop('checked', totalCheckboxes > 0 && totalCheckboxes === checkedCheckboxes);
+            selectAll.checked = totalCheckboxes > 0 && totalCheckboxes === selectedIds.length;
         }
 
-        // Checkbox singolo
-        $(document).on('change', '.row-select', function () {
-            updateSelectionUI();
+        // Checkbox singolo - event delegation
+        document.querySelector('tbody').addEventListener('change', function(e) {
+            if (e.target.classList.contains('row-select')) {
+                updateSelectionUI();
+            }
         });
 
         // Seleziona/Deseleziona tutto
-        $('#selectAll').on('change', function () {
-            const isChecked = $(this).prop('checked');
-            $('.row-select').prop('checked', isChecked);
+        selectAll.addEventListener('change', function() {
+            const isChecked = this.checked;
+            document.querySelectorAll('.row-select').forEach(cb => cb.checked = isChecked);
             updateSelectionUI();
         });
 
@@ -1197,34 +1218,33 @@
             const message = `Sei sicuro di voler eliminare ${currentSelectedIds.length} ${currentSelectedIds.length === 1 ? 'riga' : 'righe'} selezionate?`;
 
             if (confirm(message)) {
-                $.ajax({
-                    url: '/ajax/elimina_multiple',
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    contentType: 'application/json',
-                    data: JSON.stringify({ids: currentSelectedIds}),
-                    success: function (response) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/ajax/elimina_multiple', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
                         if (response.success) {
                             alert(response.message);
                             location.reload();
                         } else {
                             alert('Errore: ' + response.message);
                         }
-                    },
-                    error: function (xhr) {
-                        const error = xhr.responseJSON ? xhr.responseJSON.message : 'Errore sconosciuto';
-                        alert('Errore durante l\'eliminazione: ' + error);
+                    } else {
+                        alert('Errore durante l\'eliminazione');
                     }
-                });
+                };
+                
+                xhr.send(JSON.stringify({ids: currentSelectedIds}));
             }
         };
 
         // Funzione per annullare selezione
         window.clearSelection = function () {
-            $('.row-select').prop('checked', false);
-            $('#selectAll').prop('checked', false);
+            document.querySelectorAll('.row-select').forEach(cb => cb.checked = false);
+            selectAll.checked = false;
             updateSelectionUI();
         };
     });

@@ -23,6 +23,7 @@ Route::any('/statistiche/{data}', [HomeController::class, 'statistiche']);
 Route::any('/statistiche', [HomeController::class, 'statistiche']);
 Route::any('login', [HomeController::class, 'login']);
 Route::any('pipeline', [HomeController::class, 'pipeline']);
+Route::post('pipeline/data', [HomeController::class, 'pipelineData']);
 Route::any('disdette', [HomeController::class, 'disdette']);
 Route::any('concessionario', [HomeController::class, 'concessionario']);
 Route::any('budget', [HomeController::class, 'budget']);

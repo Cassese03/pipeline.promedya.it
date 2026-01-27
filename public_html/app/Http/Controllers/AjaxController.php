@@ -132,18 +132,39 @@ class AjaxController extends Controller
 
     public function duplica_ajax($id)
     {
-        $r = DB::select('SELECT * from pipeline where Id = ' . $id)[0];
-        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
-        $operatori = DB::select('select * from operatori');
-        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
-        $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
-        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
-        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
-        $categoria = DB::select('select * from categoria ORDER BY id');
-        $segnalato = Segnalato::all();
+        // Cache delle query per evitare di rifarle ogni volta
+        static $cache = [];
+        
+        if (!isset($cache['tables'])) {
+            $cache['tables'] = [
+                'column' => DB::select('SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\' ORDER BY ORDINAL_POSITION'),
+                'operatori' => DB::select('select username from operatori ORDER BY username'),
+                'prodotto' => DB::select('select descrizione from prodotto ORDER BY descrizione'),
+                'dipendenti' => DB::select('select descrizione from dipendente ORDER BY descrizione'),
+                'motivazione' => DB::select('select descrizione from motivazione ORDER BY descrizione'),
+                'esito_trattativa' => DB::select('select id, descrizione from esito_trattativa ORDER BY descrizione'),
+                'categoria' => DB::select('select descrizione from categoria ORDER BY id'),
+                'segnalato' => DB::select('select descrizione from segnalato ORDER BY descrizione')
+            ];
+        }
+        
+        $r = DB::selectOne('SELECT * from pipeline where Id = ?', [$id]);
+        if (!$r) {
+            return '<div class="alert alert-danger">Record non trovato</div>';
+        }
+        
+        $column = $cache['tables']['column'];
+        $operatori = $cache['tables']['operatori'];
+        $prodotto = $cache['tables']['prodotto'];
+        $dipendenti = $cache['tables']['dipendenti'];
+        $motivazione = $cache['tables']['motivazione'];
+        $esito_trattativa = $cache['tables']['esito_trattativa'];
+        $categoria = $cache['tables']['categoria'];
+        $segnalato = $cache['tables']['segnalato'];
         
         try {
-            $cfs = CF::all();
+            // Limita drasticamente per velocità - solo i più recenti
+            $cfs = CF::select('Descrizione')->limit(100)->orderBy('Descrizione')->get();
         } catch (\Exception $e) {
             $cfs = [];
         }
@@ -169,83 +190,19 @@ class AjaxController extends Controller
                                 value="<?php echo $r->{$c->COLUMN_NAME}; ?>">
                         <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
-                                <?php if (count($cfs) > 0) { ?>
-                                <style>
-                                    .select2-container .select2-selection--single {
-                                        height: 50px;
-                                    }
-                                </style>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select id="clientiSelect" class="form-control select2" name="<?php echo $c->COLUMN_NAME; ?>"
-                                            onchange="toggleAccordion()">
-                                            <?php
-                                                foreach($cfs as $cf) {
-                                                    $selected = '';
-                                                    if($cf->Descrizione == $r->Ragione_Sociale)
-                                                    $selected = 'selected';
-                                                    echo '<option '.$selected.' value="'.$cf->Descrizione.'"> '.$cf->Descrizione.'</option>';
-                                                }
-                                            ?>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button id="accordionButton" class="btn btn-outline-secondary" type="button"
-                                                data-toggle="collapse" data-target="#accordionContent"
-                                                aria-expanded="false" aria-controls="accordionContent" disabled>
-                                                <i class="fas fa-chevron-down"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="collapse" id="accordionContent">
-                                    <div class="card card-body" id="contenuto">
-                                    </div>
-                                </div>
-                                <?php } else { ?>
-                                    <input type="text" class="form-control" name="<?php echo $c->COLUMN_NAME; ?>" 
-                                           value="<?php echo $r->Ragione_Sociale; ?>" style="width:100%">
+                            <input type="text" class="form-control" 
+                                   name="<?php echo $c->COLUMN_NAME; ?>" 
+                                   list="clientiListDuplica<?php echo $r->Id; ?>"
+                                   value="<?php echo htmlspecialchars($r->Ragione_Sociale); ?>" 
+                                   style="width:100%" autocomplete="off">
+                            <?php if (count($cfs) > 0) { ?>
+                            <datalist id="clientiListDuplica<?php echo $r->Id; ?>">
+                                <?php foreach($cfs as $cf) { ?>
+                                    <option value="<?php echo htmlspecialchars($cf->Descrizione); ?>">
                                 <?php } ?>
-                                <script> 
- 
-                                     function toggleAccordion() {
-                                            var selectElement = document.getElementById('clientiSelect');
-                                            var accordionButton = document.getElementById('accordionButton');
-                                            var accordionContent = document.getElementById('accordionContent');
-
-                                            if (selectElement.value !== "") {
-                                                var selectedValue = document.getElementById("clientiSelect").value;
-
-                                                console.log(selectedValue);
-
-                                                var result = cfs.filter((e) => e.Descrizione.includes(selectedValue))[0]
-                                    
-                                                accordionButton.removeAttribute('disabled');
-                                                accordionContent.classList.add('show');
-                                            
-                                                var content = document.getElementById("contenuto").innerHTML = `
-                                                <div class="form-group">
-                                                        <label>Codice Sap</b>  </label>
-                                                        <input class="form-control" value='${result.xCodSap}' disabled>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Partita Iva</b></label>
-                                                        <input class="form-control" value='${result.PartitaIva}' disabled>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Canone Annualep</b></label>
-                                                        <input class="form-control" value='${parseFloat(result.xImpAss).toFixed(2).replace('.', ',')} €' disabled>
-                                                </div> 
-                                                `
-
-                                            } else {
-                                                accordionButton.setAttribute('disabled', 'disabled');
-                                                accordionContent.classList.remove('show');
-                                            }
-                                        }
-
-                                  
-                                </script>
-                                <?php } ?>
+                            </datalist>
+                            <?php } ?>
+                        <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Sales') { ?>
                             <select style="width:100%" class="form-control"
                                     id="<?php echo $c->COLUMN_NAME; ?>"
@@ -406,21 +363,38 @@ class AjaxController extends Controller
     public
     function modifica_ajax($id)
     {
-        $dati = file_get_contents("php://input");
-        $json = json_decode($dati);
-
-        $r = DB::select('SELECT * from pipeline where Id = ' . $id)[0];
-        $column = DB::select('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\'');
-        $operatori = DB::select('select * from operatori');
-        $prodotto = DB::select('select * from prodotto ORDER BY descrizione');
-        $dipendenti = DB::select('select * from dipendente ORDER BY descrizione');
-        $motivazione = DB::select('select * from motivazione ORDER BY descrizione');
-        $esito_trattativa = DB::select('select * from esito_trattativa ORDER BY descrizione');
-        $categoria = DB::select('select * from categoria ORDER BY id');
-        $segnalato = Segnalato::all();
+        // Cache delle query per evitare di rifarle ogni volta
+        static $cache = [];
+        
+        if (!isset($cache['tables'])) {
+            $cache['tables'] = [
+                'column' => DB::select('SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N\'pipeline\' ORDER BY ORDINAL_POSITION'),
+                'operatori' => DB::select('select username from operatori ORDER BY username'),
+                'prodotto' => DB::select('select descrizione from prodotto ORDER BY descrizione'),
+                'dipendenti' => DB::select('select descrizione from dipendente ORDER BY descrizione'),
+                'motivazione' => DB::select('select descrizione from motivazione ORDER BY descrizione'),
+                'esito_trattativa' => DB::select('select id, descrizione from esito_trattativa ORDER BY descrizione'),
+                'categoria' => DB::select('select descrizione from categoria ORDER BY id'),
+                'segnalato' => DB::select('select descrizione from segnalato ORDER BY descrizione')
+            ];
+        }
+        
+        $r = DB::selectOne('SELECT * from pipeline where Id = ?', [$id]);
+        if (!$r) {
+            return '<div class="alert alert-danger">Record non trovato</div>';
+        }
+        
+        $column = $cache['tables']['column'];
+        $operatori = $cache['tables']['operatori'];
+        $prodotto = $cache['tables']['prodotto'];
+        $dipendenti = $cache['tables']['dipendenti'];
+        $motivazione = $cache['tables']['motivazione'];
+        $esito_trattativa = $cache['tables']['esito_trattativa'];
+        $categoria = $cache['tables']['categoria'];
+        $segnalato = $cache['tables']['segnalato'];
         
         try {
-            $cfs = CF::all();
+            $cfs = CF::select('Descrizione')->limit(1000)->get();
         } catch (\Exception $e) {
             $cfs = [];
         }
@@ -461,83 +435,21 @@ class AjaxController extends Controller
                             </select>
                         <?php } ?>
                          <?php if ($c->COLUMN_NAME == 'Ragione_Sociale') { ?>
-                                <?php if (count($cfs) > 0) { ?>
-                                <style>
-                                    .select2-container .select2-selection--single {
-                                        height: 50px;
-                                    }
-                                </style>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select id="clientiSelect" class="form-control select2" name="<?php echo $c->COLUMN_NAME; ?>"
-                                            onchange="toggleAccordion()">
-                                            <?php
-                                                foreach($cfs as $cf) {
-                                                    $selected = '';
-                                                    if($cf->Descrizione == $r->Ragione_Sociale)
-                                                    $selected = 'selected';
-                                                    echo '<option '.$selected.' value="'.$cf->Descrizione.'"> '.$cf->Descrizione.'</option>';
-                                                }
-                                            ?>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button id="accordionButton" class="btn btn-outline-secondary" type="button"
-                                                data-toggle="collapse" data-target="#accordionContent"
-                                                aria-expanded="false" aria-controls="accordionContent" disabled>
-                                                <i class="fas fa-chevron-down"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="collapse" id="accordionContent">
-                                    <div class="card card-body" id="contenuto">
-                                    </div>
-                                </div>
-                                <?php } else { ?>
-                                    <input type="text" class="form-control" name="<?php echo $c->COLUMN_NAME; ?>" 
-                                           value="<?php echo $r->Ragione_Sociale; ?>" style="width:100%">
+                            <input type="text" class="form-control" 
+                                   name="<?php echo $c->COLUMN_NAME; ?>" 
+                                   list="clientiList<?php echo $r->Id; ?>"
+                                   value="<?php echo htmlspecialchars($r->Ragione_Sociale); ?>" 
+                                   style="width:100%"
+                                   autocomplete="off">
+                            <?php if (count($cfs) > 0) { ?>
+                            <datalist id="clientiList<?php echo $r->Id; ?>">
+                                <?php foreach($cfs as $cf) { ?>
+                                    <option value="<?php echo htmlspecialchars($cf->Descrizione); ?>">
                                 <?php } ?>
-                                <script> 
- 
-                                     function toggleAccordion() {
-                                            var selectElement = document.getElementById('clientiSelect');
-                                            var accordionButton = document.getElementById('accordionButton');
-                                            var accordionContent = document.getElementById('accordionContent');
-
-                                            if (selectElement.value !== "") {
-                                                var selectedValue = document.getElementById("clientiSelect").value;
-
-                                                console.log(selectedValue);
-
-                                                var result = cfs.filter((e) => e.Descrizione.includes(selectedValue))[0]
+                            </datalist>
+                            <?php } ?>
+                        <?php } ?>
                                     
-                                                accordionButton.removeAttribute('disabled');
-                                                accordionContent.classList.add('show');
-                                            
-                                                var content = document.getElementById("contenuto").innerHTML = `
-                                                <div class="form-group">
-                                                        <label>Codice Sap</b>  </label>
-                                                        <input class="form-control" value='${result.xCodSap}' disabled>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Partita Iva</b></label>
-                                                        <input class="form-control" value='${result.PartitaIva}' disabled>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Canone Annualep</b></label>
-                                                        <input class="form-control" value='${parseFloat(result.xImpAss).toFixed(2).replace('.', ',')} €' disabled>
-                                                </div> 
-                                                `
-
-                                            } else {
-                                                accordionButton.setAttribute('disabled', 'disabled');
-                                                accordionContent.classList.remove('show');
-                                            }
-                                        }
-
-                                  
-                                </script>
-                                <?php } ?>
                         <?php if ($c->COLUMN_NAME == 'Vinta') { ?>
                             <select style="width:100% " class="form-control modifica_vinta"
                                     onchange="check_vinta('modifica_vinta')"
@@ -698,10 +610,9 @@ class AjaxController extends Controller
                         <?php } ?>
                     </div>
                 </div>
-            <?php } ?>
-        <?php }
-        return ob_get_clean();
-    }
+            <?php } // chiude if
+        } // chiude foreach
+    } // chiude funzione
 
     public
     function modifica_ajax_DISDETTA($id)
