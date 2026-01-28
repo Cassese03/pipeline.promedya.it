@@ -768,6 +768,8 @@
             echo ' col-medium-wide';
         if ($c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare')
             echo ' col-narrow-xs';
+        if ($c->COLUMN_NAME == 'Ragione_Sociale')
+            echo '" style="width:auto;max-width:none;min-width:0;white-space:nowrap;';
                                 ?>" style="contain:content; padding: 0.75rem 0.5rem; word-wrap: break-word; vertical-align: middle; line-height: 1.4;
                                         <?php        if (($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria')
             echo 'text-align:left;';
@@ -1140,7 +1142,8 @@
                                             name="Ragione_Sociale" placeholder="Cliente/i selezionati (separati da virgola)"
                                             value="{{ $appliedFilters['Ragione_Sociale'] ?? '' }}"
                                             onclick="toggleCustomDropdown('dropdown_Ragione_Sociale')"
-                                            onkeyup="syncCheckboxesFromInput('dropdown_Ragione_Sociale', this.value)">
+                                            onkeyup="syncCheckboxesFromInput('dropdown_Ragione_Sociale', this.value)"
+                                        >
                                         <div class="dropdown-menu" id="dropdown_Ragione_Sociale">
                                             <div class="dropdown-search">
                                                 <input type="text" placeholder="🔍 Cerca cliente..." onkeyup="filterDropdown('dropdown_Ragione_Sociale', this.value)">
@@ -1170,10 +1173,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Ragione_Sociale" name="exclude_Ragione_Sociale"
-                                        value="1" {{ isset($appliedFilters['exclude_Ragione_Sociale']) ? 'checked' : '' }}>
-                                    <label for="exclude_Ragione_Sociale"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                    <!-- <input type="checkbox" id="exclude_Ragione_Sociale" name="exclude_Ragione_Sociale"
+                                        value="1" {{ isset($appliedFilters['exclude_Ragione_Sociale']) ? 'checked' : '' }}> -->
+                                    <!-- <label for="exclude_Ragione_Sociale"><i class="fas fa-ban"></i> Escludi invece di
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Vinta') { ?>
@@ -1209,9 +1212,9 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Vinta" name="exclude_Vinta" value="1">
+                                    <!-- <input type="checkbox" id="exclude_Vinta" name="exclude_Vinta" value="1">
                                     <label for="exclude_Vinta"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
 
@@ -1250,9 +1253,9 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Segnalato" name="exclude_Segnalato" value="1" {{ isset($appliedFilters['exclude_Segnalato']) ? 'checked' : '' }}>
+                                    <!-- <input type="checkbox" id="exclude_Segnalato" name="exclude_Segnalato" value="1" {{ isset($appliedFilters['exclude_Segnalato']) ? 'checked' : '' }}>
                                     <label for="exclude_Segnalato"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Motivazione') { ?>
@@ -1290,10 +1293,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Motivazione" name="exclude_Motivazione" value="1"
+                                    <!-- <input type="checkbox" id="exclude_Motivazione" name="exclude_Motivazione" value="1"
                                         {{ isset($appliedFilters['exclude_Motivazione']) ? 'checked' : '' }}>
                                     <label for="exclude_Motivazione"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
 
@@ -1332,9 +1335,9 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Prodotto" name="exclude_Prodotto" value="1" {{ isset($appliedFilters['exclude_Prodotto']) ? 'checked' : '' }}>
+                                    <!-- <input type="checkbox" id="exclude_Prodotto" name="exclude_Prodotto" value="1" {{ isset($appliedFilters['exclude_Prodotto']) ? 'checked' : '' }}>
                                     <label for="exclude_Prodotto"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
 
                                 <?php            } ?>
@@ -1374,10 +1377,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Dipendente" name="exclude_Dipendente" value="1"
+                                    <!-- <input type="checkbox" id="exclude_Dipendente" name="exclude_Dipendente" value="1"
                                         {{ isset($appliedFilters['exclude_Dipendente']) ? 'checked' : '' }}>
                                     <label for="exclude_Dipendente"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Tipo_Cliente') { ?>
@@ -1420,10 +1423,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Tipo_Cliente" name="exclude_Tipo_Cliente"
+                                    <!-- <input type="checkbox" id="exclude_Tipo_Cliente" name="exclude_Tipo_Cliente"
                                         value="1" {{ isset($appliedFilters['exclude_Tipo_Cliente']) ? 'checked' : '' }}>
                                     <label for="exclude_Tipo_Cliente"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Categoria') { ?>
@@ -1461,9 +1464,9 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Categoria" name="exclude_Categoria" value="1" {{ isset($appliedFilters['exclude_Categoria']) ? 'checked' : '' }}>
+                                    <!-- <input type="checkbox" id="exclude_Categoria" name="exclude_Categoria" value="1" {{ isset($appliedFilters['exclude_Categoria']) ? 'checked' : '' }}>
                                     <label for="exclude_Categoria"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Probabilita_Chiusura') { ?>
@@ -1471,28 +1474,29 @@
                                     <div class="custom-dropdown">
                                         <button type="button" class="dropdown-trigger"
                                             onclick="toggleCustomDropdown('dropdown_Probabilita_Chiusura')">
-                                            <span>Seleziona %...</span>
+                                            <span id="selected_probabilita_chiusura">Seleziona %...</span>
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
+                                        <input type="hidden" id="Probabilita_Chiusura_values" name="Probabilita_Chiusura" value="{{ $appliedFilters['Probabilita_Chiusura'] ?? '' }}">
                                         <div class="dropdown-menu" id="dropdown_Probabilita_Chiusura">
                                             <div class="dropdown-search">
                                                 <input type="text" placeholder="🔍 Cerca probabilità..." onkeyup="filterDropdown('dropdown_Probabilita_Chiusura', this.value)">
                                             </div>
                                             <div class="dropdown-items-container">
                                                 <div class="dropdown-item">
-                                                    <input type="checkbox" id="prob_25" value="25">
+                                                    <input type="checkbox" id="prob_25" value="25" onchange="updateProbabilitaChiusuraLabel()">
                                                     <label for="prob_25">25</label>
                                                 </div>
                                                 <div class="dropdown-item">
-                                                    <input type="checkbox" id="prob_50" value="50">
+                                                    <input type="checkbox" id="prob_50" value="50" onchange="updateProbabilitaChiusuraLabel()">
                                                     <label for="prob_50">50</label>
                                                 </div>
                                                 <div class="dropdown-item">
-                                                    <input type="checkbox" id="prob_75" value="75">
+                                                    <input type="checkbox" id="prob_75" value="75" onchange="updateProbabilitaChiusuraLabel()">
                                                     <label for="prob_75">75</label>
                                                 </div>
                                                 <div class="dropdown-item">
-                                                    <input type="checkbox" id="prob_100" value="100">
+                                                    <input type="checkbox" id="prob_100" value="100" onchange="updateProbabilitaChiusuraLabel()">
                                                     <label for="prob_100">100</label>
                                                 </div>
                                             </div>
@@ -1510,10 +1514,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Probabilita_Chiusura"
+                                    <!-- <input type="checkbox" id="exclude_Probabilita_Chiusura"
                                         name="exclude_Probabilita_Chiusura" value="1" {{ isset($appliedFilters['exclude_Probabilita_Chiusura']) ? 'checked' : '' }}>
                                     <label for="exclude_Probabilita_Chiusura"><i class="fas fa-ban"></i> Escludi invece
-                                        di includere</label>
+                                        di includere</label> -->
                                 </div>
                                 <?php            } ?>
                                 <?php            if ($c->COLUMN_NAME == 'Note') { ?>
@@ -1563,9 +1567,9 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Sales" name="exclude_Sales" value="1" {{ isset($appliedFilters['exclude_Sales']) ? 'checked' : '' }}>
+                                    <!-- <input type="checkbox" id="exclude_Sales" name="exclude_Sales" value="1" {{ isset($appliedFilters['exclude_Sales']) ? 'checked' : '' }}>
                                     <label for="exclude_Sales"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                             </div>
                         </div>
@@ -1610,10 +1614,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_Sales_GRUPPO" name="exclude_Sales_GRUPPO"
+                                    <!-- <input type="checkbox" id="exclude_Sales_GRUPPO" name="exclude_Sales_GRUPPO"
                                         value="1" {{ isset($appliedFilters['exclude_Sales_GRUPPO']) ? 'checked' : '' }}>
                                     <label for="exclude_Sales_GRUPPO"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                             </div>
                         </div>
@@ -1658,10 +1662,10 @@
                                     </div>
                                 </div>
                                 <div class="filter-toggle">
-                                    <input type="checkbox" id="exclude_gruppo_prodotto" name="exclude_gruppo_prodotto"
+                                    <!-- <input type="checkbox" id="exclude_gruppo_prodotto" name="exclude_gruppo_prodotto"
                                         value="1" {{ isset($appliedFilters['exclude_gruppo_prodotto']) ? 'checked' : '' }}>
                                     <label for="exclude_gruppo_prodotto"><i class="fas fa-ban"></i> Escludi invece di
-                                        includere</label>
+                                        includere</label> -->
                                 </div>
                             </div>
                         </div>
@@ -1780,6 +1784,25 @@
 
 
 <script type="text/javascript">
+        function updateProbabilitaChiusuraLabel() {
+            var selected = [];
+            [25, 50, 75, 100].forEach(function(val) {
+                var cb = document.getElementById('prob_' + val);
+                if (cb && cb.checked) selected.push(val);
+            });
+            var label = document.getElementById('selected_probabilita_chiusura');
+            var hiddenInput = document.getElementById('Probabilita_Chiusura_values');
+            if (label) {
+                if (selected.length === 0) {
+                    label.textContent = 'Seleziona %...';
+                } else {
+                    label.textContent = selected.join(', ') + ' %';
+                }
+            }
+            if (hiddenInput) {
+                hiddenInput.value = selected.join(',');
+            }
+        }
     function check_vinta(classname) {
         vinta = $('.' + classname).val();
         if (vinta == 1)
@@ -1916,6 +1939,13 @@
             const input = document.getElementById(inputId);
 
             input.value = values.join(', ');
+
+            // Aggiorna anche il campo hidden per Probabilita_Chiusura
+            if (inputId === 'Probabilita_Chiusura_values' || dropdownId === 'dropdown_Probabilita_Chiusura') {
+                var hiddenInput = document.getElementById('Probabilita_Chiusura_values');
+                if (hiddenInput) hiddenInput.value = values.join(',');
+                updateProbabilitaChiusuraLabel();
+            }
 
             // Chiudi dropdown
             document.getElementById(dropdownId).classList.remove('show');
