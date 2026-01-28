@@ -458,7 +458,10 @@ class HomeController extends Controller
                 
                 // Gestione Ragione Sociale (ora con filtro multiplo)
                 if (isset($dati['Ragione_Sociale']) && $dati['Ragione_Sociale'] !== '' && $dati['Ragione_Sociale'] !== 'undefined') {
-                    $handleMultiFilter('Ragione_Sociale', $dati);
+                    $isExcluded = isset($dati['exclude_Ragione_Sociale']) && $dati['exclude_Ragione_Sociale'] == '1';
+                    $handleMultiFilter('Ragione_Sociale', $query, $dati['Ragione_Sociale'], $isExcluded);
+                    unset($dati['Ragione_Sociale']);
+                    if (isset($dati['exclude_Ragione_Sociale'])) unset($dati['exclude_Ragione_Sociale']);
                 }
                 
                 // Rimuovi token e filtra

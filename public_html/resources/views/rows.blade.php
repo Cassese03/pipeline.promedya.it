@@ -178,9 +178,9 @@
     }
 
     .col-narrow-sm {
-        width: 130px !important;
-        max-width: 130px !important;
-        min-width: 130px !important;
+        width: 125px !important;
+        max-width: 125px !important;
+        min-width: 125px !important;
     }
 
     .col-narrow-md {
@@ -334,6 +334,34 @@
         overflow-y: auto;
         max-height: 300px;
         flex: 1;
+    }
+
+    .dropdown-search {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .dropdown-search input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        transition: border-color 0.2s;
+    }
+
+    .dropdown-search input:focus {
+        outline: none;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+    }
+
+    .dropdown-item.hidden {
+        display: none;
     }
 
     .dropdown-item {
@@ -652,7 +680,7 @@
     if ($c->COLUMN_NAME == 'Vinta')
         echo ' col-narrow-md';
     if ($c->COLUMN_NAME == 'Data_Probabile_Chiusura')
-        echo ' col-narrow-md';
+        echo ' col-narrow-sm';
     if ($c->COLUMN_NAME == 'Data_Contatto')
         echo ' col-wide';
     if ($c->COLUMN_NAME == 'Sales')
@@ -660,7 +688,7 @@
     if ($c->COLUMN_NAME == 'Prodotto')
         echo ' col-medium';
     if ($c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare')
-        echo ' col-narrow-md';
+        echo ' col-narrow-sm';
                                 ?>"
                                     style="text-align: center; background: #dbeafe; font-weight: 600; color: #1e40af; border-color: #e5e7eb; border-width:1px; padding: 0.75rem 0.5rem; word-wrap: break-word; vertical-align: middle; line-height: 1.3;">
                                     <?php    if ($c->COLUMN_NAME != 'Val_Ven_AC' && $c->COLUMN_NAME != 'Vinta' && $c->COLUMN_NAME != 'Val_Can_AC' && $c->COLUMN_NAME != 'Inc_Canone_AS' && $c->COLUMN_NAME != 'Inc_Anno_Solare' && $c->COLUMN_NAME != 'Probabilita_Chiusura')
@@ -742,7 +770,7 @@
         if ($c->COLUMN_NAME == 'Vinta')
             echo ' col-narrow-md';
         if ($c->COLUMN_NAME == 'Data_Probabile_Chiusura')
-            echo ' col-narrow-md';
+            echo ' col-narrow-sm';
         if ($c->COLUMN_NAME == 'Data_Contatto')
             echo ' col-wide';
         if ($c->COLUMN_NAME == 'Sales')
@@ -750,7 +778,7 @@
         if ($c->COLUMN_NAME == 'Prodotto')
             echo ' col-medium';
         if ($c->COLUMN_NAME == 'Vendita_Budget' || $c->COLUMN_NAME == 'Inc_Canone_AS' || $c->COLUMN_NAME == 'Inc_Anno_Solare')
-            echo ' col-narrow-md';
+            echo ' col-narrow-sm';
                                 ?>" style="contain:content; padding: 0.75rem 0.5rem; word-wrap: break-word; vertical-align: middle; line-height: 1.4;
                                         <?php        if (($c->DATA_TYPE == 'varchar') && $c->COLUMN_NAME != 'Id' && $c->COLUMN_NAME != 'Id_Padre' && $c->COLUMN_NAME != 'Probabilita_Chiusura' && $c->COLUMN_NAME != 'Categoria')
             echo 'text-align:left;';
@@ -1125,6 +1153,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Ragione_Sociale">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca cliente..." onkeyup="filterDropdown('dropdown_Ragione_Sociale', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 @php $rsIndex = 0; @endphp
                                                 @foreach($clienti as $c1)
@@ -1171,6 +1202,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Vinta">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca trattativa..." onkeyup="filterDropdown('dropdown_Vinta', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php                foreach ($esito_trattativa as $e) { ?>
                                                 <div class="dropdown-item">
@@ -1212,6 +1246,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Segnalato">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca segnalato..." onkeyup="filterDropdown('dropdown_Segnalato', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php                foreach ($segnalato as $s) { ?>
                                                 <div class="dropdown-item">
@@ -1255,6 +1292,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Motivazione">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca motivazione..." onkeyup="filterDropdown('dropdown_Motivazione', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php                foreach ($motivazione as $m) { ?>
                                                 <div class="dropdown-item">
@@ -1300,6 +1340,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Prodotto">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca prodotto..." onkeyup="filterDropdown('dropdown_Prodotto', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php                foreach ($prodotto as $s) { ?>
                                                 <div class="dropdown-item">
@@ -1345,6 +1388,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Dipendente">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca dipendente..." onkeyup="filterDropdown('dropdown_Dipendente', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php                foreach ($dipendenti as $s) { ?>
                                                 <div class="dropdown-item">
@@ -1389,6 +1435,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Tipo_Cliente">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca tipo cliente..." onkeyup="filterDropdown('dropdown_Tipo_Cliente', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="tipo_OLD" value="OLD">
@@ -1438,6 +1487,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Categoria">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca categoria..." onkeyup="filterDropdown('dropdown_Categoria', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 @foreach($categoria as $c1)
                                                     <div class="dropdown-item">
@@ -1481,6 +1533,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Probabilita_Chiusura">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca probabilità..." onkeyup="filterDropdown('dropdown_Probabilita_Chiusura', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <div class="dropdown-item">
                                                     <input type="checkbox" id="prob_25" value="25">
@@ -1547,6 +1602,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Sales">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca sales..." onkeyup="filterDropdown('dropdown_Sales', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php            foreach ($operatori as $o) { ?>
                                                 <div class="dropdown-item">
@@ -1593,6 +1651,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_Sales_GRUPPO">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca zona..." onkeyup="filterDropdown('dropdown_Sales_GRUPPO', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 <?php            $zIndex = 0;
             foreach ($zone as $z) {
@@ -1644,6 +1705,9 @@
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" id="dropdown_gruppo_prodotto">
+                                            <div class="dropdown-search">
+                                                <input type="text" placeholder="🔍 Cerca gruppo..." onkeyup="filterDropdown('dropdown_gruppo_prodotto', this.value)">
+                                            </div>
                                             <div class="dropdown-items-container">
                                                 @php $gIndex = 0; @endphp
                                                 @foreach($gruppo as $g)
@@ -1962,6 +2026,25 @@
         // Funzione per pulire un filtro
         window.clearFilter = function (inputId) {
             document.getElementById(inputId).value = '';
+        };
+
+        // Funzione per filtrare opzioni nei dropdown
+        window.filterDropdown = function (dropdownId, searchText) {
+            const dropdown = document.getElementById(dropdownId);
+            const items = dropdown.querySelectorAll('.dropdown-item');
+            const search = searchText.toLowerCase().trim();
+
+            items.forEach(item => {
+                const label = item.querySelector('label');
+                if (label) {
+                    const text = label.textContent.toLowerCase();
+                    if (text.includes(search)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+            });
         };
 
         // Funzione per ottenere ID selezionati
