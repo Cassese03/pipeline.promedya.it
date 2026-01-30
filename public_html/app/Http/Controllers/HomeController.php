@@ -367,15 +367,15 @@ class HomeController extends Controller
                 $dati = array_filter($dati, static function ($var) {
                     return $var !== null;
                 });
-                
+
                 // Funzione helper per gestire filtri multipli con esclusione
                 $handleMultiFilter = function($fieldName, &$query, $values, $isExcluded = false) {
                     if (empty($values) || trim($values) === '') return;
-                    
+
                     // Split per virgola e trim
                     $valuesArray = array_map('trim', explode(',', $values));
                     $valuesArray = array_filter($valuesArray); // Rimuovi valori vuoti
-                    
+
                     if (count($valuesArray) > 0) {
                         if ($isExcluded) {
                             $query->whereNotIn($fieldName, $valuesArray);
@@ -384,13 +384,13 @@ class HomeController extends Controller
                         }
                     }
                 };
-                
+
                 // Inizia query builder
                 $query = DB::table('pipeline')->select(DB::raw('*'));
-                
+
                 // Gestione filtri con accumulo
                 $multiFilters = ['Vinta', 'Segnalato', 'Motivazione', 'Prodotto', 'Dipendente', 'Tipo_Cliente', 'Categoria', 'Probabilita_Chiusura', 'Sales'];
-                
+
                 foreach ($multiFilters as $field) {
                     if (isset($dati[$field]) && $dati[$field] !== '' && $dati[$field] !== 'Nessun Filtro...') {
                         $isExcluded = isset($dati['exclude_' . $field]) && $dati['exclude_' . $field] == '1';
@@ -399,7 +399,7 @@ class HomeController extends Controller
                         if (isset($dati['exclude_' . $field])) unset($dati['exclude_' . $field]);
                     }
                 }
-                
+
                 // Gestione Zona (Sales_GRUPPO)
                 if (isset($dati['Sales_GRUPPO']) && $dati['Sales_GRUPPO'] !== '' && $dati['Sales_GRUPPO'] !== 'Nessun Filtro...') {
                     $zones = array_map('trim', explode(',', $dati['Sales_GRUPPO']));
@@ -416,7 +416,7 @@ class HomeController extends Controller
                     unset($dati['Sales_GRUPPO']);
                     if (isset($dati['exclude_Sales_GRUPPO'])) unset($dati['exclude_Sales_GRUPPO']);
                 }
-                
+
                 // Gestione Gruppo Prodotto
                 if (isset($dati['gruppo_prodotto']) && $dati['gruppo_prodotto'] !== '' && $dati['gruppo_prodotto'] !== 'undefined') {
                     $gruppiProdotti = array_map('trim', explode(',', $dati['gruppo_prodotto']));
@@ -437,7 +437,7 @@ class HomeController extends Controller
                     unset($dati['gruppo_prodotto']);
                     if (isset($dati['exclude_gruppo_prodotto'])) unset($dati['exclude_gruppo_prodotto']);
                 }
-                
+
                 // Gestione Date
                 if (isset($dati['Data_contatto_i'])) {
                     $query->where('Data_Contatto', '>=', $dati['Data_contatto_i']);
@@ -455,7 +455,7 @@ class HomeController extends Controller
                     $query->where('Data_Probabile_Chiusura', '<=', $dati['Data_Probabile_Chiusura_f']);
                     unset($dati['Data_Probabile_Chiusura_f']);
                 }
-                
+
                 // Gestione Ragione Sociale (ora con filtro multiplo)
                 if (isset($dati['Ragione_Sociale']) && $dati['Ragione_Sociale'] !== '' && $dati['Ragione_Sociale'] !== 'undefined') {
                     $isExcluded = isset($dati['exclude_Ragione_Sociale']) && $dati['exclude_Ragione_Sociale'] == '1';
@@ -463,11 +463,11 @@ class HomeController extends Controller
                     unset($dati['Ragione_Sociale']);
                     if (isset($dati['exclude_Ragione_Sociale'])) unset($dati['exclude_Ragione_Sociale']);
                 }
-                
+
                 // Rimuovi token e filtra
                 unset($dati['_token']);
                 unset($dati['filtra']);
-                
+
                 // Applica filtri rimanenti (campi standard)
                 foreach ($column as $c) {
                     if ($c->COLUMN_NAME != 'Id' && $c->DATA_TYPE != 'date') {
@@ -476,10 +476,10 @@ class HomeController extends Controller
                         }
                     }
                 }
-                
+
                 // Applica WHERE restanti
                 $query->where($dati);
-                
+
                 // Esegui query
                 $rows = $query->orderBy('pipeline.Id', 'desc')->get();
                 $operatori = DB::select('select * from operatori');
@@ -493,7 +493,7 @@ class HomeController extends Controller
                 $segnalato = Segnalato::all();
                 $categoria = DB::select('select * from categoria ORDER BY id');
                 $filtersActive = true;
-                
+
                 // Costruisci array dei filtri applicati per la view
                 $appliedFilters = [];
                 $filterFields = ['Vinta', 'Segnalato', 'Motivazione', 'Prodotto', 'Dipendente', 'Tipo_Cliente', 'Categoria', 'Probabilita_Chiusura', 'Sales', 'Sales_GRUPPO', 'gruppo_prodotto', 'Ragione_Sociale'];
@@ -505,7 +505,7 @@ class HomeController extends Controller
                         $appliedFilters['exclude_' . $field] = true;
                     }
                 }
-                
+
                 return View::make('rows', compact('utente', 'segnalato', 'esito_trattativa', 'categoria', 'zone', 'motivazione', 'prodotto', 'dipendenti', 'rows', 'operatori', 'column', 'clienti', 'gruppo', 'filtersActive', 'appliedFilters'));
             }
             $rows = DB::select('select * from pipeline order by Id desc LIMIT 25');
@@ -531,17 +531,17 @@ class HomeController extends Controller
         $draw = $request->get('draw');
         $start = $request->get('start', 0);
         $length = $request->get('length', 25);
-        
+
         // Get total records count
         $totalRecords = DB::table('pipeline')->count();
-        
+
         // Get data with pagination
         $data = DB::table('pipeline')
             ->orderBy('Id', 'desc')
             ->skip($start)
             ->take($length)
             ->get();
-        
+
         return response()->json([
             'draw' => intval($draw),
             'recordsTotal' => $totalRecords,
@@ -1149,7 +1149,7 @@ class HomeController extends Controller
                 $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(CURDATE())');
                 $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(CURDATE()) and semestre = ' . $semestre .' order by desc_obiettivo desc');
                 $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(CURDATE()),\'1231\') and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(CURDATE()),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(CURDATE()),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(CURDATE()),\'0101\') )');
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime('+1 month')) . '-1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime('now')) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' .date('Y-m-d', strtotime('last day of this month')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime('now')) . '\' )');
                 $statistiche_corrente = DB::select('SELECT f.Vinta, SUM(Val) AS Val FROM (SELECT IF(Vinta = 2,2,IF(Vinta = 1,1,3)) AS Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 2 or Vinta = 1) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\')) or ((Vinta != 1 and Vinta != 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(NOW(),\'%Y - %M\'))
@@ -1202,7 +1202,7 @@ class HomeController extends Controller
                 $incentivi = DB::select('SELECT * FROM incentivi where anno = YEAR(\'' . $data . '\') and semestre = ' . $semestre.' order by desc_obiettivo desc');
                 $opening = DB::SELECT('SELECT * FROM opening where Anno = YEAR(\'' . $data . '\')');
                 $statistiche_budget = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and data_mese >= CONCAT(YEAR(\'' . $data . '\'),\'0101\')) UNION ALL (SELECT SUM(budget) as valore, \'Budget Progressivo\' as type from budget where data_mese <= \'' . ($last_of_month) . '\' and data_mese >= CONCAT(YEAR(\'' . $data . '\'),\'0101\')) UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= CONCAT(YEAR(\'' . $data . '\'),\'1231\') and Data_Probabile_Chiusura >= CONCAT(YEAR(\'' . $data . '\'),\'0101\') )');
-                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime(date('Y-m-01', strtotime($data)) . '+1 month -1 day')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
+                $statistiche_budget_mensile = DB::SELECT('(SELECT SUM(budget) as valore, \'Budget\' as type from budget where data_mese = \'' . date('Y-m-01', strtotime($data)) . '\') UNION ALL (SELECT Coalesce(SUM(Vendita_Budget),0) as valore,\'Vendite\' as type FROM pipeline where Vinta = 2 and Data_Probabile_Chiusura <= \'' . date('Y-m-d', strtotime('last day of this month')) . '\' and Data_Probabile_Chiusura >= \'' . date('Y-m-01', strtotime($data)) . '\' )');
                 $statistiche_corrente = DB::select('SELECT Vinta,CAST(SUM(Val_Ven_AC) as Decimal(20,2)) as Val
                                                       FROM   pipeline
                                                       WHERE  ((Vinta = 1 or Vinta = 2) and DATE_FORMAT(Data_Probabile_Chiusura,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\')) or ((Vinta != 2 && Vinta != 1) and DATE_FORMAT(Data_Contatto,\'%Y - %M\') = DATE_FORMAT(\'' . $data . '\',\'%Y - %M\'))
